@@ -1,4 +1,4 @@
-package com.ebrothers.linerunner;
+package com.ebrothers.linerunner.common;
 
 public interface Constants {
 	// Pixel to meters ratio. Box2D uses meters as the unit for measurement.

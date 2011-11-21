@@ -1,4 +1,4 @@
-package com.ebrothers.linerunner;
+package com.ebrothers.linerunner.common;
 
 import android.util.Log;
 
