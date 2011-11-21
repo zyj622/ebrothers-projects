@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="200" height="30" tilewidth="16" tileheight="16">
+ <objectgroup name="objects" width="200" height="30">
+  <object name="ground" x="0" y="288" width="3200" height="16">
+   <properties>
+    <property name="color" value="0,0,0"/>
+   </properties>
+  </object>
+  <object name="startzone" x="96" y="256" width="32" height="32"/>
+  <object x="432" y="272" width="16" height="16"/>
+  <object x="640" y="208" width="16" height="16"/>
+  <object name="endzone" x="2864" y="0" width="16" height="288"/>
+ </objectgroup>
+</map>
