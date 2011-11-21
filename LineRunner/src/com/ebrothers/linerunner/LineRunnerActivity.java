@@ -1,7 +1,6 @@
 package com.ebrothers.linerunner;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import javax.microedition.khronos.opengles.GL10;
 
@@ -20,15 +19,12 @@ import org.cocos2d.nodes.CCSpriteFrame;
 import org.cocos2d.nodes.CCSpriteFrameCache;
 import org.cocos2d.nodes.CCSpriteSheet;
 import org.cocos2d.opengl.CCGLSurfaceView;
-import org.cocos2d.opengl.CCPVRTexture;
 import org.cocos2d.types.CCTexParams;
 import org.cocos2d.types.CGPoint;
 import org.cocos2d.types.CGRect;
 import org.cocos2d.types.CGSize;
-import org.cocos2d.utils.PlistParser;
 
 import android.app.Activity;
-import android.graphics.RectF;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.Window;
