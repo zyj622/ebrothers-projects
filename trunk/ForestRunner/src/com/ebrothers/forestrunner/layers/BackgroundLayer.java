@@ -8,7 +8,7 @@ public class BackgroundLayer extends CCLayer {
 
 	public BackgroundLayer() {
 		super();
-		CCTMXTiledMap map = CCTMXTiledMap.tiledMap("level1.tmx");
+		CCTMXTiledMap map = CCTMXTiledMap.tiledMap("level/level1.tmx");
 		CCTMXLayer layer = map.layerNamed("layer1");
 //		CCMoveTo moveTo = CCMoveTo.action(10, CGPoint.ccp(-9000, 0));
 //		layer.runAction(moveTo);
