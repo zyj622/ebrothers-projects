@@ -1,0 +1,63 @@
+Ground M 1400
+Gosign 300
+Box 800
+Box 1200
+Bridge
+Ground M 500
+Box 250
+Bridge
+Ground M 600
+Dinosaur2 500
+Gap 160
+Ground M 300
+Fire 200
+Bridge
+Ground M 280
+Ground H 500
+Flower 250
+Ground M 220
+Ground L 600
+Trap 300
+----------4100-----------
+Ground M 500
+Gosign 100
+Gap 150
+Ground M 130
+Gap 150
+Ground M 130
+Gap 150
+Ground H 600
+Flower 300
+Ground M 200
+Bridge
+Ground M 400
+Dinosaur2 350
+Ground L 250
+Bridge
+Ground L 500
+Dinosaur2 450
+Gap 160
+Ground M 550
+Gosign 180
+Gap 160
+Ground H 560
+Fire 300
+Gap 140
+Ground H 200
+Ground M 700
+Box 350
+Bridge
+Ground M 150
+Gap 175
+Ground M 200
+Ground L 250
+Ground M 220
+Ground H 200
+Ground M 350
+Trap 250
+Bridge
+Ground M 900
+Fire 200
+Trap 500
+Stopsign 750
+End
