@@ -1,28 +1,32 @@
 package com.ebrothers.forestrunner.scenes;
 
 import org.cocos2d.layers.CCScene;
-import org.cocos2d.nodes.CCSpriteFrameCache;
 
+import com.ebrothers.forestrunner.common.Logger;
 import com.ebrothers.forestrunner.layers.BackgroundLayer;
+import com.ebrothers.forestrunner.layers.GameLayer;
+import com.ebrothers.forestrunner.layers.GameMenuLayer;
 
 public class GameScene extends CCScene {
+	private static final String TAG = "GameScene";
 
 	public static GameScene scene() {
+		Logger.d(TAG, "create game scene...");
 		GameScene scene = new GameScene();
 		scene.addChild(new BackgroundLayer());
+		// Levels.getCurrentLevelPath()
+		scene.addChild(new GameLayer("level/leveltest.txt"));
+		scene.addChild(new GameMenuLayer());
 		return scene;
 	}
 
 	public GameScene() {
 		super();
-		final CCSpriteFrameCache sharedSpriteFrameCache = CCSpriteFrameCache
-				.sharedSpriteFrameCache();
-		sharedSpriteFrameCache.addSpriteFrames("static.plist");
-		sharedSpriteFrameCache.addSpriteFrames("sprites.plist");
 	}
 
 	@Override
 	public void onEnter() {
 		super.onEnter();
 	}
+
 }

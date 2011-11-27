@@ -4,6 +4,7 @@ import org.cocos2d.layers.CCScene;
 import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.nodes.CCSpriteFrameCache;
 import org.cocos2d.opengl.CCGLSurfaceView;
+import org.cocos2d.types.CGSize;
 import com.ebrothers.forestrunner.common.Globals;
 import com.ebrothers.forestrunner.scenes.MainScene;
 import android.app.Activity;
@@ -15,12 +16,19 @@ import android.view.KeyEvent;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.ebrothers.forestrunner.common.Globals;
+import com.ebrothers.forestrunner.common.Logger;
+import com.ebrothers.forestrunner.data.Levels;
+import com.ebrothers.forestrunner.scenes.GameScene;
+
 public class ForestRunnerActivity extends Activity {
+	private static final String TAG = "ForestRunnerActivity";
 	private CCGLSurfaceView mGLSurfaceView;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		Logger.d(TAG, "ForestRunnerActivity#onCreate.");
 
 		// set the window status, no tile, full screen and don't sleep
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -34,19 +42,37 @@ public class ForestRunnerActivity extends Activity {
 		setContentView(mGLSurfaceView);
 		loadFrameCache();
 
+		Levels.load();
+
 		// attach the OpenGL view to a window
 		CCDirector.sharedDirector().attachInView(mGLSurfaceView);
 
+		CGSize winSize = CCDirector.sharedDirector().winSize();
+		Globals.scale_ratio = winSize.height / 320f;
+
+		float winHeight = CCDirector.sharedDirector().winSize().getHeight();
+		Globals.groundH_y = winHeight / 2f;
+		Globals.groundM_y = winHeight / 3f;
+		Globals.groundL_y = winHeight / 5f;
+
+		final CCSpriteFrameCache sharedSpriteFrameCache = CCSpriteFrameCache
+				.sharedSpriteFrameCache();
+		sharedSpriteFrameCache.addSpriteFrames("background.plist");
+		sharedSpriteFrameCache.addSpriteFrames("menu.plist");
+		sharedSpriteFrameCache.addSpriteFrames("sprite1.plist");
+		sharedSpriteFrameCache.addSpriteFrames("sprite2.plist");
+		sharedSpriteFrameCache.addSpriteFrames("sprite3.plist");
+
 		// no effect here because device orientation is controlled by manifest
 		CCDirector.sharedDirector().setDeviceOrientation(
-				CCDirector.kCCDeviceOrientationPortrait);
+				CCDirector.kCCDeviceOrientationLandscapeLeft);
 
 		// show FPS
 		// set false to disable FPS display, but don't delete fps_images.png!!
 		CCDirector.sharedDirector().setDisplayFPS(true);
 
 		// frames per second
-		CCDirector.sharedDirector().setAnimationInterval(1.0f / 60);
+		CCDirector.sharedDirector().setAnimationInterval(1f / 60);
 
 		// Make the Scene active
 		CCDirector.sharedDirector().runWithScene(MainScene.scene());
