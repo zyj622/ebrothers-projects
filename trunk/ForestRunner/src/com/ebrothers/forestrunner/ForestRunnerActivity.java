@@ -12,11 +12,12 @@ import com.ebrothers.forestrunner.scenes.GameScene;
 
 public class ForestRunnerActivity extends Activity {
 	private CCGLSurfaceView mGLSurfaceView;
+	public static Activity act = null;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
+		act = this;
 		// set the window status, no tile, full screen and don't sleep
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
