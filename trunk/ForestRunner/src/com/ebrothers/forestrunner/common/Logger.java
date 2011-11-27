@@ -9,7 +9,7 @@ public class Logger {
 
 	public static void d(String tag, String msg) {
 		if (LOGD) {
-			Log.d(tag, "****** " + msg);
+			Log.d(tag, "###### " + msg);
 		}
 	}
 
@@ -21,7 +21,7 @@ public class Logger {
 
 	public static void e(String tag, Throwable tr) {
 		if (LOGE) {
-			Log.e(tag, "****** ERROR", tr);
+			Log.e(tag, "###### ERROR", tr);
 		}
 	}
 }

@@ -1,39 +1,60 @@
 package com.ebrothers.forestrunner.layers;
 
+import org.cocos2d.actions.instant.CCCallFunc;
+import org.cocos2d.actions.interval.CCMoveTo;
+import org.cocos2d.actions.interval.CCSequence;
 import org.cocos2d.layers.CCLayer;
 import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.nodes.CCSprite;
+import org.cocos2d.nodes.CCSpriteFrame;
 import org.cocos2d.nodes.CCSpriteFrameCache;
-
-import com.ebrothers.forestrunner.sprites.Background;
+import org.cocos2d.types.CGPoint;
+import org.cocos2d.types.CGSize;
 
 public class BackgroundLayer extends CCLayer {
+	private CCSequence sequence;
 
 	public BackgroundLayer() {
-		super();
-		Background.create(this).roll();
-
 		CCSpriteFrameCache cache = CCSpriteFrameCache.sharedSpriteFrameCache();
-		CCSprite sprite = CCSprite.sprite(cache.getSpriteFrame("ground31.png"));
-		sprite.setScale(1.5f);
-		sprite.setPosition(100,
-				-CCDirector.sharedDirector().winSize().height / 2f);
-		addChild(sprite);
+		CCSpriteFrame spriteFrame = cache.getSpriteFrame("background01.jpg");
+
+		CCSprite background1 = CCSprite.sprite(spriteFrame);
+		CCSprite background2 = CCSprite.sprite(spriteFrame);
+
+		background1.setAnchorPoint(0, 1);
+		background2.setAnchorPoint(0, 1);
+
+		CGSize winSize = CCDirector.sharedDirector().winSize();
+
+		CGSize contentSize = background1.getContentSize();
+		float scaleRatio = winSize.height / contentSize.height;
+		float width = contentSize.width * scaleRatio;
+		float y = winSize.height;
+
+		background1.setPosition(0, y);
+		background2.setPosition(width, y);
+
+		background1.setScale(scaleRatio);
+		background2.setScale(scaleRatio);
+
+		addChild(background1);
+		addChild(background2);
+
+		// action sequence for rolling
+		CCMoveTo action = CCMoveTo.action(20, CGPoint.ccp(-width, 0));
+		sequence = CCSequence.actions(action,
+				CCCallFunc.action(this, "actionDone"));
+	}
+
+	public void actionDone() {
+		stopAllActions();
+		setPosition(0, 0);
+		runAction(sequence);
 	}
 
 	@Override
 	public void onEnter() {
 		super.onEnter();
-		schedule("tick", 1);
-	}
-
-	public void tick(float delta) {
-
-	}
-
-	@Override
-	public void onExit() {
-		super.onExit();
-		unschedule("tick");
+		runAction(sequence);
 	}
 }

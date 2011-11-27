@@ -4,14 +4,27 @@
     <dict>
         <key>frames</key>
         <dict>
-            <key>game_choose.jpg</key>
+            <key>background01.jpg</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,324},{480,320}}</string>
+                <string>{{2,2},{512,256}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
-                <true/>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{512,256}}</string>
+                <key>sourceSize</key>
+                <string>{512,256}</string>
+            </dict>
+            <key>game_choose.jpg</key>
+            <dict>
+                <key>frame</key>
+                <string>{{2,582},{480,320}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
                 <key>sourceColorRect</key>
                 <string>{{0,0},{480,320}}</string>
                 <key>sourceSize</key>
@@ -20,7 +33,7 @@
             <key>game_over.jpg</key>
             <dict>
                 <key>frame</key>
-                <string>{{484,2},{480,320}}</string>
+                <string>{{484,324},{480,320}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -33,7 +46,7 @@
             <key>game_start01.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,2},{480,320}}</string>
+                <string>{{2,260},{480,320}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -46,7 +59,7 @@
             <key>game_start02.jpg</key>
             <dict>
                 <key>frame</key>
-                <string>{{324,324},{480,320}}</string>
+                <string>{{516,2},{480,320}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -62,13 +75,13 @@
             <key>format</key>
             <integer>2</integer>
             <key>realTextureFileName</key>
-            <string>backgrounds.png</string>
+            <string>background.png</string>
             <key>size</key>
             <string>{1024,1024}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:85f8a047b073553fe39fa0b4fdf7f9ce$</string>
+            <string>$TexturePacker:SmartUpdate:81fdfb6003719e0aee92b1820d0791ca$</string>
             <key>textureFileName</key>
-            <string>backgrounds.png</string>
+            <string>background.png</string>
         </dict>
     </dict>
 </plist>

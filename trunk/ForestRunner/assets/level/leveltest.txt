@@ -1,0 +1,17 @@
+Ground M 900
+Gosign 100
+Stopsign 200
+Fire 300
+Box 400
+Flower 500
+Trap 600
+Dinosaur 700
+Dinosaur2 800
+Dinosaur3 900
+Bridge
+Ground M 200
+Gap 150
+Stone
+Gap 150
+Ground M 300
+End
