@@ -74,7 +74,7 @@ public class SoundManager {
     	sourceSound.put(MUSIC_UPSLOPE, R.raw.music_upslope);
     }
   
-    public void palySound(Context context,String fileName,boolean loop){
+    public void playSound(Context context,String fileName,boolean loop){
     	boolean sound = (Boolean) LocalDataManager.getInstance().readSetting(LocalDataManager.SOUND, false);
     	if(!sound) return;
     	if(sourceSound.containsKey(fileName)){
