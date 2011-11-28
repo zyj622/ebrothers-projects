@@ -1,13 +1,13 @@
-Ground M 1000
+Ground M 1600
 Gosign 100
 Stopsign 200
-Fire 300
-Box 400
-Flower 500
-Trap 600
-Dinosaur 700
-Dinosaur2 800
-Dinosaur3 900
+Fire 400
+Box 600
+Flower 800
+Trap 1000
+Dinosaur 1200
+Dinosaur2 1400
+Dinosaur3 1600
 Bridge
 Ground M 200
 Gap 150

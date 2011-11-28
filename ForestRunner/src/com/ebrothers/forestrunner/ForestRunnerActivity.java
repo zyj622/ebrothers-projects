@@ -55,7 +55,7 @@ public class ForestRunnerActivity extends Activity {
 		float winHeight = CCDirector.sharedDirector().winSize().getHeight();
 		Globals.groundH_y = winHeight / 2f;
 		Globals.groundM_y = winHeight / 3f;
-		Globals.groundL_y = winHeight / 5f;
+		Globals.groundL_y = winHeight / 10f;
 
 		// no effect here because device orientation is controlled by manifest
 		CCDirector.sharedDirector().setDeviceOrientation(
