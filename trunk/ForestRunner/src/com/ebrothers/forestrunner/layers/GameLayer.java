@@ -1,5 +1,7 @@
 package com.ebrothers.forestrunner.layers;
 
+import java.util.ArrayList;
+
 import org.cocos2d.actions.UpdateCallback;
 import org.cocos2d.actions.interval.CCMoveTo;
 import org.cocos2d.layers.CCLayer;
@@ -18,6 +20,7 @@ public class GameLayer extends CCLayer implements UpdateCallback {
 	private static final String TAG = "GameLayer";
 	private float totalWidth = 0;
 	private GameSprite runner;
+	private ArrayList<GameSprite> canCollisions;
 
 	public GameLayer(String level) {
 		super();
@@ -31,6 +34,16 @@ public class GameLayer extends CCLayer implements UpdateCallback {
 		builder.build(this, data);
 		totalWidth = builder.getLevelWidth();
 		Logger.d(TAG, "GameLayer. totalWidth=" + totalWidth);
+		// filter sprites which can collision.
+		canCollisions = new ArrayList<GameSprite>();
+		for (CCNode child : getChildren()) {
+			if (child instanceof GameSprite) {
+				final GameSprite sprite = (GameSprite) child;
+				if (sprite.canCollision() && !sprite.equals(runner)) {
+					canCollisions.add(sprite);
+				}
+			}
+		}
 	}
 
 	@Override
@@ -46,15 +59,13 @@ public class GameLayer extends CCLayer implements UpdateCallback {
 	@Override
 	public void update(float d) {
 		final GameSprite spriteA = runner;
-		for (CCNode child : getChildren()) {
-			if (child instanceof GameSprite) {
-				final GameSprite spriteB = (GameSprite) child;
-				if (!spriteB.equals(spriteA) && spriteB.canCollision()
-						&& spriteB.canCollision()
-						&& isContacted(spriteA, spriteB)) {
-					spriteA.onStartContact(spriteB);
-					spriteB.onStartContact(spriteA);
-				}
+		final ArrayList<GameSprite> sprites = canCollisions;
+		int count = sprites.size();
+		for (int i = 0; i < count; i++) {
+			final GameSprite spriteB = sprites.get(i);
+			if (isContacted(spriteA, spriteB)) {
+				spriteA.onStartContact(spriteB);
+				spriteB.onStartContact(spriteA);
 			}
 		}
 	}
