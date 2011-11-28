@@ -38,6 +38,13 @@ public abstract class GameSprite extends CCSprite {
 		addAnimation(animation);
 	}
 
+	protected void addAnimation(String animationName,
+			ArrayList<CCSpriteFrame> frames, float dt) {
+		CCAnimation animation = CCAnimation
+				.animation(animationName, dt, frames);
+		addAnimation(animation);
+	}
+
 	protected void playeLoopAnimation(String animationName) {
 		runAction(CCRepeatForever.action(CCAnimate
 				.action(animationByName(animationName))));
@@ -60,16 +67,11 @@ public abstract class GameSprite extends CCSprite {
 		return false;
 	}
 
-	/**
-	 * FIX SCALE FACTOR.
-	 */
-	@Deprecated
-	@Override
-	public void setScale(float s) {
-		super.setScale(Globals.scale_ratio);
-	}
-
 	public float getBoundingWidth() {
 		return getBoundingBox().size.width;
+	}
+
+	public float getBoundingHeight() {
+		return getBoundingBox().size.height;
 	}
 }

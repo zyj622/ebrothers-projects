@@ -10,6 +10,8 @@ public class Flower extends GameSprite {
 	public Flower() {
 		super("flower01.png");
 		setAnchorPoint(0.5f, 0);
+		Cherry.addOnTop(this);
+		Banana.addOn2Sides(this);
 		CCSpriteFrameCache cache = CCSpriteFrameCache.sharedSpriteFrameCache();
 		ArrayList<CCSpriteFrame> frames = new ArrayList<CCSpriteFrame>();
 		for (int i = 0; i < 4; i++) {

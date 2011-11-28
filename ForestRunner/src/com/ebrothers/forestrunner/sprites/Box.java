@@ -5,6 +5,8 @@ public class Box extends GameSprite {
 	public Box() {
 		super("box01.png");
 		setAnchorPoint(0.5f, 0);
+		Cherry.addOnTop(this);
+		Banana.addOn2Sides(this);
 	}
 
 	@Override
