@@ -1,14 +1,15 @@
 package com.ebrothers.forestrunner.layers;
 
-import java.util.ArrayList;
-
 import org.cocos2d.actions.UpdateCallback;
 import org.cocos2d.actions.interval.CCMoveTo;
+import org.cocos2d.events.CCTouchDispatcher;
 import org.cocos2d.layers.CCLayer;
 import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.nodes.CCNode;
 import org.cocos2d.types.CGPoint;
 import org.cocos2d.types.CGRect;
+
+import android.view.MotionEvent;
 
 import com.ebrothers.forestrunner.common.Logger;
 import com.ebrothers.forestrunner.data.LevelData;
@@ -19,55 +20,54 @@ import com.ebrothers.forestrunner.sprites.Runner;
 public class GameLayer extends CCLayer implements UpdateCallback {
 	private static final String TAG = "GameLayer";
 	private float totalWidth = 0;
-	private GameSprite runner;
-	private ArrayList<GameSprite> canCollisions;
+	private Runner runner;
+	private CCNode ground;
+	private CCMoveTo moveAction;
 
 	public GameLayer(String level) {
 		super();
 		Logger.d(TAG, "GameLayer init...");
+		setIsTouchEnabled(true);
+		// build ground
+		ground = CCNode.node();
+		GameLevelBuilder builder = GameLevelBuilder.create();
+		LevelData data = LevelDataParser.parse(level);
+		builder.build(ground, data);
+		totalWidth = builder.getLevelWidth();
+		Logger.d(TAG, "GameLayer. totalWidth=" + totalWidth);
+		addChild(ground);
+
 		// init runner
 		runner = new Runner();
 		addChild(runner);
-		// build level data
-		GameLevelBuilder builder = GameLevelBuilder.create();
-		LevelData data = LevelDataParser.parse(level);
-		builder.build(this, data);
-		totalWidth = builder.getLevelWidth();
-		Logger.d(TAG, "GameLayer. totalWidth=" + totalWidth);
-		// filter sprites which can collision.
-		canCollisions = new ArrayList<GameSprite>();
-		for (CCNode child : getChildren()) {
-			if (child instanceof GameSprite) {
-				final GameSprite sprite = (GameSprite) child;
-				if (sprite.canCollision() && !sprite.equals(runner)) {
-					canCollisions.add(sprite);
-				}
-			}
+
+		// create move action
+		float winWidth = CCDirector.sharedDirector().winSize().width;
+		moveAction = CCMoveTo
+				.action(20, CGPoint.ccp(-totalWidth + winWidth, 0));
+	}
+
+	@Override
+	public boolean ccTouchesBegan(MotionEvent event) {
+		switch (event.getAction()) {
+		case MotionEvent.ACTION_DOWN:
+			runner.jump();
+			break;
+		default:
+			break;
 		}
+		return CCTouchDispatcher.kEventHandled;
 	}
 
 	@Override
 	public void onEnter() {
 		super.onEnter();
-		float winWidth = CCDirector.sharedDirector().winSize().width;
-		CCMoveTo action = CCMoveTo.action(20,
-				CGPoint.ccp(-totalWidth + winWidth, 0));
-		runAction(action);
+		ground.runAction(moveAction);
 		schedule(this);
 	}
 
 	@Override
 	public void update(float d) {
-		final GameSprite spriteA = runner;
-		final ArrayList<GameSprite> sprites = canCollisions;
-		int count = sprites.size();
-		for (int i = 0; i < count; i++) {
-			final GameSprite spriteB = sprites.get(i);
-			if (isContacted(spriteA, spriteB)) {
-				spriteA.onStartContact(spriteB);
-				spriteB.onStartContact(spriteA);
-			}
-		}
 	}
 
 	private boolean isContacted(GameSprite spriteA, GameSprite spriteB) {

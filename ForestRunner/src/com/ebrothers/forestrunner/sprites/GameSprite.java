@@ -33,7 +33,7 @@ public abstract class GameSprite extends CCSprite {
 
 	protected void addAnimation(String animationName,
 			ArrayList<CCSpriteFrame> frames) {
-		CCAnimation animation = CCAnimation.animation(animationName, 0.1f,
+		CCAnimation animation = CCAnimation.animation(animationName, 0.05f,
 				frames);
 		addAnimation(animation);
 	}
@@ -41,6 +41,10 @@ public abstract class GameSprite extends CCSprite {
 	protected void playeLoopAnimation(String animationName) {
 		runAction(CCRepeatForever.action(CCAnimate
 				.action(animationByName(animationName))));
+	}
+
+	protected void playeAnimation(String animationName) {
+		runAction(CCAnimate.action(animationByName(animationName), false));
 	}
 
 	public void onStartContact(GameSprite target) {
