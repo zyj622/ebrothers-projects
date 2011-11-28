@@ -5,6 +5,7 @@ public class Stone extends GameSprite {
 	public Stone() {
 		super("stone01.png");
 		setAnchorPoint(0, 1);
+		Cherry.addOnTop(this);
 	}
 
 	@Override

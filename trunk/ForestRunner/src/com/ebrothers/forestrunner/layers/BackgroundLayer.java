@@ -27,15 +27,18 @@ public class BackgroundLayer extends CCLayer {
 		CGSize winSize = CCDirector.sharedDirector().winSize();
 
 		CGSize contentSize = background1.getContentSize();
-		float scaleRatio = winSize.height / contentSize.height;
-		float width = contentSize.width * scaleRatio;
+		float scaleRatioX = winSize.width / contentSize.width;
+		float scaleRatioY = winSize.height / contentSize.height;
+		float width = contentSize.width * scaleRatioX;
 		float y = winSize.height;
 
 		background1.setPosition(0, y);
 		background2.setPosition(width, y);
 
-		background1.setScale(scaleRatio);
-		background2.setScale(scaleRatio);
+		background1.setScaleX(scaleRatioX);
+		background1.setScaleY(scaleRatioY);
+		background2.setScaleX(scaleRatioX);
+		background2.setScaleY(scaleRatioY);
 
 		addChild(background1);
 		addChild(background2);

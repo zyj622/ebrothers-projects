@@ -17,7 +17,7 @@ public class Runner extends GameSprite {
 	public Runner() {
 		super("man01.png");
 		setAnchorPoint(0.5f, 0);
-		setPosition(100, Globals.groundM_y);
+		setPosition(100, Globals.groundM_y - 10);
 		CCSpriteFrameCache cache = CCSpriteFrameCache.sharedSpriteFrameCache();
 		ArrayList<CCSpriteFrame> frames = new ArrayList<CCSpriteFrame>();
 		for (int i = 0; i < 8; i++) {

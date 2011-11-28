@@ -44,7 +44,7 @@ public class GameLayer extends CCLayer implements UpdateCallback {
 		// create move action
 		float winWidth = CCDirector.sharedDirector().winSize().width;
 		moveAction = CCMoveTo
-				.action(20, CGPoint.ccp(-totalWidth + winWidth, 0));
+				.action(5, CGPoint.ccp(-totalWidth + winWidth, 0));
 	}
 
 	@Override
@@ -62,7 +62,8 @@ public class GameLayer extends CCLayer implements UpdateCallback {
 	@Override
 	public void onEnter() {
 		super.onEnter();
-		ground.runAction(moveAction);
+		//ground.runAction(moveAction);
+		setPosition(-200, 0);
 		schedule(this);
 	}
 

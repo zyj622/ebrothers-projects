@@ -10,6 +10,8 @@ public class Fire extends GameSprite {
 	public Fire() {
 		super("fire01.png");
 		setAnchorPoint(0.5f, 0);
+		Cherry.addOnTop(this);
+		Banana.addOn2Sides(this);
 		CCSpriteFrameCache cache = CCSpriteFrameCache.sharedSpriteFrameCache();
 		ArrayList<CCSpriteFrame> frames = new ArrayList<CCSpriteFrame>();
 		for (int i = 0; i < 3; i++) {
