@@ -18,6 +18,7 @@ import android.view.WindowManager;
 import com.ebrothers.forestrunner.common.Globals;
 import com.ebrothers.forestrunner.common.Logger;
 import com.ebrothers.forestrunner.data.Levels;
+import com.ebrothers.forestrunner.manager.LocalDataManager;
 import com.ebrothers.forestrunner.scenes.MainScene;
 
 public class ForestRunnerActivity extends Activity {
@@ -40,6 +41,8 @@ public class ForestRunnerActivity extends Activity {
 
 		setContentView(mGLSurfaceView);
 		loadFrameCache();
+		//初始化  preference
+		LocalDataManager.getInstance().initialize(this);
 
 		Levels.load();
 
