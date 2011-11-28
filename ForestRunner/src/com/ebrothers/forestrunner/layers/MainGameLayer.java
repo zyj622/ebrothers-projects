@@ -10,6 +10,8 @@ import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.nodes.CCSprite;
 import org.cocos2d.types.CGPoint;
 
+import com.ebrothers.forestrunner.manager.LocalDataManager;
+import com.ebrothers.forestrunner.manager.SoundManager;
 import com.ebrothers.forestrunner.scenes.GameScene;
 import com.ebrothers.forestrunner.scenes.HighScoreScene;
 import android.content.Intent;
@@ -109,8 +111,19 @@ public class MainGameLayer extends BasicLayer {
 		cmMenuOpen.alignItemsVertically();
 
 		cmMenuOpen.setPosition(width - 20, 20);
-		cmMenuOpen.setVisible(false);
+		
 		addChild(cmMenuOpen, 6);
+		
+		//设置声音图标
+		boolean sound = (Boolean) LocalDataManager.getInstance().readSetting(LocalDataManager.SOUND, false);
+		if(sound){
+			cmMenuOpen.setVisible(true);
+			cmMenuClose.setVisible(false);
+		}else{
+			cmMenuOpen.setVisible(false);
+			cmMenuClose.setVisible(true);
+		}
+		
 
 		CCSprite spriteShare = getNode("share_r.PNG", 0, 0);
 		CCMenuItemSprite cmsShare = CCMenuItemSprite.item(spriteShare,
@@ -124,7 +137,12 @@ public class MainGameLayer extends BasicLayer {
 		addChild(cmMenuShare, 6);
 	}
 
+	/**
+	 * 分享
+	 * @param o
+	 */
 	public void shareCallback(Object o) {
+		SoundManager.getInstance().playEffect(CCDirector.sharedDirector().getActivity(), SoundManager.MUSIC_BUTTON);
 		if (CCDirector.sharedDirector().getActivity() != null){
 			Intent intent = new Intent(Intent.ACTION_SEND);
 			intent.setType("text/plain");
@@ -134,28 +152,52 @@ public class MainGameLayer extends BasicLayer {
 		}
 	}
 
+	/**
+	 * 更多
+	 * @param o
+	 */
 	public void more(Object o) {
+		SoundManager.getInstance().playEffect(CCDirector.sharedDirector().getActivity(), SoundManager.MUSIC_BUTTON);
 		Intent it = new Intent(Intent.ACTION_VIEW,
 				Uri.parse("http://www.baidu.com"));
 		if (CCDirector.sharedDirector().getActivity() != null)
 			CCDirector.sharedDirector().getActivity().startActivity(it);
 	}
 
+	/**
+	 * 关闭声音
+	 * @param o
+	 */
 	public void closeSound(Object o) {
 		cmMenuOpen.setVisible(false);
 		cmMenuClose.setVisible(true);
+		SoundManager.getInstance().playEffect(CCDirector.sharedDirector().getActivity(), SoundManager.MUSIC_BUTTON);
 	}
 
+	/**
+	 * 打开声音
+	 * @param o
+	 */
 	public void openSound(Object o) {
 		cmMenuOpen.setVisible(true);
 		cmMenuClose.setVisible(false);
 	}
 	
+	/**
+	 * 
+	 * @param o
+	 */
 	public void startGame(Object o) {
+		SoundManager.getInstance().playEffect(CCDirector.sharedDirector().getActivity(), SoundManager.MUSIC_BUTTON);
 		CCDirector.sharedDirector().pushScene(GameScene.scene());
 	}
 
+	/**
+	 * 
+	 * @param o
+	 */
 	public void startHigh(Object o) {
+		SoundManager.getInstance().playEffect(CCDirector.sharedDirector().getActivity(), SoundManager.MUSIC_BUTTON);
 		CCDirector.sharedDirector().pushScene(HighScoreScene.scene());
 	}
 
@@ -187,6 +229,7 @@ public class MainGameLayer extends BasicLayer {
 	@Override
 	public void onEnter() {
 		super.onEnter();
+		Log.i("game", "enter_main_game_layer");
 	}
 	public void onExit() {
 		super.onExit();
