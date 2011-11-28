@@ -5,8 +5,7 @@ import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.nodes.CCSpriteFrameCache;
 import org.cocos2d.opengl.CCGLSurfaceView;
 import org.cocos2d.types.CGSize;
-import com.ebrothers.forestrunner.common.Globals;
-import com.ebrothers.forestrunner.scenes.MainScene;
+
 import android.app.Activity;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
@@ -19,7 +18,7 @@ import android.view.WindowManager;
 import com.ebrothers.forestrunner.common.Globals;
 import com.ebrothers.forestrunner.common.Logger;
 import com.ebrothers.forestrunner.data.Levels;
-import com.ebrothers.forestrunner.scenes.GameScene;
+import com.ebrothers.forestrunner.scenes.MainScene;
 
 public class ForestRunnerActivity extends Activity {
 	private static final String TAG = "ForestRunnerActivity";
@@ -54,14 +53,6 @@ public class ForestRunnerActivity extends Activity {
 		Globals.groundH_y = winHeight / 2f;
 		Globals.groundM_y = winHeight / 3f;
 		Globals.groundL_y = winHeight / 5f;
-
-		final CCSpriteFrameCache sharedSpriteFrameCache = CCSpriteFrameCache
-				.sharedSpriteFrameCache();
-		sharedSpriteFrameCache.addSpriteFrames("background.plist");
-		sharedSpriteFrameCache.addSpriteFrames("menu.plist");
-		sharedSpriteFrameCache.addSpriteFrames("sprite1.plist");
-		sharedSpriteFrameCache.addSpriteFrames("sprite2.plist");
-		sharedSpriteFrameCache.addSpriteFrames("sprite3.plist");
 
 		// no effect here because device orientation is controlled by manifest
 		CCDirector.sharedDirector().setDeviceOrientation(
@@ -113,10 +104,11 @@ public class ForestRunnerActivity extends Activity {
 	private void loadFrameCache() {
 		CCSpriteFrameCache sharedSpriteFrameCache = CCSpriteFrameCache
 				.sharedSpriteFrameCache();
-		sharedSpriteFrameCache.addSpriteFrames("static.plist");
-		sharedSpriteFrameCache.addSpriteFrames("sprites.plist");
-		sharedSpriteFrameCache.addSpriteFrames("backgrounds.plist");
+		sharedSpriteFrameCache.addSpriteFrames("background.plist");
 		sharedSpriteFrameCache.addSpriteFrames("menu.plist");
+		sharedSpriteFrameCache.addSpriteFrames("sprite1.plist");
+		sharedSpriteFrameCache.addSpriteFrames("sprite2.plist");
+		sharedSpriteFrameCache.addSpriteFrames("sprite3.plist");
 	}
 
 	private void showDialog() {

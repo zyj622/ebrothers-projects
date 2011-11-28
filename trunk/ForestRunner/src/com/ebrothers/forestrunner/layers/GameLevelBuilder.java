@@ -78,8 +78,8 @@ public class GameLevelBuilder {
 				bridge.setPosition(nextX - (14 * Globals.scale_ratio),
 						lastGroundTop - (20 * Globals.scale_ratio));
 				parent.addChild(bridge);
-				nextX += bridge.getWidth() - (30 * Globals.scale_ratio);
-				levelWidth += (bridge.getWidth() - (30 * Globals.scale_ratio));
+				nextX += bridge.getBoundingWidth() - (30 * Globals.scale_ratio);
+				levelWidth += (bridge.getBoundingWidth() - (30 * Globals.scale_ratio));
 				break;
 			case SpriteType.DINORSAUR_1:
 				Dinosaur1 dinosaur = new Dinosaur1();
@@ -137,8 +137,8 @@ public class GameLevelBuilder {
 				Stone stone = new Stone();
 				stone.setPosition(nextX, lastGroundTop);
 				parent.addChild(stone);
-				nextX += stone.getWidth();
-				levelWidth += stone.getWidth();
+				nextX += stone.getBoundingWidth();
+				levelWidth += stone.getBoundingWidth();
 				break;
 			default:
 				break;
@@ -151,10 +151,10 @@ public class GameLevelBuilder {
 		GroundL leftGround = new GroundL();
 		leftGround.setPosition(left, top);
 		parent.addChild(leftGround);
-		float leftWidth = leftGround.getWidth() - 1;
+		float leftWidth = leftGround.getBoundingWidth() - 1;
 		float currentX = left + leftWidth;
 		GroundR rightGround = new GroundR();
-		float rightWidth = rightGround.getWidth() - 1;
+		float rightWidth = rightGround.getBoundingWidth() - 1;
 		float maxX = currentX + width - leftWidth - rightWidth;
 		// add middle grounds
 		boolean flag = false;
@@ -169,7 +169,7 @@ public class GameLevelBuilder {
 			}
 			middle.setPosition(currentX, top);
 			parent.addChild(middle);
-			currentX += middle.getWidth() - 1;
+			currentX += middle.getBoundingWidth() - 1;
 		}
 		// add right ground
 		rightGround.setPosition(maxX, top);
