@@ -43,29 +43,51 @@ public class GameLevelBuilder {
 		float nextX = 0;
 		float lastGroundLeft = 0;
 		float lastGroundTop = Globals.groundM_y;
+		boolean paddingLeft = false;
 		for (SpriteData spriteData : datas) {
 			// create game sprite by type
 			switch (spriteData.type) {
 			case SpriteType.GROUND_M:
-				createGround(parent, nextX, Globals.groundM_y, spriteData.width);
+				if (paddingLeft) {
+					createGround(parent, nextX - 180, Globals.groundM_y,
+							spriteData.width + 180);
+				} else {
+					createGround(parent, nextX, Globals.groundM_y,
+							spriteData.width);
+				}
 				lastGroundLeft = nextX;
 				lastGroundTop = Globals.groundM_y;
 				nextX += spriteData.width;
 				levelWidth += spriteData.width;
+				paddingLeft = true;
 				break;
 			case SpriteType.GROUND_L:
-				createGround(parent, nextX, Globals.groundL_y, spriteData.width);
+				if (paddingLeft) {
+					createGround(parent, nextX - 180, Globals.groundL_y,
+							spriteData.width + 180);
+				} else {
+					createGround(parent, nextX, Globals.groundL_y,
+							spriteData.width);
+				}
 				lastGroundLeft = nextX;
 				lastGroundTop = Globals.groundL_y;
 				nextX += spriteData.width;
 				levelWidth += spriteData.width;
+				paddingLeft = true;
 				break;
 			case SpriteType.GROUND_H:
-				createGround(parent, nextX, Globals.groundH_y, spriteData.width);
+				if (paddingLeft) {
+					createGround(parent, nextX - 180, Globals.groundH_y,
+							spriteData.width + 180);
+				} else {
+					createGround(parent, nextX, Globals.groundH_y,
+							spriteData.width);
+				}
 				lastGroundLeft = nextX;
 				lastGroundTop = Globals.groundH_y;
 				nextX += spriteData.width;
 				levelWidth += spriteData.width;
+				paddingLeft = true;
 				break;
 			case SpriteType.BOX:
 				Box box = new Box();
@@ -80,6 +102,7 @@ public class GameLevelBuilder {
 				parent.addChild(bridge);
 				nextX += bridge.getBoundingWidth() - (30 * Globals.scale_ratio);
 				levelWidth += (bridge.getBoundingWidth() - (30 * Globals.scale_ratio));
+				paddingLeft = false;
 				break;
 			case SpriteType.DINORSAUR_1:
 				Dinosaur1 dinosaur = new Dinosaur1();
@@ -114,6 +137,7 @@ public class GameLevelBuilder {
 			case SpriteType.GAP:
 				nextX += spriteData.width;
 				levelWidth += spriteData.width;
+				paddingLeft = false;
 				break;
 			case SpriteType.GO_SIGN:
 				GoSign gosign = new GoSign();

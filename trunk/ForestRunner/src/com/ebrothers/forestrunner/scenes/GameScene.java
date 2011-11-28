@@ -3,6 +3,7 @@ package com.ebrothers.forestrunner.scenes;
 import org.cocos2d.layers.CCScene;
 
 import com.ebrothers.forestrunner.common.Logger;
+import com.ebrothers.forestrunner.data.Levels;
 import com.ebrothers.forestrunner.layers.BackgroundLayer;
 import com.ebrothers.forestrunner.layers.GameLayer;
 import com.ebrothers.forestrunner.layers.GameMenuLayer;
@@ -14,8 +15,8 @@ public class GameScene extends CCScene {
 		Logger.d(TAG, "create game scene...");
 		GameScene scene = new GameScene();
 		scene.addChild(new BackgroundLayer());
-		// Levels.getCurrentLevelPath()
-		scene.addChild(new GameLayer("level/leveltest.txt"));
+		// "level/leveltest.txt"
+		scene.addChild(new GameLayer(Levels.getCurrentLevelPath()));
 		scene.addChild(new GameMenuLayer());
 		return scene;
 	}

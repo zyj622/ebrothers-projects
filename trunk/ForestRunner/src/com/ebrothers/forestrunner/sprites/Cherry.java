@@ -30,7 +30,7 @@ public class Cherry extends GameSprite {
 		CGPoint parentPos = parent.getPosition();
 		float parentWidth = parent.getContentSize().width;
 		cherry.setPosition(parentPos.x + parentWidth / 2f,
-				parentPos.y + cherry.getContentSize().height * 2 + 20);
+				parentPos.y + cherry.getContentSize().height * 2 + 5);
 		parent.addChild(cherry);
 	}
 }
