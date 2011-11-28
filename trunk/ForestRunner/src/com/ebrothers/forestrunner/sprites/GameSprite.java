@@ -28,6 +28,7 @@ public abstract class GameSprite extends CCSprite {
 
 	private void initSprite() {
 		super.setScale(Globals.scale_ratio);
+		getTexture().setAliasTexParameters();
 	}
 
 	protected void addAnimation(String animationName,
