@@ -10,9 +10,10 @@ import org.cocos2d.nodes.CCSpriteFrame;
 import org.cocos2d.nodes.CCSpriteFrameCache;
 
 import com.ebrothers.forestrunner.common.Globals;
+import com.ebrothers.forestrunner.common.Logger;
 
 public abstract class GameSprite extends CCSprite {
-	private float width;
+	private static final String TAG = "GameSprite";
 
 	public GameSprite() {
 		super();
@@ -26,8 +27,7 @@ public abstract class GameSprite extends CCSprite {
 	}
 
 	private void initSprite() {
-		setScale(Globals.scale_ratio);
-		setWidth(getTextureRect().size.width * Globals.scale_ratio);
+		super.setScale(Globals.scale_ratio);
 	}
 
 	protected void addAnimation(String animationName,
@@ -42,19 +42,29 @@ public abstract class GameSprite extends CCSprite {
 				.action(animationByName(animationName))));
 	}
 
-	public abstract boolean canCollision();
+	public void onStartContact(GameSprite target) {
+		Logger.d(TAG, "start contact. A=" + this + ", B=" + target);
+		// do nothing
+	}
 
-	public abstract boolean isFatal();
-
-	public boolean isCollideWith(GameSprite sprinte) {
+	public boolean canCollision() {
 		return false;
 	}
 
-	public void setWidth(float width) {
-		this.width = width;
+	public boolean isFatal() {
+		return false;
 	}
 
-	public float getWidth() {
-		return width;
+	/**
+	 * FIX SCALE FACTOR.
+	 */
+	@Deprecated
+	@Override
+	public void setScale(float s) {
+		super.setScale(Globals.scale_ratio);
+	}
+
+	public float getBoundingWidth() {
+		return getBoundingBox().size.width;
 	}
 }

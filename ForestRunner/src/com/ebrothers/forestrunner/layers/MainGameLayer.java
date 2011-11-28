@@ -9,6 +9,8 @@ import org.cocos2d.menus.CCMenuItemSprite;
 import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.nodes.CCSprite;
 import org.cocos2d.types.CGPoint;
+
+import com.ebrothers.forestrunner.scenes.GameScene;
 import com.ebrothers.forestrunner.scenes.HighScoreScene;
 import android.content.Intent;
 import android.net.Uri;
@@ -147,6 +149,10 @@ public class MainGameLayer extends BasicLayer {
 	public void openSound(Object o) {
 		cmMenuOpen.setVisible(true);
 		cmMenuClose.setVisible(false);
+	}
+	
+	public void startGame(Object o) {
+		CCDirector.sharedDirector().pushScene(GameScene.scene());
 	}
 
 	public void startHigh(Object o) {
