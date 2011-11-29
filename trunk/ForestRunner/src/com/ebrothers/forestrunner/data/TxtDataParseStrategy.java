@@ -13,6 +13,7 @@ public class TxtDataParseStrategy implements ParseStrategy {
 		assert (is != null);
 		final LevelData level = new LevelData();
 		Scanner scanner = new Scanner(is);
+		SpriteData parent = null;
 		while (scanner.hasNextLine()) {
 			String line = scanner.nextLine();
 			String[] splites = line.split(" ");
@@ -20,52 +21,90 @@ public class TxtDataParseStrategy implements ParseStrategy {
 			if (line.startsWith("Ground M")) {
 				data.type = SpriteType.GROUND_M;
 				data.width = Float.parseFloat(splites[2]);
+				parent = data;
+				level.addSpriteData(data);
 			} else if (line.startsWith("Ground H")) {
 				data.type = SpriteType.GROUND_H;
 				data.width = Float.parseFloat(splites[2]);
+				parent = data;
+				level.addSpriteData(data);
 			} else if (line.startsWith("Ground L")) {
 				data.type = SpriteType.GROUND_L;
 				data.width = Float.parseFloat(splites[2]);
-			} else if (line.startsWith("Gosign")) {
-				data.type = SpriteType.GO_SIGN;
-				data.rx = Float.parseFloat(splites[1]);
-			} else if (line.startsWith("Fire")) {
-				data.type = SpriteType.FIRE;
-				data.rx = Float.parseFloat(splites[1]);
+				parent = data;
+				level.addSpriteData(data);
 			} else if (line.startsWith("Gap")) {
 				data.type = SpriteType.GAP;
 				data.width = Float.parseFloat(splites[1]);
+				parent = data;
+				level.addSpriteData(data);
+			} else if (line.startsWith("Bridge")) {
+				data.type = SpriteType.BRIDGE;
+				parent = data;
+				level.addSpriteData(data);
+			} else if (line.startsWith("Stone")) {
+				data.type = SpriteType.STONE;
+				parent = data;
+				level.addSpriteData(data);
+			} else if (line.startsWith("Gosign")) {
+				data.type = SpriteType.GO_SIGN;
+				data.rx = Float.parseFloat(splites[1]);
+				if (parent != null) {
+					parent.addChild(data);
+				}
+			} else if (line.startsWith("Fire")) {
+				data.type = SpriteType.FIRE;
+				data.rx = Float.parseFloat(splites[1]);
+				if (parent != null) {
+					parent.addChild(data);
+				}
 			} else if (line.startsWith("Box")) {
 				data.type = SpriteType.BOX;
 				data.rx = Float.parseFloat(splites[1]);
+				if (parent != null) {
+					parent.addChild(data);
+				}
 			} else if (line.startsWith("Flower")) {
 				data.type = SpriteType.FLOWER;
 				data.rx = Float.parseFloat(splites[1]);
-			} else if (line.startsWith("Bridge")) {
-				data.type = SpriteType.BRIDGE;
+				if (parent != null) {
+					parent.addChild(data);
+				}
 			} else if (line.startsWith("Dinosaur2")) {
 				data.type = SpriteType.DINORSAUR_2;
 				data.rx = Float.parseFloat(splites[1]);
+				if (parent != null) {
+					parent.addChild(data);
+				}
 			} else if (line.startsWith("Dinosaur3")) {
 				data.type = SpriteType.DINORSAUR_3;
 				data.rx = Float.parseFloat(splites[1]);
+				if (parent != null) {
+					parent.addChild(data);
+				}
 			} else if (line.startsWith("Dinosaur")) {
 				data.type = SpriteType.DINORSAUR_1;
 				data.rx = Float.parseFloat(splites[1]);
+				if (parent != null) {
+					parent.addChild(data);
+				}
 			} else if (line.startsWith("Stopsign")) {
 				data.type = SpriteType.STOP_SIGN;
 				data.rx = Float.parseFloat(splites[1]);
+				if (parent != null) {
+					parent.addChild(data);
+				}
 			} else if (line.startsWith("Trap")) {
 				data.type = SpriteType.TRAP;
 				data.rx = Float.parseFloat(splites[1]);
-			} else if (line.startsWith("Stone")) {
-				data.type = SpriteType.STONE;
+				if (parent != null) {
+					parent.addChild(data);
+				}
 			} else if (line.startsWith("End")) {
 				break;
 			} else {
 				continue;
 			}
-			level.addSpriteData(data);
 		}
 		scanner.close();
 		return level;

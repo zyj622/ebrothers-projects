@@ -41,133 +41,140 @@ public class GameLevelBuilder {
 		// get sprite's data
 		ArrayList<SpriteData> datas = levelData.getSpriteDatas();
 		float nextX = 0;
-		float lastGroundLeft = 0;
 		float lastGroundTop = Globals.groundM_y;
-		boolean paddingLeft = false;
-		for (SpriteData spriteData : datas) {
+		int count = datas.size();
+		SpriteData spriteData;
+		int preType = -1;
+		int nextType = -1;
+		float spriteWidth = 0;
+		for (int i = 0; i < count; i++) {
+			spriteData = datas.get(i);
+			if ((i + 1) < count) {
+				nextType = datas.get(i + 1).type;
+			} else {
+				nextType = -1;
+			}
 			// create game sprite by type
 			switch (spriteData.type) {
-			case SpriteType.GROUND_M:
-				if (paddingLeft) {
-					createGround(parent, nextX - 180, Globals.groundM_y,
-							spriteData.width + 180);
-				} else {
-					createGround(parent, nextX, Globals.groundM_y,
-							spriteData.width);
-				}
-				lastGroundLeft = nextX;
-				lastGroundTop = Globals.groundM_y;
-				nextX += spriteData.width;
-				levelWidth += spriteData.width;
-				paddingLeft = true;
-				break;
 			case SpriteType.GROUND_L:
-				if (paddingLeft) {
-					createGround(parent, nextX - 180, Globals.groundL_y,
-							spriteData.width + 180);
-				} else {
-					createGround(parent, nextX, Globals.groundL_y,
-							spriteData.width);
-				}
-				lastGroundLeft = nextX;
 				lastGroundTop = Globals.groundL_y;
-				nextX += spriteData.width;
-				levelWidth += spriteData.width;
-				paddingLeft = true;
+				spriteWidth = spriteData.width;
+				createGround(parent, preType, nextType, spriteData.type, nextX,
+						lastGroundTop, spriteWidth);
+				break;
+			case SpriteType.GROUND_M:
+				lastGroundTop = Globals.groundM_y;
+				spriteWidth = spriteData.width;
+				createGround(parent, preType, nextType, spriteData.type, nextX,
+						lastGroundTop, spriteWidth);
 				break;
 			case SpriteType.GROUND_H:
-				if (paddingLeft) {
-					createGround(parent, nextX - 180, Globals.groundH_y,
-							spriteData.width + 180);
-				} else {
-					createGround(parent, nextX, Globals.groundH_y,
-							spriteData.width);
-				}
-				lastGroundLeft = nextX;
 				lastGroundTop = Globals.groundH_y;
-				nextX += spriteData.width;
-				levelWidth += spriteData.width;
-				paddingLeft = true;
-				break;
-			case SpriteType.BOX:
-				Box box = new Box();
-				box.setPosition(lastGroundLeft + spriteData.rx, lastGroundTop
-						- 4 * Globals.scale_ratio);
-				parent.addChild(box);
+				spriteWidth = spriteData.width;
+				createGround(parent, preType, nextType, spriteData.type, nextX,
+						lastGroundTop, spriteWidth);
 				break;
 			case SpriteType.BRIDGE:
 				Bridge bridge = new Bridge();
 				bridge.setPosition(nextX - (14 * Globals.scale_ratio),
 						lastGroundTop - (20 * Globals.scale_ratio));
 				parent.addChild(bridge);
-				nextX += bridge.getBoundingWidth() - (30 * Globals.scale_ratio);
-				levelWidth += (bridge.getBoundingWidth() - (30 * Globals.scale_ratio));
-				paddingLeft = false;
-				break;
-			case SpriteType.DINORSAUR_1:
-				Dinosaur1 dinosaur = new Dinosaur1();
-				dinosaur.setPosition(lastGroundLeft + spriteData.rx,
-						lastGroundTop - 4);
-				parent.addChild(dinosaur);
-				break;
-			case SpriteType.DINORSAUR_2:
-				Dinosaur2 dinosaur2 = new Dinosaur2();
-				dinosaur2.setPosition(lastGroundLeft + spriteData.rx,
-						lastGroundTop - 4);
-				parent.addChild(dinosaur2);
-				break;
-			case SpriteType.DINORSAUR_3:
-				Dinosaur3 dinosaur3 = new Dinosaur3();
-				dinosaur3.setPosition(lastGroundLeft + spriteData.rx,
-						lastGroundTop - 4);
-				parent.addChild(dinosaur3);
-				break;
-			case SpriteType.FIRE:
-				Fire fire = new Fire();
-				fire.setPosition(lastGroundLeft + spriteData.rx,
-						lastGroundTop - 8);
-				parent.addChild(fire);
-				break;
-			case SpriteType.FLOWER:
-				Flower flower = new Flower();
-				flower.setPosition(lastGroundLeft + spriteData.rx,
-						lastGroundTop - 4);
-				parent.addChild(flower);
+				spriteWidth = bridge.getBoundingWidth()
+						- (30 * Globals.scale_ratio);
 				break;
 			case SpriteType.GAP:
-				nextX += spriteData.width;
-				levelWidth += spriteData.width;
-				paddingLeft = false;
-				break;
-			case SpriteType.GO_SIGN:
-				GoSign gosign = new GoSign();
-				gosign.setPosition(lastGroundLeft + spriteData.rx,
-						lastGroundTop - 4);
-				parent.addChild(gosign);
-				break;
-			case SpriteType.STOP_SIGN:
-				StopSign stopsign = new StopSign();
-				stopsign.setPosition(lastGroundLeft + spriteData.rx,
-						lastGroundTop - 4);
-				parent.addChild(stopsign);
-				break;
-			case SpriteType.TRAP:
-				Trap trap = new Trap();
-				trap.setPosition(lastGroundLeft + spriteData.rx,
-						lastGroundTop - 4);
-				parent.addChild(trap);
+				spriteWidth = spriteData.width;
 				break;
 			case SpriteType.STONE:
 				Stone stone = new Stone();
 				stone.setPosition(nextX, lastGroundTop);
 				parent.addChild(stone);
-				nextX += stone.getBoundingWidth();
-				levelWidth += stone.getBoundingWidth();
+				spriteWidth = stone.getBoundingWidth();
 				break;
 			default:
 				break;
 			}
+			createChildren(parent, spriteData.getChildren(), nextX,
+					lastGroundTop);
+			nextX += spriteWidth;
+			levelWidth += spriteWidth;
+			preType = spriteData.type;
 		}
+	}
+
+	private void createChildren(CCNode parent, ArrayList<SpriteData> children,
+			float parentLeft, float parentTop) {
+		int count = children.size();
+		SpriteData child;
+		for (int i = 0; i < count; i++) {
+			child = children.get(i);
+			switch (child.type) {
+			case SpriteType.BOX:
+				Box box = new Box();
+				box.setPosition(parentLeft + child.rx, parentTop - 4
+						* Globals.scale_ratio);
+				parent.addChild(box);
+				break;
+			case SpriteType.DINORSAUR_1:
+				Dinosaur1 dinosaur = new Dinosaur1();
+				dinosaur.setPosition(parentLeft + child.rx, parentTop - 4);
+				parent.addChild(dinosaur);
+				break;
+			case SpriteType.DINORSAUR_2:
+				Dinosaur2 dinosaur2 = new Dinosaur2();
+				dinosaur2.setPosition(parentLeft + child.rx, parentTop - 4);
+				parent.addChild(dinosaur2);
+				break;
+			case SpriteType.DINORSAUR_3:
+				Dinosaur3 dinosaur3 = new Dinosaur3();
+				dinosaur3.setPosition(parentLeft + child.rx, parentTop - 4);
+				parent.addChild(dinosaur3);
+				break;
+			case SpriteType.FIRE:
+				Fire fire = new Fire();
+				fire.setPosition(parentLeft + child.rx, parentTop - 8);
+				parent.addChild(fire);
+				break;
+			case SpriteType.FLOWER:
+				Flower flower = new Flower();
+				flower.setPosition(parentLeft + child.rx, parentTop - 4);
+				parent.addChild(flower);
+				break;
+			case SpriteType.GO_SIGN:
+				GoSign gosign = new GoSign();
+				gosign.setPosition(parentLeft + child.rx, parentTop - 4);
+				parent.addChild(gosign);
+				break;
+			case SpriteType.STOP_SIGN:
+				StopSign stopsign = new StopSign();
+				stopsign.setPosition(parentLeft + child.rx, parentTop - 4);
+				parent.addChild(stopsign);
+				break;
+			case SpriteType.TRAP:
+				Trap trap = new Trap();
+				trap.setPosition(parentLeft + child.rx, parentTop - 4);
+				parent.addChild(trap);
+				break;
+			}
+		}
+	}
+
+	private void createGround(CCNode parent, int preType, int nextType,
+			int type, float left, float top, float width) {
+		// if previous ground is tall than current, padding current ground.
+		if (isGroundType(preType) && preType > type) {
+			left -= 200;
+			width += 200;
+		}
+		if (isGroundType(nextType) && nextType > type) {
+			width += 50;
+		}
+		createGround(parent, left, top, width);
+	}
+
+	private boolean isGroundType(int type) {
+		return (SpriteType.GROUND_H == type) || (SpriteType.GROUND_L == type)
+				|| (SpriteType.GROUND_M == type);
 	}
 
 	private void createGround(CCNode parent, float left, float top, float width) {
@@ -191,7 +198,11 @@ public class GameLevelBuilder {
 				middle = new GroundM2();
 				flag = true;
 			}
-			middle.setPosition(currentX, top);
+			if (maxX - currentX < 50) {
+				middle.setPosition(currentX - 50, top);
+			} else {
+				middle.setPosition(currentX, top);
+			}
 			parent.addChild(middle);
 			currentX += middle.getBoundingWidth() - 1;
 		}
