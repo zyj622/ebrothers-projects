@@ -51,6 +51,8 @@ public class ForestRunnerActivity extends Activity {
 
 		CGSize winSize = CCDirector.sharedDirector().winSize();
 		Globals.scale_ratio = winSize.height / 320f;
+		Globals.scale_ratio_y = winSize.height / 320f;
+		Globals.scale_ratio_x = winSize.width / 480f;
 
 		float winHeight = CCDirector.sharedDirector().winSize().getHeight();
 		Globals.groundH_y = winHeight / 2f;
