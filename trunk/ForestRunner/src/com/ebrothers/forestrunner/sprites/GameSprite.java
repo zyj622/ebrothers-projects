@@ -12,15 +12,19 @@ import org.cocos2d.nodes.CCSpriteFrameCache;
 import com.ebrothers.forestrunner.common.Globals;
 import com.ebrothers.forestrunner.common.Logger;
 
-public abstract class GameSprite extends CCSprite {
+public class GameSprite extends CCSprite {
 	private static final String TAG = "GameSprite";
 
-	public GameSprite() {
+	public static GameSprite sprite(String frameName) {
+		return new GameSprite(frameName);
+	}
+
+	protected GameSprite() {
 		super();
 		initSprite();
 	}
 
-	public GameSprite(String frameName) {
+	protected GameSprite(String frameName) {
 		super(CCSpriteFrameCache.sharedSpriteFrameCache().getSpriteFrame(
 				frameName));
 		initSprite();
