@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import org.cocos2d.nodes.CCDirector;
 
-import com.ebrothers.forestrunner.common.Globals;
 import com.ebrothers.forestrunner.common.Logger;
 
 public final class Levels {
@@ -21,7 +20,7 @@ public final class Levels {
 		}
 	}
 
-	public static String getCurrentLevelPath() {
-		return LEVEL_DIR + "/" + levels[Globals.current_level];
+	public static String getLevelDataPath(int level) {
+		return LEVEL_DIR + "/" + levels[level];
 	}
 }

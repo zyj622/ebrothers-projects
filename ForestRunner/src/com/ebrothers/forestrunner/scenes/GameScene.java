@@ -11,12 +11,12 @@ import com.ebrothers.forestrunner.layers.GameMenuLayer;
 public class GameScene extends CCScene {
 	private static final String TAG = "GameScene";
 
-	public static GameScene scene() {
+	public static GameScene scene(int level) {
 		Logger.d(TAG, "create game scene...");
 		GameScene scene = new GameScene();
 		scene.addChild(new BackgroundLayer());
 		// "level/leveltest.txt"
-		scene.addChild(new GameLayer(Levels.getCurrentLevelPath()));
+		scene.addChild(new GameLayer(Levels.getLevelDataPath(level)));
 		scene.addChild(new GameMenuLayer());
 		return scene;
 	}

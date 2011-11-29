@@ -10,13 +10,15 @@ import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.nodes.CCSprite;
 import org.cocos2d.types.CGPoint;
 
+import android.content.Intent;
+import android.net.Uri;
+import android.util.Log;
+
+import com.ebrothers.forestrunner.common.Globals;
 import com.ebrothers.forestrunner.manager.LocalDataManager;
 import com.ebrothers.forestrunner.manager.SoundManager;
 import com.ebrothers.forestrunner.scenes.GameScene;
 import com.ebrothers.forestrunner.scenes.HighScoreScene;
-import android.content.Intent;
-import android.net.Uri;
-import android.util.Log;
 
 /**
  * 主菜单 HighScores界面 More 分享 界面控制
@@ -189,7 +191,7 @@ public class MainGameLayer extends BasicLayer {
 	 */
 	public void startGame(Object o) {
 		SoundManager.getInstance().playEffect(CCDirector.sharedDirector().getActivity(), SoundManager.MUSIC_BUTTON);
-		CCDirector.sharedDirector().pushScene(GameScene.scene());
+		CCDirector.sharedDirector().pushScene(GameScene.scene(Globals.current_level));
 	}
 
 	/**
