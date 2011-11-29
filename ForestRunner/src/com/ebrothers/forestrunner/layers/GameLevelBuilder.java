@@ -3,6 +3,10 @@ package com.ebrothers.forestrunner.layers;
 import java.util.ArrayList;
 
 import org.cocos2d.nodes.CCNode;
+import org.cocos2d.nodes.CCSprite;
+import org.cocos2d.nodes.CCSpriteFrameCache;
+
+import android.location.Address;
 
 import com.ebrothers.forestrunner.common.Globals;
 import com.ebrothers.forestrunner.common.Logger;
@@ -162,14 +166,30 @@ public class GameLevelBuilder {
 	private void createGround(CCNode parent, int preType, int nextType,
 			int type, float left, float top, float width) {
 		// if previous ground is tall than current, padding current ground.
+		float paddingLeft = 0;
+		float paddingRight = 0;
 		if (isGroundType(preType) && preType > type) {
-			left -= 200;
-			width += 200;
+			paddingLeft = 180;
+			left -= paddingLeft;
+			width += paddingLeft;
 		}
 		if (isGroundType(nextType) && nextType > type) {
-			width += 50;
+			paddingRight = 80;
+			width += paddingRight;
 		}
 		createGround(parent, left, top, width);
+
+		if (width > 550f) {
+			GameSprite sprite = GameSprite.sprite("ground37.png");
+			sprite.setAnchorPoint(0, 1);
+			sprite.setPosition(350f + left, top - 55f);
+			parent.addChild(sprite);
+		} else if (width > 400f) {
+			GameSprite sprite = GameSprite.sprite("ground38.png");
+			sprite.setAnchorPoint(0, 1);
+			sprite.setPosition(130f + left, top - 55f);
+			parent.addChild(sprite);
+		}
 	}
 
 	private boolean isGroundType(int type) {
