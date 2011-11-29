@@ -6,6 +6,7 @@ import org.cocos2d.events.CCTouchDispatcher;
 import org.cocos2d.layers.CCLayer;
 import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.nodes.CCNode;
+import org.cocos2d.nodes.CCSpriteSheet;
 import org.cocos2d.types.CGPoint;
 import org.cocos2d.types.CGRect;
 
@@ -29,7 +30,7 @@ public class GameLayer extends CCLayer implements UpdateCallback {
 		Logger.d(TAG, "GameLayer init...");
 		setIsTouchEnabled(true);
 		// build ground
-		ground = CCNode.node();
+		ground = CCSpriteSheet.spriteSheet("sprites.png");
 		GameLevelBuilder builder = GameLevelBuilder.create();
 		LevelData data = LevelDataParser.parse(level);
 		builder.build(ground, data);
@@ -44,7 +45,7 @@ public class GameLayer extends CCLayer implements UpdateCallback {
 		// create move action
 		float winWidth = CCDirector.sharedDirector().winSize().width;
 		moveAction = CCMoveTo
-				.action(40, CGPoint.ccp(-totalWidth + winWidth, 0));
+				.action(45, CGPoint.ccp(-totalWidth + winWidth, 0));
 	}
 
 	@Override
