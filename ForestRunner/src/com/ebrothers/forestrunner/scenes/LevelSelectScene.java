@@ -8,12 +8,16 @@ import com.ebrothers.forestrunner.layers.LevelSelectLayer;
 public class LevelSelectScene extends CCScene {
 
 	public static LevelSelectScene scene() {
-		CCSpriteFrameCache cache = CCSpriteFrameCache.sharedSpriteFrameCache();
-		cache.removeAllSpriteFrames();
-		cache.addSpriteFrames("stages.plist");
 		LevelSelectScene scene = new LevelSelectScene();
 		scene.addChild(new LevelSelectLayer());
 		return scene;
+	}
+
+	public LevelSelectScene() {
+		super();
+		CCSpriteFrameCache cache = CCSpriteFrameCache.sharedSpriteFrameCache();
+		cache.removeAllSpriteFrames();
+		cache.addSpriteFrames("stages.plist");
 	}
 
 }

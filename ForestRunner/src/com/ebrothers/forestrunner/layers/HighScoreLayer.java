@@ -1,13 +1,10 @@
 package com.ebrothers.forestrunner.layers;
 
-import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.nodes.CCLabel;
 import org.cocos2d.nodes.CCSprite;
 import org.cocos2d.types.ccColor3B;
 
-import com.ebrothers.forestrunner.common.Globals;
 import com.ebrothers.forestrunner.common.Logger;
-import com.ebrothers.forestrunner.manager.SoundManager;
 
 public class HighScoreLayer extends BasicLayer {
 	String stageArray[] = {"1","2","3","4","5","6","7","8"};
