@@ -8,7 +8,6 @@ import org.cocos2d.nodes.CCAnimation;
 import org.cocos2d.nodes.CCSprite;
 import org.cocos2d.nodes.CCSpriteFrame;
 import org.cocos2d.nodes.CCSpriteFrameCache;
-import org.cocos2d.opengl.CCTexture2D;
 
 import com.ebrothers.forestrunner.common.Globals;
 import com.ebrothers.forestrunner.common.Logger;
@@ -29,16 +28,16 @@ public abstract class GameSprite extends CCSprite {
 
 	private void initSprite() {
 		super.setScale(Globals.scale_ratio);
-		CCTexture2D texture = getTexture();
-		if (texture != null) {
-			texture.setAliasTexParameters();
-		}
+		// CCTexture2D texture = getTexture();
+		// if (texture != null) {
+		// texture.setAliasTexParameters();
+		// }
 	}
 
 	protected void addAnimation(String animationName,
 			ArrayList<CCSpriteFrame> frames) {
-		CCAnimation animation = CCAnimation.animation(animationName, 0.05f,
-				frames);
+		CCAnimation animation = CCAnimation.animation(animationName,
+				0.4f / frames.size(), frames);
 		addAnimation(animation);
 	}
 

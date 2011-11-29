@@ -1,8 +1,8 @@
 package com.ebrothers.forestrunner.sprites;
 
 public interface SpriteType {
-	public static final int GROUND_M = 0;
-	public static final int GROUND_L = 1;
+	public static final int GROUND_L = 0;
+	public static final int GROUND_M = 1;
 	public static final int GROUND_H = 2;
 	public static final int BOX = 3;
 	public static final int BRIDGE = 4;

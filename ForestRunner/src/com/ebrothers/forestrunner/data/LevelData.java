@@ -18,9 +18,22 @@ public class LevelData {
 	}
 
 	public static class SpriteData {
+		public SpriteData() {
+			children = new ArrayList<SpriteData>();
+		}
+
+		public ArrayList<SpriteData> getChildren() {
+			return children;
+		}
+
+		public void addChild(SpriteData child) {
+			children.add(child);
+		}
+
 		public float rx;
 		public float width;
 		public int type;
+		private ArrayList<SpriteData> children;
 	}
 
 }
