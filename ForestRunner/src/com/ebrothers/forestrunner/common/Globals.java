@@ -11,4 +11,8 @@ public final class Globals {
 	public static float groundH_y;
 	public static float groundM_y;
 	public static float groundL_y;
+	
+	public static float scale_ratio_x = 1f;
+	public static float scale_ratio_y = 1f;
+	
 }
