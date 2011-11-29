@@ -163,8 +163,7 @@ public class MainGameMenuLayer extends BasicLayer {
 	 */
 	public void startGame(Object o) {
 		SoundManager.getInstance().playEffect(CCDirector.sharedDirector().getActivity(), SoundManager.MUSIC_BUTTON);
-		SceneManager.getInstance().replaceTo(SceneManager.SCENE_GAME);
-//		CCDirector.sharedDirector().pushScene(LevelSelectScene.scene());
+		SceneManager.getInstance().replaceTo(SceneManager.SCENE_STAGES);
 	}
 
 	/**

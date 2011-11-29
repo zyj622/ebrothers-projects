@@ -14,9 +14,6 @@ public class GameScene extends CCScene {
 
 	public static GameScene scene(int level) {
 		Logger.d(TAG, "create game scene...");
-		CCSpriteFrameCache cache = CCSpriteFrameCache.sharedSpriteFrameCache();
-		cache.removeAllSpriteFrames();
-		cache.addSpriteFrames("sprites.plist");
 		GameScene scene = new GameScene();
 		scene.addChild(new BackgroundLayer());
 		// "level/leveltest.txt"
@@ -27,6 +24,9 @@ public class GameScene extends CCScene {
 
 	public GameScene() {
 		super();
+		CCSpriteFrameCache cache = CCSpriteFrameCache.sharedSpriteFrameCache();
+		cache.removeAllSpriteFrames();
+		cache.addSpriteFrames("sprites.plist");
 	}
 
 	@Override
