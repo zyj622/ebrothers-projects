@@ -1,8 +1,6 @@
 package com.ebrothers.forestrunner;
 
-import org.cocos2d.layers.CCScene;
 import org.cocos2d.nodes.CCDirector;
-import org.cocos2d.nodes.CCSpriteFrameCache;
 import org.cocos2d.opengl.CCGLSurfaceView;
 import org.cocos2d.types.CGSize;
 
@@ -19,6 +17,7 @@ import com.ebrothers.forestrunner.common.Globals;
 import com.ebrothers.forestrunner.common.Logger;
 import com.ebrothers.forestrunner.data.Levels;
 import com.ebrothers.forestrunner.manager.LocalDataManager;
+import com.ebrothers.forestrunner.manager.SceneManager;
 import com.ebrothers.forestrunner.scenes.MainScene;
 
 public class ForestRunnerActivity extends Activity {
@@ -40,8 +39,7 @@ public class ForestRunnerActivity extends Activity {
 		mGLSurfaceView = new CCGLSurfaceView(this);
 
 		setContentView(mGLSurfaceView);
-		loadFrameCache();
-		//初始化  preference
+		// 初始化 preference
 		LocalDataManager.getInstance().initialize(this);
 
 		Levels.load();
@@ -96,24 +94,11 @@ public class ForestRunnerActivity extends Activity {
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
 			// 后退键场景切换
-			CCScene cs = CCDirector.sharedDirector().getRunningScene();
-			if (cs instanceof MainScene) {
+			if (!SceneManager.getInstance().backTo()) {
 				showDialog();
-			} else {
-				CCDirector.sharedDirector().popScene();
 			}
 		}
 		return true;
-	}
-
-	private void loadFrameCache() {
-		CCSpriteFrameCache sharedSpriteFrameCache = CCSpriteFrameCache
-				.sharedSpriteFrameCache();
-		sharedSpriteFrameCache.addSpriteFrames("background.plist");
-		sharedSpriteFrameCache.addSpriteFrames("menu.plist");
-		sharedSpriteFrameCache.addSpriteFrames("sprite1.plist");
-		sharedSpriteFrameCache.addSpriteFrames("sprite2.plist");
-		sharedSpriteFrameCache.addSpriteFrames("sprite3.plist");
 	}
 
 	private void showDialog() {

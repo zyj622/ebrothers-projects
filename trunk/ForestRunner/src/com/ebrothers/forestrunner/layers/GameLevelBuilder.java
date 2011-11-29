@@ -3,10 +3,6 @@ package com.ebrothers.forestrunner.layers;
 import java.util.ArrayList;
 
 import org.cocos2d.nodes.CCNode;
-import org.cocos2d.nodes.CCSprite;
-import org.cocos2d.nodes.CCSpriteFrameCache;
-
-import android.location.Address;
 
 import com.ebrothers.forestrunner.common.Globals;
 import com.ebrothers.forestrunner.common.Logger;
@@ -182,12 +178,12 @@ public class GameLevelBuilder {
 		if (width > 550f) {
 			GameSprite sprite = GameSprite.sprite("ground37.png");
 			sprite.setAnchorPoint(0, 1);
-			sprite.setPosition(350f + left, top - 55f);
+			sprite.setPosition(350f + left, top - 55f * Globals.scale_ratio);
 			parent.addChild(sprite);
 		} else if (width > 400f) {
 			GameSprite sprite = GameSprite.sprite("ground38.png");
 			sprite.setAnchorPoint(0, 1);
-			sprite.setPosition(130f + left, top - 55f);
+			sprite.setPosition(130f + left, top - 55f * Globals.scale_ratio);
 			parent.addChild(sprite);
 		}
 	}

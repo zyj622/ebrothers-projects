@@ -4,16 +4,16 @@ import org.cocos2d.menus.CCMenu;
 import org.cocos2d.menus.CCMenuItemSprite;
 import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.nodes.CCSprite;
-import com.ebrothers.forestrunner.common.Globals;
-import com.ebrothers.forestrunner.manager.LocalDataManager;
-import com.ebrothers.forestrunner.manager.SoundManager;
-import com.ebrothers.forestrunner.scenes.GameScene;
-import com.ebrothers.forestrunner.scenes.HighScoreScene;
-import com.ebrothers.forestrunner.scenes.LevelSelectScene;
 
 import android.content.Intent;
 import android.net.Uri;
 import android.util.Log;
+
+import com.ebrothers.forestrunner.common.Globals;
+import com.ebrothers.forestrunner.manager.LocalDataManager;
+import com.ebrothers.forestrunner.manager.SceneManager;
+import com.ebrothers.forestrunner.manager.SoundManager;
+import com.ebrothers.forestrunner.scenes.HighScoreScene;
 
 /**
  * 主界面 菜单
@@ -163,8 +163,8 @@ public class MainGameMenuLayer extends BasicLayer {
 	 */
 	public void startGame(Object o) {
 		SoundManager.getInstance().playEffect(CCDirector.sharedDirector().getActivity(), SoundManager.MUSIC_BUTTON);
-//		CCDirector.sharedDirector().pushScene(GameScene.scene());
-		CCDirector.sharedDirector().pushScene(LevelSelectScene.scene());
+		SceneManager.getInstance().replaceTo(SceneManager.SCENE_GAME);
+//		CCDirector.sharedDirector().pushScene(LevelSelectScene.scene());
 	}
 
 	/**
