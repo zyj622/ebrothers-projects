@@ -6,9 +6,9 @@ import org.cocos2d.nodes.CCSprite;
 import org.cocos2d.nodes.CCSpriteFrame;
 import org.cocos2d.nodes.CCSpriteFrameCache;
 
+import com.ebrothers.forestrunner.common.Globals;
+
 public class BasicLayer extends CCLayer {
-	protected final float SCALE_X = 1.8f;
-	protected final float SCALE_Y = 1.5f;
 	protected CCSpriteFrameCache cache;
 	
 	protected float width;
@@ -27,11 +27,12 @@ public class BasicLayer extends CCLayer {
 		CCSpriteFrame frame = cache.getSpriteFrame(name);
 		CCSprite sprite = CCSprite.sprite(frame);
 		sprite.setAnchorPoint(x_anchor, y_anchor);
-		sprite.setScaleY(SCALE_Y);
-		sprite.setScaleX(SCALE_X);
+		sprite.setScaleX(Globals.scale_ratio_x);
+		sprite.setScaleY(Globals.scale_ratio_y);
 		sprite.setPosition(x, y);
 		return sprite;
 	}
+	
 	
 	protected CCSprite getNode(String name, float x, float y) {
 		CCSpriteFrame frame = cache.getSpriteFrame(name);
