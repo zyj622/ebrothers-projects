@@ -12,10 +12,12 @@ import org.cocos2d.menus.CCMenu;
 import org.cocos2d.menus.CCMenuItemSprite;
 import org.cocos2d.menus.CCMenuItemToggle;
 import org.cocos2d.nodes.CCDirector;
+import org.cocos2d.nodes.CCLabelAtlas;
 import org.cocos2d.nodes.CCSprite;
 import org.cocos2d.nodes.CCSpriteSheet;
 import org.cocos2d.types.CGPoint;
 import org.cocos2d.types.CGRect;
+import org.cocos2d.types.CGSize;
 
 import android.view.MotionEvent;
 
@@ -41,6 +43,8 @@ public class GameLayer extends CCLayer implements UpdateCallback {
 	private float[] _bp_y;
 	private int bp_index = 0;
 	private CCMenuItemToggle pauseToggle;
+	private CCLabelAtlas score;
+	private CCLabelAtlas life;
 
 	public GameLayer(String level) {
 		super();
@@ -77,6 +81,40 @@ public class GameLayer extends CCLayer implements UpdateCallback {
 		runner = new Runner();
 		runnerRx = runner.getPosition().x + runner.getTextureRect().size.width;
 		root.addChild(runner);
+
+		// add stage title
+		CGSize winSize = CCDirector.sharedDirector().winSize();
+		GameSprite title = GameSprite.sprite("gameover_stage"
+				+ (Globals.current_level + 1) + ".png");
+		title.setAnchorPoint(0.5f, 1);
+		title.setPosition(winSize.width / 2f, winSize.height);
+		root.addChild(title);
+
+		// add score
+		GameSprite scoreIcon = GameSprite.sprite("score01.png");
+		scoreIcon.setAnchorPoint(0, 1);
+		scoreIcon.setPosition(0, winSize.height);
+		root.addChild(scoreIcon);
+
+		score = CCLabelAtlas.label("+123", "numbers.png", 13, 16, '0');
+		score.setAnchorPoint(0, 1);
+		score.setPosition(
+				scoreIcon.getPosition().x + scoreIcon.getBoundingWidth(),
+				winSize.height);
+		addChild(score);
+
+		// add life counter
+		life = CCLabelAtlas.label("x4", "numbers.png", 12, 12, '0');
+		life.setAnchorPoint(1, 1);
+		life.setPosition(winSize.width, winSize.height);
+		score.setString("x4");
+		addChild(life);
+
+		GameSprite lifeIcon = GameSprite.sprite("life01.png");
+		lifeIcon.setAnchorPoint(1, 1);
+		lifeIcon.setPosition(life.getPosition().x
+				- life.getBoundingBox().size.width, winSize.height);
+		root.addChild(lifeIcon);
 
 		// pause/resume
 		GameSprite resumeSprite = GameSprite.sprite("pause02.png");
