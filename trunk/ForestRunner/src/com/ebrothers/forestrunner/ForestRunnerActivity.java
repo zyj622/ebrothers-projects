@@ -1,5 +1,6 @@
 package com.ebrothers.forestrunner;
 
+import org.cocos2d.layers.CCScene;
 import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.opengl.CCGLSurfaceView;
 import org.cocos2d.types.CGSize;
@@ -18,6 +19,7 @@ import com.ebrothers.forestrunner.common.Logger;
 import com.ebrothers.forestrunner.data.Levels;
 import com.ebrothers.forestrunner.manager.LocalDataManager;
 import com.ebrothers.forestrunner.manager.SceneManager;
+import com.ebrothers.forestrunner.scenes.GameScene;
 import com.ebrothers.forestrunner.scenes.MainScene;
 
 public class ForestRunnerActivity extends Activity {
@@ -75,6 +77,10 @@ public class ForestRunnerActivity extends Activity {
 	@Override
 	public void onPause() {
 		super.onPause();
+		CCScene runningScene = CCDirector.sharedDirector().getRunningScene();
+		if (runningScene instanceof GameScene) {
+			((GameScene) runningScene).pauseGame();
+		}
 		CCDirector.sharedDirector().pause();
 	}
 

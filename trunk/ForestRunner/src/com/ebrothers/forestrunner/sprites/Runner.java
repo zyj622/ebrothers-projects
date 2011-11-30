@@ -11,13 +11,14 @@ import org.cocos2d.nodes.CCSpriteFrameCache;
 import com.ebrothers.forestrunner.common.Globals;
 
 public class Runner extends GameSprite {
-
+	public static float y_offset;
 	private boolean jumping;
 
 	public Runner() {
 		super("man01.png");
 		setAnchorPoint(0, 1);
-		setPosition(100, Globals.groundM_y + getBoundingHeight() - 10);
+		y_offset = getBoundingHeight() - 10;
+		setPosition(100, Globals.groundM_y + y_offset);
 		CCSpriteFrameCache cache = CCSpriteFrameCache.sharedSpriteFrameCache();
 		ArrayList<CCSpriteFrame> frames = new ArrayList<CCSpriteFrame>();
 		for (int i = 0; i < 8; i++) {

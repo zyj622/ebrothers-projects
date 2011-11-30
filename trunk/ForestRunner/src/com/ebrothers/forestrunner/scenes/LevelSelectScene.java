@@ -8,9 +8,7 @@ import com.ebrothers.forestrunner.layers.LevelSelectLayer;
 public class LevelSelectScene extends CCScene {
 
 	public static LevelSelectScene scene() {
-		LevelSelectScene scene = new LevelSelectScene();
-		scene.addChild(new LevelSelectLayer());
-		return scene;
+		return new LevelSelectScene();
 	}
 
 	public LevelSelectScene() {
@@ -18,6 +16,7 @@ public class LevelSelectScene extends CCScene {
 		CCSpriteFrameCache cache = CCSpriteFrameCache.sharedSpriteFrameCache();
 		cache.removeAllSpriteFrames();
 		cache.addSpriteFrames("stages.plist");
+		addChild(new LevelSelectLayer());
 	}
 
 }

@@ -3,6 +3,7 @@ package com.ebrothers.forestrunner.layers;
 import java.util.ArrayList;
 
 import org.cocos2d.nodes.CCNode;
+import org.cocos2d.types.CGPoint;
 
 import com.ebrothers.forestrunner.common.Globals;
 import com.ebrothers.forestrunner.common.Logger;
@@ -28,16 +29,21 @@ import com.ebrothers.forestrunner.sprites.Trap;
 
 public class GameLevelBuilder {
 	private static final String TAG = "GameLevelBuilder";
-	private float levelWidth = 0;
+	private ArrayList<CGPoint> breakPoints;
 
 	public static GameLevelBuilder create() {
 		GameLevelBuilder map = new GameLevelBuilder();
 		return map;
 	}
 
-	public void build(CCNode parent, LevelData levelData) {
+	public GameLevelBuilder() {
+		breakPoints = new ArrayList<CGPoint>();
+	}
+
+	public float build(CCNode parent, LevelData levelData) {
 		Logger.d(TAG, "build level map...");
 		assert (levelData != null);
+		float levelWidth = 0;
 		// get sprite's data
 		ArrayList<SpriteData> datas = levelData.getSpriteDatas();
 		float nextX = 0;
@@ -98,8 +104,16 @@ public class GameLevelBuilder {
 					lastGroundTop);
 			nextX += spriteWidth;
 			levelWidth += spriteWidth;
+			CGPoint point;
+			if (SpriteType.GAP == spriteData.type) {
+				point = CGPoint.ccp(nextX, 0);
+			} else {
+				point = CGPoint.ccp(nextX, lastGroundTop);
+			}
+			breakPoints.add(point);
 			preType = spriteData.type;
 		}
+		return levelWidth;
 	}
 
 	private void createChildren(CCNode parent, ArrayList<SpriteData> children,
@@ -227,7 +241,7 @@ public class GameLevelBuilder {
 		parent.addChild(rightGround);
 	}
 
-	public float getLevelWidth() {
-		return levelWidth;
+	public ArrayList<CGPoint> getBreakPoints() {
+		return breakPoints;
 	}
 }
