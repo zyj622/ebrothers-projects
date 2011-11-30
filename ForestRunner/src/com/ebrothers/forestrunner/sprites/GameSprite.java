@@ -15,6 +15,10 @@ import com.ebrothers.forestrunner.common.Logger;
 public class GameSprite extends CCSprite {
 	private static final String TAG = "GameSprite";
 
+	public static GameSprite sprite() {
+		return new GameSprite();
+	}
+
 	public static GameSprite sprite(String frameName) {
 		return new GameSprite(frameName);
 	}

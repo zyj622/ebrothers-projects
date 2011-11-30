@@ -9,10 +9,7 @@ import com.ebrothers.forestrunner.layers.MainGameMenuLayer;
 public class MainScene extends CCScene {
 
 	public static MainScene scene() {
-		MainScene scene = new MainScene();
-		scene.addChild(new MainGameBackgroundLayer());
-		scene.addChild(new MainGameMenuLayer());
-		return scene;
+		return new MainScene();
 	}
 
 	public MainScene() {
@@ -20,6 +17,9 @@ public class MainScene extends CCScene {
 		CCSpriteFrameCache cache = CCSpriteFrameCache.sharedSpriteFrameCache();
 		cache.removeAllSpriteFrames();
 		cache.addSpriteFrames("mainmenu.plist");
+
+		addChild(new MainGameBackgroundLayer());
+		addChild(new MainGameMenuLayer());
 	}
 
 }

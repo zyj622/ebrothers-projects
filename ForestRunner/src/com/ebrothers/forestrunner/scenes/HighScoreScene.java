@@ -8,9 +8,7 @@ import com.ebrothers.forestrunner.layers.HighScoreLayer;
 public class HighScoreScene extends CCScene {
 
 	public static HighScoreScene scene() {
-		HighScoreScene scene = new HighScoreScene();
-		scene.addChild(new HighScoreLayer());
-		return scene;
+		return new HighScoreScene();
 	}
 
 	public HighScoreScene() {
@@ -18,5 +16,7 @@ public class HighScoreScene extends CCScene {
 		CCSpriteFrameCache cache = CCSpriteFrameCache.sharedSpriteFrameCache();
 		cache.removeAllSpriteFrames();
 		cache.addSpriteFrames("stages.plist");
+
+		addChild(new HighScoreLayer());
 	}
 }

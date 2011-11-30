@@ -5,28 +5,33 @@ import org.cocos2d.nodes.CCSpriteFrameCache;
 
 import com.ebrothers.forestrunner.common.Logger;
 import com.ebrothers.forestrunner.data.Levels;
-import com.ebrothers.forestrunner.layers.BackgroundLayer;
 import com.ebrothers.forestrunner.layers.GameLayer;
-import com.ebrothers.forestrunner.layers.GameMenuLayer;
 
 public class GameScene extends CCScene {
 	private static final String TAG = "GameScene";
+	private GameLayer gameLayer;
 
 	public static GameScene scene(int level) {
 		Logger.d(TAG, "create game scene...");
-		GameScene scene = new GameScene();
-		scene.addChild(new BackgroundLayer());
-		// "level/leveltest.txt"
-		scene.addChild(new GameLayer(Levels.getLevelDataPath(level)));
-		scene.addChild(new GameMenuLayer());
-		return scene;
+		return new GameScene(level);
 	}
 
-	public GameScene() {
+	private GameScene(int level) {
 		super();
 		CCSpriteFrameCache cache = CCSpriteFrameCache.sharedSpriteFrameCache();
 		cache.removeAllSpriteFrames();
 		cache.addSpriteFrames("sprites.plist");
+
+		gameLayer = new GameLayer(Levels.getLevelDataPath(level));
+		addChild(gameLayer);
+	}
+
+	public void pauseGame() {
+		gameLayer.pauseGame();
+	}
+
+	public void resumeGame() {
+		gameLayer.resumeGame();
 	}
 
 	@Override
