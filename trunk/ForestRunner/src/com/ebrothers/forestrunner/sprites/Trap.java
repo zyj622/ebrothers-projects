@@ -20,9 +20,7 @@ public class Trap extends GameSprite {
 		addAnimation("trigger", frames);
 	}
 
-	@Override
-	public void onEnter() {
-		super.onEnter();
+	public void trigger() {
 		playeLoopAnimation("trigger");
 	}
 

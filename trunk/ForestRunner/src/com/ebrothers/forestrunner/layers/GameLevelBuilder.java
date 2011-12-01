@@ -131,17 +131,17 @@ public class GameLevelBuilder {
 				break;
 			case SpriteType.DINORSAUR_1:
 				Dinosaur1 dinosaur = new Dinosaur1();
-				dinosaur.setPosition(parentLeft + child.rx, parentTop - 4);
+				dinosaur.setPosition(parentLeft + child.rx, parentTop - 15);
 				parent.addChild(dinosaur);
 				break;
 			case SpriteType.DINORSAUR_2:
 				Dinosaur2 dinosaur2 = new Dinosaur2();
-				dinosaur2.setPosition(parentLeft + child.rx, parentTop - 4);
+				dinosaur2.setPosition(parentLeft + child.rx, parentTop - 15);
 				parent.addChild(dinosaur2);
 				break;
 			case SpriteType.DINORSAUR_3:
 				Dinosaur3 dinosaur3 = new Dinosaur3();
-				dinosaur3.setPosition(parentLeft + child.rx, parentTop - 4);
+				dinosaur3.setPosition(parentLeft + child.rx, parentTop - 15);
 				parent.addChild(dinosaur3);
 				break;
 			case SpriteType.FIRE:

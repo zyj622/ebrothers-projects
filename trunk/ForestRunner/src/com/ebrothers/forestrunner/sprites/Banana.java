@@ -15,7 +15,7 @@ public class Banana extends GameSprite {
 		ArrayList<CCSpriteFrame> frames = new ArrayList<CCSpriteFrame>();
 		frames.add(cache.getSpriteFrame("star01.png"));
 		frames.add(cache.getSpriteFrame("star02.png"));
-		addAnimation("shine", frames, 0.1f);
+		addAnimation("shine", frames, 0.2f);
 	}
 
 	@Override
@@ -29,13 +29,13 @@ public class Banana extends GameSprite {
 		float y = parent.getPosition().y;
 		float w = parent.getContentSize().width;
 		Banana banana = new Banana();
-		banana.setPosition(x + 80, y + 20);
+		banana.setPosition(x + 50, y + 20);
 		parent.addChild(banana);
 		banana = new Banana();
 		banana.setPosition(x + w / 2f, y + 100);
 		parent.addChild(banana);
 		banana = new Banana();
-		banana.setPosition(x + w - 80, y + 20);
+		banana.setPosition(x + w - 50, y + 20);
 		parent.addChild(banana);
 	}
 
