@@ -235,8 +235,18 @@ public class GameLayer extends CCLayer implements UpdateCallback {
 	public void update(float d) {
 		float y = getRunnerY(-ground.getPosition().x + runnerRx);
 		CGPoint pos = runner.getPosition();
-		if (y != pos.y && !runner.isJumping()) {
-			runner.setPosition(pos.x, y + Runner.y_offset);
+		float currY = pos.y - Runner.y_offset;
+		if (y != currY && !runner.isInAction()) {
+			if (y == 0) {
+				// fall in gap
+				runner.fallToGap();
+			} else if (y < pos.y) {
+				runner.fallToGround(y);
+			} else {
+				// knock down
+
+				// runner.setPosition(pos.x, y + Runner.y_offset);
+			}
 		}
 	}
 

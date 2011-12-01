@@ -13,8 +13,9 @@ import com.ebrothers.forestrunner.common.Globals;
 
 public class Runner extends GameSprite {
 	public static final float JUMP_DURING = .8f;
+	public static final float FALL_DURING = .2f;
 	public static float y_offset;
-	private boolean jumping;
+	private boolean acting;
 
 	public Runner() {
 		super("man01.png");
@@ -32,6 +33,9 @@ public class Runner extends GameSprite {
 			frames.add(cache.getSpriteFrame(String.format("man1%d.png", i + 1)));
 		}
 		addAnimation("jump", frames);
+		frames.clear();
+		frames.add(cache.getSpriteFrame("man11.png"));
+		addAnimation("fall", frames);
 	}
 
 	@Override
@@ -46,28 +50,48 @@ public class Runner extends GameSprite {
 	}
 
 	public void jump(float y) {
-		if (!jumping) {
+		if (!acting) {
 			stopAllActions();
-			playeAnimation("jump");
+			playeDelayAnimation("jump", FALL_DURING, "fall");
 			CGPoint to = CGPoint.ccp(getPosition().x, y + y_offset);
+			float jHeight = 150;
+			if (y > (getPosition().y - y_offset)) {
+				jHeight = 100;
+			}
 			runAction(CCSequence.actions(
-					CCJumpTo.action(JUMP_DURING, to, 150, 1),
-					CCCallFunc.action(this, "jumpDone")));
-			jumping = true;
+					CCJumpTo.action(JUMP_DURING, to, jHeight, 1),
+					CCCallFunc.action(this, "actionDone")));
+			acting = true;
 		}
 	}
 
-	public boolean isJumping() {
-		return jumping;
+	public boolean isInAction() {
+		return acting;
 	}
 
-	public void jumpDone() {
+	public void actionDone() {
 		run();
-		jumping = false;
+		acting = false;
 	}
 
 	public void run() {
 		stopAllActions();
 		playeLoopAnimation("run");
+	}
+
+	public void fallToGap() {
+
+	}
+
+	public void fallToGround(float y) {
+		if (!acting) {
+			stopAllActions();
+			playeAnimation("fall");
+			CGPoint to = CGPoint.ccp(getPosition().x, y + y_offset);
+			runAction(CCSequence.actions(
+					CCJumpTo.action(FALL_DURING, to, 10, 1),
+					CCCallFunc.action(this, "actionDone")));
+			acting = true;
+		}
 	}
 }
