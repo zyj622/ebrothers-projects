@@ -2,6 +2,7 @@ package com.ebrothers.forestrunner;
 
 import org.cocos2d.layers.CCScene;
 import org.cocos2d.nodes.CCDirector;
+import org.cocos2d.nodes.CCSpriteFrameCache;
 import org.cocos2d.opengl.CCGLSurfaceView;
 import org.cocos2d.types.CGSize;
 
@@ -43,6 +44,12 @@ public class ForestRunnerActivity extends Activity {
 		setContentView(mGLSurfaceView);
 		// 初始化 preference
 		LocalDataManager.getInstance().initialize(this);
+
+		CCSpriteFrameCache cache = CCSpriteFrameCache.sharedSpriteFrameCache();
+		cache.addSpriteFrames("sprites.plist");
+		cache.addSpriteFrames("stages.plist");
+		cache.addSpriteFrames("mainmenu.plist");
+		cache.addSpriteFrames("gameover.plist");
 
 		Levels.load();
 
