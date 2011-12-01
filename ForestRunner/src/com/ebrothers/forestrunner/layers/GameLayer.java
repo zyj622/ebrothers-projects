@@ -39,6 +39,7 @@ public class GameLayer extends CCLayer implements UpdateCallback {
 	private CCSequence moveAction;
 	// for break points
 	private final float runnerRx;
+	private static final float X_SPEED = 400f;// pixel/s
 	private float[] _bp_x;
 	private float[] _bp_y;
 	private int bp_index = 0;
@@ -135,16 +136,22 @@ public class GameLayer extends CCLayer implements UpdateCallback {
 
 		// create move action
 		float winWidth = CCDirector.sharedDirector().winSize().width;
+		float moveDistance = totalWidth - winWidth;
 		moveAction = CCSequence.actions(
-				CCMoveTo.action(45, CGPoint.ccp(-totalWidth + winWidth, 0)),
+				CCMoveTo.action(moveDistance / X_SPEED,
+						CGPoint.ccp(-moveDistance, 0)),
 				CCCallFunc.action(this, "moveDone"));
+
 	}
 
 	@Override
 	public boolean ccTouchesBegan(MotionEvent event) {
 		switch (event.getAction()) {
 		case MotionEvent.ACTION_DOWN:
-			runner.jump();
+			float currX = -ground.getPosition().x + runnerRx;
+			float futureX = currX + Runner.JUMP_DURING * X_SPEED;
+			float futureY = getFutureY(futureX);
+			runner.jump(futureY);
 			break;
 		default:
 			break;
@@ -205,6 +212,15 @@ public class GameLayer extends CCLayer implements UpdateCallback {
 				spriteB.getBoundingBox());
 	}
 
+	public float getFutureY(float futureX) {
+		for (int i = 0; i < _bp_x.length; i++) {
+			if (futureX < _bp_x[i]) {
+				return _bp_y[i];
+			}
+		}
+		return Globals.groundM_y;
+	}
+
 	public float getRunnerY(float runnerX) {
 		assert (bp_index < _bp_x.length);
 		if (runnerX < _bp_x[bp_index]) {
@@ -219,7 +235,7 @@ public class GameLayer extends CCLayer implements UpdateCallback {
 	public void update(float d) {
 		float y = getRunnerY(-ground.getPosition().x + runnerRx);
 		CGPoint pos = runner.getPosition();
-		if (y != pos.y) {
+		if (y != pos.y && !runner.isJumping()) {
 			runner.setPosition(pos.x, y + Runner.y_offset);
 		}
 	}

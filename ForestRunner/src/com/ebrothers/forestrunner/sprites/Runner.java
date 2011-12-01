@@ -7,10 +7,12 @@ import org.cocos2d.actions.interval.CCJumpTo;
 import org.cocos2d.actions.interval.CCSequence;
 import org.cocos2d.nodes.CCSpriteFrame;
 import org.cocos2d.nodes.CCSpriteFrameCache;
+import org.cocos2d.types.CGPoint;
 
 import com.ebrothers.forestrunner.common.Globals;
 
 public class Runner extends GameSprite {
+	public static final float JUMP_DURING = .8f;
 	public static float y_offset;
 	private boolean jumping;
 
@@ -43,15 +45,20 @@ public class Runner extends GameSprite {
 		return true;
 	}
 
-	public void jump() {
+	public void jump(float y) {
 		if (!jumping) {
 			stopAllActions();
 			playeAnimation("jump");
+			CGPoint to = CGPoint.ccp(getPosition().x, y + y_offset);
 			runAction(CCSequence.actions(
-					CCJumpTo.action(.8f, getPosition(), 150, 1),
+					CCJumpTo.action(JUMP_DURING, to, 150, 1),
 					CCCallFunc.action(this, "jumpDone")));
 			jumping = true;
 		}
+	}
+
+	public boolean isJumping() {
+		return jumping;
 	}
 
 	public void jumpDone() {
