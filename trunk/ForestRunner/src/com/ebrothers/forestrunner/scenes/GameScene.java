@@ -1,7 +1,6 @@
 package com.ebrothers.forestrunner.scenes;
 
 import org.cocos2d.layers.CCScene;
-import org.cocos2d.nodes.CCSpriteFrameCache;
 
 import com.ebrothers.forestrunner.common.Logger;
 import com.ebrothers.forestrunner.data.Levels;
@@ -18,10 +17,6 @@ public class GameScene extends CCScene {
 
 	private GameScene(int level) {
 		super();
-		CCSpriteFrameCache cache = CCSpriteFrameCache.sharedSpriteFrameCache();
-		cache.removeAllSpriteFrames();
-		cache.addSpriteFrames("sprites.plist");
-
 		gameLayer = new GameLayer(Levels.getLevelDataPath(level));
 		addChild(gameLayer);
 	}
