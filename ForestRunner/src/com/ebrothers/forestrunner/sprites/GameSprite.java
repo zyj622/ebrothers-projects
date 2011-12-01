@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import org.cocos2d.actions.base.CCRepeatForever;
 import org.cocos2d.actions.interval.CCAnimate;
+import org.cocos2d.actions.interval.CCDelayTime;
+import org.cocos2d.actions.interval.CCSequence;
 import org.cocos2d.nodes.CCAnimation;
 import org.cocos2d.nodes.CCSprite;
 import org.cocos2d.nodes.CCSpriteFrame;
@@ -63,6 +65,14 @@ public class GameSprite extends CCSprite {
 
 	protected void playeAnimation(String animationName) {
 		runAction(CCAnimate.action(animationByName(animationName), false));
+	}
+
+	protected void playeDelayAnimation(String animationName1, float dt,
+			String animationName2) {
+		runAction(CCSequence.actions(
+				CCAnimate.action(animationByName(animationName1), false),
+				CCDelayTime.action(dt),
+				CCAnimate.action(animationByName(animationName2), false)));
 	}
 
 	public void onStartContact(GameSprite target) {
