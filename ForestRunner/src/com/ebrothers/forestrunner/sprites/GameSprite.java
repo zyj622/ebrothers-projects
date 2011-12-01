@@ -3,6 +3,7 @@ package com.ebrothers.forestrunner.sprites;
 import java.util.ArrayList;
 
 import org.cocos2d.actions.base.CCRepeatForever;
+import org.cocos2d.actions.instant.CCCallFunc;
 import org.cocos2d.actions.interval.CCAnimate;
 import org.cocos2d.actions.interval.CCDelayTime;
 import org.cocos2d.actions.interval.CCSequence;
@@ -47,7 +48,7 @@ public class GameSprite extends CCSprite {
 	protected void addAnimation(String animationName,
 			ArrayList<CCSpriteFrame> frames) {
 		CCAnimation animation = CCAnimation.animation(animationName,
-				0.4f / frames.size(), frames);
+				0.5f / frames.size(), frames);
 		addAnimation(animation);
 	}
 
@@ -61,6 +62,13 @@ public class GameSprite extends CCSprite {
 	protected void playeLoopAnimation(String animationName) {
 		runAction(CCRepeatForever.action(CCAnimate
 				.action(animationByName(animationName))));
+	}
+
+	protected void playeAnimation(String animationName, Object target,
+			String selector) {
+		runAction(CCSequence.actions(
+				CCAnimate.action(animationByName(animationName), false),
+				CCCallFunc.action(target, selector)));
 	}
 
 	protected void playeAnimation(String animationName) {

@@ -16,7 +16,7 @@ public class Cherry extends GameSprite {
 		ArrayList<CCSpriteFrame> frames = new ArrayList<CCSpriteFrame>();
 		frames.add(cache.getSpriteFrame("star03.png"));
 		frames.add(cache.getSpriteFrame("star04.png"));
-		addAnimation("shine", frames, 0.1f);
+		addAnimation("shine", frames, 0.2f);
 	}
 
 	@Override

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.cocos2d.actions.UpdateCallback;
 import org.cocos2d.actions.instant.CCCallFunc;
+import org.cocos2d.actions.interval.CCMoveBy;
 import org.cocos2d.actions.interval.CCMoveTo;
 import org.cocos2d.actions.interval.CCSequence;
 import org.cocos2d.events.CCTouchDispatcher;
@@ -12,9 +13,9 @@ import org.cocos2d.menus.CCMenu;
 import org.cocos2d.menus.CCMenuItemSprite;
 import org.cocos2d.menus.CCMenuItemToggle;
 import org.cocos2d.nodes.CCDirector;
-import org.cocos2d.nodes.CCLabelAtlas;
 import org.cocos2d.nodes.CCSprite;
 import org.cocos2d.nodes.CCSpriteSheet;
+import org.cocos2d.opengl.CCBitmapFontAtlas;
 import org.cocos2d.types.CGPoint;
 import org.cocos2d.types.CGRect;
 import org.cocos2d.types.CGSize;
@@ -39,13 +40,13 @@ public class GameLayer extends CCLayer implements UpdateCallback {
 	private CCSequence moveAction;
 	// for break points
 	private final float runnerRx;
-	private static final float X_SPEED = 400f;// pixel/s
+	private static final float X_SPEED = 450f;// pixel/s
 	private float[] _bp_x;
 	private float[] _bp_y;
 	private int bp_index = 0;
 	private CCMenuItemToggle pauseToggle;
-	private CCLabelAtlas score;
-	private CCLabelAtlas life;
+	private CCBitmapFontAtlas score;
+	private CCBitmapFontAtlas life;
 
 	public GameLayer(String level) {
 		super();
@@ -80,7 +81,7 @@ public class GameLayer extends CCLayer implements UpdateCallback {
 
 		// init runner
 		runner = new Runner();
-		runnerRx = runner.getPosition().x + runner.getTextureRect().size.width;
+		runnerRx = runner.getPosition().x + runner.getBoundingWidth() - 30;
 		root.addChild(runner);
 
 		// add stage title
@@ -97,7 +98,7 @@ public class GameLayer extends CCLayer implements UpdateCallback {
 		scoreIcon.setPosition(0, winSize.height);
 		root.addChild(scoreIcon);
 
-		score = CCLabelAtlas.label("+123", "numbers.png", 13, 16, '0');
+		score = CCBitmapFontAtlas.bitmapFontAtlas("+0", "font2.fnt");
 		score.setAnchorPoint(0, 1);
 		score.setPosition(
 				scoreIcon.getPosition().x + scoreIcon.getBoundingWidth(),
@@ -105,10 +106,9 @@ public class GameLayer extends CCLayer implements UpdateCallback {
 		addChild(score);
 
 		// add life counter
-		life = CCLabelAtlas.label("x4", "numbers.png", 12, 12, '0');
+		life = CCBitmapFontAtlas.bitmapFontAtlas("x4", "font2.fnt");
 		life.setAnchorPoint(1, 1);
 		life.setPosition(winSize.width, winSize.height);
-		score.setString("x4");
 		addChild(life);
 
 		GameSprite lifeIcon = GameSprite.sprite("life01.png");
@@ -140,7 +140,7 @@ public class GameLayer extends CCLayer implements UpdateCallback {
 		moveAction = CCSequence.actions(
 				CCMoveTo.action(moveDistance / X_SPEED,
 						CGPoint.ccp(-moveDistance, 0)),
-				CCCallFunc.action(this, "moveDone"));
+				CCCallFunc.action(this, "winGame"));
 
 	}
 
@@ -149,9 +149,13 @@ public class GameLayer extends CCLayer implements UpdateCallback {
 		switch (event.getAction()) {
 		case MotionEvent.ACTION_DOWN:
 			float currX = -ground.getPosition().x + runnerRx;
-			float futureX = currX + Runner.JUMP_DURING * X_SPEED;
+			float futureX = currX + Runner.JUMP_DURING_LONG * X_SPEED;
 			float futureY = getFutureY(futureX);
-			runner.jump(futureY);
+			if (futureY == 0) {
+				runner.jumpToGap(this, "jumpToGapDone");
+			} else {
+				runner.jump(futureY);
+			}
 			break;
 		default:
 			break;
@@ -159,15 +163,11 @@ public class GameLayer extends CCLayer implements UpdateCallback {
 		return CCTouchDispatcher.kEventHandled;
 	}
 
-	public void moveDone() {
-		background.stopAllActions();
-	}
-
 	@Override
 	public void onEnter() {
 		super.onEnter();
 		ground.runAction(moveAction);
-		// ground.setPosition(-800, 0);
+		// ground.setPosition(-1600, 0);
 		schedule(this);
 	}
 
@@ -237,17 +237,37 @@ public class GameLayer extends CCLayer implements UpdateCallback {
 		CGPoint pos = runner.getPosition();
 		float currY = pos.y - Runner.y_offset;
 		if (y != currY && !runner.isInAction()) {
-			if (y == 0) {
+			if (y == 0 || currY == 0) {
+				Logger.d(TAG, "fallToGap. y=" + y + ", currY=" + currY);
 				// fall in gap
-				runner.fallToGap();
-			} else if (y < pos.y) {
+				runner.fallToGap(this, "loseGame");
+			} else if (y < currY) {
+				Logger.d(TAG, "fallToGround. y=" + y + ", currY=" + currY);
 				runner.fallToGround(y);
 			} else {
+				Logger.d(TAG, "knockDown. y=" + y + ", currY=" + currY);
 				// knock down
-
-				// runner.setPosition(pos.x, y + Runner.y_offset);
+				runner.knockDown();
+				ground.stopAllActions();
+				ground.runAction(CCSequence.actions(
+						CCMoveBy.action(0.6f, CGPoint.ccp(150, 0)),
+						CCCallFunc.action(this, "loseGame")));
 			}
 		}
+	}
+
+	public void jumpToGapDone() {
+		runner.fallToGap(this, "loseGame");
+	}
+
+	public void winGame() {
+		pauseToggle.setIsEnabled(false);
+		pauseGame();
+	}
+
+	public void loseGame() {
+		pauseToggle.setIsEnabled(false);
+		pauseGame();
 	}
 
 }
