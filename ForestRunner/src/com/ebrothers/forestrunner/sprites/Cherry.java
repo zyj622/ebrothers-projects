@@ -15,6 +15,12 @@ public class Cherry extends GameSprite {
 		frames.add(cache.getSpriteFrame("star03.png"));
 		frames.add(cache.getSpriteFrame("star04.png"));
 		addAnimation("shine", frames, 0.2f);
+		frames.clear();
+		for (int i = 0; i < 5; i++) {
+			frames.add(cache.getSpriteFrame(String.format("flash0%d.png",
+					(i + 1))));
+		}
+		addAnimation("flash", frames, 0.2f);
 	}
 
 	@Override
@@ -33,5 +39,14 @@ public class Cherry extends GameSprite {
 	@Override
 	public boolean canCollision() {
 		return true;
+	}
+
+	@Override
+	public void onStartContact(GameSprite target) {
+		playeAnimation("flash", this, "flashDone");
+	}
+
+	public void flashDone() {
+		removeSelf();
 	}
 }

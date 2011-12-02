@@ -330,6 +330,12 @@ public class GameLayer extends CCLayer implements UpdateCallback {
 		if (CGRect.intersects(runnerRect,
 				collisionObjects[co_index].getBoundingBox())) {
 			Logger.d(TAG, "collision. " + collisionObjects[co_index]);
+			if (collisionObjects[co_index].isFatal()) {
+				background.pauseSchedulerAndActions();
+				ground.pauseSchedulerAndActions();
+			}
+			runner.onStartContact(collisionObjects[co_index]);
+			collisionObjects[co_index].onStartContact(runner);
 			co_index++;
 		}
 	}
