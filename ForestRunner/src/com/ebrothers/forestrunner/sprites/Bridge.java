@@ -5,7 +5,6 @@ public class Bridge extends GameSprite {
 	public Bridge() {
 		super("bridge01.png");
 		setAnchorPoint(0, 0);
-		Banana.addAsTopTriangle(this);
 	}
 
 	@Override

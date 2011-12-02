@@ -17,6 +17,7 @@ public class GameScene extends CCScene {
 
 	private GameScene(int level) {
 		super();
+		// "level/leveltest.txt"
 		gameLayer = new GameLayer(Levels.getLevelDataPath(level));
 		addChild(gameLayer);
 	}

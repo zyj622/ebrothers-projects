@@ -10,7 +10,6 @@ public class Banana extends GameSprite {
 	public Banana() {
 		super("star01.png");
 		setAnchorPoint(0.5f, 0);
-		setScale(1);
 		CCSpriteFrameCache cache = CCSpriteFrameCache.sharedSpriteFrameCache();
 		ArrayList<CCSpriteFrame> frames = new ArrayList<CCSpriteFrame>();
 		frames.add(cache.getSpriteFrame("star01.png"));
@@ -24,41 +23,50 @@ public class Banana extends GameSprite {
 		playeLoopAnimation("shine");
 	}
 
-	public static void addAsTopTriangle(CCNode parent) {
-		float x = parent.getPosition().x;
-		float y = parent.getPosition().y;
-		float w = parent.getContentSize().width;
+	public static void addAsTopTriangle(CCNode parent, float cx, float cy) {
 		Banana banana = new Banana();
-		banana.setPosition(x + 50, y + 20);
+		banana.setPosition(cx + 80, cy + 10);
 		parent.addChild(banana);
 		banana = new Banana();
-		banana.setPosition(x + w / 2f, y + 100);
+		banana.setPosition(cx, cy + 80);
 		parent.addChild(banana);
 		banana = new Banana();
-		banana.setPosition(x + w - 50, y + 20);
+		banana.setPosition(cx - 80, cy + 10);
 		parent.addChild(banana);
 	}
 
-	public static void addOn2Sides(CCNode parent) {
-		float x = parent.getPosition().x;
-		float y = parent.getPosition().y;
-		float w = parent.getContentSize().width;
-		float h = parent.getContentSize().height;
+	public static void addOn2Sides4(CCNode parent, float cx, float cy) {
 		// left top
 		Banana banana = new Banana();
-		banana.setPosition(x - 10, y + h * 2 / 3f - 10);
+		banana.setPosition(cx - 60, cy + 70);
 		parent.addChild(banana);
 		// right top
 		banana = new Banana();
-		banana.setPosition(x + w + 10, y + h * 2 / 3f - 10);
+		banana.setPosition(cx + 60, cy + 70);
 		parent.addChild(banana);
 		// left bottomd
 		banana = new Banana();
-		banana.setPosition(x - 20, y + h / 3f - 20);
+		banana.setPosition(cx - 80, cy + 8);
 		parent.addChild(banana);
 		// right bottom
 		banana = new Banana();
-		banana.setPosition(x + w + 20, y + h / 3f - 20);
+		banana.setPosition(cx + 80, cy + 8);
 		parent.addChild(banana);
+	}
+
+	public static void addOn2Sides2(CCNode parent, float cx, float cy) {
+		// left
+		Banana banana = new Banana();
+		banana.setPosition(cx - 120, cy);
+		parent.addChild(banana);
+		// right
+		banana = new Banana();
+		banana.setPosition(cx + 40, cy);
+		parent.addChild(banana);
+	}
+
+	@Override
+	public boolean canCollision() {
+		return true;
 	}
 }

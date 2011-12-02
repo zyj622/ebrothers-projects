@@ -17,7 +17,7 @@ import com.ebrothers.forestrunner.common.Logger;
 public class Runner extends GameSprite {
 	private static final String TAG = "Runner";
 	public static final float JUMP_DURING_LONG = .7f;
-	public static final float JUMP_DURING_SHORT = .5f;
+	public static final float JUMP_DURING_SHORT = .6f;
 	public static final float FALL_DURING = .2f;
 	public static float y_offset;
 	private boolean acting;

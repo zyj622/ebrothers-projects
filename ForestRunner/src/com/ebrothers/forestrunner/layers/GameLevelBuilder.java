@@ -9,8 +9,10 @@ import com.ebrothers.forestrunner.common.Globals;
 import com.ebrothers.forestrunner.common.Logger;
 import com.ebrothers.forestrunner.data.LevelData;
 import com.ebrothers.forestrunner.data.LevelData.SpriteData;
+import com.ebrothers.forestrunner.sprites.Banana;
 import com.ebrothers.forestrunner.sprites.Box;
 import com.ebrothers.forestrunner.sprites.Bridge;
+import com.ebrothers.forestrunner.sprites.Cherry;
 import com.ebrothers.forestrunner.sprites.Dinosaur1;
 import com.ebrothers.forestrunner.sprites.Dinosaur2;
 import com.ebrothers.forestrunner.sprites.Dinosaur3;
@@ -84,9 +86,11 @@ public class GameLevelBuilder {
 				Bridge bridge = new Bridge();
 				bridge.setPosition(nextX - (14 * Globals.scale_ratio),
 						lastGroundTop - (20 * Globals.scale_ratio));
-				parent.addChild(bridge);
 				spriteWidth = bridge.getBoundingWidth()
 						- (30 * Globals.scale_ratio);
+				Banana.addAsTopTriangle(parent, bridge.getPosition().x
+						+ spriteWidth / 2f, lastGroundTop);
+				parent.addChild(bridge, 1);
 				break;
 			case SpriteType.GAP:
 				spriteWidth = spriteData.width;
@@ -96,6 +100,8 @@ public class GameLevelBuilder {
 				stone.setPosition(nextX, lastGroundTop);
 				parent.addChild(stone);
 				spriteWidth = stone.getBoundingWidth();
+				Cherry.addOnTop(parent, nextX + spriteWidth / 2f,
+						lastGroundTop, false);
 				break;
 			default:
 				break;
@@ -120,54 +126,65 @@ public class GameLevelBuilder {
 			float parentLeft, float parentTop) {
 		int count = children.size();
 		SpriteData child;
+		GameSprite sprite = null;
 		for (int i = 0; i < count; i++) {
 			child = children.get(i);
 			switch (child.type) {
 			case SpriteType.BOX:
-				Box box = new Box();
-				box.setPosition(parentLeft + child.rx, parentTop - 4
+				sprite = new Box();
+				sprite.setPosition(parentLeft + child.rx, parentTop - 4
 						* Globals.scale_ratio);
-				parent.addChild(box);
+				parent.addChild(sprite);
+				Cherry.addOnTop(parent, parentLeft + child.rx, parentTop, true);
+				Banana.addOn2Sides4(parent, parentLeft + child.rx, parentTop);
 				break;
 			case SpriteType.DINORSAUR_1:
-				Dinosaur1 dinosaur = new Dinosaur1();
-				dinosaur.setPosition(parentLeft + child.rx, parentTop - 15);
-				parent.addChild(dinosaur);
+				sprite = new Dinosaur1();
+				sprite.setPosition(parentLeft + child.rx, parentTop - 15);
+				parent.addChild(sprite);
 				break;
 			case SpriteType.DINORSAUR_2:
-				Dinosaur2 dinosaur2 = new Dinosaur2();
-				dinosaur2.setPosition(parentLeft + child.rx, parentTop - 15);
-				parent.addChild(dinosaur2);
+				sprite = new Dinosaur2();
+				sprite.setPosition(parentLeft + child.rx, parentTop - 15);
+				parent.addChild(sprite);
 				break;
 			case SpriteType.DINORSAUR_3:
-				Dinosaur3 dinosaur3 = new Dinosaur3();
-				dinosaur3.setPosition(parentLeft + child.rx, parentTop - 15);
-				parent.addChild(dinosaur3);
+				sprite = new Dinosaur3();
+				sprite.setPosition(parentLeft + child.rx, parentTop - 15);
+				parent.addChild(sprite);
 				break;
 			case SpriteType.FIRE:
-				Fire fire = new Fire();
-				fire.setPosition(parentLeft + child.rx, parentTop - 8);
-				parent.addChild(fire);
+				sprite = new Fire();
+				sprite.setPosition(parentLeft + child.rx, parentTop - 8);
+				parent.addChild(sprite);
+				Cherry.addOnTop(parent, parentLeft + child.rx, parentTop, true);
+				Banana.addOn2Sides4(parent, parentLeft + child.rx, parentTop);
 				break;
 			case SpriteType.FLOWER:
-				Flower flower = new Flower();
-				flower.setPosition(parentLeft + child.rx, parentTop - 4);
-				parent.addChild(flower);
+				sprite = new Flower();
+				sprite.setPosition(parentLeft + child.rx, parentTop - 4);
+				parent.addChild(sprite);
+				Cherry.addOnTop(parent, parentLeft + child.rx, parentTop, true);
+				Banana.addOn2Sides4(parent, parentLeft + child.rx, parentTop);
 				break;
 			case SpriteType.GO_SIGN:
-				GoSign gosign = new GoSign();
-				gosign.setPosition(parentLeft + child.rx, parentTop - 4);
-				parent.addChild(gosign);
+				sprite = new GoSign();
+				sprite.setPosition(parentLeft + child.rx, parentTop - 4);
+				parent.addChild(sprite);
+				Banana.addOn2Sides2(parent, parentLeft + child.rx, parentTop);
 				break;
 			case SpriteType.STOP_SIGN:
-				StopSign stopsign = new StopSign();
-				stopsign.setPosition(parentLeft + child.rx, parentTop - 4);
-				parent.addChild(stopsign);
+				sprite = new StopSign();
+				sprite.setPosition(parentLeft + child.rx, parentTop - 4);
+				parent.addChild(sprite);
+				Banana.addOn2Sides2(parent, parentLeft + child.rx, parentTop);
 				break;
 			case SpriteType.TRAP:
-				Trap trap = new Trap();
-				trap.setPosition(parentLeft + child.rx, parentTop - 4);
-				parent.addChild(trap);
+				sprite = new Trap();
+				sprite.setPosition(parentLeft + child.rx, parentTop - 4);
+				parent.addChild(sprite);
+				Cherry.addOnTop(parent, parentLeft + child.rx, parentTop, true);
+				Banana.addOn2Sides4(parent, parentLeft + child.rx, parentTop);
 				break;
 			}
 		}
@@ -193,12 +210,12 @@ public class GameLevelBuilder {
 			GameSprite sprite = GameSprite.sprite("ground37.png");
 			sprite.setAnchorPoint(0, 1);
 			sprite.setPosition(350f + left, top - 55f * Globals.scale_ratio);
-			parent.addChild(sprite);
+			parent.addChild(sprite, 1);
 		} else if (width > 400f) {
 			GameSprite sprite = GameSprite.sprite("ground38.png");
 			sprite.setAnchorPoint(0, 1);
 			sprite.setPosition(130f + left, top - 55f * Globals.scale_ratio);
-			parent.addChild(sprite);
+			parent.addChild(sprite, 1);
 		}
 	}
 
@@ -211,14 +228,14 @@ public class GameLevelBuilder {
 		// add left ground
 		GroundL leftGround = new GroundL();
 		leftGround.setPosition(left, top);
-		parent.addChild(leftGround);
-		float leftWidth = leftGround.getBoundingWidth() - 1;
+		parent.addChild(leftGround, 1);
+		float leftWidth = leftGround.getBoundingWidth();
 		float currentX = left + leftWidth;
 		GroundR rightGround = new GroundR();
-		float rightWidth = rightGround.getBoundingWidth() - 1;
+		float rightWidth = rightGround.getBoundingWidth();
 		float maxX = currentX + width - leftWidth - rightWidth;
 		// add middle grounds
-		boolean flag = false;
+		boolean flag = true;
 		while (currentX < maxX) {
 			GameSprite middle = null;
 			if (flag) {
@@ -233,12 +250,12 @@ public class GameLevelBuilder {
 			} else {
 				middle.setPosition(currentX, top);
 			}
-			parent.addChild(middle);
+			parent.addChild(middle, 1);
 			currentX += middle.getBoundingWidth() - 1;
 		}
 		// add right ground
 		rightGround.setPosition(maxX, top);
-		parent.addChild(rightGround);
+		parent.addChild(rightGround, 1);
 	}
 
 	public ArrayList<CGPoint> getBreakPoints() {
