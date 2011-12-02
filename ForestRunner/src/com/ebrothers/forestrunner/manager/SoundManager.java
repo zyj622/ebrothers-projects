@@ -75,7 +75,7 @@ public class SoundManager {
     }
   
     public void playSound(Context context,String fileName,boolean loop){
-    	boolean sound = (Boolean) LocalDataManager.getInstance().readSetting(LocalDataManager.SOUND, false);
+    	boolean sound = (Boolean) LocalDataManager.getInstance().readSetting(LocalDataManager.SOUND, true);
     	if(!sound) return;
     	if(sourceSound.containsKey(fileName)){
         	SoundEngine.sharedEngine().playSound(context, sourceSound.get(fileName), loop);
@@ -86,7 +86,7 @@ public class SoundManager {
     
     
     public void pauseSound(){
-    	boolean sound = (Boolean) LocalDataManager.getInstance().readSetting(LocalDataManager.SOUND, false);
+    	boolean sound = (Boolean) LocalDataManager.getInstance().readSetting(LocalDataManager.SOUND, true);
     	if(!sound) return;
     	SoundEngine.sharedEngine().pauseSound();
     }
