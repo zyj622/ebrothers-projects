@@ -13,11 +13,8 @@ import org.cocos2d.nodes.CCSpriteFrame;
 import org.cocos2d.nodes.CCSpriteFrameCache;
 
 import com.ebrothers.forestrunner.common.Globals;
-import com.ebrothers.forestrunner.common.Logger;
 
 public class GameSprite extends CCSprite {
-	private static final String TAG = "GameSprite";
-
 	public static GameSprite sprite() {
 		return new GameSprite();
 	}
@@ -84,7 +81,6 @@ public class GameSprite extends CCSprite {
 	}
 
 	public void onStartContact(GameSprite target) {
-		Logger.d(TAG, "start contact. A=" + this + ", B=" + target);
 		// do nothing
 	}
 
