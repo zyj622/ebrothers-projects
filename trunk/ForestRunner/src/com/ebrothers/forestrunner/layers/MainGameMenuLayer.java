@@ -13,7 +13,6 @@ import com.ebrothers.forestrunner.common.Globals;
 import com.ebrothers.forestrunner.manager.LocalDataManager;
 import com.ebrothers.forestrunner.manager.SceneManager;
 import com.ebrothers.forestrunner.manager.SoundManager;
-import com.ebrothers.forestrunner.scenes.HighScoreScene;
 
 /**
  * 主界面 菜单
@@ -90,7 +89,7 @@ public class MainGameMenuLayer extends BasicLayer {
 		addChild(cmMenuOpen, 6);
 		
 		//设置声音图标
-		boolean sound = (Boolean) LocalDataManager.getInstance().readSetting(LocalDataManager.SOUND, false);
+		boolean sound = (Boolean) LocalDataManager.getInstance().readSetting(LocalDataManager.SOUND, true);
 		if(sound){
 			cmMenuOpen.setVisible(true);
 			cmMenuClose.setVisible(false);
@@ -145,6 +144,7 @@ public class MainGameMenuLayer extends BasicLayer {
 	public void closeSound(Object o) {
 		cmMenuOpen.setVisible(false);
 		cmMenuClose.setVisible(true);
+		LocalDataManager.getInstance().writeSetting(LocalDataManager.SOUND, false);
 		SoundManager.getInstance().playEffect(CCDirector.sharedDirector().getActivity(), SoundManager.MUSIC_BUTTON);
 	}
 
@@ -155,6 +155,7 @@ public class MainGameMenuLayer extends BasicLayer {
 	public void openSound(Object o) {
 		cmMenuOpen.setVisible(true);
 		cmMenuClose.setVisible(false);
+		LocalDataManager.getInstance().writeSetting(LocalDataManager.SOUND, true);
 	}
 	
 	/**
@@ -172,7 +173,7 @@ public class MainGameMenuLayer extends BasicLayer {
 	 */
 	public void startHigh(Object o) {
 		SoundManager.getInstance().playEffect(CCDirector.sharedDirector().getActivity(), SoundManager.MUSIC_BUTTON);
-		CCDirector.sharedDirector().pushScene(HighScoreScene.scene());
+		SceneManager.getInstance().replaceTo(SceneManager.SCENE_HIGHSCORE);
 	}
 
 	
