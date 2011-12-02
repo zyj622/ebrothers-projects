@@ -5,13 +5,11 @@ import java.util.ArrayList;
 import org.cocos2d.nodes.CCNode;
 import org.cocos2d.nodes.CCSpriteFrame;
 import org.cocos2d.nodes.CCSpriteFrameCache;
-import org.cocos2d.types.CGPoint;
 
 public class Cherry extends GameSprite {
 	public Cherry() {
 		super("star03.png");
 		setAnchorPoint(0.5f, 0);
-		setScale(1);
 		CCSpriteFrameCache cache = CCSpriteFrameCache.sharedSpriteFrameCache();
 		ArrayList<CCSpriteFrame> frames = new ArrayList<CCSpriteFrame>();
 		frames.add(cache.getSpriteFrame("star03.png"));
@@ -25,12 +23,15 @@ public class Cherry extends GameSprite {
 		playeLoopAnimation("shine");
 	}
 
-	public static void addOnTop(CCNode parent) {
+	public static void addOnTop(CCNode parent, float cx, float cy,
+			boolean offset) {
 		Cherry cherry = new Cherry();
-		CGPoint parentPos = parent.getPosition();
-		float parentWidth = parent.getContentSize().width;
-		cherry.setPosition(parentPos.x + parentWidth / 2f,
-				parentPos.y + cherry.getContentSize().height * 2 + 5);
+		cherry.setPosition(cx, offset ? cy + 120 : cy);
 		parent.addChild(cherry);
+	}
+
+	@Override
+	public boolean canCollision() {
+		return true;
 	}
 }
