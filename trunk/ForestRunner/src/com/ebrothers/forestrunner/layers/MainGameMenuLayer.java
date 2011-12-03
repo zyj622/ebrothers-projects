@@ -146,6 +146,7 @@ public class MainGameMenuLayer extends BasicLayer {
 		cmMenuClose.setVisible(true);
 		LocalDataManager.getInstance().writeSetting(LocalDataManager.SOUND, false);
 		SoundManager.getInstance().playEffect(CCDirector.sharedDirector().getActivity(), SoundManager.MUSIC_BUTTON);
+		LocalDataManager.getInstance().writeSetting(LocalDataManager.SOUND, false);
 	}
 
 	/**
