@@ -9,7 +9,7 @@ import org.cocos2d.nodes.CCSpriteFrameCache;
 public class Cherry extends GameSprite {
 	public Cherry() {
 		super("star03.png");
-		setAnchorPoint(0.5f, 0);
+		// setAnchorPoint(0.5f, 0);
 		CCSpriteFrameCache cache = CCSpriteFrameCache.sharedSpriteFrameCache();
 		ArrayList<CCSpriteFrame> frames = new ArrayList<CCSpriteFrame>();
 		frames.add(cache.getSpriteFrame("star03.png"));
@@ -20,7 +20,7 @@ public class Cherry extends GameSprite {
 			frames.add(cache.getSpriteFrame(String.format("flash0%d.png",
 					(i + 1))));
 		}
-		addAnimation("flash", frames, 0.2f);
+		addAnimation("flash", frames, 0.1f);
 	}
 
 	@Override
@@ -32,7 +32,8 @@ public class Cherry extends GameSprite {
 	public static void addOnTop(CCNode parent, float cx, float cy,
 			boolean offset) {
 		Cherry cherry = new Cherry();
-		cherry.setPosition(cx, offset ? cy + 120 : cy);
+		cherry.setPosition(cx - 1, cherry.getBoundingHeight() / 2f
+				+ (offset ? cy + 100 : cy));
 		parent.addChild(cherry);
 	}
 
@@ -47,6 +48,7 @@ public class Cherry extends GameSprite {
 	}
 
 	public void flashDone() {
-		removeSelf();
+		// removeSelf();
+		setVisible(false);
 	}
 }

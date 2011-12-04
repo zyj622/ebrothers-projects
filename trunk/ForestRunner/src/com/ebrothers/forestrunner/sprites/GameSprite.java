@@ -93,10 +93,10 @@ public class GameSprite extends CCSprite {
 	}
 
 	public float getBoundingWidth() {
-		return getBoundingBox().size.width;
+		return getTextureRect().size.width * Globals.scale_ratio;
 	}
 
 	public float getBoundingHeight() {
-		return getBoundingBox().size.height;
+		return getTextureRect().size.height * Globals.scale_ratio;
 	}
 }
