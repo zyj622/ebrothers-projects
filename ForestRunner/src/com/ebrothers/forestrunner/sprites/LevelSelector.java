@@ -4,7 +4,8 @@ import org.cocos2d.nodes.CCSprite;
 import org.cocos2d.nodes.CCSpriteFrame;
 import org.cocos2d.nodes.CCSpriteFrameCache;
 import org.cocos2d.types.CGSize;
-import com.ebrothers.forestrunner.common.Logger;
+
+import com.ebrothers.forestrunner.common.Constants;
 
 public class LevelSelector extends CCSprite {
 	
@@ -12,43 +13,43 @@ public class LevelSelector extends CCSprite {
 	public static LevelSelector levelSprite(int level,int score,boolean isNomal){
 		if(score == 0){
 			return new LevelSelector("stage_locked.png");
-		}else if(score>0 && score < 30000){
+		}else if(score>0 && score < Constants.LEVEL_ONE){
 			if(isNomal){
 				return new LevelSelector("stage_bg_normal.png","stage_0.png","stage_0.png","stage_0.png",level);
 			}else{
 				return new LevelSelector("stage_bg_pressed.png","stage_0.png","stage_0.png","stage_0.png",level);
 			}
-		}else if(score>=30000 && score < 45000){
+		}else if(score>=Constants.LEVEL_ONE && score < Constants.LEVEL_TWO){
 			if(isNomal){
 				return new LevelSelector("stage_bg_normal.png","stage_1.png","stage_0.png","stage_0.png",level);
 			}else{
 				return new LevelSelector("stage_bg_pressed.png","stage_1.png","stage_0.png","stage_0.png",level);
 			}
-		}else if(score>=45000 && score < 60000){
+		}else if(score>=Constants.LEVEL_TWO && score < Constants.LEVEL_THREE){
 			if(isNomal){
 				return new LevelSelector("stage_bg_normal.png","stage_2.png","stage_0.png","stage_0.png",level);
 			}else{
 				return new LevelSelector("stage_bg_pressed.png","stage_2.png","stage_0.png","stage_0.png",level);
 			}
-		}else if(score>=60000 && score < 65000){
+		}else if(score>=Constants.LEVEL_THREE && score < Constants.LEVEL_FOUR){
 			if(isNomal){
 				return new LevelSelector("stage_bg_normal.png","stage_2.png","stage_1.png","stage_0.png",level);
 			}else{
 				return new LevelSelector("stage_bg_pressed.png","stage_2.png","stage_1.png","stage_0.png",level);
 			}
-		}else if(score>=65000 && score < 70000){
+		}else if(score>=Constants.LEVEL_FOUR && score < Constants.LEVEL_FIVE){
 			if(isNomal){
 				return new LevelSelector("stage_bg_normal.png","stage_2.png","stage_2.png","stage_0.png",level);
 			}else{
 				return new LevelSelector("stage_bg_pressed.png","stage_2.png","stage_2.png","stage_0.png",level);
 			}
-		}else if(score>=70000 && score < 75000){
+		}else if(score>=Constants.LEVEL_FIVE && score < Constants.LEVEL_XIE){
 			if(isNomal){
 				return new LevelSelector("stage_bg_normal.png","stage_2.png","stage_2.png","stage_1.png",level);
 			}else{
 				return new LevelSelector("stage_bg_pressed.png","stage_2.png","stage_2.png","stage_1.png",level);
 			}
-		}else if(score>=75000){
+		}else if(score>=Constants.LEVEL_XIE){
 			if(isNomal){
 				return new LevelSelector("stage_bg_normal.png","stage_2.png","stage_2.png","stage_2.png",level);
 			}else{
