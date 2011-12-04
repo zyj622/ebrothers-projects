@@ -15,4 +15,6 @@ public final class Globals {
 	public static float scale_ratio_x = 1f;
 	public static float scale_ratio_y = 1f;
 	
+	public static String more_url = "http://www.baidu.coms";
+	
 }
