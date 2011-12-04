@@ -6,7 +6,6 @@ import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.nodes.CCSprite;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.util.Log;
 
 import com.ebrothers.forestrunner.common.Globals;
@@ -130,11 +129,7 @@ public class MainGameMenuLayer extends BasicLayer {
 	 * @param o
 	 */
 	public void more(Object o) {
-		SoundManager.getInstance().playEffect(CCDirector.sharedDirector().getActivity(), SoundManager.MUSIC_BUTTON);
-		Intent it = new Intent(Intent.ACTION_VIEW,
-				Uri.parse("http://www.baidu.com"));
-		if (CCDirector.sharedDirector().getActivity() != null)
-			CCDirector.sharedDirector().getActivity().startActivity(it);
+		moreGame();
 	}
 
 	/**
