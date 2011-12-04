@@ -7,7 +7,7 @@
             <key>button_again01.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{74,324},{127,34}}</string>
+                <string>{{324,324},{127,34}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -20,7 +20,7 @@
             <key>button_again02.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{38,324},{127,34}}</string>
+                <string>{{288,324},{127,34}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -33,7 +33,7 @@
             <key>button_more01.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{131,453},{127,33}}</string>
+                <string>{{381,453},{127,33}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -46,7 +46,7 @@
             <key>button_more02.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{110,324},{127,33}}</string>
+                <string>{{360,324},{127,33}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -59,7 +59,7 @@
             <key>button_next01.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,453},{127,34}}</string>
+                <string>{{252,453},{127,34}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -72,7 +72,7 @@
             <key>button_next02.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,324},{127,34}}</string>
+                <string>{{252,324},{127,34}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -95,6 +95,19 @@
                 <key>sourceSize</key>
                 <string>{480,320}</string>
             </dict>
+            <key>victory.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{2,324},{248,186}}</string>
+                <key>offset</key>
+                <string>{0,-2}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,4},{248,186}}</string>
+                <key>sourceSize</key>
+                <string>{248,190}</string>
+            </dict>
         </dict>
         <key>metadata</key>
         <dict>
@@ -105,7 +118,7 @@
             <key>size</key>
             <string>{512,512}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:0f7a0341eed7e623f1f8683b2396ebc0$</string>
+            <string>$TexturePacker:SmartUpdate:39f6832f555f5ff1e576888a436941dc$</string>
             <key>textureFileName</key>
             <string>gameover.png</string>
         </dict>
