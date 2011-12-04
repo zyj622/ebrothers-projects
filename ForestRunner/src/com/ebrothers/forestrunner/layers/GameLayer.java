@@ -57,6 +57,7 @@ public class GameLayer extends CCLayer implements UpdateCallback {
 	private GameSprite[] collisionObjects;
 	private int co_index = 0;
 	private CGRect runnerRect;
+	private CGRect objectRect;
 
 	public GameLayer(String level) {
 		super();
@@ -186,6 +187,7 @@ public class GameLayer extends CCLayer implements UpdateCallback {
 				CCCallFunc.action(this, "moveDone"));
 
 		runnerRect = CGRect.zero();
+		objectRect = CGRect.zero();
 	}
 
 	@Override
@@ -289,18 +291,14 @@ public class GameLayer extends CCLayer implements UpdateCallback {
 		float runnerLy = getRunnerLy(runnerLx);
 		if (runnerRy != currY && !runner.isInAction()) {
 			if (runnerLy == 0 || currY == 0) {
-				Logger.d(TAG, "fallToGap. y=" + runnerRy + ", currY=" + currY);
 				// fall in gap
 				runner.fallToGap(this, "loseGame");
 				background.pauseSchedulerAndActions();
 				ground.pauseSchedulerAndActions();
 			} else if (runnerLy < currY) {
-				Logger.d(TAG, "fallToGround. y=" + runnerRy + ", currY="
-						+ currY);
 				runner.fallToGround(runnerRy);
 			}
 			if (runnerRy > currY) {
-				Logger.d(TAG, "knockDown. y=" + runnerRy + ", currY=" + currY);
 				// knock down
 				runner.knockDown();
 				ground.stopAllActions();
@@ -310,32 +308,34 @@ public class GameLayer extends CCLayer implements UpdateCallback {
 			}
 		}
 
-		runnerRect.set(runnerLx, currY, runner.getBoundingWidth(),
-				runner.getBoundingHeight());
-
-		if (co_index >= collisionObjects.length) {
+		GameSprite[] objects = collisionObjects;
+		if (co_index >= objects.length) {
 			return;
 		}
 
 		// detect collision
-		while (co_index < collisionObjects.length
-				&& collisionObjects[co_index].getPosition().x < runnerRx) {
+		while (co_index < objects.length
+				&& objects[co_index].getPosition().x < runnerLx) {
 			co_index++;
-			if (co_index >= collisionObjects.length) {
+			if (co_index >= objects.length) {
 				return;
 			}
-			Logger.d(TAG, "next. " + co_index);
 		}
 
-		if (CGRect.intersects(runnerRect,
-				collisionObjects[co_index].getBoundingBox())) {
-			Logger.d(TAG, "collision. " + collisionObjects[co_index]);
-			if (collisionObjects[co_index].isFatal()) {
+		GameSprite object = objects[co_index];
+		CGPoint position = object.getPosition();
+		runnerRect.set(runnerLx, currY, runner.getBoundingWidth(),
+				runner.getBoundingHeight());
+		objectRect.set(position.x, position.y, object.getBoundingWidth(),
+				object.getBoundingHeight());
+
+		if (CGRect.intersects(runnerRect, objectRect)) {
+			if (object.isFatal()) {
 				background.pauseSchedulerAndActions();
 				ground.pauseSchedulerAndActions();
 			}
-			runner.onStartContact(collisionObjects[co_index]);
-			collisionObjects[co_index].onStartContact(runner);
+			runner.onStartContact(object);
+			object.onStartContact(runner);
 			co_index++;
 		}
 	}

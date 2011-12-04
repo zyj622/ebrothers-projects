@@ -12,10 +12,8 @@ import org.cocos2d.nodes.CCSpriteFrameCache;
 import org.cocos2d.types.CGPoint;
 
 import com.ebrothers.forestrunner.common.Globals;
-import com.ebrothers.forestrunner.common.Logger;
 
 public class Runner extends GameSprite {
-	private static final String TAG = "Runner";
 	public static final float JUMP_DURING_LONG = .7f;
 	public static final float JUMP_DURING_SHORT = .6f;
 	public static final float FALL_DURING = .2f;
@@ -37,7 +35,7 @@ public class Runner extends GameSprite {
 		for (int i = 0; i < 2; i++) {
 			frames.add(cache.getSpriteFrame(String.format("man1%d.png", i + 1)));
 		}
-		addAnimation("jump", frames);
+		addAnimation("jump", frames, 0.1f);
 		frames.clear();
 		frames.add(cache.getSpriteFrame("man11.png"));
 		addAnimation("fallToGround", frames);
@@ -51,6 +49,21 @@ public class Runner extends GameSprite {
 			frames.add(cache.getSpriteFrame(String.format("man5%d.png", i + 1)));
 		}
 		addAnimation("knockDown", frames, 0.1f);
+		frames.clear();
+		for (int i = 0; i < 8; i++) {
+			frames.add(cache.getSpriteFrame(String.format("man2%d.png", i + 1)));
+		}
+		addAnimation("burn", frames, 0.1f);
+		frames.clear();
+		for (int i = 0; i < 6; i++) {
+			frames.add(cache.getSpriteFrame(String.format("man3%d.png", i + 1)));
+		}
+		addAnimation("eaten", frames, 0.1f);
+		frames.clear();
+		for (int i = 0; i < 4; i++) {
+			frames.add(cache.getSpriteFrame(String.format("man4%d.png", i + 1)));
+		}
+		addAnimation("float", frames, 0.1f);
 	}
 
 	@Override
@@ -80,11 +93,10 @@ public class Runner extends GameSprite {
 
 	public void jump(float y) {
 		if (!acting) {
-			Logger.d(TAG, "jump. y=" + y);
 			stopAllActions();
-			playeDelayAnimation("jump", FALL_DURING, "fallToGround");
+			playeDelayAnimation("jump", 0.2f, "fallToGround");
 			CGPoint to = CGPoint.ccp(getPosition().x, y + y_offset);
-			float jHeight = 140;
+			float jHeight = 150;
 			float during = JUMP_DURING_LONG;
 			if (y > (getPosition().y - y_offset)) {
 				jHeight = 90;
@@ -99,9 +111,8 @@ public class Runner extends GameSprite {
 
 	public void jumpToGap(Object target, String selector) {
 		if (!acting) {
-			Logger.d(TAG, "jumpToGap. ");
 			stopAllActions();
-			playeDelayAnimation("jump", FALL_DURING, "fallToGround");
+			playeDelayAnimation("jump", 0.2f, "fallToGround");
 			runAction(CCSequence.actions(
 					CCJumpTo.action(JUMP_DURING_LONG, getPosition(), 150, 1),
 					CCCallFunc.action(this, "actionDone"),
@@ -127,7 +138,7 @@ public class Runner extends GameSprite {
 			playeAnimation("fallToGround");
 			CGPoint to = CGPoint.ccp(getPosition().x, y + y_offset);
 			runAction(CCSequence.actions(
-					CCJumpTo.action(FALL_DURING, to, 10, 1),
+					CCJumpTo.action(FALL_DURING, to, 5, 1),
 					CCCallFunc.action(this, "actionDone")));
 			acting = true;
 		}
@@ -144,5 +155,12 @@ public class Runner extends GameSprite {
 	public void knockDownDone() {
 		stopAllActions();
 		runAction(CCMoveBy.action(0.2f, CGPoint.ccp(0, -60)));
+	}
+
+	@Override
+	public void onStartContact(GameSprite target) {
+		if (target instanceof Fire) {
+			playeAnimation("burn");
+		}
 	}
 }

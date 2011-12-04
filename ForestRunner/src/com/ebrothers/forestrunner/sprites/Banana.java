@@ -9,7 +9,6 @@ import org.cocos2d.nodes.CCSpriteFrameCache;
 public class Banana extends GameSprite {
 	public Banana() {
 		super("star01.png");
-		setAnchorPoint(0.5f, 0);
 		CCSpriteFrameCache cache = CCSpriteFrameCache.sharedSpriteFrameCache();
 		ArrayList<CCSpriteFrame> frames = new ArrayList<CCSpriteFrame>();
 		frames.add(cache.getSpriteFrame("star01.png"));
@@ -20,7 +19,7 @@ public class Banana extends GameSprite {
 			frames.add(cache.getSpriteFrame(String.format("flash0%d.png",
 					(i + 1))));
 		}
-		addAnimation("flash", frames, 0.2f);
+		addAnimation("flash", frames, 0.1f);
 	}
 
 	@Override
@@ -31,38 +30,41 @@ public class Banana extends GameSprite {
 
 	public static void addAsTopTriangle(CCNode parent, float cx, float cy) {
 		Banana banana = new Banana();
-		banana.setPosition(cx + 80, cy + 10);
+		cy += banana.getBoundingHeight() / 2f;
+		banana.setPosition(cx + 140, cy + 8);
 		parent.addChild(banana);
 		banana = new Banana();
-		banana.setPosition(cx, cy + 80);
+		banana.setPosition(cx + 20, cy + 80);
 		parent.addChild(banana);
 		banana = new Banana();
-		banana.setPosition(cx - 80, cy + 10);
+		banana.setPosition(cx - 100, cy + 8);
 		parent.addChild(banana);
 	}
 
 	public static void addOn2Sides4(CCNode parent, float cx, float cy) {
 		// left top
 		Banana banana = new Banana();
-		banana.setPosition(cx - 60, cy + 70);
+		cy += banana.getBoundingHeight() / 2f;
+		banana.setPosition(cx - 80, cy + 50);
 		parent.addChild(banana);
 		// right top
 		banana = new Banana();
-		banana.setPosition(cx + 60, cy + 70);
+		banana.setPosition(cx + 80, cy + 50);
 		parent.addChild(banana);
 		// left bottomd
 		banana = new Banana();
-		banana.setPosition(cx - 80, cy + 8);
+		banana.setPosition(cx - 100, cy + 5);
 		parent.addChild(banana);
 		// right bottom
 		banana = new Banana();
-		banana.setPosition(cx + 80, cy + 8);
+		banana.setPosition(cx + 100, cy + 5);
 		parent.addChild(banana);
 	}
 
 	public static void addOn2Sides2(CCNode parent, float cx, float cy) {
 		// left
 		Banana banana = new Banana();
+		cy += banana.getBoundingHeight() / 2f;
 		banana.setPosition(cx - 120, cy);
 		parent.addChild(banana);
 		// right
@@ -82,6 +84,7 @@ public class Banana extends GameSprite {
 	}
 
 	public void flashDone() {
-		removeSelf();
+		// removeSelf();
+		setVisible(false);
 	}
 }

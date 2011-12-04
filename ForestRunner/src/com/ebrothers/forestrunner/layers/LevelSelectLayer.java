@@ -8,6 +8,7 @@ import org.cocos2d.types.CGPoint;
 
 import com.ebrothers.forestrunner.common.Globals;
 import com.ebrothers.forestrunner.common.Logger;
+import com.ebrothers.forestrunner.manager.SceneManager;
 import com.ebrothers.forestrunner.sprites.LevelSelector;
 
 public class LevelSelectLayer extends BasicLayer {
@@ -155,6 +156,8 @@ public class LevelSelectLayer extends BasicLayer {
 
 	public void levelSelect(Object o) {
 		CCMenuItemSprite cmis = (CCMenuItemSprite) o;
+		Globals.current_level = cmis.getTag() - 1;
+		SceneManager.getInstance().replaceTo(SceneManager.SCENE_GAME);
 		Logger.e("game", String.valueOf(cmis.getTag()));
 	}
 
