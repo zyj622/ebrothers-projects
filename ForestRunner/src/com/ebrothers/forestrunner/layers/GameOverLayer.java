@@ -4,8 +4,6 @@ import org.cocos2d.nodes.CCSprite;
 import org.cocos2d.opengl.CCBitmapFontAtlas;
 import org.cocos2d.types.ccColor3B;
 
-import com.ebrothers.forestrunner.common.Globals;
-
 
 public class GameOverLayer extends BasicLayer {
 
