@@ -17,6 +17,12 @@ public class Flower extends GameSprite {
 					i + 1)));
 		}
 		addAnimation("shake", frames);
+
+		frames.clear();
+		for (int i = 1; i < 6; i++) {
+			frames.add(cache.getSpriteFrame(String.format("man3%d.png", i + 1)));
+		}
+		addAnimation("eat", frames, 0.2f);
 	}
 
 	@Override
@@ -33,5 +39,14 @@ public class Flower extends GameSprite {
 	@Override
 	public boolean isFatal() {
 		return true;
+	}
+
+	@Override
+	public void onStartContact(GameSprite target) {
+		playeAnimation("eat", this, "eatDone");
+	}
+
+	public void eatDone() {
+		playeLoopAnimation("shake");
 	}
 }

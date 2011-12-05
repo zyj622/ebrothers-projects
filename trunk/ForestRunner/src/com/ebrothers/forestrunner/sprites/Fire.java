@@ -7,6 +7,8 @@ import org.cocos2d.nodes.CCSpriteFrameCache;
 
 public class Fire extends GameSprite {
 
+	private GameSprite burnSprite;
+
 	public Fire() {
 		super("fire01.png");
 		setAnchorPoint(0.5f, 0);
@@ -16,6 +18,17 @@ public class Fire extends GameSprite {
 			frames.add(cache.getSpriteFrame(String.format("fire0%d.png", i + 1)));
 		}
 		addAnimation("shining", frames);
+
+		burnSprite = GameSprite.sprite("man21.png");
+		burnSprite.setScale(1);
+		burnSprite.setAnchorPoint(0.5f, 1);
+		burnSprite.setPosition(burnSprite.getBoundingWidth() / 2f - 10f,
+				getBoundingHeight());
+		frames.clear();
+		for (int i = 0; i < 8; i++) {
+			frames.add(cache.getSpriteFrame(String.format("man2%d.png", i + 1)));
+		}
+		burnSprite.addAnimation("burn", frames, 0.1f);
 	}
 
 	@Override
@@ -32,5 +45,15 @@ public class Fire extends GameSprite {
 	@Override
 	public boolean isFatal() {
 		return true;
+	}
+
+	@Override
+	public void onStartContact(GameSprite target) {
+		addChild(burnSprite, 1);
+		burnSprite.playeAnimation("burn", this, "burnDone");
+	}
+
+	public void burnDone() {
+		burnSprite.setVisible(false);
 	}
 }

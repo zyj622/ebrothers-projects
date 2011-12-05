@@ -45,20 +45,9 @@ public class Runner extends GameSprite {
 		}
 		addAnimation("fallToGap", frames);
 		frames.clear();
-		for (int i = 0; i < 3; i++) {
-			frames.add(cache.getSpriteFrame(String.format("man5%d.png", i + 1)));
-		}
+		frames.add(cache.getSpriteFrame("man45.png"));
+		frames.add(cache.getSpriteFrame("man46.png"));
 		addAnimation("knockDown", frames, 0.1f);
-		frames.clear();
-		for (int i = 0; i < 8; i++) {
-			frames.add(cache.getSpriteFrame(String.format("man2%d.png", i + 1)));
-		}
-		addAnimation("burn", frames, 0.1f);
-		frames.clear();
-		for (int i = 0; i < 6; i++) {
-			frames.add(cache.getSpriteFrame(String.format("man3%d.png", i + 1)));
-		}
-		addAnimation("eaten", frames, 0.1f);
 		frames.clear();
 		for (int i = 0; i < 4; i++) {
 			frames.add(cache.getSpriteFrame(String.format("man4%d.png", i + 1)));
@@ -159,9 +148,9 @@ public class Runner extends GameSprite {
 
 	@Override
 	public void onStartContact(GameSprite target) {
-		if (target instanceof Fire) {
+		if (target instanceof Fire || target instanceof Flower) {
 			stopAllActions();
-			playeAnimation("burn", this, "diedDone");
+			setVisible(false);
 		}
 	}
 
