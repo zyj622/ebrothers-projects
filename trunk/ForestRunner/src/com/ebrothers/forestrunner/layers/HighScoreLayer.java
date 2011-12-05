@@ -2,6 +2,7 @@ package com.ebrothers.forestrunner.layers;
 
 import org.cocos2d.nodes.CCLabel;
 import org.cocos2d.nodes.CCSprite;
+import org.cocos2d.opengl.CCBitmapFontAtlas;
 import org.cocos2d.types.ccColor3B;
 
 import com.ebrothers.forestrunner.common.Logger;
@@ -16,33 +17,33 @@ public class HighScoreLayer extends BasicLayer {
 		CCSprite sprite02 = getNode("game_choose.jpg", 0, 0, 0, 0);
 		addChild(sprite02, 1);
 		
-		CCLabel stageName = getLabel("Stage", width * 10 / 16,height * 12 / 13, 36);
+		CCBitmapFontAtlas stageName = getFontLabel("Stage", width * 10 / 16,height * 12 / 13, 36);
 		addChild(stageName, 2);
 		for(int i=0;i<stageArray.length;i++){
-			CCLabel tmpLable = getLabel(stageArray[i], width * 10 / 16, height * (11-i) / 13, 30);
+			CCBitmapFontAtlas tmpLable = getFontLabel(stageArray[i], width * 10 / 16, height * (11-i) / 13, 30);
 			addChild(tmpLable, 2);
 		}
-		CCLabel stageTotal = getLabel("Total", width * 10 / 16,height * (12-stageArray.length-1) / 13, 36);
+		CCBitmapFontAtlas stageTotal = getFontLabel("Total", width * 10 / 16,height * (12-stageArray.length-1) / 13, 36);
 		addChild(stageTotal, 2);
 
-		CCLabel highScoreName = getLabel("High Score", width * 13 / 16,
+		CCBitmapFontAtlas highScoreName = getFontLabel("High Score", width * 13 / 16,
 				height * 12 / 13, 36);
 		addChild(highScoreName, 2);
 		for(int j=0;j<highScoreArray.length;j++){
-			CCLabel tmpLable = getLabel(highScoreArray[j], width * 13 / 16, height * (11-j) / 13, 30);
+			CCBitmapFontAtlas tmpLable = getFontLabel(highScoreArray[j], width * 13 / 16, height * (11-j) / 13, 30);
 			addChild(tmpLable, 2);
 		}
-		CCLabel highScoreAll = getLabel(getScoreTotle(), width * 13 / 16,
+		CCBitmapFontAtlas highScoreAll = getFontLabel(getScoreTotle(), width * 13 / 16,
 				height * (12-highScoreArray.length-1) / 13, 36);
 		addChild(highScoreAll, 2);
 	}
 
 	
-	private CCLabel getLabel(String content,float x,float y,int fontSize){
-		CCLabel label = CCLabel.makeLabel(content, "DroidSerif", fontSize);
-		label.setColor(ccColor3B.ccBLACK);
-		label.setPosition(x, y);
-		return label;
+	private CCBitmapFontAtlas getFontLabel(String content,float x,float y,int fontSize){
+		CCBitmapFontAtlas score = CCBitmapFontAtlas.bitmapFontAtlas(content, "font1.fnt");
+		score.setPosition(x, y);
+		score.setColor(ccColor3B.ccRED);
+		return score;
 	}
 	
 	private String getScoreTotle(){
