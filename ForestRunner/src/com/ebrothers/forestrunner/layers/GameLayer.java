@@ -329,13 +329,15 @@ public class GameLayer extends CCLayer implements UpdateCallback {
 			runner.onStartContact(object);
 			object.onStartContact(runner);
 			co_index++;
-		} else if (runnerLx > position.x) {
+		} else if (runnerRx > position.x) {
 			co_index++;
 		}
 	}
 
 	public void jumpToGapDone() {
 		runner.fallToGap(this, "loseGame");
+		background.pauseSchedulerAndActions();
+		ground.pauseSchedulerAndActions();
 	}
 
 	public void moveDone() {

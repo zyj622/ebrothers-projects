@@ -156,7 +156,7 @@ public class GameLevelBuilder {
 			case SpriteType.FIRE:
 				sprite = new Fire();
 				sprite.setPosition(parentLeft + child.rx, parentTop - 8);
-				parent.addChild(sprite);
+				parent.addChild(sprite, 1);
 				Cherry.addOnTop(parent, parentLeft + child.rx, parentTop, true);
 				Banana.addOn2Sides4(parent, parentLeft + child.rx, parentTop);
 				break;
