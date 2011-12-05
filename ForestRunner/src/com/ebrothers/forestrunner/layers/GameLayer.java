@@ -314,20 +314,12 @@ public class GameLayer extends CCLayer implements UpdateCallback {
 		}
 
 		// detect collision
-		while (co_index < objects.length
-				&& objects[co_index].getPosition().x < runnerLx) {
-			co_index++;
-			if (co_index >= objects.length) {
-				return;
-			}
-		}
-
 		GameSprite object = objects[co_index];
 		CGPoint position = object.getPosition();
 		runnerRect.set(runnerLx, currY, runner.getBoundingWidth(),
 				runner.getBoundingHeight());
-		objectRect.set(position.x, position.y, object.getBoundingWidth(),
-				object.getBoundingHeight());
+		objectRect.set(position.x - object.getBoundingWidth() / 2f, position.y,
+				object.getBoundingWidth(), object.getBoundingHeight());
 
 		if (CGRect.intersects(runnerRect, objectRect)) {
 			if (object.isFatal()) {
@@ -336,6 +328,8 @@ public class GameLayer extends CCLayer implements UpdateCallback {
 			}
 			runner.onStartContact(object);
 			object.onStartContact(runner);
+			co_index++;
+		} else if (runnerLx > position.x) {
 			co_index++;
 		}
 	}

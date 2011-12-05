@@ -160,7 +160,12 @@ public class Runner extends GameSprite {
 	@Override
 	public void onStartContact(GameSprite target) {
 		if (target instanceof Fire) {
-			playeAnimation("burn");
+			stopAllActions();
+			playeAnimation("burn", this, "diedDone");
 		}
+	}
+
+	public void diedDone() {
+		setVisible(false);
 	}
 }
