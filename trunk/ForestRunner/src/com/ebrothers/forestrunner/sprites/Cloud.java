@@ -8,7 +8,7 @@ import org.cocos2d.nodes.CCSprite;
 import org.cocos2d.nodes.CCSpriteFrameCache;
 import org.cocos2d.types.CGPoint;
 
-import com.ebrothers.forestrunner.common.Globals;
+import com.ebrothers.forestrunner.common.Game;
 import com.ebrothers.forestrunner.common.Logger;
 
 public class Cloud extends CCSprite {
@@ -17,8 +17,8 @@ public class Cloud extends CCSprite {
 		super(CCSpriteFrameCache.sharedSpriteFrameCache().getSpriteFrame(
 				frameName));
 		setAnchorPoint(0.5f, 0.5f);
-		setScaleX(Globals.scale_ratio_x);
-		setScaleY(Globals.scale_ratio_y);
+		setScaleX(Game.scale_ratio_x);
+		setScaleY(Game.scale_ratio_y);
 	}
 
 	/**

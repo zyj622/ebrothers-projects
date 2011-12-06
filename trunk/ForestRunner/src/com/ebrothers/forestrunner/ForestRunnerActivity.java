@@ -15,7 +15,7 @@ import android.view.KeyEvent;
 import android.view.Window;
 import android.view.WindowManager;
 
-import com.ebrothers.forestrunner.common.Globals;
+import com.ebrothers.forestrunner.common.Game;
 import com.ebrothers.forestrunner.common.Logger;
 import com.ebrothers.forestrunner.data.Levels;
 import com.ebrothers.forestrunner.manager.LocalDataManager;
@@ -57,14 +57,14 @@ public class ForestRunnerActivity extends Activity {
 		CCDirector.sharedDirector().attachInView(mGLSurfaceView);
 
 		CGSize winSize = CCDirector.sharedDirector().winSize();
-		Globals.scale_ratio = winSize.height / 320f;
-		Globals.scale_ratio_y = winSize.height / 320f;
-		Globals.scale_ratio_x = winSize.width / 480f;
+		Game.scale_ratio = winSize.height / 320f;
+		Game.scale_ratio_y = winSize.height / 320f;
+		Game.scale_ratio_x = winSize.width / 480f;
 
 		float winHeight = CCDirector.sharedDirector().winSize().getHeight();
-		Globals.groundH_y = winHeight / 2f;
-		Globals.groundM_y = winHeight / 3f;
-		Globals.groundL_y = winHeight / 10f;
+		Game.groundH_y = winHeight / 2f;
+		Game.groundM_y = winHeight / 3f;
+		Game.groundL_y = winHeight / 10f;
 
 		// no effect here because device orientation is controlled by manifest
 		CCDirector.sharedDirector().setDeviceOrientation(
@@ -85,8 +85,8 @@ public class ForestRunnerActivity extends Activity {
 	public void onPause() {
 		super.onPause();
 		CCScene runningScene = CCDirector.sharedDirector().getRunningScene();
-		if (runningScene instanceof GameScene) {
-			((GameScene) runningScene).pauseGame();
+		if (runningScene instanceof GameScene && Game.delegate != null) {
+			Game.delegate.pauseGame();
 		}
 		CCDirector.sharedDirector().pause();
 	}

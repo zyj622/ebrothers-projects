@@ -9,7 +9,7 @@ import org.cocos2d.nodes.CCSpriteFrameCache;
 import android.content.Intent;
 import android.net.Uri;
 
-import com.ebrothers.forestrunner.common.Globals;
+import com.ebrothers.forestrunner.common.Game;
 import com.ebrothers.forestrunner.manager.SoundManager;
 
 public class BasicLayer extends CCLayer {
@@ -31,8 +31,8 @@ public class BasicLayer extends CCLayer {
 		CCSpriteFrame frame = cache.getSpriteFrame(name);
 		CCSprite sprite = CCSprite.sprite(frame);
 		sprite.setAnchorPoint(x_anchor, y_anchor);
-		sprite.setScaleX(Globals.scale_ratio_x);
-		sprite.setScaleY(Globals.scale_ratio_y);
+		sprite.setScaleX(Game.scale_ratio_x);
+		sprite.setScaleY(Game.scale_ratio_y);
 		sprite.setPosition(x, y);
 		return sprite;
 	}
@@ -48,7 +48,7 @@ public class BasicLayer extends CCLayer {
 	protected void moreGame(){
 		SoundManager.getInstance().playEffect(CCDirector.sharedDirector().getActivity(), SoundManager.MUSIC_BUTTON);
 		Intent it = new Intent(Intent.ACTION_VIEW,
-				Uri.parse(Globals.more_url));
+				Uri.parse(Game.more_url));
 		if (CCDirector.sharedDirector().getActivity() != null)
 			CCDirector.sharedDirector().getActivity().startActivity(it);
 	}

@@ -1,59 +1,25 @@
 package com.ebrothers.forestrunner.sprites;
 
-import org.cocos2d.nodes.CCNode;
-
-import com.ebrothers.forestrunner.common.Globals;
-
 public class Ground extends GameSprite {
+	public static final int GROUND_L = 1;
+	public static final int GROUND_M1 = 2;
+	public static final int GROUND_M2 = 3;
+	public static final int GROUND_R = 4;
 
-	private Ground() {
-		super();
+	public static Ground ground(int type) {
+		return new Ground(type);
+	}
+
+	private int _type;
+
+	private Ground(int type) {
+		super("ground3" + type + ".png");
+		_type = type;
 		setAnchorPoint(0, 1);
 	}
 
-	public static CCNode createGround(int type, float left, float width) {
-		float top = getTopByType(type);
-		CCNode ground = new Ground();
-		ground.setPosition(left, top);
-		// add left ground
-		GroundL leftGround = new GroundL();
-		leftGround.setPosition(left, top);
-		ground.addChild(leftGround);
-		float leftWidth = leftGround.getBoundingWidth() - 1;
-		float currentX = left + leftWidth;
-		GroundR rightGround = new GroundR();
-		float rightWidth = rightGround.getBoundingWidth() - 1;
-		float maxX = currentX + width - leftWidth - rightWidth;
-		// add middle grounds
-		boolean flag = false;
-		while (currentX < maxX) {
-			GameSprite middle = null;
-			if (flag) {
-				middle = new GroundM1();
-				flag = false;
-			} else {
-				middle = new GroundM2();
-				flag = true;
-			}
-			middle.setPosition(currentX, top);
-			ground.addChild(middle);
-			currentX += middle.getBoundingWidth() - 1;
-		}
-		// add right ground
-		rightGround.setPosition(maxX, top);
-		ground.addChild(rightGround);
-		return ground;
+	public int getType() {
+		return _type;
 	}
 
-	private static float getTopByType(int type) {
-		switch (type) {
-		case SpriteType.GROUND_M:
-			return Globals.groundM_y;
-		case SpriteType.GROUND_L:
-			return Globals.groundL_y;
-		case SpriteType.GROUND_H:
-			return Globals.groundH_y;
-		}
-		return Globals.groundM_y;
-	}
 }

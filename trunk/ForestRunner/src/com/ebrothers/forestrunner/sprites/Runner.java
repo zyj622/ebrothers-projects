@@ -11,7 +11,9 @@ import org.cocos2d.nodes.CCSpriteFrame;
 import org.cocos2d.nodes.CCSpriteFrameCache;
 import org.cocos2d.types.CGPoint;
 
-import com.ebrothers.forestrunner.common.Globals;
+import android.R.bool;
+
+import com.ebrothers.forestrunner.common.Game;
 
 public class Runner extends GameSprite {
 	public static final float JUMP_DURING_LONG = .7f;
@@ -24,7 +26,7 @@ public class Runner extends GameSprite {
 		super("man01.png");
 		setAnchorPoint(0, 1);
 		y_offset = getBoundingHeight() - 10;
-		setPosition(100, Globals.groundM_y + y_offset);
+		setPosition(100, Game.groundM_y + y_offset);
 		CCSpriteFrameCache cache = CCSpriteFrameCache.sharedSpriteFrameCache();
 		ArrayList<CCSpriteFrame> frames = new ArrayList<CCSpriteFrame>();
 		for (int i = 0; i < 8; i++) {
@@ -48,6 +50,11 @@ public class Runner extends GameSprite {
 		frames.add(cache.getSpriteFrame("man45.png"));
 		frames.add(cache.getSpriteFrame("man46.png"));
 		addAnimation("knockDown", frames, 0.1f);
+		frames.clear();
+		frames.add(cache.getSpriteFrame("man51.png"));
+		frames.add(cache.getSpriteFrame("man52.png"));
+		frames.add(cache.getSpriteFrame("man53.png"));
+		addAnimation("knockDown1", frames, 0.1f);
 		frames.clear();
 		for (int i = 0; i < 4; i++) {
 			frames.add(cache.getSpriteFrame(String.format("man4%d.png", i + 1)));
@@ -143,7 +150,13 @@ public class Runner extends GameSprite {
 
 	public void knockDownDone() {
 		stopAllActions();
-		runAction(CCMoveBy.action(0.2f, CGPoint.ccp(0, -60)));
+		runAction(CCSequence.actions(
+				CCMoveBy.action(0.2f, CGPoint.ccp(0, -60)),
+				CCCallFunc.action(this, "loseGame")));
+	}
+
+	public void loseGame() {
+		Game.delegate.loseGame();
 	}
 
 	@Override
@@ -151,10 +164,21 @@ public class Runner extends GameSprite {
 		if (target instanceof Fire || target instanceof Flower) {
 			stopAllActions();
 			setVisible(false);
+		} else if (target instanceof Dinosaur) {
+			stopAllActions();
+			playeAnimation("float", this, "loseGame");
+		} else if (target instanceof Box || target instanceof Trap) {
+			stopAllActions();
+			playeAnimation("knockDown1", this, "loseGame");
 		}
 	}
 
-	public void diedDone() {
-		setVisible(false);
+	public void restart(CGPoint restartPoint) {
+		if (!getVisible()) {
+			setVisible(true);
+		}
+		setPosition(100, restartPoint.y + y_offset);
+		acting = false;
+		playeLoopAnimation("run");
 	}
 }

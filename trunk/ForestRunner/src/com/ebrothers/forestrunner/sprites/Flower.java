@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import org.cocos2d.nodes.CCSpriteFrame;
 import org.cocos2d.nodes.CCSpriteFrameCache;
 
+import com.ebrothers.forestrunner.common.Game;
+
 public class Flower extends GameSprite {
 
 	public Flower() {
@@ -47,6 +49,6 @@ public class Flower extends GameSprite {
 	}
 
 	public void eatDone() {
-		playeLoopAnimation("shake");
+		Game.delegate.loseGame();
 	}
 }

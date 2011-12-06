@@ -3,7 +3,7 @@ package com.ebrothers.forestrunner.manager;
 import org.cocos2d.layers.CCScene;
 import org.cocos2d.nodes.CCDirector;
 
-import com.ebrothers.forestrunner.common.Globals;
+import com.ebrothers.forestrunner.common.Game;
 import com.ebrothers.forestrunner.scenes.GameScene;
 import com.ebrothers.forestrunner.scenes.HighScoreScene;
 import com.ebrothers.forestrunner.scenes.LevelSelectScene;
@@ -46,7 +46,7 @@ public class SceneManager {
 			break;
 		case SCENE_GAME:
 			CCDirector.sharedDirector().replaceScene(
-					GameScene.scene(Globals.current_level));
+					GameScene.scene(Game.current_level));
 			break;
 		case SCENE_GAMEOVER:
 			// CCDirector.sharedDirector().replaceScene(GameOverScene.scene());
