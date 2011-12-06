@@ -6,6 +6,8 @@ import org.cocos2d.nodes.CCNode;
 import org.cocos2d.nodes.CCSpriteFrame;
 import org.cocos2d.nodes.CCSpriteFrameCache;
 
+import com.ebrothers.forestrunner.common.Game;
+
 public class Cherry extends GameSprite {
 	public Cherry() {
 		super("star03.png");
@@ -45,6 +47,8 @@ public class Cherry extends GameSprite {
 	@Override
 	public void onStartContact(GameSprite target) {
 		playeAnimation("flash", this, "flashDone");
+		Game.score += 200;
+		Game.delegate.updateScore();
 	}
 
 	public void flashDone() {

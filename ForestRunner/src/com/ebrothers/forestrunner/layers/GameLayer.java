@@ -30,6 +30,8 @@ import com.ebrothers.forestrunner.common.Game;
 import com.ebrothers.forestrunner.common.Logger;
 import com.ebrothers.forestrunner.data.LevelData;
 import com.ebrothers.forestrunner.data.LevelDataParser;
+import com.ebrothers.forestrunner.manager.LocalDataManager;
+import com.ebrothers.forestrunner.manager.SceneManager;
 import com.ebrothers.forestrunner.sprites.Background;
 import com.ebrothers.forestrunner.sprites.GameSprite;
 import com.ebrothers.forestrunner.sprites.Runner;
@@ -59,7 +61,7 @@ public class GameLayer extends CCLayer implements UpdateCallback, GameDelegate {
 	private int co_index = 0;
 	private CGRect runnerRect;
 	private CGRect objectRect;
-	private int lifeAmount = 5;
+	private int lifeAmount = 1;
 	private CGPoint[] signs;
 	private int sign_index = 0;
 	/**
@@ -254,6 +256,19 @@ public class GameLayer extends CCLayer implements UpdateCallback, GameDelegate {
 	public void winGame() {
 		pauseToggle.setIsEnabled(false);
 		pauseGame();
+		Game.isWin = true;
+		// save passed level
+		LocalDataManager ldm = LocalDataManager.getInstance();
+		if (Game.current_level > (Integer) ldm.readSetting(
+				LocalDataManager.PASSED, 0)) {
+			ldm.writeSetting(LocalDataManager.PASSED, Game.current_level);
+		}
+		// save score of current level
+		String level = String.valueOf(Game.current_level);
+		if (Game.score > (Integer) ldm.readSetting(level, 0)) {
+			ldm.writeSetting(level, Game.score);
+		}
+		SceneManager.getInstance().replaceTo(SceneManager.SCENE_GAMEOVER);
 	}
 
 	@Override
@@ -262,10 +277,17 @@ public class GameLayer extends CCLayer implements UpdateCallback, GameDelegate {
 		lifeAmount--;
 		if (lifeAmount == 0) {
 			// game over
+			Game.isWin = false;
+			SceneManager.getInstance().replaceTo(SceneManager.SCENE_GAMEOVER);
 		} else {
 			life.setString("x" + (lifeAmount - 1));
 			restartGame();
 		}
+	}
+
+	@Override
+	public void updateScore() {
+		score.setString("+" + Game.score);
 	}
 
 	@Override
@@ -430,4 +452,5 @@ public class GameLayer extends CCLayer implements UpdateCallback, GameDelegate {
 				+ lbp_index + ", rbp_index=" + rbp_index + ", co_index="
 				+ co_index);
 	}
+
 }

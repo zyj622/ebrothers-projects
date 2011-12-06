@@ -14,6 +14,6 @@ public interface Constants {
 	public static final int LEVEL_THREE = 60000;
 	public static final int LEVEL_FOUR = 65000;
 	public static final int LEVEL_FIVE = 70000;
-	public static final int LEVEL_XIE = 75000;
+	public static final int LEVEL_SIX = 75000;
 	
 }

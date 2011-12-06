@@ -1,6 +1,5 @@
 package com.ebrothers.forestrunner.layers;
 
-import org.cocos2d.nodes.CCLabel;
 import org.cocos2d.nodes.CCSprite;
 import org.cocos2d.opengl.CCBitmapFontAtlas;
 import org.cocos2d.types.ccColor3B;
@@ -33,7 +32,7 @@ public class HighScoreLayer extends BasicLayer {
 			CCBitmapFontAtlas tmpLable = getFontLabel(highScoreArray[j], width * 13 / 16, height * (11-j) / 13, 30);
 			addChild(tmpLable, 2);
 		}
-		CCBitmapFontAtlas highScoreAll = getFontLabel(getScoreTotle(), width * 13 / 16,
+		CCBitmapFontAtlas highScoreAll = getFontLabel(getScoreTotal(), width * 13 / 16,
 				height * (12-highScoreArray.length-1) / 13, 36);
 		addChild(highScoreAll, 2);
 	}
@@ -46,7 +45,7 @@ public class HighScoreLayer extends BasicLayer {
 		return score;
 	}
 	
-	private String getScoreTotle(){
+	private String getScoreTotal(){
 		int tmp = 0;
 		for(int j=0;j<highScoreArray.length;j++){
 			tmp += Integer.valueOf(highScoreArray[j]);

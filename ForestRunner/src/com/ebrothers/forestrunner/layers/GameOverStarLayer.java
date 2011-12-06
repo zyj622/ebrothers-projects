@@ -10,26 +10,35 @@ import com.ebrothers.forestrunner.common.Game;
 
 public class GameOverStarLayer extends BasicLayer {
 
-	public GameOverStarLayer(int score) {
+	public GameOverStarLayer(long score) {
 		super();
-		if(score>=0 && score < Constants.LEVEL_ONE){
+		if (Game.isWin) {
+			if (score >= 0 && score < Constants.LEVEL_ONE) {
+				setStar("star_0.png", "star_0.png", "star_0.png");
+			} else if (score >= Constants.LEVEL_ONE
+					&& score < Constants.LEVEL_TWO) {
+				setStar("star_1.png", "star_0.png", "star_0.png");
+			} else if (score >= Constants.LEVEL_TWO
+					&& score < Constants.LEVEL_THREE) {
+				setStar("star_2.png", "star_0.png", "star_0.png");
+			} else if (score >= Constants.LEVEL_THREE
+					&& score < Constants.LEVEL_FOUR) {
+				setStar("star_2.png", "star_1.png", "star_0.png");
+			} else if (score >= Constants.LEVEL_FOUR
+					&& score < Constants.LEVEL_FIVE) {
+				setStar("star_2.png", "star_2.png", "star_0.png");
+			} else if (score >= Constants.LEVEL_FIVE
+					&& score < Constants.LEVEL_SIX) {
+				setStar("star_2.png", "star_2.png", "star_1.png");
+			} else if (score >= Constants.LEVEL_SIX) {
+				setStar("star_2.png", "star_2.png", "star_2.png");
+			}
+		} else {
 			setStar("star_0.png", "star_0.png", "star_0.png");
-		}else if(score>=Constants.LEVEL_ONE && score < Constants.LEVEL_TWO){
-			setStar("star_1.png", "star_0.png", "star_0.png");
-		}else if(score>=Constants.LEVEL_TWO && score < Constants.LEVEL_THREE){
-			setStar("star_2.png", "star_0.png", "star_0.png");
-		}else if(score>=Constants.LEVEL_THREE && score < Constants.LEVEL_FOUR){
-			setStar("star_2.png", "star_1.png", "star_0.png");
-		}else if(score>=Constants.LEVEL_FOUR && score < Constants.LEVEL_FIVE){
-			setStar("star_2.png", "star_2.png", "star_0.png");
-		}else if(score>=Constants.LEVEL_FIVE && score < Constants.LEVEL_XIE){
-			setStar("star_2.png", "star_2.png", "star_1.png");
-		}else if(score>=Constants.LEVEL_XIE){
-			setStar("star_2.png", "star_2.png", "star_2.png");
 		}
 	}
-	
-	public void setStar(String star03,String star02,String star01){
+
+	public void setStar(String star03, String star02, String star01) {
 		CCSpriteFrameCache cache = CCSpriteFrameCache.sharedSpriteFrameCache();
 		CCSpriteFrame spriteFrame1 = cache.getSpriteFrame(star01);
 		CCSprite sprite1 = CCSprite.sprite(spriteFrame1);
@@ -42,15 +51,16 @@ public class GameOverStarLayer extends BasicLayer {
 		CCSprite sprite2 = CCSprite.sprite(spriteFrame2);
 		sprite2.setScale(Game.scale_ratio_x);
 		sprite2.setAnchorPoint(1, 1);
-		sprite2.setPosition((width * 9.3f / 10)-(starCs.width*Game.scale_ratio_x), height * 5.2f / 8);
+		sprite2.setPosition((width * 9.3f / 10)
+				- (starCs.width * Game.scale_ratio_x), height * 5.2f / 8);
 		addChild(sprite2);
 		CCSpriteFrame spriteFrame3 = cache.getSpriteFrame(star03);
 		CCSprite sprite3 = CCSprite.sprite(spriteFrame3);
 		sprite3.setScale(Game.scale_ratio_x);
 		sprite3.setAnchorPoint(1, 1);
-		sprite3.setPosition((width * 9.3f / 10)-(starCs.width*Game.scale_ratio_x)*2f, height * 5.2f / 8);
+		sprite3.setPosition((width * 9.3f / 10)
+				- (starCs.width * Game.scale_ratio_x) * 2f, height * 5.2f / 8);
 		addChild(sprite3);
 	}
-	
 
 }
