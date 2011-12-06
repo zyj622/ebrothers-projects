@@ -43,13 +43,13 @@ public class LevelSelector extends CCSprite {
 			}else{
 				return new LevelSelector("stage_bg_pressed.png","stage_2.png","stage_2.png","stage_0.png",level);
 			}
-		}else if(score>=Constants.LEVEL_FIVE && score < Constants.LEVEL_XIE){
+		}else if(score>=Constants.LEVEL_FIVE && score < Constants.LEVEL_SIX){
 			if(isNomal){
 				return new LevelSelector("stage_bg_normal.png","stage_2.png","stage_2.png","stage_1.png",level);
 			}else{
 				return new LevelSelector("stage_bg_pressed.png","stage_2.png","stage_2.png","stage_1.png",level);
 			}
-		}else if(score>=Constants.LEVEL_XIE){
+		}else if(score>=Constants.LEVEL_SIX){
 			if(isNomal){
 				return new LevelSelector("stage_bg_normal.png","stage_2.png","stage_2.png","stage_2.png",level);
 			}else{

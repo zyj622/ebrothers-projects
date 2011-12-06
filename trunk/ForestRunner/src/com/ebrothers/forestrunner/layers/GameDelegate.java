@@ -10,4 +10,6 @@ public interface GameDelegate {
 
 	public void winGame();
 
+	public void updateScore();
+
 }

@@ -4,6 +4,7 @@ import org.cocos2d.layers.CCScene;
 import org.cocos2d.nodes.CCDirector;
 
 import com.ebrothers.forestrunner.common.Game;
+import com.ebrothers.forestrunner.scenes.GameOverScene;
 import com.ebrothers.forestrunner.scenes.GameScene;
 import com.ebrothers.forestrunner.scenes.HighScoreScene;
 import com.ebrothers.forestrunner.scenes.LevelSelectScene;
@@ -49,7 +50,7 @@ public class SceneManager {
 					GameScene.scene(Game.current_level));
 			break;
 		case SCENE_GAMEOVER:
-			// CCDirector.sharedDirector().replaceScene(GameOverScene.scene());
+			CCDirector.sharedDirector().replaceScene(GameOverScene.scene());
 			break;
 		case SCENE_HIGHSCORE:
 			CCDirector.sharedDirector().replaceScene(HighScoreScene.scene());
@@ -72,9 +73,9 @@ public class SceneManager {
 		} else if (scene instanceof GameScene) {
 			replaceTo(SCENE_STAGES);
 			return true;
-			// } else if (scene instanceof GameOverScene) {
-			// replaceTo(SCENE_STAGES);
-			// return true;
+		} else if (scene instanceof GameOverScene) {
+			replaceTo(SCENE_STAGES);
+			return true;
 		} else if (scene instanceof HighScoreScene) {
 			replaceTo(SCENE_MAINMENU);
 			return true;

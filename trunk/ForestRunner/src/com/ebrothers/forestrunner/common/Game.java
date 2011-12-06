@@ -21,4 +21,7 @@ public final class Game {
 
 	public static GameDelegate delegate;
 
+	public static long score;
+	public static boolean isWin;
+
 }

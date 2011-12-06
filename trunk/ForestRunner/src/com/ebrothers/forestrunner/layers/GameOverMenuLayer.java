@@ -7,49 +7,44 @@ import org.cocos2d.nodes.CCSprite;
 import org.cocos2d.types.CGPoint;
 
 import com.ebrothers.forestrunner.common.Game;
+import com.ebrothers.forestrunner.manager.SceneManager;
 
 public class GameOverMenuLayer extends BasicLayer {
-	
-	
-	
-	public GameOverMenuLayer(){
+
+	public GameOverMenuLayer() {
 		super();
-		
-		boolean overFlag = true;
-		
+
 		// 游戏菜单
 		CCSprite spriteAgain = getNode("button_again01.png", 0, 0);
 		CCSprite spriteAgainSelect = getNode("button_again02.png", 0, 0);
-		CCMenuItemSprite cmsStart = CCMenuItemSprite.item(spriteAgain,
+		CCMenuItemSprite cmsAgain = CCMenuItemSprite.item(spriteAgain,
 				spriteAgainSelect, this, "againGame");
-		cmsStart.setScaleX(Game.scale_ratio_x);
-		cmsStart.setScaleY(Game.scale_ratio_y);
-		cmsStart.setAnchorPoint(1, 1);
-
-		CCSprite spriteHigh = getNode("button_next01.png", 0, 0);
-		CCSprite spriteHighSelect = getNode("button_next02.png", 0, 0);
-		CCMenuItemSprite cmsHigh = CCMenuItemSprite.item(spriteHigh,
-				spriteHighSelect, this, "nextStage");
-		cmsHigh.setScaleX(Game.scale_ratio_x);
-		cmsHigh.setScaleY(Game.scale_ratio_y);
-		cmsHigh.setAnchorPoint(1, 1);
+		cmsAgain.setScaleX(Game.scale_ratio_x);
+		cmsAgain.setScaleY(Game.scale_ratio_y);
+		cmsAgain.setAnchorPoint(1, 1);
 
 		CCSprite spriteMore = getNode("button_more01.png", 0, 0);
 		CCSprite spriteMoreSelect = getNode("button_more02.png", 0, 0);
 		CCMenuItemSprite cmsMore = CCMenuItemSprite.item(spriteMore,
 				spriteMoreSelect, this, "more");
-
 		cmsMore.setScaleX(Game.scale_ratio_x);
 		cmsMore.setScaleY(Game.scale_ratio_y);
 		cmsMore.setAnchorPoint(1, 1);
-		
+
 		CCMenu cmMenu = null;
-		if(overFlag){
-			cmMenu = CCMenu.menu(cmsStart, cmsHigh, cmsMore);
-		}else{
-			cmMenu = CCMenu.menu(cmsStart, cmsHigh, cmsMore);
+		if (Game.isWin) {
+			CCSprite spriteHigh = getNode("button_next01.png", 0, 0);
+			CCSprite spriteHighSelect = getNode("button_next02.png", 0, 0);
+			CCMenuItemSprite cmsNext = CCMenuItemSprite.item(spriteHigh,
+					spriteHighSelect, this, "nextStage");
+			cmsNext.setScaleX(Game.scale_ratio_x);
+			cmsNext.setScaleY(Game.scale_ratio_y);
+			cmsNext.setAnchorPoint(1, 1);
+			cmMenu = CCMenu.menu(cmsAgain, cmsNext, cmsMore);
+		} else {
+			cmMenu = CCMenu.menu(cmsAgain, cmsMore);
 		}
-		
+
 		cmMenu.setAnchorPoint(1, 1);
 		cmMenu.alignItemsVertically();
 		cmMenu.alignItemsVertically(10f);
@@ -61,24 +56,23 @@ public class GameOverMenuLayer extends BasicLayer {
 			offsetY = point.y;
 			break;
 		}
-		cmMenu.setPosition((width * 9.3f / 10)-Math.abs(offsetX), (height * 4f / 8)-Math.abs(offsetY));
-		
+		cmMenu.setPosition((width * 9.3f / 10) - Math.abs(offsetX),
+				(height * 4f / 8) - Math.abs(offsetY));
+
 		addChild(cmMenu, 5);
-		
-		
-		
+
 	}
-	
-	
-	public void againGame(Object o){
-		
+
+	public void againGame(Object o) {
+		SceneManager.getInstance().replaceTo(SceneManager.SCENE_GAME);
 	}
-	
-	public void nextStage(Object o){
-		
+
+	public void nextStage(Object o) {
+		Game.current_level++;
+		SceneManager.getInstance().replaceTo(SceneManager.SCENE_GAME);
 	}
-	
-	public void more(Object o){
+
+	public void more(Object o) {
 		moreGame();
 	}
 

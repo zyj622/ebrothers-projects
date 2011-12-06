@@ -5,38 +5,39 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
 public class LocalDataManager {
-	
-	//用户配置数据
-	public static String SOUND = "sound";
-	
+
+	// 用户配置数据
+	public static final String SOUND = "sound";
+	public static final String PASSED = "passed";
+
 	private static LocalDataManager instance;
 
 	private SharedPreferences settings = null;
-	
+
 	public static LocalDataManager getInstance() {
 		if (instance == null) {
 			instance = new LocalDataManager();
 		}
-		
 		return instance;
 	}
-	
+
 	/**
 	 * 初始化设置
+	 * 
 	 * @param context
 	 */
 	public void initialize(Context context) {
 		settings = PreferenceManager.getDefaultSharedPreferences(context);
 	}
-	
+
 	/**
 	 * 写操作,写完并commit
+	 * 
 	 * @param name
 	 * @param obj
 	 */
-	public void writeSetting(String name,Object obj) {
+	public void writeSetting(String name, Object obj) {
 		SharedPreferences.Editor editor = settings.edit();
-		
 		if (obj instanceof Boolean) {
 			editor.putBoolean(name, (Boolean) obj);
 		} else if (obj instanceof Integer) {
@@ -50,28 +51,28 @@ public class LocalDataManager {
 		}
 		editor.commit();
 	}
-	
+
 	/**
 	 * 清除掉已经有得设置
+	 * 
 	 * @param name
 	 */
 	public void deleteSetting(String name) {
 		SharedPreferences.Editor editor = settings.edit();
-		
 		editor.remove(name);
-		
 		editor.commit();
 	}
-	
+
 	/**
 	 * 读配置操作
+	 * 
 	 * @param name
 	 * @param res
 	 * @return
 	 */
-	public Object readSetting(String name,Object res) {
+	public Object readSetting(String name, Object res) {
 		if (res instanceof Boolean) {
-			res = settings.getBoolean(name,false);
+			res = settings.getBoolean(name, false);
 		} else if (res instanceof Integer) {
 			res = settings.getInt(name, 0);
 		} else if (res instanceof Float) {
@@ -80,7 +81,7 @@ public class LocalDataManager {
 			res = settings.getLong(name, 0);
 		} else if (res instanceof String) {
 			res = settings.getString(name, "");
-		} 
+		}
 		return res;
 	}
 }
