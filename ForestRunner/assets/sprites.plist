@@ -925,7 +925,7 @@
                 <key>sourceColorRect</key>
                 <string>{{0,0},{48,64}}</string>
                 <key>sourceSize</key>
-                <string>{64,64}</string>
+                <string>{48,64}</string>
             </dict>
             <key>man32.png</key>
             <dict>
@@ -938,7 +938,7 @@
                 <key>sourceColorRect</key>
                 <string>{{0,0},{72,112}}</string>
                 <key>sourceSize</key>
-                <string>{128,128}</string>
+                <string>{72,112}</string>
             </dict>
             <key>man33.png</key>
             <dict>
@@ -951,7 +951,7 @@
                 <key>sourceColorRect</key>
                 <string>{{8,0},{66,92}}</string>
                 <key>sourceSize</key>
-                <string>{128,128}</string>
+                <string>{66,92}</string>
             </dict>
             <key>man34.png</key>
             <dict>
@@ -964,7 +964,7 @@
                 <key>sourceColorRect</key>
                 <string>{{3,0},{66,92}}</string>
                 <key>sourceSize</key>
-                <string>{128,128}</string>
+                <string>{66,92}</string>
             </dict>
             <key>man35.png</key>
             <dict>
@@ -977,7 +977,7 @@
                 <key>sourceColorRect</key>
                 <string>{{0,0},{66,106}}</string>
                 <key>sourceSize</key>
-                <string>{128,128}</string>
+                <string>{66,106}</string>
             </dict>
             <key>man36.png</key>
             <dict>
@@ -990,7 +990,7 @@
                 <key>sourceColorRect</key>
                 <string>{{16,0},{66,82}}</string>
                 <key>sourceSize</key>
-                <string>{128,128}</string>
+                <string>{66,82}</string>
             </dict>
             <key>man41.png</key>
             <dict>

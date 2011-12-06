@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import org.cocos2d.nodes.CCSpriteFrame;
 import org.cocos2d.nodes.CCSpriteFrameCache;
 
+import com.ebrothers.forestrunner.common.Game;
+
 public class Fire extends GameSprite {
 
 	private GameSprite burnSprite;
@@ -54,6 +56,7 @@ public class Fire extends GameSprite {
 	}
 
 	public void burnDone() {
-		burnSprite.setVisible(false);
+		removeChild(burnSprite, true);
+		Game.delegate.loseGame();
 	}
 }

@@ -12,7 +12,7 @@ import org.cocos2d.nodes.CCSprite;
 import org.cocos2d.nodes.CCSpriteFrame;
 import org.cocos2d.nodes.CCSpriteFrameCache;
 
-import com.ebrothers.forestrunner.common.Globals;
+import com.ebrothers.forestrunner.common.Game;
 
 public class GameSprite extends CCSprite {
 	public static GameSprite sprite() {
@@ -35,7 +35,7 @@ public class GameSprite extends CCSprite {
 	}
 
 	private void initSprite() {
-		super.setScale(Globals.scale_ratio);
+		super.setScale(Game.scale_ratio);
 		// CCTexture2D texture = getTexture();
 		// if (texture != null) {
 		// texture.setAliasTexParameters();
@@ -93,10 +93,11 @@ public class GameSprite extends CCSprite {
 	}
 
 	public float getBoundingWidth() {
-		return getTextureRect().size.width * Globals.scale_ratio;
+		return getTextureRect().size.width * Game.scale_ratio;
 	}
 
 	public float getBoundingHeight() {
-		return getTextureRect().size.height * Globals.scale_ratio;
+		return getTextureRect().size.height * Game.scale_ratio;
 	}
+
 }

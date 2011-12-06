@@ -26,7 +26,7 @@ import org.cocos2d.types.CGSize;
 
 import android.view.MotionEvent;
 
-import com.ebrothers.forestrunner.common.Globals;
+import com.ebrothers.forestrunner.common.Game;
 import com.ebrothers.forestrunner.common.Logger;
 import com.ebrothers.forestrunner.data.LevelData;
 import com.ebrothers.forestrunner.data.LevelDataParser;
@@ -34,7 +34,8 @@ import com.ebrothers.forestrunner.sprites.Background;
 import com.ebrothers.forestrunner.sprites.GameSprite;
 import com.ebrothers.forestrunner.sprites.Runner;
 
-public class GameLayer extends CCLayer implements UpdateCallback {
+public class GameLayer extends CCLayer implements UpdateCallback, GameDelegate {
+
 	private static final String TAG = "GameLayer";
 	private float totalWidth = 0;
 	private Runner runner;
@@ -58,13 +59,21 @@ public class GameLayer extends CCLayer implements UpdateCallback {
 	private int co_index = 0;
 	private CGRect runnerRect;
 	private CGRect objectRect;
+	private int lifeAmount = 5;
+	private CGPoint[] signs;
+	private int sign_index = 0;
+	/**
+	 * When runner over the go sign, will store states. 0: lbp_index 1:
+	 * rbp_index 2: co_index;
+	 */
+	private int[] states_bak;
 
 	public GameLayer(String level) {
 		super();
 		Logger.d(TAG, "GameLayer init...");
 		setIsTouchEnabled(true);
 
-		root = CCSpriteSheet.spriteSheet("sprites.png", 250);
+		root = CCSpriteSheet.spriteSheet("sprites.png", 350);
 		addChild(root);
 
 		// add background
@@ -103,23 +112,22 @@ public class GameLayer extends CCLayer implements UpdateCallback {
 				}
 			}
 		}
-
 		Collections.sort(collisions, new Comparator<GameSprite>() {
 			public int compare(GameSprite object1, GameSprite object2) {
 				return Float.compare(object1.getPosition().x,
 						object2.getPosition().x);
-			};
+			}
 		});
-
 		collisionObjects = collisions
 				.toArray(new GameSprite[collisions.size()]);
-
-		if (Logger.LOGD) {
-			for (int i = 0; i < collisionObjects.length; i++) {
-				Logger.d(TAG, "GameLayer. [" + i + "]=" + collisionObjects[i]
-						+ ", x=" + collisionObjects[i].getPosition().x);
+		// get all signs: stop and start sign
+		ArrayList<CGPoint> points = builder.getSignPoints();
+		Collections.sort(points, new Comparator<CGPoint>() {
+			public int compare(CGPoint object1, CGPoint object2) {
+				return Float.compare(object1.x, object2.x);
 			}
-		}
+		});
+		signs = points.toArray(new CGPoint[points.size()]);
 
 		// init runner
 		runner = new Runner();
@@ -131,7 +139,7 @@ public class GameLayer extends CCLayer implements UpdateCallback {
 		// add stage title
 		CGSize winSize = CCDirector.sharedDirector().winSize();
 		GameSprite title = GameSprite.sprite("gameover_stage"
-				+ (Globals.current_level + 1) + ".png");
+				+ (Game.current_level + 1) + ".png");
 		title.setAnchorPoint(0.5f, 1);
 		title.setPosition(winSize.width / 2f, winSize.height);
 		root.addChild(title);
@@ -173,7 +181,7 @@ public class GameLayer extends CCLayer implements UpdateCallback {
 		pauseToggle.setAnchorPoint(0, 0);
 		pauseToggle.setPosition(0, 0);
 		CCMenu menu = CCMenu.menu(pauseToggle);
-		menu.setScale(Globals.scale_ratio);
+		menu.setScale(Game.scale_ratio);
 		menu.setAnchorPoint(0, 0);
 		menu.setPosition(0, 0);
 		addChild(menu);
@@ -188,13 +196,14 @@ public class GameLayer extends CCLayer implements UpdateCallback {
 
 		runnerRect = CGRect.zero();
 		objectRect = CGRect.zero();
+		states_bak = new int[3];
 	}
 
 	@Override
 	public boolean ccTouchesBegan(MotionEvent event) {
 		switch (event.getAction()) {
 		case MotionEvent.ACTION_DOWN:
-			float currX = -ground.getPosition().x + runnerRx2Screen;
+			float currX = getRunnerRx();
 			float futureX = currX + Runner.JUMP_DURING_LONG * X_SPEED;
 			float futureY = getFutureY(futureX);
 			if (futureY == 0) {
@@ -223,6 +232,113 @@ public class GameLayer extends CCLayer implements UpdateCallback {
 		unschedule(this);
 	}
 
+	@Override
+	public void resumeGame() {
+		pauseToggle.setSelectedIndex(0);
+		runner.resumeSchedulerAndActions();
+		restartGround();
+		resumeSchedulerAndActions();
+		setIsTouchEnabled(true);
+	}
+
+	@Override
+	public void pauseGame() {
+		pauseToggle.setSelectedIndex(1);
+		runner.pauseSchedulerAndActions();
+		stopGround();
+		pauseSchedulerAndActions();
+		setIsTouchEnabled(false);
+	}
+
+	@Override
+	public void winGame() {
+		pauseToggle.setIsEnabled(false);
+		pauseGame();
+	}
+
+	@Override
+	public void loseGame() {
+		Logger.d(TAG, "loseGame. ");
+		lifeAmount--;
+		if (lifeAmount == 0) {
+			// game over
+		} else {
+			life.setString("x" + (lifeAmount - 1));
+			restartGame();
+		}
+	}
+
+	@Override
+	public void update(float d) {
+		float runnerRx = getRunnerRx();
+		float runnerLx = getRunnerLx();
+		float runnerRy = getRunnerRy(runnerRx);
+		float runnerLy = getRunnerLy(runnerLx);
+		float currY = runner.getPosition().y - Runner.y_offset;
+		if (runnerRy != currY && !runner.isInAction()) {
+			if (runnerLy == 0 || currY == 0) {
+				// fall in gap
+				runner.fallToGap(this, "loseGame");
+				stopGround();
+				return;
+			} else if (runnerLy < currY) {
+				runner.fallToGround(runnerRy);
+			}
+			if (runnerRy > currY) {
+				Logger.d(TAG, "update. runnerRy=" + runnerRy + ", currY="
+						+ currY);
+				// knock down
+				runner.knockDown();
+				ground.stopAllActions();
+				ground.runAction(CCSequence.actions(
+						CCMoveBy.action(0.6f, CGPoint.ccp(150, 0)),
+						CCCallFunc.action(this, "loseGame")));
+				return;
+			}
+		}
+
+		GameSprite[] objects = collisionObjects;
+		if (co_index >= objects.length) {
+			return;
+		}
+
+		// detect collision
+		while (!objects[co_index].getVisible()) {
+			co_index++;
+		}
+		GameSprite object = objects[co_index];
+		CGPoint position = object.getPosition();
+		runnerRect.set(runnerLx, currY, runner.getBoundingWidth(),
+				runner.getBoundingHeight());
+		objectRect.set(position.x - object.getBoundingWidth() / 2f, position.y,
+				object.getBoundingWidth(), object.getBoundingHeight());
+
+		if (CGRect.intersects(runnerRect, objectRect)) {
+			if (object.isFatal()) {
+				stopGround();
+			}
+			Logger.d(TAG, "collistion. runnerX=" + runnerRect.origin.x
+					+ ", objectX=" + objectRect.origin.x + ", object=" + object);
+			runner.onStartContact(object);
+			object.onStartContact(runner);
+			co_index++;
+		} else if (runnerRx > position.x) {
+			co_index++;
+		}
+
+		if (sign_index >= signs.length) {
+			return;
+		}
+
+		if (runnerLx >= signs[sign_index].x) {
+			// save states after over signs
+			states_bak[0] = lbp_index;
+			states_bak[1] = rbp_index;
+			states_bak[2] = co_index;
+			sign_index++;
+		}
+	}
+
 	public void onPauseOrResume(Object object) {
 		CCMenuItemToggle toggle = (CCMenuItemToggle) object;
 		int index = toggle.selectedIndex();
@@ -235,31 +351,13 @@ public class GameLayer extends CCLayer implements UpdateCallback {
 		}
 	}
 
-	public void resumeGame() {
-		pauseToggle.setSelectedIndex(0);
-		runner.resumeSchedulerAndActions();
-		ground.resumeSchedulerAndActions();
-		background.resumeSchedulerAndActions();
-		resumeSchedulerAndActions();
-		setIsTouchEnabled(true);
-	}
-
-	public void pauseGame() {
-		pauseToggle.setSelectedIndex(1);
-		runner.pauseSchedulerAndActions();
-		ground.pauseSchedulerAndActions();
-		background.pauseSchedulerAndActions();
-		pauseSchedulerAndActions();
-		setIsTouchEnabled(false);
-	}
-
 	public float getFutureY(float futureX) {
 		for (int i = 0; i < _bp_x.length; i++) {
 			if (futureX < _bp_x[i]) {
 				return _bp_y[i];
 			}
 		}
-		return Globals.groundM_y;
+		return Game.groundM_y;
 	}
 
 	public float getRunnerRy(float runnerX) {
@@ -282,75 +380,54 @@ public class GameLayer extends CCLayer implements UpdateCallback {
 		}
 	}
 
-	@Override
-	public void update(float d) {
-		float runnerRx = -ground.getPosition().x + runnerRx2Screen;
-		float runnerLx = -ground.getPosition().x + runnerLx2Screen;
-		float currY = runner.getPosition().y - Runner.y_offset;
-		float runnerRy = getRunnerRy(runnerRx);
-		float runnerLy = getRunnerLy(runnerLx);
-		if (runnerRy != currY && !runner.isInAction()) {
-			if (runnerLy == 0 || currY == 0) {
-				// fall in gap
-				runner.fallToGap(this, "loseGame");
-				background.pauseSchedulerAndActions();
-				ground.pauseSchedulerAndActions();
-			} else if (runnerLy < currY) {
-				runner.fallToGround(runnerRy);
-			}
-			if (runnerRy > currY) {
-				// knock down
-				runner.knockDown();
-				ground.stopAllActions();
-				ground.runAction(CCSequence.actions(
-						CCMoveBy.action(0.6f, CGPoint.ccp(150, 0)),
-						CCCallFunc.action(this, "loseGame")));
-			}
-		}
+	private float getRunnerLx() {
+		return -ground.getPosition().x + runnerLx2Screen;
+	}
 
-		GameSprite[] objects = collisionObjects;
-		if (co_index >= objects.length) {
-			return;
-		}
-
-		// detect collision
-		GameSprite object = objects[co_index];
-		CGPoint position = object.getPosition();
-		runnerRect.set(runnerLx, currY, runner.getBoundingWidth(),
-				runner.getBoundingHeight());
-		objectRect.set(position.x - object.getBoundingWidth() / 2f, position.y,
-				object.getBoundingWidth(), object.getBoundingHeight());
-
-		if (CGRect.intersects(runnerRect, objectRect)) {
-			if (object.isFatal()) {
-				background.pauseSchedulerAndActions();
-				ground.pauseSchedulerAndActions();
-			}
-			runner.onStartContact(object);
-			object.onStartContact(runner);
-			co_index++;
-		} else if (runnerRx > position.x) {
-			co_index++;
-		}
+	private float getRunnerRx() {
+		return -ground.getPosition().x + runnerRx2Screen;
 	}
 
 	public void jumpToGapDone() {
 		runner.fallToGap(this, "loseGame");
+		stopGround();
+	}
+
+	private void stopGround() {
 		background.pauseSchedulerAndActions();
-		ground.pauseSchedulerAndActions();
+		ground.stopAllActions();
+	}
+
+	private void restartGround() {
+		background.resumeSchedulerAndActions();
+		ground.runAction(moveAction);
 	}
 
 	public void moveDone() {
+
 	}
 
-	public void winGame() {
-		pauseToggle.setIsEnabled(false);
-		pauseGame();
+	private void restartGame() {
+		resetStates();
+		CGPoint restartPoint = signs[sign_index];
+		ground.setPosition(-restartPoint.x + runnerRx2Screen, 0);
+		runner.restart(restartPoint);
+		restartGround();
 	}
 
-	public void loseGame() {
-		pauseToggle.setIsEnabled(false);
-		pauseGame();
+	private void resetStates() {
+		// reset sign_index
+		if (sign_index > 0) {
+			sign_index--;
+		}
+		// reset lbp_index
+		lbp_index = states_bak[0];
+		// reset rbp_index
+		rbp_index = states_bak[1];
+		// reset co_index
+		co_index = states_bak[2];
+		Logger.d(TAG, "resetStates. sign_index=" + sign_index + ", lbp_index="
+				+ lbp_index + ", rbp_index=" + rbp_index + ", co_index="
+				+ co_index);
 	}
-
 }

@@ -10,7 +10,7 @@ import org.cocos2d.types.CGPoint;
 import android.content.Intent;
 import android.util.Log;
 
-import com.ebrothers.forestrunner.common.Globals;
+import com.ebrothers.forestrunner.common.Game;
 import com.ebrothers.forestrunner.manager.LocalDataManager;
 import com.ebrothers.forestrunner.manager.SceneManager;
 import com.ebrothers.forestrunner.manager.SoundManager;
@@ -39,16 +39,16 @@ public class MainGameMenuLayer extends BasicLayer {
 		CCSprite spritePlaySelect = getNode("button_play02.png", 0, 0);
 		CCMenuItemSprite cmsStart = CCMenuItemSprite.item(spritePlay,
 				spritePlaySelect, this, "startGame");
-		cmsStart.setScaleX(Globals.scale_ratio_x);
-		cmsStart.setScaleY(Globals.scale_ratio_y);
+		cmsStart.setScaleX(Game.scale_ratio_x);
+		cmsStart.setScaleY(Game.scale_ratio_y);
 		cmsStart.setAnchorPoint(1, 1);
 
 		CCSprite spriteHigh = getNode("button_high01.png", 0, 0);
 		CCSprite spriteHighSelect = getNode("button_high02.png", 0, 0);
 		CCMenuItemSprite cmsHigh = CCMenuItemSprite.item(spriteHigh,
 				spriteHighSelect, this, "startHigh");
-		cmsHigh.setScaleX(Globals.scale_ratio_x);
-		cmsHigh.setScaleY(Globals.scale_ratio_y);
+		cmsHigh.setScaleX(Game.scale_ratio_x);
+		cmsHigh.setScaleY(Game.scale_ratio_y);
 		cmsHigh.setAnchorPoint(1, 1);
 
 		CCSprite spriteMore = getNode("button_more01.png", 0, 0);
@@ -56,8 +56,8 @@ public class MainGameMenuLayer extends BasicLayer {
 		CCMenuItemSprite cmsMore = CCMenuItemSprite.item(spriteMore,
 				spriteMoreSelect, this, "more");
 
-		cmsMore.setScaleX(Globals.scale_ratio_x);
-		cmsMore.setScaleY(Globals.scale_ratio_y);
+		cmsMore.setScaleX(Game.scale_ratio_x);
+		cmsMore.setScaleY(Game.scale_ratio_y);
 		cmsMore.setAnchorPoint(1, 1);
 
 		CCMenu cmMenu = CCMenu.menu(cmsStart, cmsHigh, cmsMore);
@@ -79,7 +79,7 @@ public class MainGameMenuLayer extends BasicLayer {
 		CCSprite spriteSoundClose = getNode("sound01.png", 0, 0);
 		CCMenuItemSprite cmsSoundClose = CCMenuItemSprite.item(
 				spriteSoundClose, spriteSoundClose, this, "openSound");
-		cmsSoundClose.setScale(Globals.scale_ratio_y);
+		cmsSoundClose.setScale(Game.scale_ratio_y);
 		cmsSoundClose.setAnchorPoint(1, 0);
 		cmMenuClose = CCMenu.menu(cmsSoundClose);
 		cmMenuClose.alignItemsVertically();
@@ -90,7 +90,7 @@ public class MainGameMenuLayer extends BasicLayer {
 		CCSprite spriteSoundOpen = getNode("sound02.png", 0, 0);
 		CCMenuItemSprite cmsSoundOpen = CCMenuItemSprite.item(spriteSoundOpen,
 				spriteSoundOpen, this, "closeSound");
-		cmsSoundOpen.setScale(Globals.scale_ratio_y);
+		cmsSoundOpen.setScale(Game.scale_ratio_y);
 		cmsSoundOpen.setAnchorPoint(1, 0);
 		cmMenuOpen = CCMenu.menu(cmsSoundOpen);
 		cmMenuOpen.alignItemsVertically();
@@ -113,7 +113,7 @@ public class MainGameMenuLayer extends BasicLayer {
 		CCSprite spriteShare = getNode("share_r.PNG", 0, 0);
 		CCMenuItemSprite cmsShare = CCMenuItemSprite.item(spriteShare,
 				spriteShare, this, "shareCallback");
-		cmsShare.setScale(Globals.scale_ratio_y);
+		cmsShare.setScale(Game.scale_ratio_y);
 		cmsShare.setAnchorPoint(1, 1);
 		CCMenu cmMenuShare = CCMenu.menu(cmsShare);
 		cmMenuShare.setPosition(width, height);

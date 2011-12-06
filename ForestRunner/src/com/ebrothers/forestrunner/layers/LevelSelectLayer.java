@@ -6,7 +6,7 @@ import org.cocos2d.nodes.CCNode;
 import org.cocos2d.nodes.CCSprite;
 import org.cocos2d.types.CGPoint;
 
-import com.ebrothers.forestrunner.common.Globals;
+import com.ebrothers.forestrunner.common.Game;
 import com.ebrothers.forestrunner.common.Logger;
 import com.ebrothers.forestrunner.manager.SceneManager;
 import com.ebrothers.forestrunner.sprites.LevelSelector;
@@ -34,19 +34,19 @@ public class LevelSelectLayer extends BasicLayer {
 		CCMenuItemSprite menuItem01 = CCMenuItemSprite.item(spriteNormal01,
 				spritePressed01, this, "levelSelect");
 		menuItem01.setTag(1);
-		menuItem01.setScale(Globals.scale_ratio_y);
+		menuItem01.setScale(Game.scale_ratio_y);
 		menuItem01.setAnchorPoint(1, 0.5f);
 
 		CCMenuItemSprite menuItem02 = CCMenuItemSprite.item(spriteNormal02,
 				spritePressed02, this, "levelSelect");
 		menuItem02.setTag(2);
-		menuItem02.setScale(Globals.scale_ratio_y);
+		menuItem02.setScale(Game.scale_ratio_y);
 		menuItem02.setAnchorPoint(1, 0.5f);
 
 		CCMenuItemSprite menuItem03 = CCMenuItemSprite.item(spriteNormal03,
 				spritePressed03, this, "levelSelect");
 		menuItem03.setTag(3);
-		menuItem03.setScale(Globals.scale_ratio_y);
+		menuItem03.setScale(Game.scale_ratio_y);
 		menuItem03.setAnchorPoint(1, 0.5f);
 
 		CCMenu menu01 = CCMenu.menu(menuItem01, menuItem02, menuItem03);
@@ -77,19 +77,19 @@ public class LevelSelectLayer extends BasicLayer {
 		CCMenuItemSprite menuItem04 = CCMenuItemSprite.item(spriteNormal04,
 				spritePressed04, this, "levelSelect");
 		menuItem04.setTag(4);
-		menuItem04.setScale(Globals.scale_ratio_y);
+		menuItem04.setScale(Game.scale_ratio_y);
 		menuItem04.setAnchorPoint(1, 0.5f);
 
 		CCMenuItemSprite menuItem05 = CCMenuItemSprite.item(spriteNormal05,
 				spritePressed05, this, "levelSelect");
 		menuItem05.setTag(5);
-		menuItem05.setScale(Globals.scale_ratio_y);
+		menuItem05.setScale(Game.scale_ratio_y);
 		menuItem05.setAnchorPoint(1, 0.5f);
 
 		CCMenuItemSprite menuItem06 = CCMenuItemSprite.item(spriteNormal06,
 				spritePressed06, this, "levelSelect");
 		menuItem06.setTag(6);
-		menuItem06.setScale(Globals.scale_ratio_y);
+		menuItem06.setScale(Game.scale_ratio_y);
 		menuItem06.setAnchorPoint(1, 0.5f);
 
 		CCMenu menu02 = CCMenu.menu(menuItem04, menuItem05, menuItem06);
@@ -121,18 +121,18 @@ public class LevelSelectLayer extends BasicLayer {
 		CCMenuItemSprite menuItem07 = CCMenuItemSprite.item(spriteNormal07,
 				spritePressed07, this, "levelSelect");
 		menuItem07.setTag(7);
-		menuItem07.setScale(Globals.scale_ratio_y);
+		menuItem07.setScale(Game.scale_ratio_y);
 		menuItem07.setAnchorPoint(1, 0.5f);
 
 		CCMenuItemSprite menuItem08 = CCMenuItemSprite.item(spriteNormal08,
 				spritePressed08, this, "levelSelect");
 		menuItem08.setTag(8);
-		menuItem08.setScale(Globals.scale_ratio_y);
+		menuItem08.setScale(Game.scale_ratio_y);
 		menuItem08.setAnchorPoint(1, 0.5f);
 
 		CCMenuItemSprite menuItem09 = CCMenuItemSprite.item(spriteNormal09,
 				spritePressed09, this, "levelSelect");
-		menuItem09.setScale(Globals.scale_ratio_y);
+		menuItem09.setScale(Game.scale_ratio_y);
 		menuItem09.setAnchorPoint(1, 0.5f);
 		menuItem09.setVisible(false);
 
@@ -156,7 +156,7 @@ public class LevelSelectLayer extends BasicLayer {
 
 	public void levelSelect(Object o) {
 		CCMenuItemSprite cmis = (CCMenuItemSprite) o;
-		Globals.current_level = cmis.getTag() - 1;
+		Game.current_level = cmis.getTag() - 1;
 		SceneManager.getInstance().replaceTo(SceneManager.SCENE_GAME);
 		Logger.e("game", String.valueOf(cmis.getTag()));
 	}

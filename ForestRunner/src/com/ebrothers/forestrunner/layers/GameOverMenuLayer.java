@@ -6,7 +6,7 @@ import org.cocos2d.nodes.CCNode;
 import org.cocos2d.nodes.CCSprite;
 import org.cocos2d.types.CGPoint;
 
-import com.ebrothers.forestrunner.common.Globals;
+import com.ebrothers.forestrunner.common.Game;
 
 public class GameOverMenuLayer extends BasicLayer {
 	
@@ -22,16 +22,16 @@ public class GameOverMenuLayer extends BasicLayer {
 		CCSprite spriteAgainSelect = getNode("button_again02.png", 0, 0);
 		CCMenuItemSprite cmsStart = CCMenuItemSprite.item(spriteAgain,
 				spriteAgainSelect, this, "againGame");
-		cmsStart.setScaleX(Globals.scale_ratio_x);
-		cmsStart.setScaleY(Globals.scale_ratio_y);
+		cmsStart.setScaleX(Game.scale_ratio_x);
+		cmsStart.setScaleY(Game.scale_ratio_y);
 		cmsStart.setAnchorPoint(1, 1);
 
 		CCSprite spriteHigh = getNode("button_next01.png", 0, 0);
 		CCSprite spriteHighSelect = getNode("button_next02.png", 0, 0);
 		CCMenuItemSprite cmsHigh = CCMenuItemSprite.item(spriteHigh,
 				spriteHighSelect, this, "nextStage");
-		cmsHigh.setScaleX(Globals.scale_ratio_x);
-		cmsHigh.setScaleY(Globals.scale_ratio_y);
+		cmsHigh.setScaleX(Game.scale_ratio_x);
+		cmsHigh.setScaleY(Game.scale_ratio_y);
 		cmsHigh.setAnchorPoint(1, 1);
 
 		CCSprite spriteMore = getNode("button_more01.png", 0, 0);
@@ -39,8 +39,8 @@ public class GameOverMenuLayer extends BasicLayer {
 		CCMenuItemSprite cmsMore = CCMenuItemSprite.item(spriteMore,
 				spriteMoreSelect, this, "more");
 
-		cmsMore.setScaleX(Globals.scale_ratio_x);
-		cmsMore.setScaleY(Globals.scale_ratio_y);
+		cmsMore.setScaleX(Game.scale_ratio_x);
+		cmsMore.setScaleY(Game.scale_ratio_y);
 		cmsMore.setAnchorPoint(1, 1);
 		
 		CCMenu cmMenu = null;

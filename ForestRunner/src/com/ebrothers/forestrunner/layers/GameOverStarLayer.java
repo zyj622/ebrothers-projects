@@ -6,7 +6,7 @@ import org.cocos2d.nodes.CCSpriteFrameCache;
 import org.cocos2d.types.CGSize;
 
 import com.ebrothers.forestrunner.common.Constants;
-import com.ebrothers.forestrunner.common.Globals;
+import com.ebrothers.forestrunner.common.Game;
 
 public class GameOverStarLayer extends BasicLayer {
 
@@ -33,22 +33,22 @@ public class GameOverStarLayer extends BasicLayer {
 		CCSpriteFrameCache cache = CCSpriteFrameCache.sharedSpriteFrameCache();
 		CCSpriteFrame spriteFrame1 = cache.getSpriteFrame(star01);
 		CCSprite sprite1 = CCSprite.sprite(spriteFrame1);
-		sprite1.setScale(Globals.scale_ratio_x);
+		sprite1.setScale(Game.scale_ratio_x);
 		CGSize starCs = sprite1.getContentSize();
 		sprite1.setAnchorPoint(1, 1);
 		sprite1.setPosition(width * 9.3f / 10, height * 5.2f / 8);
 		addChild(sprite1);
 		CCSpriteFrame spriteFrame2 = cache.getSpriteFrame(star02);
 		CCSprite sprite2 = CCSprite.sprite(spriteFrame2);
-		sprite2.setScale(Globals.scale_ratio_x);
+		sprite2.setScale(Game.scale_ratio_x);
 		sprite2.setAnchorPoint(1, 1);
-		sprite2.setPosition((width * 9.3f / 10)-(starCs.width*Globals.scale_ratio_x), height * 5.2f / 8);
+		sprite2.setPosition((width * 9.3f / 10)-(starCs.width*Game.scale_ratio_x), height * 5.2f / 8);
 		addChild(sprite2);
 		CCSpriteFrame spriteFrame3 = cache.getSpriteFrame(star03);
 		CCSprite sprite3 = CCSprite.sprite(spriteFrame3);
-		sprite3.setScale(Globals.scale_ratio_x);
+		sprite3.setScale(Game.scale_ratio_x);
 		sprite3.setAnchorPoint(1, 1);
-		sprite3.setPosition((width * 9.3f / 10)-(starCs.width*Globals.scale_ratio_x)*2f, height * 5.2f / 8);
+		sprite3.setPosition((width * 9.3f / 10)-(starCs.width*Game.scale_ratio_x)*2f, height * 5.2f / 8);
 		addChild(sprite3);
 	}
 	
