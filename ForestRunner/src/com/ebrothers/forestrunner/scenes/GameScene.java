@@ -3,8 +3,8 @@ package com.ebrothers.forestrunner.scenes;
 import org.cocos2d.layers.CCScene;
 
 import com.ebrothers.forestrunner.common.Game;
+import com.ebrothers.forestrunner.common.Levels;
 import com.ebrothers.forestrunner.common.Logger;
-import com.ebrothers.forestrunner.data.Levels;
 import com.ebrothers.forestrunner.layers.GameLayer;
 
 public class GameScene extends CCScene {

@@ -3,7 +3,7 @@ package com.ebrothers.forestrunner.common;
 import com.ebrothers.forestrunner.layers.GameDelegate;
 
 public final class Game {
-
+	public static final int LIFE_AMOUNT = 5;
 	/**
 	 * Current level index, based 0.
 	 */
@@ -23,5 +23,4 @@ public final class Game {
 
 	public static long score;
 	public static boolean isWin;
-
 }

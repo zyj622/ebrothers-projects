@@ -7,6 +7,8 @@ import org.cocos2d.nodes.CCSpriteFrameCache;
 
 public class Trap extends GameSprite {
 
+	private boolean triggered = false;
+
 	public Trap() {
 		super("trap01.png");
 		setAnchorPoint(0.5f, 0);
@@ -15,11 +17,12 @@ public class Trap extends GameSprite {
 		for (int i = 0; i < 3; i++) {
 			frames.add(cache.getSpriteFrame(String.format("trap0%d.png", i + 1)));
 		}
-		addAnimation("trigger", frames);
+		addAnimation("trigger", frames, 0.1f);
 	}
 
 	public void trigger() {
-		playeLoopAnimation("trigger");
+		triggered = true;
+		playeAnimation("trigger");
 	}
 
 	@Override
@@ -30,6 +33,18 @@ public class Trap extends GameSprite {
 	@Override
 	public boolean isFatal() {
 		return true;
+	}
+
+	@Override
+	public void restore() {
+		stopAllActions();
+		setDisplayFrame(CCSpriteFrameCache.sharedSpriteFrameCache()
+				.getSpriteFrame("trap01.png"));
+		triggered = false;
+	}
+
+	public boolean isTriggered() {
+		return triggered;
 	}
 
 }

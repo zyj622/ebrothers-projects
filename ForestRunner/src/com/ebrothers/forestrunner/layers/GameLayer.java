@@ -33,8 +33,10 @@ import com.ebrothers.forestrunner.data.LevelDataParser;
 import com.ebrothers.forestrunner.manager.LocalDataManager;
 import com.ebrothers.forestrunner.manager.SceneManager;
 import com.ebrothers.forestrunner.sprites.Background;
+import com.ebrothers.forestrunner.sprites.Dinosaur;
 import com.ebrothers.forestrunner.sprites.GameSprite;
 import com.ebrothers.forestrunner.sprites.Runner;
+import com.ebrothers.forestrunner.sprites.Trap;
 
 public class GameLayer extends CCLayer implements UpdateCallback, GameDelegate {
 
@@ -61,7 +63,7 @@ public class GameLayer extends CCLayer implements UpdateCallback, GameDelegate {
 	private int co_index = 0;
 	private CGRect runnerRect;
 	private CGRect objectRect;
-	private int lifeAmount = 1;
+	private int remainLives = Game.LIFE_AMOUNT;
 	private CGPoint[] signs;
 	private int sign_index = 0;
 	/**
@@ -69,6 +71,7 @@ public class GameLayer extends CCLayer implements UpdateCallback, GameDelegate {
 	 * rbp_index 2: co_index;
 	 */
 	private int[] states_bak;
+	private final float runner2RScreen;
 
 	public GameLayer(String level) {
 		super();
@@ -84,6 +87,7 @@ public class GameLayer extends CCLayer implements UpdateCallback, GameDelegate {
 
 		// build ground
 		ground = new CCSprite();
+		// "level/leveltest.txt"
 		LevelData data = LevelDataParser.parse(level);
 		GameLevelBuilder builder = GameLevelBuilder.create();
 		totalWidth = builder.build(ground, data);
@@ -199,6 +203,9 @@ public class GameLayer extends CCLayer implements UpdateCallback, GameDelegate {
 		runnerRect = CGRect.zero();
 		objectRect = CGRect.zero();
 		states_bak = new int[3];
+
+		runner2RScreen = CCDirector.sharedDirector().winSize().width
+				* Game.scale_ratio - runnerRx2Screen;
 	}
 
 	@Override
@@ -274,13 +281,13 @@ public class GameLayer extends CCLayer implements UpdateCallback, GameDelegate {
 	@Override
 	public void loseGame() {
 		Logger.d(TAG, "loseGame. ");
-		lifeAmount--;
-		if (lifeAmount == 0) {
+		remainLives--;
+		if (remainLives == 0) {
 			// game over
 			Game.isWin = false;
 			SceneManager.getInstance().replaceTo(SceneManager.SCENE_GAMEOVER);
 		} else {
-			life.setString("x" + (lifeAmount - 1));
+			life.setString("x" + (remainLives - 1));
 			restartGame();
 		}
 	}
@@ -311,7 +318,7 @@ public class GameLayer extends CCLayer implements UpdateCallback, GameDelegate {
 						+ currY);
 				// knock down
 				runner.knockDown();
-				ground.stopAllActions();
+				stopGround();
 				ground.runAction(CCSequence.actions(
 						CCMoveBy.action(0.6f, CGPoint.ccp(150, 0)),
 						CCCallFunc.action(this, "loseGame")));
@@ -327,20 +334,37 @@ public class GameLayer extends CCLayer implements UpdateCallback, GameDelegate {
 		// detect collision
 		while (!objects[co_index].getVisible()) {
 			co_index++;
+			if (co_index >= objects.length) {
+				return;
+			}
 		}
 		GameSprite object = objects[co_index];
 		CGPoint position = object.getPosition();
 		runnerRect.set(runnerLx, currY, runner.getBoundingWidth(),
 				runner.getBoundingHeight());
-		objectRect.set(position.x - object.getBoundingWidth() / 2f, position.y,
-				object.getBoundingWidth(), object.getBoundingHeight());
+		float objectW = object.getBoundingWidth();
+		float objectLx = position.x - objectW / 2f;
+		objectRect.set(objectLx, position.y, objectW,
+				object.getBoundingHeight());
+
+		if (object instanceof Trap) {
+			Trap trap = (Trap) object;
+			if (!trap.isTriggered() && (objectLx - runnerRx) < 200) {
+				trap.trigger();
+			}
+		} else if (object instanceof Dinosaur) {
+			Dinosaur dinosaur = (Dinosaur) object;
+			if (!dinosaur.isRushed() && (objectLx - runnerRx) < runner2RScreen) {
+				dinosaur.rush();
+			}
+		}
 
 		if (CGRect.intersects(runnerRect, objectRect)) {
 			if (object.isFatal()) {
 				stopGround();
 			}
-			Logger.d(TAG, "collistion. runnerX=" + runnerRect.origin.x
-					+ ", objectX=" + objectRect.origin.x + ", object=" + object);
+			Logger.d(TAG, "collistion. runnerRect=" + runnerRect
+					+ ", objectRect=" + objectRect + ", object=" + object);
 			runner.onStartContact(object);
 			object.onStartContact(runner);
 			co_index++;
@@ -416,11 +440,13 @@ public class GameLayer extends CCLayer implements UpdateCallback, GameDelegate {
 	}
 
 	private void stopGround() {
+		pauseSchedulerAndActions();
 		background.pauseSchedulerAndActions();
 		ground.stopAllActions();
 	}
 
 	private void restartGround() {
+		resumeSchedulerAndActions();
 		background.resumeSchedulerAndActions();
 		ground.runAction(moveAction);
 	}
@@ -431,8 +457,14 @@ public class GameLayer extends CCLayer implements UpdateCallback, GameDelegate {
 
 	private void restartGame() {
 		resetStates();
+		// restore all collision objects
+		for (int i = 0; i < collisionObjects.length; i++) {
+			collisionObjects[i].restore();
+		}
 		CGPoint restartPoint = signs[sign_index];
+		// restore ground
 		ground.setPosition(-restartPoint.x + runnerRx2Screen, 0);
+		// restore runner
 		runner.restart(restartPoint);
 		restartGround();
 	}
