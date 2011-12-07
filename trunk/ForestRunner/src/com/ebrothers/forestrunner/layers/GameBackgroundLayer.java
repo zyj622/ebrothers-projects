@@ -1,8 +1,9 @@
-package com.ebrothers.forestrunner.sprites;
+package com.ebrothers.forestrunner.layers;
 
 import org.cocos2d.actions.instant.CCCallFunc;
 import org.cocos2d.actions.interval.CCMoveTo;
 import org.cocos2d.actions.interval.CCSequence;
+import org.cocos2d.layers.CCLayer;
 import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.nodes.CCSprite;
 import org.cocos2d.nodes.CCSpriteFrame;
@@ -10,15 +11,12 @@ import org.cocos2d.nodes.CCSpriteFrameCache;
 import org.cocos2d.types.CGPoint;
 import org.cocos2d.types.CGSize;
 
-public class Background extends CCSprite {
-
-	public static Background background() {
-		return new Background();
-	}
+public class GameBackgroundLayer extends CCLayer {
 
 	private CCSequence sequence;
 
-	public Background() {
+	public GameBackgroundLayer() {
+		super();
 		CCSpriteFrameCache cache = CCSpriteFrameCache.sharedSpriteFrameCache();
 		CCSpriteFrame spriteFrame = cache.getSpriteFrame("background01.jpg");
 
@@ -60,5 +58,13 @@ public class Background extends CCSprite {
 	public void onEnter() {
 		runAction(sequence);
 		super.onEnter();
+	}
+
+	public void pause() {
+		pauseSchedulerAndActions();
+	}
+
+	public void resume() {
+		resumeSchedulerAndActions();
 	}
 }

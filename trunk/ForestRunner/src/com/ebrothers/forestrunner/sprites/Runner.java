@@ -26,7 +26,7 @@ public class Runner extends GameSprite {
 	public Runner() {
 		super("man01.png");
 		setAnchorPoint(0, 1);
-		y_offset = getBoundingHeight() - 10;
+		y_offset = getBoundingHeight() - 5;
 		Logger.d(TAG, "Runner. y_offset=" + y_offset);
 		baseY = Game.groundM_y;
 		setPosition(100, baseY + y_offset);
@@ -95,7 +95,7 @@ public class Runner extends GameSprite {
 			stopAllActions();
 			playeDelayAnimation("jump", 0.2f, "fallToGround");
 			CGPoint to = CGPoint.ccp(getPosition().x, y + y_offset);
-			float jHeight = 150;
+			float jHeight = 130;
 			float during = JUMP_DURING_LONG;
 			if (y > baseY) {
 				jHeight = 90;
