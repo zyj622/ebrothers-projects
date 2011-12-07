@@ -1,10 +1,9 @@
-package com.ebrothers.forestrunner.data;
+package com.ebrothers.forestrunner.common;
 
 import java.io.IOException;
 
 import org.cocos2d.nodes.CCDirector;
 
-import com.ebrothers.forestrunner.common.Logger;
 
 public final class Levels {
 	private static final String LEVEL_DIR = "level";

@@ -16,8 +16,8 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.ebrothers.forestrunner.common.Game;
+import com.ebrothers.forestrunner.common.Levels;
 import com.ebrothers.forestrunner.common.Logger;
-import com.ebrothers.forestrunner.data.Levels;
 import com.ebrothers.forestrunner.manager.LocalDataManager;
 import com.ebrothers.forestrunner.manager.SceneManager;
 import com.ebrothers.forestrunner.scenes.GameScene;

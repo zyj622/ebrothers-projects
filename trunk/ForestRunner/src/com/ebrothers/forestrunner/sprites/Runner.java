@@ -11,22 +11,25 @@ import org.cocos2d.nodes.CCSpriteFrame;
 import org.cocos2d.nodes.CCSpriteFrameCache;
 import org.cocos2d.types.CGPoint;
 
-import android.R.bool;
-
 import com.ebrothers.forestrunner.common.Game;
+import com.ebrothers.forestrunner.common.Logger;
 
 public class Runner extends GameSprite {
+	private static final String TAG = "Runner";
 	public static final float JUMP_DURING_LONG = .7f;
 	public static final float JUMP_DURING_SHORT = .6f;
 	public static final float FALL_DURING = .2f;
 	public static float y_offset;
 	private boolean acting;
+	public float baseY;
 
 	public Runner() {
 		super("man01.png");
 		setAnchorPoint(0, 1);
 		y_offset = getBoundingHeight() - 10;
-		setPosition(100, Game.groundM_y + y_offset);
+		Logger.d(TAG, "Runner. y_offset=" + y_offset);
+		baseY = Game.groundM_y;
+		setPosition(100, baseY + y_offset);
 		CCSpriteFrameCache cache = CCSpriteFrameCache.sharedSpriteFrameCache();
 		ArrayList<CCSpriteFrame> frames = new ArrayList<CCSpriteFrame>();
 		for (int i = 0; i < 8; i++) {
@@ -59,7 +62,7 @@ public class Runner extends GameSprite {
 		for (int i = 0; i < 4; i++) {
 			frames.add(cache.getSpriteFrame(String.format("man4%d.png", i + 1)));
 		}
-		addAnimation("float", frames, 0.1f);
+		addAnimation("float", frames, 0.2f);
 	}
 
 	@Override
@@ -94,13 +97,14 @@ public class Runner extends GameSprite {
 			CGPoint to = CGPoint.ccp(getPosition().x, y + y_offset);
 			float jHeight = 150;
 			float during = JUMP_DURING_LONG;
-			if (y > (getPosition().y - y_offset)) {
+			if (y > baseY) {
 				jHeight = 90;
 				during = JUMP_DURING_SHORT;
 			}
 			runAction(CCSequence.actions(
 					CCJumpTo.action(during, to, jHeight, 1),
 					CCCallFunc.action(this, "actionDone")));
+			baseY = y;
 			acting = true;
 		}
 	}
@@ -119,6 +123,7 @@ public class Runner extends GameSprite {
 
 	public void fallToGap(Object target, String selector) {
 		if (!acting) {
+			Logger.d(TAG, "fallToGap. ");
 			stopAllActions();
 			playeAnimation("fallToGap");
 			CGPoint to = CGPoint.ccp(getPosition().x, 0);
@@ -136,6 +141,7 @@ public class Runner extends GameSprite {
 			runAction(CCSequence.actions(
 					CCJumpTo.action(FALL_DURING, to, 5, 1),
 					CCCallFunc.action(this, "actionDone")));
+			baseY = y;
 			acting = true;
 		}
 	}
@@ -150,9 +156,8 @@ public class Runner extends GameSprite {
 
 	public void knockDownDone() {
 		stopAllActions();
-		runAction(CCSequence.actions(
-				CCMoveBy.action(0.2f, CGPoint.ccp(0, -60)),
-				CCCallFunc.action(this, "loseGame")));
+		runAction(CCSequence
+				.actions(CCMoveBy.action(0.2f, CGPoint.ccp(0, -60))));
 	}
 
 	public void loseGame() {
@@ -174,11 +179,13 @@ public class Runner extends GameSprite {
 	}
 
 	public void restart(CGPoint restartPoint) {
+		Logger.d(TAG, "restart. restartPoint=" + restartPoint);
 		if (!getVisible()) {
 			setVisible(true);
 		}
-		setPosition(100, restartPoint.y + y_offset);
-		acting = false;
+		baseY = restartPoint.y;
+		setPosition(100, baseY + y_offset);
 		playeLoopAnimation("run");
+		acting = false;
 	}
 }

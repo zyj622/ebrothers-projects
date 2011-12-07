@@ -100,4 +100,8 @@ public class GameSprite extends CCSprite {
 		return getTextureRect().size.height * Game.scale_ratio;
 	}
 
+	public void restore() {
+		// do nothing
+	}
+
 }
