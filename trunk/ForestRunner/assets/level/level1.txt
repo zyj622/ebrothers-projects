@@ -43,8 +43,8 @@ Ground L 600
 Box 300
 Bridge
 Ground L 200
-Ground M 1000
+Ground M 1200
 Box 300
 Box 560
-Stopsign 800
+Stopsign 1000
 End

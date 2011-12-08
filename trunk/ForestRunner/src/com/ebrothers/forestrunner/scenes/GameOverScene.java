@@ -13,7 +13,7 @@ public class GameOverScene extends CCScene {
 		return new GameOverScene();
 	}
 
-	public GameOverScene() {
+	private GameOverScene() {
 		super();
 		long score = Game.score;
 		addChild(new GameOverLayer(score));

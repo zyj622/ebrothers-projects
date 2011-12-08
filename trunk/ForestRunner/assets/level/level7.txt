@@ -107,10 +107,10 @@ Box 100
 Gap 180
 Ground M 200
 Gap 180
-Ground M 1500
+Ground M 1600
 Box 430
 Box 630
 Box 850
 Dinosaur 1300
-Stopsign 1350
+Stopsign 1450
 End

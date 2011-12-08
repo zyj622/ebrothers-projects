@@ -12,10 +12,14 @@ import org.cocos2d.actions.interval.CCMoveTo;
 import org.cocos2d.actions.interval.CCSequence;
 import org.cocos2d.events.CCTouchDispatcher;
 import org.cocos2d.layers.CCLayer;
+import org.cocos2d.menus.CCMenu;
+import org.cocos2d.menus.CCMenuItemSprite;
 import org.cocos2d.menus.CCMenuItemToggle;
 import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.nodes.CCNode;
+import org.cocos2d.nodes.CCSprite;
 import org.cocos2d.nodes.CCSpriteSheet;
+import org.cocos2d.opengl.CCBitmapFontAtlas;
 import org.cocos2d.types.CGPoint;
 import org.cocos2d.types.CGRect;
 import org.cocos2d.types.CGSize;
@@ -28,27 +32,30 @@ import com.ebrothers.forestrunner.data.LevelData;
 import com.ebrothers.forestrunner.data.LevelDataParser;
 import com.ebrothers.forestrunner.manager.LocalDataManager;
 import com.ebrothers.forestrunner.manager.SceneManager;
+import com.ebrothers.forestrunner.sprites.Background;
 import com.ebrothers.forestrunner.sprites.Dinosaur;
 import com.ebrothers.forestrunner.sprites.GameSprite;
 import com.ebrothers.forestrunner.sprites.Runner;
 import com.ebrothers.forestrunner.sprites.Trap;
-import com.ebrothers.forestrunner.util.CCFollowInH;
 
-public class GameLayer extends CCLayer implements UpdateCallback {
+public class GameLayer extends CCLayer implements UpdateCallback, GameDelegate {
 
 	private static final String TAG = "GameLayer";
 	private float totalWidth = 0;
 	private Runner runner;
-	private CCSpriteSheet ground;
+	private CCSpriteSheet root;
+	private CCSprite ground;
+	private Background background;
 	private CCSequence moveAction;
 	// for break points
-	private final float runnerRx2Screen;
-	private final float runnerLx2Screen;
-	private static final float X_SPEED = 450f;// pixel/s
+	private static final float X_SPEED = 1000f;// 450f;// pixel/s
 	private float[] _bp_x;
 	private float[] _bp_y;
 	private int lbp_index = 0;
 	private int rbp_index = 0;
+	private CCMenuItemToggle pauseToggle;
+	private CCBitmapFontAtlas score;
+	private CCBitmapFontAtlas life;
 	// collision object
 	private GameSprite[] collisionObjects;
 	private int co_index = 0;
@@ -69,15 +76,21 @@ public class GameLayer extends CCLayer implements UpdateCallback {
 		Logger.d(TAG, "GameLayer init...");
 		setIsTouchEnabled(true);
 
-		ground = CCSpriteSheet.spriteSheet("sprites.png", 350);
-		addChild(ground);
+		root = CCSpriteSheet.spriteSheet("sprites.png", 500);
+		addChild(root);
+
+		// add background
+		background = Background.background();
+		root.addChild(background);
 
 		// build ground
+		ground = new CCSprite();
 		// "level/leveltest.txt"
-		LevelData data = LevelDataParser.parse("level/leveltest.txt");
+		LevelData data = LevelDataParser.parse(level);
 		GameLevelBuilder builder = GameLevelBuilder.create();
 		totalWidth = builder.build(ground, data);
 		Logger.d(TAG, "GameLayer. totalWidth=" + totalWidth);
+		root.addChild(ground);
 
 		ArrayList<CGPoint> breakPoints = builder.getBreakPoints();
 		int count = breakPoints.size();
@@ -122,10 +135,53 @@ public class GameLayer extends CCLayer implements UpdateCallback {
 
 		// init runner
 		runner = new Runner();
-		runnerRx2Screen = runner.getPosition().x + runner.getBoundingWidth()
-				- 30;
-		runnerLx2Screen = runner.getPosition().x;
-		addChild(runner);
+		root.addChild(runner);
+
+		// add stage title
+		CGSize winSize = CCDirector.sharedDirector().winSize();
+		GameSprite title = GameSprite.sprite("gameover_stage"
+				+ (Game.current_level + 1) + ".png");
+		title.setPosition(winSize.width / 2f, winSize.height - 40);
+		root.addChild(title);
+
+		// add score
+		GameSprite scoreIcon = GameSprite.sprite("score01.png");
+		scoreIcon.setPosition(40, winSize.height - 40);
+		root.addChild(scoreIcon);
+
+		score = CCBitmapFontAtlas.bitmapFontAtlas("+0", "font2.fnt");
+		score.setAnchorPoint(0, 0.5f);
+		score.setPosition(
+				scoreIcon.getPosition().x
+						+ scoreIcon.getBoundingBox().size.width / 2f + 5,
+				scoreIcon.getPosition().y);
+		addChild(score);
+
+		// add life counter
+		life = CCBitmapFontAtlas.bitmapFontAtlas("x4", "font2.fnt");
+		life.setPosition(winSize.width - 40, winSize.height - 40);
+		addChild(life);
+
+		GameSprite lifeIcon = GameSprite.sprite("life01.png");
+		lifeIcon.setPosition(life.getPosition().x
+				- life.getBoundingBox().size.width - 5, life.getPosition().y);
+		root.addChild(lifeIcon);
+
+		// pause/resume
+		GameSprite resumeSprite = GameSprite.sprite("pause02.png");
+		GameSprite pauseSprite = GameSprite.sprite("pause01.png");
+		CCMenuItemSprite resume = CCMenuItemSprite.item(resumeSprite,
+				resumeSprite);
+		CCMenuItemSprite pause = CCMenuItemSprite
+				.item(pauseSprite, pauseSprite);
+		pauseToggle = CCMenuItemToggle.item(this, "onPauseOrResume", resume,
+				pause);
+		pauseToggle.setPosition(25, 25);
+		CCMenu menu = CCMenu.menu(pauseToggle);
+		menu.setScale(Game.scale_ratio);
+		menu.setAnchorPoint(0, 0);
+		menu.setPosition(0, 0);
+		addChild(menu);
 
 		// create move action
 		float winWidth = CCDirector.sharedDirector().winSize().width;
@@ -140,7 +196,11 @@ public class GameLayer extends CCLayer implements UpdateCallback {
 		states_bak = new int[3];
 
 		runner2RScreen = CCDirector.sharedDirector().winSize().width
-				* Game.scale_ratio - runnerRx2Screen;
+				* Game.scale_ratio - getRunnerRX2Screen();
+	}
+
+	private float getRunnerRX2Screen() {
+		return runner.getPosition().x + runner.getBoundingWidth() - 30;
 	}
 
 	@Override
@@ -165,10 +225,8 @@ public class GameLayer extends CCLayer implements UpdateCallback {
 	@Override
 	public void onEnter() {
 		super.onEnter();
-		runner.runAction(CCMoveTo.action(totalWidth / X_SPEED,
-				CGPoint.ccp(totalWidth, Game.groundM_y + Runner.y_offset)));
-		runAction(CCFollowInH.action(runner, 100));
-		// schedule(this);
+		ground.runAction(moveAction);
+		schedule(this);
 	}
 
 	@Override
@@ -177,21 +235,30 @@ public class GameLayer extends CCLayer implements UpdateCallback {
 		unschedule(this);
 	}
 
+	@Override
 	public void resumeGame() {
+		pauseToggle.setSelectedIndex(0);
 		runner.resumeSchedulerAndActions();
+		restartGround();
 		resumeSchedulerAndActions();
 		setIsTouchEnabled(true);
 	}
 
+	@Override
 	public void pauseGame() {
+		pauseToggle.setSelectedIndex(1);
 		runner.pauseSchedulerAndActions();
+		stopGround();
 		pauseSchedulerAndActions();
 		setIsTouchEnabled(false);
 	}
 
+	@Override
 	public void winGame() {
+		pauseToggle.setIsEnabled(false);
 		pauseGame();
 		Game.isWin = true;
+		Game.score += (remainLives * 10000);
 		// save passed level
 		LocalDataManager ldm = LocalDataManager.getInstance();
 		if (Game.current_level > (Integer) ldm.readSetting(
@@ -200,12 +267,13 @@ public class GameLayer extends CCLayer implements UpdateCallback {
 		}
 		// save score of current level
 		String level = String.valueOf(Game.current_level);
-		if (Game.score > (Integer) ldm.readSetting(level, 0)) {
+		if (Game.score > (Long) ldm.readSetting(level, 0L)) {
 			ldm.writeSetting(level, Game.score);
 		}
 		SceneManager.getInstance().replaceTo(SceneManager.SCENE_GAMEOVER);
 	}
 
+	@Override
 	public void loseGame() {
 		Logger.d(TAG, "loseGame. ");
 		remainLives--;
@@ -214,9 +282,14 @@ public class GameLayer extends CCLayer implements UpdateCallback {
 			Game.isWin = false;
 			SceneManager.getInstance().replaceTo(SceneManager.SCENE_GAMEOVER);
 		} else {
-
+			life.setString("x" + (remainLives - 1));
 			restartGame();
 		}
+	}
+
+	@Override
+	public void updateScore() {
+		score.setString("+" + Game.score);
 	}
 
 	@Override
@@ -334,6 +407,9 @@ public class GameLayer extends CCLayer implements UpdateCallback {
 			return _bp_y[rbp_index];
 		} else {
 			rbp_index++;
+			if (rbp_index >= _bp_y.length) {
+				rbp_index--;
+			}
 			return _bp_y[rbp_index];
 		}
 	}
@@ -344,16 +420,19 @@ public class GameLayer extends CCLayer implements UpdateCallback {
 			return _bp_y[lbp_index];
 		} else {
 			lbp_index++;
+			if (lbp_index >= _bp_y.length) {
+				lbp_index--;
+			}
 			return _bp_y[lbp_index];
 		}
 	}
 
 	private float getRunnerLx() {
-		return -ground.getPosition().x + runnerLx2Screen;
+		return -ground.getPosition().x + runner.getPosition().x;
 	}
 
 	private float getRunnerRx() {
-		return -ground.getPosition().x + runnerRx2Screen;
+		return -ground.getPosition().x + getRunnerRX2Screen();
 	}
 
 	public void jumpToGapDone() {
@@ -363,15 +442,23 @@ public class GameLayer extends CCLayer implements UpdateCallback {
 
 	private void stopGround() {
 		pauseSchedulerAndActions();
+		background.pauseSchedulerAndActions();
+		ground.stopAllActions();
 	}
 
 	private void restartGround() {
 		resumeSchedulerAndActions();
+		background.resumeSchedulerAndActions();
+		ground.runAction(moveAction);
 	}
 
 	public void moveDone() {
-		// runner.runAction(CCMoveTo.action(2,
-		// CGPoint.ccp(800, Game.groundM_y + Runner.y_offset)));
+		float distance = CCDirector.sharedDirector().winSize().width
+				- Runner.RELATIVE_SCREEN_LEFT;
+		float during = distance / X_SPEED;
+		runner.runAction(CCSequence.actions(
+				CCMoveBy.action(during, CGPoint.ccp(distance, 0)),
+				CCCallFunc.action(this, "winGame")));
 	}
 
 	private void restartGame() {
@@ -382,7 +469,7 @@ public class GameLayer extends CCLayer implements UpdateCallback {
 		}
 		CGPoint restartPoint = signs[sign_index];
 		// restore ground
-		float groundX = -restartPoint.x + runnerRx2Screen;
+		float groundX = -restartPoint.x + getRunnerRX2Screen();
 		ground.setPosition(groundX, 0);
 		float winWidth = CCDirector.sharedDirector().winSize().width;
 		float moveDistance = totalWidth - winWidth;

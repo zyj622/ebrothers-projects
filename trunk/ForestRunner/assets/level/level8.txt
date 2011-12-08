@@ -95,10 +95,10 @@ Ground M 330
 Flower 150
 Ground L 460
 Fire 220
-Ground M 1300
+Ground M 1400
 Trap 200
 Box 420
 Flower 670
 Fire 920
-Stopsign 1150
+Stopsign 1250
 End

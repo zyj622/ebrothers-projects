@@ -15,14 +15,14 @@ public class GameOverLayer extends BasicLayer {
 		addChild(sprite02, 1);
 
 		CCSprite spriteName = getNode("gameover_stage"
-				+ (Game.current_level + 1) + ".png", width * 9.3f / 10,
-				height * 7.4f / 8, 1, 1);
+				+ (Game.current_level + 1) + ".png", winW * 9.3f / 10,
+				winH * 7.4f / 8, 1, 1);
 		addChild(spriteName, 2);
 
 		CCBitmapFontAtlas scoreAtlas = CCBitmapFontAtlas.bitmapFontAtlas(
 				"Score:" + score, "font1.fnt");
 		scoreAtlas.setAnchorPoint(1, 1);
-		scoreAtlas.setPosition(width * 9.3f / 10, height * 6.0f / 8);
+		scoreAtlas.setPosition(winW * 9.3f / 10, winH * 6.0f / 8);
 		addChild(scoreAtlas, 3);
 		scoreAtlas.setColor(ccColor3B.ccRED);
 

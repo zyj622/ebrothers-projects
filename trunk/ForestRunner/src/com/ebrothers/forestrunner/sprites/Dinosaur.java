@@ -15,6 +15,7 @@ public class Dinosaur extends GameSprite {
 	public static final int DINOSAUR_3 = 3;
 
 	private boolean rushed;
+	private CGPoint originalPosition;
 
 	public static Dinosaur dinosaur(int type) {
 		return new Dinosaur(type);
@@ -47,10 +48,12 @@ public class Dinosaur extends GameSprite {
 
 	@Override
 	public void restore() {
-		stopAllActions();
-		setDisplayFrame("rush", 0);
-		setPosition(getPosition().x + MOVE_DISTANCE, getPosition().y);
-		rushed = false;
+		if (originalPosition != null) {
+			stopAllActions();
+			setDisplayFrame("rush", 0);
+			setPosition(originalPosition);
+			rushed = false;
+		}
 	}
 
 	public int getType() {
@@ -62,9 +65,12 @@ public class Dinosaur extends GameSprite {
 	}
 
 	public void rush() {
-		rushed = true;
-		playeLoopAnimation("rush");
-		runAction(CCMoveBy.action(2, CGPoint.ccp(-MOVE_DISTANCE, 0)));
+		if (!rushed) {
+			rushed = true;
+			playeLoopAnimation("rush");
+			originalPosition = getPosition();
+			runAction(CCMoveBy.action(2, CGPoint.ccp(-MOVE_DISTANCE, 0)));
+		}
 	}
 
 }

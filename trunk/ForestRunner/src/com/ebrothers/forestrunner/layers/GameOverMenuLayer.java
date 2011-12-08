@@ -7,6 +7,7 @@ import org.cocos2d.nodes.CCSprite;
 import org.cocos2d.types.CGPoint;
 
 import com.ebrothers.forestrunner.common.Game;
+import com.ebrothers.forestrunner.common.Levels;
 import com.ebrothers.forestrunner.manager.SceneManager;
 
 public class GameOverMenuLayer extends BasicLayer {
@@ -32,7 +33,7 @@ public class GameOverMenuLayer extends BasicLayer {
 		cmsMore.setAnchorPoint(1, 1);
 
 		CCMenu cmMenu = null;
-		if (Game.isWin) {
+		if (Game.isWin && Game.current_level < Levels.count - 1) {
 			CCSprite spriteHigh = getNode("button_next01.png", 0, 0);
 			CCSprite spriteHighSelect = getNode("button_next02.png", 0, 0);
 			CCMenuItemSprite cmsNext = CCMenuItemSprite.item(spriteHigh,
@@ -56,8 +57,8 @@ public class GameOverMenuLayer extends BasicLayer {
 			offsetY = point.y;
 			break;
 		}
-		cmMenu.setPosition((width * 9.3f / 10) - Math.abs(offsetX),
-				(height * 4f / 8) - Math.abs(offsetY));
+		cmMenu.setPosition((winW * 9.3f / 10) - Math.abs(offsetX),
+				(winH * 4f / 8) - Math.abs(offsetY));
 
 		addChild(cmMenu, 5);
 
