@@ -16,6 +16,7 @@ import com.ebrothers.forestrunner.common.Logger;
 
 public class Runner extends GameSprite {
 	private static final String TAG = "Runner";
+	public static final int RELATIVE_SCREEN_LEFT = 100;
 	public static final float JUMP_DURING_LONG = .7f;
 	public static final float JUMP_DURING_SHORT = .6f;
 	public static final float FALL_DURING = .2f;
@@ -26,10 +27,10 @@ public class Runner extends GameSprite {
 	public Runner() {
 		super("man01.png");
 		setAnchorPoint(0, 1);
-		y_offset = getBoundingHeight() - 5;
+		y_offset = getBoundingHeight() - 10;
 		Logger.d(TAG, "Runner. y_offset=" + y_offset);
 		baseY = Game.groundM_y;
-		setPosition(100, baseY + y_offset);
+		setPosition(RELATIVE_SCREEN_LEFT, baseY + y_offset);
 		CCSpriteFrameCache cache = CCSpriteFrameCache.sharedSpriteFrameCache();
 		ArrayList<CCSpriteFrame> frames = new ArrayList<CCSpriteFrame>();
 		for (int i = 0; i < 8; i++) {
@@ -95,7 +96,7 @@ public class Runner extends GameSprite {
 			stopAllActions();
 			playeDelayAnimation("jump", 0.2f, "fallToGround");
 			CGPoint to = CGPoint.ccp(getPosition().x, y + y_offset);
-			float jHeight = 130;
+			float jHeight = 150;
 			float during = JUMP_DURING_LONG;
 			if (y > baseY) {
 				jHeight = 90;
@@ -184,7 +185,7 @@ public class Runner extends GameSprite {
 			setVisible(true);
 		}
 		baseY = restartPoint.y;
-		setPosition(100, baseY + y_offset);
+		setPosition(RELATIVE_SCREEN_LEFT, baseY + y_offset);
 		playeLoopAnimation("run");
 		acting = false;
 	}

@@ -56,8 +56,8 @@ Ground H 200
 Ground M 350
 Trap 250
 Bridge
-Ground M 900
+Ground M 1100
 Fire 200
 Trap 500
-Stopsign 750
+Stopsign 950
 End

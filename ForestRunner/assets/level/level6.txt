@@ -106,10 +106,10 @@ Stone
 Gap 150
 Stone
 Gap 160
-Ground M 1500
+Ground M 1600
 Fire 240
 Fire 480
 Fire 720
 Dinosaur 1200
-Stopsign 1350
+Stopsign 1450
 End

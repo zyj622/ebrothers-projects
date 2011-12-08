@@ -9,7 +9,6 @@ import org.cocos2d.nodes.CCSpriteFrameCache;
 import org.cocos2d.types.CGPoint;
 
 import com.ebrothers.forestrunner.common.Game;
-import com.ebrothers.forestrunner.common.Logger;
 
 public class Cloud extends CCSprite {
 
@@ -35,11 +34,4 @@ public class Cloud extends CCSprite {
 				.actions(CCPlace.action(CGPoint.ccp(start_x, height)), action));
 		runAction(actionForever);
 	}
-
-	@Override
-	public void onEnter() {
-		super.onEnter();
-		Logger.e("game", "cloud---------enter");
-	}
-
 }

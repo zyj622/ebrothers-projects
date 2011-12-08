@@ -14,20 +14,19 @@ import com.ebrothers.forestrunner.manager.SoundManager;
 
 public class BasicLayer extends CCLayer {
 	protected CCSpriteFrameCache cache;
-	
-	protected float width;
-	protected float height;
-	
-	public BasicLayer(){
+
+	protected float winW;
+	protected float winH;
+
+	public BasicLayer() {
 		super();
-		width = CCDirector.sharedDirector().winSize().width;
-		height = CCDirector.sharedDirector().winSize().height;
+		winW = CCDirector.sharedDirector().winSize().width;
+		winH = CCDirector.sharedDirector().winSize().height;
 		cache = CCSpriteFrameCache.sharedSpriteFrameCache();
-		
 	}
-	
-	
-	protected CCSprite getNode(String name, float x, float y,float x_anchor,float y_anchor) {
+
+	protected CCSprite getNode(String name, float x, float y, float x_anchor,
+			float y_anchor) {
 		CCSpriteFrame frame = cache.getSpriteFrame(name);
 		CCSprite sprite = CCSprite.sprite(frame);
 		sprite.setAnchorPoint(x_anchor, y_anchor);
@@ -36,19 +35,19 @@ public class BasicLayer extends CCLayer {
 		sprite.setPosition(x, y);
 		return sprite;
 	}
-	
-	
+
 	protected CCSprite getNode(String name, float x, float y) {
 		CCSpriteFrame frame = cache.getSpriteFrame(name);
 		CCSprite sprite = CCSprite.sprite(frame);
 		sprite.setPosition(x, y);
 		return sprite;
 	}
-	
-	protected void moreGame(){
-		SoundManager.getInstance().playEffect(CCDirector.sharedDirector().getActivity(), SoundManager.MUSIC_BUTTON);
-		Intent it = new Intent(Intent.ACTION_VIEW,
-				Uri.parse(Game.more_url));
+
+	protected void moreGame() {
+		SoundManager.getInstance().playEffect(
+				CCDirector.sharedDirector().getActivity(),
+				SoundManager.MUSIC_BUTTON);
+		Intent it = new Intent(Intent.ACTION_VIEW, Uri.parse(Game.more_url));
 		if (CCDirector.sharedDirector().getActivity() != null)
 			CCDirector.sharedDirector().getActivity().startActivity(it);
 	}

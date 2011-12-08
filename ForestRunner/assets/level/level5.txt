@@ -95,9 +95,9 @@ Bridge
 Ground M 300
 Dinosaur 200
 Gap 182
-Ground M 1000
+Ground M 1200
 Flower 250
 Fire 470
 Flower 710
-Stopsign 850
+Stopsign 1050
 End

@@ -69,8 +69,8 @@ Ground H 200
 Dinosaur 150
 Ground M 360
 Gap 180
-Ground M 1000
+Ground M 1200
 Trap 300
 Flower 550
-Stopsign 880
+Stopsign 1080
 End

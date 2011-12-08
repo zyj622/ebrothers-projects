@@ -61,6 +61,6 @@ Ground M 200
 Gap 150
 Ground M 180
 Gap 150
-Ground M 500
-Stopsign 350
+Ground M 800
+Stopsign 450
 End
