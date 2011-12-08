@@ -48,7 +48,7 @@ public class GameLayer extends CCLayer implements UpdateCallback, GameDelegate {
 	private Background background;
 	private CCSequence moveAction;
 	// for break points
-	private static final float X_SPEED = 1000f;// 450f;// pixel/s
+	private static final float X_SPEED = 450f;// pixel/s
 	private float[] _bp_x;
 	private float[] _bp_y;
 	private int lbp_index = 0;
