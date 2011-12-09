@@ -1,5 +1,7 @@
 package com.ebrothers.forestrunner;
 
+import org.cocos2d.sound.SoundEngine;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -13,6 +15,7 @@ public class SplashActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		setContentView(R.layout.splash);
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		new BackgroundWorker().execute();
@@ -21,14 +24,21 @@ public class SplashActivity extends Activity {
 	class BackgroundWorker extends AsyncTask<Void, Void, Void> {
 		@Override
 		protected Void doInBackground(Void... params) {
+			try {
+				Thread.sleep(2000);
+			} catch (InterruptedException e) {
+			}
+			SoundEngine.sharedEngine().preloadEffect(getApplicationContext(),
+					R.raw.music_button);
+			Intent intent = new Intent();
+			intent.setClass(getApplicationContext(), ForestRunnerActivity.class);
+			startActivity(intent);
 			return null;
 		}
 
 		@Override
 		protected void onPostExecute(Void result) {
-			Intent intent = new Intent();
-			intent.setClass(getApplicationContext(), ForestRunnerActivity.class);
-			startActivity(intent);
+
 			finish();
 		}
 	}

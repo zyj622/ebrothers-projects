@@ -72,15 +72,15 @@ public class LocalDataManager {
 	 */
 	public Object readSetting(String name, Object res) {
 		if (res instanceof Boolean) {
-			res = settings.getBoolean(name, false);
+			res = settings.getBoolean(name, (Boolean) res);
 		} else if (res instanceof Integer) {
-			res = settings.getInt(name, 0);
+			res = settings.getInt(name, (Integer) res);
 		} else if (res instanceof Float) {
-			res = settings.getFloat(name, 0);
+			res = settings.getFloat(name, (Float) res);
 		} else if (res instanceof Long) {
-			res = settings.getLong(name, 0);
+			res = settings.getLong(name, (Long) res);
 		} else if (res instanceof String) {
-			res = settings.getString(name, "");
+			res = settings.getString(name, (String) res);
 		}
 		return res;
 	}

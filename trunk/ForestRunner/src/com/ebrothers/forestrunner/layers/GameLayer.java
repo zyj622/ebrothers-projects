@@ -32,6 +32,7 @@ import com.ebrothers.forestrunner.data.LevelData;
 import com.ebrothers.forestrunner.data.LevelDataParser;
 import com.ebrothers.forestrunner.manager.LocalDataManager;
 import com.ebrothers.forestrunner.manager.SceneManager;
+import com.ebrothers.forestrunner.manager.SoundManager;
 import com.ebrothers.forestrunner.sprites.Background;
 import com.ebrothers.forestrunner.sprites.Dinosaur;
 import com.ebrothers.forestrunner.sprites.GameSprite;
@@ -225,6 +226,9 @@ public class GameLayer extends CCLayer implements UpdateCallback, GameDelegate {
 	@Override
 	public void onEnter() {
 		super.onEnter();
+		SoundManager.getInstance().playSound(
+				CCDirector.sharedDirector().getActivity(),
+				SoundManager.MUSIC_BACKGROUND, true);
 		ground.runAction(moveAction);
 		schedule(this);
 	}
@@ -232,6 +236,7 @@ public class GameLayer extends CCLayer implements UpdateCallback, GameDelegate {
 	@Override
 	public void onExit() {
 		super.onExit();
+		SoundManager.getInstance().pauseSound();
 		unschedule(this);
 	}
 
@@ -242,6 +247,7 @@ public class GameLayer extends CCLayer implements UpdateCallback, GameDelegate {
 		restartGround();
 		resumeSchedulerAndActions();
 		setIsTouchEnabled(true);
+		SoundManager.getInstance().resumeSound();
 	}
 
 	@Override
@@ -251,6 +257,7 @@ public class GameLayer extends CCLayer implements UpdateCallback, GameDelegate {
 		stopGround();
 		pauseSchedulerAndActions();
 		setIsTouchEnabled(false);
+		SoundManager.getInstance().pauseSound();
 	}
 
 	@Override
