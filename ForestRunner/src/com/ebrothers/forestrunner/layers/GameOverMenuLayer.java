@@ -42,6 +42,10 @@ public class GameOverMenuLayer extends BasicLayer {
 			cmsNext.setScaleY(Game.scale_ratio_y);
 			cmsNext.setAnchorPoint(1, 1);
 			cmMenu = CCMenu.menu(cmsAgain, cmsNext, cmsMore);
+			//添加胜利标语
+			CCSprite victory = getNode("victory.png", winW * 1.8f / 3,
+					winH * 6.5f / 8, 1, 1);
+			addChild(victory, 5);
 		} else {
 			cmMenu = CCMenu.menu(cmsAgain, cmsMore);
 		}
