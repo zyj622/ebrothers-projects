@@ -23,4 +23,9 @@ public final class Game {
 
 	public static long score;
 	public static boolean isWin;
+
+	public static void init() {
+		score = 0;
+		isWin = false;
+	}
 }

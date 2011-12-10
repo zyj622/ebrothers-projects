@@ -63,7 +63,7 @@ public class MainGameMenuLayer extends BasicLayer {
 		CCMenu cmMenu = CCMenu.menu(cmsStart, cmsHigh, cmsMore);
 		cmMenu.setAnchorPoint(1, 1);
 		cmMenu.alignItemsVertically();
-		cmMenu.alignItemsVertically(10f);
+		cmMenu.alignItemsVertically(20f);
 		float offsetX = 0f;
 		float offsetY = 0f;
 		for (CCNode child : cmMenu.getChildren()) {
@@ -73,7 +73,7 @@ public class MainGameMenuLayer extends BasicLayer {
 			break;
 		}
 		cmMenu.setPosition((winW * 8.5f / 10) - Math.abs(offsetX), (winH / 2)
-				- Math.abs(offsetY));
+				+ 25f - Math.abs(offsetY));
 		addChild(cmMenu, 5);
 		/*****************************************************************************/
 
@@ -85,7 +85,7 @@ public class MainGameMenuLayer extends BasicLayer {
 		cmMenuClose = CCMenu.menu(cmsSoundClose);
 		cmMenuClose.alignItemsVertically();
 
-		cmMenuClose.setPosition(winW - 20, 20);
+		cmMenuClose.setPosition(winW - 15, 15);
 		addChild(cmMenuClose, 6);
 
 		CCSprite spriteSoundOpen = getNode("sound02.png", 0, 0);
@@ -96,7 +96,7 @@ public class MainGameMenuLayer extends BasicLayer {
 		cmMenuOpen = CCMenu.menu(cmsSoundOpen);
 		cmMenuOpen.alignItemsVertically();
 
-		cmMenuOpen.setPosition(winW - 20, 20);
+		cmMenuOpen.setPosition(winW - 15, 15);
 
 		addChild(cmMenuOpen, 6);
 
@@ -129,9 +129,7 @@ public class MainGameMenuLayer extends BasicLayer {
 	 * @param o
 	 */
 	public void shareCallback(Object o) {
-		SoundManager.getInstance().playEffect(
-				CCDirector.sharedDirector().getActivity(),
-				SoundManager.MUSIC_BUTTON);
+		SoundManager.sharedSoundManager().playEffect(SoundManager.MUSIC_BUTTON);
 		if (CCDirector.sharedDirector().getActivity() != null) {
 			Intent intent = new Intent(Intent.ACTION_SEND);
 			intent.setType("text/plain");
@@ -163,9 +161,7 @@ public class MainGameMenuLayer extends BasicLayer {
 	public void closeSound(Object o) {
 		cmMenuOpen.setVisible(false);
 		cmMenuClose.setVisible(true);
-		SoundManager.getInstance().playEffect(
-				CCDirector.sharedDirector().getActivity(),
-				SoundManager.MUSIC_BUTTON);
+		SoundManager.sharedSoundManager().playEffect(SoundManager.MUSIC_BUTTON);
 		LocalDataManager.getInstance().writeSetting(LocalDataManager.SOUND,
 				false);
 	}
@@ -187,10 +183,8 @@ public class MainGameMenuLayer extends BasicLayer {
 	 * @param o
 	 */
 	public void startGame(Object o) {
-		SoundManager.getInstance().playEffect(
-				CCDirector.sharedDirector().getActivity(),
-				SoundManager.MUSIC_BUTTON);
-		SceneManager.getInstance().replaceTo(SceneManager.SCENE_STAGES);
+		SoundManager.sharedSoundManager().playEffect(SoundManager.MUSIC_BUTTON);
+		SceneManager.sharedSceneManager().replaceTo(SceneManager.SCENE_STAGES);
 	}
 
 	/**
@@ -198,10 +192,8 @@ public class MainGameMenuLayer extends BasicLayer {
 	 * @param o
 	 */
 	public void startHigh(Object o) {
-		SoundManager.getInstance().playEffect(
-				CCDirector.sharedDirector().getActivity(),
-				SoundManager.MUSIC_BUTTON);
-		SceneManager.getInstance().replaceTo(SceneManager.SCENE_HIGHSCORE);
+		SoundManager.sharedSoundManager().playEffect(SoundManager.MUSIC_BUTTON);
+		SceneManager.sharedSceneManager().replaceTo(SceneManager.SCENE_HIGHSCORE);
 	}
 
 }

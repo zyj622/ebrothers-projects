@@ -3,6 +3,7 @@ package com.ebrothers.forestrunner.manager;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.sound.SoundEngine;
 
 import android.content.Context;
@@ -19,31 +20,31 @@ public class SoundManager {
 	private static final String TAG = "SoundManager";
 	private static SoundManager _instance;
 
-	private static Map<String, Integer> sourceSound;
+	private static Map<Integer, Integer> sourceSound;
 
-	public static final String MUSIC_BACKGROUND = "music_background";
-	public static final String MUSIC_BOX = "music_box";
-	public static final String MUSIC_BUTTON = "music_button";
-	public static final String MUSIC_DINOSAUR = "music_dinosaur";
-	public static final String MUSIC_DOWN = "music_down";
-	public static final String MUSIC_DOWNSLOPE = "music_downslope";
-	public static final String MUSIC_FAIL = "music_fail";
-	public static final String MUSIC_FIRE = "music_fire";
-	public static final String MUSIC_FLOWWE = "music_flower";
-	public static final String MUSIC_JUMP = "music_jump";
-	public static final String MUSIC_JUMPDOWN = "music_jumpdown";
-	public static final String MUSIC_LIFE = "music_life";
-	public static final String MUSIC_MUSHROOM_1 = "music_mushroom1";
-	public static final String MUSIC_MUSHROOM_2 = "music_mushroom2";
-	public static final String MUSIC_RELIVE = "music_relive";
-	public static final String MUSIC_START_1 = "music_star1";
-	public static final String MUSIC_START_2 = "music_star2";
-	public static final String MUSIC_START = "music_start";
-	public static final String MUSIC_SUCCESS = "music_success";
-	public static final String MUSIC_TRAP = "music_trap";
-	public static final String MUSIC_UPSLOPE = "music_upslope";
+	public static final int MUSIC_BACKGROUND = 0;
+	public static final int MUSIC_BOX = 1;
+	public static final int MUSIC_BUTTON = 2;
+	public static final int MUSIC_DINOSAUR = 3;
+	public static final int MUSIC_DOWN = 4;
+	public static final int MUSIC_DOWNSLOPE = 5;
+	public static final int MUSIC_FAIL = 6;
+	public static final int MUSIC_FIRE = 7;
+	public static final int MUSIC_FLOWWE = 8;
+	public static final int MUSIC_JUMP = 9;
+	public static final int MUSIC_JUMPDOWN = 10;
+	public static final int MUSIC_LIFE = 11;
+	public static final int MUSIC_MUSHROOM_1 = 12;
+	public static final int MUSIC_MUSHROOM_2 = 13;
+	public static final int MUSIC_RELIVE = 14;
+	public static final int MUSIC_START_1 = 15;
+	public static final int MUSIC_START_2 = 16;
+	public static final int MUSIC_START = 17;
+	public static final int MUSIC_SUCCESS = 18;
+	public static final int MUSIC_TRAP = 19;
+	public static final int MUSIC_UPSLOPE = 20;
 
-	public static SoundManager getInstance() {
+	public static SoundManager sharedSoundManager() {
 		if (_instance == null) {
 			_instance = new SoundManager();
 		}
@@ -51,7 +52,7 @@ public class SoundManager {
 	}
 
 	private SoundManager() {
-		sourceSound = new HashMap<String, Integer>();
+		sourceSound = new HashMap<Integer, Integer>();
 		sourceSound.put(MUSIC_BACKGROUND, R.raw.music_background);
 		sourceSound.put(MUSIC_BOX, R.raw.music_box);
 		sourceSound.put(MUSIC_BUTTON, R.raw.music_button);
@@ -75,14 +76,26 @@ public class SoundManager {
 		sourceSound.put(MUSIC_UPSLOPE, R.raw.music_upslope);
 	}
 
-	public void playSound(Context context, String fileName, boolean loop) {
+	public void preload(Context context) {
+		SoundEngine soundEngine = SoundEngine.sharedEngine();
+		for (Integer rawId : sourceSound.values()) {
+			if (R.raw.music_background == rawId) {
+				soundEngine.preloadSound(context, rawId);
+			} else {
+				soundEngine.preloadEffect(context, rawId);
+			}
+		}
+	}
+
+	public void playSound(int which, boolean loop) {
 		boolean sound = (Boolean) LocalDataManager.getInstance().readSetting(
 				LocalDataManager.SOUND, true);
 		if (!sound)
 			return;
-		if (sourceSound.containsKey(fileName)) {
-			SoundEngine.sharedEngine().playSound(context,
-					sourceSound.get(fileName), loop);
+		if (sourceSound.containsKey(which)) {
+			SoundEngine.sharedEngine().playSound(
+					CCDirector.sharedDirector().getActivity(),
+					sourceSound.get(which), loop);
 		} else {
 			Logger.e("game", "sound source null");
 		}
@@ -104,16 +117,16 @@ public class SoundManager {
 		SoundEngine.sharedEngine().resumeSound();
 	}
 
-	public void playEffect(Context context, String fileName) {
+	public void playEffect(int which) {
 		boolean sound = (Boolean) LocalDataManager.getInstance().readSetting(
 				LocalDataManager.SOUND, true);
-		Logger.d(TAG, "playEffect. sound=" + sound);
 		if (!sound)
 			return;
 		try {
-			if (sourceSound.containsKey(fileName)) {
-				int id = sourceSound.get(fileName);
-				SoundEngine.sharedEngine().playEffect(context, id);
+			if (sourceSound.containsKey(which)) {
+				int id = sourceSound.get(which);
+				SoundEngine.sharedEngine().playEffect(
+						CCDirector.sharedDirector().getActivity(), id);
 			} else {
 				Logger.e("game", "sound source null");
 			}

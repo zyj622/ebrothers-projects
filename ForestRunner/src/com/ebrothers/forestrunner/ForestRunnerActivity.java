@@ -107,7 +107,7 @@ public class ForestRunnerActivity extends Activity {
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
 			// 后退键场景切换
-			if (!SceneManager.getInstance().backTo()) {
+			if (!SceneManager.sharedSceneManager().backTo()) {
 				showDialog();
 			}
 		}

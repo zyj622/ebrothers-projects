@@ -4,8 +4,8 @@ import java.io.IOException;
 
 import org.cocos2d.nodes.CCDirector;
 
-
 public final class Levels {
+	private static final boolean TEST_LEVEL = false;
 	private static final String LEVEL_DIR = "level";
 	private static final String TAG = "Levels";
 	private static String[] levels;
@@ -22,6 +22,10 @@ public final class Levels {
 	}
 
 	public static String getLevelDataPath(int level) {
-		return LEVEL_DIR + "/" + levels[level];
+		if (TEST_LEVEL) {
+			return "leveltest.txt";
+		} else {
+			return LEVEL_DIR + "/" + levels[level];
+		}
 	}
 }

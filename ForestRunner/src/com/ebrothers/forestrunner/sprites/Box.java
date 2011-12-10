@@ -1,5 +1,7 @@
 package com.ebrothers.forestrunner.sprites;
 
+import com.ebrothers.forestrunner.manager.SoundManager;
+
 public class Box extends GameSprite {
 
 	public Box() {
@@ -17,4 +19,8 @@ public class Box extends GameSprite {
 		return true;
 	}
 
+	@Override
+	public void onStartContact(GameSprite target) {
+		SoundManager.sharedSoundManager().playEffect(SoundManager.MUSIC_BOX);
+	}
 }

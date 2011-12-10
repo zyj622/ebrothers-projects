@@ -12,13 +12,12 @@ public class GameScene extends CCScene {
 
 	public static GameScene scene(int level) {
 		Logger.d(TAG, "create game scene...");
+		Game.init();
 		return new GameScene(level);
 	}
 
 	private GameScene(int level) {
 		super();
-		// "level/leveltest.txt"
-		Game.score = 0;
 		GameLayer gameLayer = new GameLayer(Levels.getLevelDataPath(level));
 		Game.delegate = gameLayer;
 		addChild(gameLayer);

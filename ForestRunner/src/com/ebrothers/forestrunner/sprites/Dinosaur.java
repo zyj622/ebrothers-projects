@@ -7,9 +7,11 @@ import org.cocos2d.nodes.CCSpriteFrame;
 import org.cocos2d.nodes.CCSpriteFrameCache;
 import org.cocos2d.types.CGPoint;
 
+import com.ebrothers.forestrunner.manager.SoundManager;
+
 public class Dinosaur extends GameSprite {
 
-	private static final int MOVE_DISTANCE = 300;
+	private static final int MOVE_DISTANCE = 400;
 	public static final int DINOSAUR_1 = 1;
 	public static final int DINOSAUR_2 = 2;
 	public static final int DINOSAUR_3 = 3;
@@ -44,6 +46,12 @@ public class Dinosaur extends GameSprite {
 	@Override
 	public boolean isFatal() {
 		return true;
+	}
+
+	@Override
+	public void onStartContact(GameSprite target) {
+		SoundManager.sharedSoundManager().playEffect(
+				SoundManager.MUSIC_DINOSAUR);
 	}
 
 	@Override

@@ -19,6 +19,7 @@ import com.ebrothers.forestrunner.sprites.Flower;
 import com.ebrothers.forestrunner.sprites.GameSprite;
 import com.ebrothers.forestrunner.sprites.GoSign;
 import com.ebrothers.forestrunner.sprites.Ground;
+import com.ebrothers.forestrunner.sprites.Life;
 import com.ebrothers.forestrunner.sprites.SpriteType;
 import com.ebrothers.forestrunner.sprites.Stone;
 import com.ebrothers.forestrunner.sprites.StopSign;
@@ -177,6 +178,11 @@ public class GameLevelBuilder {
 				parent.addChild(sprite);
 				Banana.addOn2Sides2(parent, parentLeft + child.rx, parentTop);
 				signs.add(CGPoint.ccp(parentLeft + child.rx, parentTop));
+				break;
+			case SpriteType.LIFE:
+				sprite = new Life();
+				sprite.setPosition(parentLeft + child.rx, parentTop + child.ry);
+				parent.addChild(sprite);
 				break;
 			case SpriteType.TRAP:
 				sprite = new Trap();

@@ -101,6 +101,13 @@ public class TxtDataParseStrategy implements ParseStrategy {
 				if (parent != null) {
 					parent.addChild(data);
 				}
+			} else if (line.startsWith("Life")) {
+				data.type = SpriteType.LIFE;
+				data.rx = Float.parseFloat(splites[1]) * Game.scale_ratio;
+				data.ry = Float.parseFloat(splites[2]) * Game.scale_ratio;
+				if (parent != null) {
+					parent.addChild(data);
+				}
 			} else if (line.startsWith("End")) {
 				break;
 			} else {

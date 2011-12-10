@@ -17,4 +17,5 @@ public interface SpriteType {
 	public static final int STOP_SIGN = 13;
 	public static final int TRAP = 14;
 	public static final int STONE = 15;
+	public static final int LIFE = 16;
 }
