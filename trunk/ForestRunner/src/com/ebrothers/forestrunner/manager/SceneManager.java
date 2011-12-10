@@ -30,7 +30,7 @@ public class SceneManager {
 
 	private static SceneManager _instance;
 
-	public static SceneManager getInstance() {
+	public static SceneManager sharedSceneManager() {
 		if (_instance == null) {
 			_instance = new SceneManager();
 		}

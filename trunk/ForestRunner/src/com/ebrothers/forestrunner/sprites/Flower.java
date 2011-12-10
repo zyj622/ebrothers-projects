@@ -6,6 +6,7 @@ import org.cocos2d.nodes.CCSpriteFrame;
 import org.cocos2d.nodes.CCSpriteFrameCache;
 
 import com.ebrothers.forestrunner.common.Game;
+import com.ebrothers.forestrunner.manager.SoundManager;
 
 public class Flower extends GameSprite {
 
@@ -45,6 +46,7 @@ public class Flower extends GameSprite {
 
 	@Override
 	public void onStartContact(GameSprite target) {
+		SoundManager.sharedSoundManager().playEffect(SoundManager.MUSIC_FLOWWE);
 		playeAnimation("eat", this, "eatDone");
 	}
 

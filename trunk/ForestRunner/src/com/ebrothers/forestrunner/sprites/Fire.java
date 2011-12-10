@@ -6,6 +6,7 @@ import org.cocos2d.nodes.CCSpriteFrame;
 import org.cocos2d.nodes.CCSpriteFrameCache;
 
 import com.ebrothers.forestrunner.common.Game;
+import com.ebrothers.forestrunner.manager.SoundManager;
 
 public class Fire extends GameSprite {
 
@@ -51,6 +52,7 @@ public class Fire extends GameSprite {
 
 	@Override
 	public void onStartContact(GameSprite target) {
+		SoundManager.sharedSoundManager().playEffect(SoundManager.MUSIC_FIRE);
 		addChild(burnSprite, 1);
 		burnSprite.playeAnimation("burn", this, "burnDone");
 	}

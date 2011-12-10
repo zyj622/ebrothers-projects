@@ -44,9 +44,7 @@ public class BasicLayer extends CCLayer {
 	}
 
 	protected void moreGame() {
-		SoundManager.getInstance().playEffect(
-				CCDirector.sharedDirector().getActivity(),
-				SoundManager.MUSIC_BUTTON);
+		SoundManager.sharedSoundManager().playEffect(SoundManager.MUSIC_BUTTON);
 		Intent it = new Intent(Intent.ACTION_VIEW, Uri.parse(Game.more_url));
 		if (CCDirector.sharedDirector().getActivity() != null)
 			CCDirector.sharedDirector().getActivity().startActivity(it);

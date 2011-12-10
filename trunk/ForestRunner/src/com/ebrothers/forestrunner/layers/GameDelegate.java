@@ -12,4 +12,6 @@ public interface GameDelegate {
 
 	public void updateScore();
 
+	public void addLife();
+
 }

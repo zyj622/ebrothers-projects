@@ -9,6 +9,7 @@ import org.cocos2d.types.CGPoint;
 import com.ebrothers.forestrunner.common.Game;
 import com.ebrothers.forestrunner.common.Levels;
 import com.ebrothers.forestrunner.manager.SceneManager;
+import com.ebrothers.forestrunner.manager.SoundManager;
 
 public class GameOverMenuLayer extends BasicLayer {
 
@@ -42,7 +43,7 @@ public class GameOverMenuLayer extends BasicLayer {
 			cmsNext.setScaleY(Game.scale_ratio_y);
 			cmsNext.setAnchorPoint(1, 1);
 			cmMenu = CCMenu.menu(cmsAgain, cmsNext, cmsMore);
-			//添加胜利标语
+			// 添加胜利标语
 			CCSprite victory = getNode("victory.png", winW * 1.8f / 3,
 					winH * 6.5f / 8, 1, 1);
 			addChild(victory, 5);
@@ -69,12 +70,14 @@ public class GameOverMenuLayer extends BasicLayer {
 	}
 
 	public void againGame(Object o) {
-		SceneManager.getInstance().replaceTo(SceneManager.SCENE_GAME);
+		SoundManager.sharedSoundManager().playEffect(SoundManager.MUSIC_BUTTON);
+		SceneManager.sharedSceneManager().replaceTo(SceneManager.SCENE_GAME);
 	}
 
 	public void nextStage(Object o) {
+		SoundManager.sharedSoundManager().playEffect(SoundManager.MUSIC_BUTTON);
 		Game.current_level++;
-		SceneManager.getInstance().replaceTo(SceneManager.SCENE_GAME);
+		SceneManager.sharedSceneManager().replaceTo(SceneManager.SCENE_GAME);
 	}
 
 	public void more(Object o) {

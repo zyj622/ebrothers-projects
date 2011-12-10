@@ -13,6 +13,7 @@ import org.cocos2d.types.CGPoint;
 
 import com.ebrothers.forestrunner.common.Game;
 import com.ebrothers.forestrunner.common.Logger;
+import com.ebrothers.forestrunner.manager.SoundManager;
 
 public class Runner extends GameSprite {
 	private static final String TAG = "Runner";
@@ -93,6 +94,8 @@ public class Runner extends GameSprite {
 
 	public void jump(float y) {
 		if (!acting) {
+			SoundManager.sharedSoundManager().playEffect(
+					SoundManager.MUSIC_JUMP);
 			stopAllActions();
 			playeDelayAnimation("jump", 0.2f, "fallToGround");
 			CGPoint to = CGPoint.ccp(getPosition().x, y + y_offset);
@@ -104,10 +107,16 @@ public class Runner extends GameSprite {
 			}
 			runAction(CCSequence.actions(
 					CCJumpTo.action(during, to, jHeight, 1),
-					CCCallFunc.action(this, "actionDone")));
+					CCCallFunc.action(this, "jumpDone")));
 			baseY = y;
 			acting = true;
 		}
+	}
+
+	public void jumpDone() {
+		SoundManager.sharedSoundManager().playEffect(
+				SoundManager.MUSIC_JUMPDOWN);
+		actionDone();
 	}
 
 	public void jumpToGap(Object target, String selector) {
@@ -125,6 +134,8 @@ public class Runner extends GameSprite {
 	public void fallToGap(Object target, String selector) {
 		if (!acting) {
 			Logger.d(TAG, "fallToGap. ");
+			SoundManager.sharedSoundManager().playEffect(
+					SoundManager.MUSIC_DOWN);
 			stopAllActions();
 			playeAnimation("fallToGap");
 			CGPoint to = CGPoint.ccp(getPosition().x, 0);
@@ -136,6 +147,8 @@ public class Runner extends GameSprite {
 
 	public void fallToGround(float y) {
 		if (!acting) {
+			SoundManager.sharedSoundManager().playEffect(
+					SoundManager.MUSIC_DOWNSLOPE);
 			stopAllActions();
 			playeAnimation("fallToGround");
 			CGPoint to = CGPoint.ccp(getPosition().x, y + y_offset);
@@ -149,6 +162,8 @@ public class Runner extends GameSprite {
 
 	public void knockDown() {
 		if (!acting) {
+			SoundManager.sharedSoundManager().playEffect(
+					SoundManager.MUSIC_UPSLOPE);
 			stopAllActions();
 			playeAnimation("knockDown", this, "knockDownDone");
 			acting = true;

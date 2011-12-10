@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import org.cocos2d.nodes.CCSpriteFrame;
 import org.cocos2d.nodes.CCSpriteFrameCache;
 
+import com.ebrothers.forestrunner.manager.SoundManager;
+
 public class Trap extends GameSprite {
 
 	private boolean triggered = false;
@@ -33,6 +35,11 @@ public class Trap extends GameSprite {
 	@Override
 	public boolean isFatal() {
 		return true;
+	}
+
+	@Override
+	public void onStartContact(GameSprite target) {
+		SoundManager.sharedSoundManager().playEffect(SoundManager.MUSIC_TRAP);
 	}
 
 	@Override

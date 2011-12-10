@@ -31,6 +31,7 @@ public class LevelData {
 		}
 
 		public float rx;
+		public float ry;
 		public float width;
 		public int type;
 		private ArrayList<SpriteData> children;

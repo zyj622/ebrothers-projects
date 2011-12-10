@@ -7,6 +7,7 @@ import org.cocos2d.nodes.CCSpriteFrame;
 import org.cocos2d.nodes.CCSpriteFrameCache;
 
 import com.ebrothers.forestrunner.common.Game;
+import com.ebrothers.forestrunner.manager.SoundManager;
 
 public class Banana extends GameSprite {
 	public Banana() {
@@ -82,6 +83,8 @@ public class Banana extends GameSprite {
 
 	@Override
 	public void onStartContact(GameSprite target) {
+		SoundManager.sharedSoundManager()
+				.playEffect(SoundManager.MUSIC_START_1);
 		playeAnimation("flash", this, "flashDone");
 		Game.score += 450;
 		Game.delegate.updateScore();

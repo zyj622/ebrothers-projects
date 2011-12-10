@@ -9,6 +9,7 @@ import com.ebrothers.forestrunner.common.Game;
 import com.ebrothers.forestrunner.common.Levels;
 import com.ebrothers.forestrunner.manager.LocalDataManager;
 import com.ebrothers.forestrunner.manager.SceneManager;
+import com.ebrothers.forestrunner.manager.SoundManager;
 import com.ebrothers.forestrunner.sprites.LevelSelector;
 
 public class LevelSelectLayer extends BasicLayer {
@@ -30,7 +31,7 @@ public class LevelSelectLayer extends BasicLayer {
 		CCMenuItemSprite item;
 		CCMenu menu;
 		int passedLevel = (Integer) LocalDataManager.getInstance().readSetting(
-				LocalDataManager.PASSED, 0);
+				LocalDataManager.PASSED, -1);
 		for (int i = 0; i < 3; i++) {
 			menu = CCMenu.menu();
 			for (int j = 0; j < 3; j++) {
@@ -81,8 +82,10 @@ public class LevelSelectLayer extends BasicLayer {
 	public void levelSelect(Object o) {
 		CCMenuItemSprite cmis = (CCMenuItemSprite) o;
 		if (cmis.isEnabled()) {
+			SoundManager.sharedSoundManager().playEffect(
+					SoundManager.MUSIC_BUTTON);
 			Game.current_level = cmis.getTag();
-			SceneManager.getInstance().replaceTo(SceneManager.SCENE_GAME);
+			SceneManager.sharedSceneManager().replaceTo(SceneManager.SCENE_GAME);
 		}
 	}
 }

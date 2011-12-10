@@ -1,13 +1,13 @@
 package com.ebrothers.forestrunner;
 
-import org.cocos2d.sound.SoundEngine;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
+
+import com.ebrothers.forestrunner.manager.SoundManager;
 
 public class SplashActivity extends Activity {
 
@@ -28,8 +28,7 @@ public class SplashActivity extends Activity {
 				Thread.sleep(2000);
 			} catch (InterruptedException e) {
 			}
-			SoundEngine.sharedEngine().preloadEffect(getApplicationContext(),
-					R.raw.music_button);
+			SoundManager.sharedSoundManager().preload(getApplicationContext());
 			Intent intent = new Intent();
 			intent.setClass(getApplicationContext(), ForestRunnerActivity.class);
 			startActivity(intent);

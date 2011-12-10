@@ -49,7 +49,7 @@ public class GameLayer extends CCLayer implements UpdateCallback, GameDelegate {
 	private Background background;
 	private CCSequence moveAction;
 	// for break points
-	private static final float X_SPEED = 450f;// pixel/s
+	private static final float X_SPEED = 500f;// pixel/s
 	private float[] _bp_x;
 	private float[] _bp_y;
 	private int lbp_index = 0;
@@ -71,6 +71,7 @@ public class GameLayer extends CCLayer implements UpdateCallback, GameDelegate {
 	 */
 	private int[] states_bak;
 	private final float runner2RScreen;
+	private boolean isPlatformMoveDone;
 
 	public GameLayer(String level) {
 		super();
@@ -86,7 +87,6 @@ public class GameLayer extends CCLayer implements UpdateCallback, GameDelegate {
 
 		// build ground
 		ground = new CCSprite();
-		// "level/leveltest.txt"
 		LevelData data = LevelDataParser.parse(level);
 		GameLevelBuilder builder = GameLevelBuilder.create();
 		totalWidth = builder.build(ground, data);
@@ -226,8 +226,8 @@ public class GameLayer extends CCLayer implements UpdateCallback, GameDelegate {
 	@Override
 	public void onEnter() {
 		super.onEnter();
-		SoundManager.getInstance().playSound(
-				CCDirector.sharedDirector().getActivity(),
+		SoundManager.sharedSoundManager().playEffect(SoundManager.MUSIC_START);
+		SoundManager.sharedSoundManager().playSound(
 				SoundManager.MUSIC_BACKGROUND, true);
 		ground.runAction(moveAction);
 		schedule(this);
@@ -236,32 +236,42 @@ public class GameLayer extends CCLayer implements UpdateCallback, GameDelegate {
 	@Override
 	public void onExit() {
 		super.onExit();
-		SoundManager.getInstance().pauseSound();
+		SoundManager.sharedSoundManager().pauseSound();
 		unschedule(this);
 	}
 
 	@Override
 	public void resumeGame() {
-		pauseToggle.setSelectedIndex(0);
-		runner.resumeSchedulerAndActions();
-		restartGround();
-		resumeSchedulerAndActions();
 		setIsTouchEnabled(true);
-		SoundManager.getInstance().resumeSound();
+		resumeSchedulerAndActions();
+		runner.resumeSchedulerAndActions();
+		ground.resumeSchedulerAndActions();
+		background.resumeSchedulerAndActions();
+		for (GameSprite object : collisionObjects) {
+			object.resumeSchedulerAndActions();
+		}
+		SoundManager.sharedSoundManager().resumeSound();
+		pauseToggle.setSelectedIndex(0);
 	}
 
 	@Override
 	public void pauseGame() {
-		pauseToggle.setSelectedIndex(1);
-		runner.pauseSchedulerAndActions();
-		stopGround();
-		pauseSchedulerAndActions();
 		setIsTouchEnabled(false);
-		SoundManager.getInstance().pauseSound();
+		runner.pauseSchedulerAndActions();
+		ground.pauseSchedulerAndActions();
+		background.pauseSchedulerAndActions();
+		pauseSchedulerAndActions();
+		for (GameSprite object : collisionObjects) {
+			object.pauseSchedulerAndActions();
+		}
+		SoundManager.sharedSoundManager().pauseSound();
+		pauseToggle.setSelectedIndex(1);
 	}
 
 	@Override
 	public void winGame() {
+		SoundManager.sharedSoundManager()
+				.playEffect(SoundManager.MUSIC_SUCCESS);
 		pauseToggle.setIsEnabled(false);
 		pauseGame();
 		Game.isWin = true;
@@ -269,7 +279,7 @@ public class GameLayer extends CCLayer implements UpdateCallback, GameDelegate {
 		// save passed level
 		LocalDataManager ldm = LocalDataManager.getInstance();
 		if (Game.current_level > (Integer) ldm.readSetting(
-				LocalDataManager.PASSED, 0)) {
+				LocalDataManager.PASSED, -1)) {
 			ldm.writeSetting(LocalDataManager.PASSED, Game.current_level);
 		}
 		// save score of current level
@@ -277,17 +287,19 @@ public class GameLayer extends CCLayer implements UpdateCallback, GameDelegate {
 		if (Game.score > (Long) ldm.readSetting(level, 0L)) {
 			ldm.writeSetting(level, Game.score);
 		}
-		SceneManager.getInstance().replaceTo(SceneManager.SCENE_GAMEOVER);
+		SceneManager.sharedSceneManager()
+				.replaceTo(SceneManager.SCENE_GAMEOVER);
 	}
 
 	@Override
 	public void loseGame() {
-		Logger.d(TAG, "loseGame. ");
+		SoundManager.sharedSoundManager().playEffect(SoundManager.MUSIC_FAIL);
 		remainLives--;
 		if (remainLives == 0) {
 			// game over
 			Game.isWin = false;
-			SceneManager.getInstance().replaceTo(SceneManager.SCENE_GAMEOVER);
+			SceneManager.sharedSceneManager().replaceTo(
+					SceneManager.SCENE_GAMEOVER);
 		} else {
 			life.setString("x" + (remainLives - 1));
 			restartGame();
@@ -300,7 +312,21 @@ public class GameLayer extends CCLayer implements UpdateCallback, GameDelegate {
 	}
 
 	@Override
+	public void addLife() {
+		remainLives++;
+		life.setString("x" + (remainLives - 1));
+	}
+
+	@Override
 	public void update(float d) {
+		if (isPlatformMoveDone && !runner.isInAction()) {
+			float distance = CCDirector.sharedDirector().winSize().width
+					- Runner.RELATIVE_SCREEN_LEFT;
+			float during = distance / X_SPEED;
+			runner.runAction(CCSequence.actions(
+					CCMoveBy.action(during, CGPoint.ccp(distance, 0)),
+					CCCallFunc.action(this, "winGame")));
+		}
 		float runnerRx = getRunnerRx();
 		float runnerLx = getRunnerLx();
 		float runnerRy = getRunnerRy(runnerRx);
@@ -310,7 +336,7 @@ public class GameLayer extends CCLayer implements UpdateCallback, GameDelegate {
 			if (runnerLy == 0 || currY == 0) {
 				// fall in gap
 				runner.fallToGap(this, "loseGame");
-				stopGround();
+				stopPlatform();
 				return;
 			} else if (runnerLy < currY) {
 				runner.fallToGround(runnerRy);
@@ -320,7 +346,7 @@ public class GameLayer extends CCLayer implements UpdateCallback, GameDelegate {
 						+ currY);
 				// knock down
 				runner.knockDown();
-				stopGround();
+				stopPlatform();
 				ground.runAction(CCSequence.actions(
 						CCMoveBy.action(0.6f, CGPoint.ccp(150, 0)),
 						CCCallFunc.action(this, "loseGame")));
@@ -363,7 +389,7 @@ public class GameLayer extends CCLayer implements UpdateCallback, GameDelegate {
 
 		if (CGRect.intersects(runnerRect, objectRect)) {
 			if (object.isFatal()) {
-				stopGround();
+				stopPlatform();
 			}
 			Logger.d(TAG, "collistion. runnerRect=" + runnerRect
 					+ ", objectRect=" + objectRect + ", object=" + object);
@@ -444,31 +470,23 @@ public class GameLayer extends CCLayer implements UpdateCallback, GameDelegate {
 
 	public void jumpToGapDone() {
 		runner.fallToGap(this, "loseGame");
-		stopGround();
+		stopPlatform();
 	}
 
-	private void stopGround() {
+	private void stopPlatform() {
 		pauseSchedulerAndActions();
 		background.pauseSchedulerAndActions();
 		ground.stopAllActions();
 	}
 
-	private void restartGround() {
-		resumeSchedulerAndActions();
-		background.resumeSchedulerAndActions();
-		ground.runAction(moveAction);
-	}
-
 	public void moveDone() {
-		float distance = CCDirector.sharedDirector().winSize().width
-				- Runner.RELATIVE_SCREEN_LEFT;
-		float during = distance / X_SPEED;
-		runner.runAction(CCSequence.actions(
-				CCMoveBy.action(during, CGPoint.ccp(distance, 0)),
-				CCCallFunc.action(this, "winGame")));
+		Logger.d(TAG, "moveDone.");
+		isPlatformMoveDone = true;
+		setIsTouchEnabled(false);
 	}
 
 	private void restartGame() {
+		SoundManager.sharedSoundManager().playEffect(SoundManager.MUSIC_RELIVE);
 		resetStates();
 		// restore all collision objects
 		for (int i = 0; i < collisionObjects.length; i++) {
@@ -478,15 +496,17 @@ public class GameLayer extends CCLayer implements UpdateCallback, GameDelegate {
 		// restore ground
 		float groundX = -restartPoint.x + getRunnerRX2Screen();
 		ground.setPosition(groundX, 0);
+		// restore runner
+		runner.restart(restartPoint);
 		float winWidth = CCDirector.sharedDirector().winSize().width;
 		float moveDistance = totalWidth - winWidth;
 		moveAction = CCSequence.actions(
 				CCMoveTo.action((moveDistance + groundX) / X_SPEED,
 						CGPoint.ccp(-moveDistance, 0)),
 				CCCallFunc.action(this, "moveDone"));
-		// restore runner
-		runner.restart(restartPoint);
-		restartGround();
+		resumeSchedulerAndActions();
+		background.resumeSchedulerAndActions();
+		ground.runAction(moveAction);
 	}
 
 	private void resetStates() {
