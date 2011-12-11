@@ -28,7 +28,7 @@ public class Runner extends GameSprite {
 	public Runner() {
 		super("man01.png");
 		setAnchorPoint(0, 1);
-		y_offset = getBoundingHeight() - 10;
+		y_offset = getBoundingHeight() - 5;
 		Logger.d(TAG, "Runner. y_offset=" + y_offset);
 		baseY = Game.groundM_y;
 		setPosition(RELATIVE_SCREEN_LEFT, baseY + y_offset);
@@ -64,7 +64,7 @@ public class Runner extends GameSprite {
 		for (int i = 0; i < 4; i++) {
 			frames.add(cache.getSpriteFrame(String.format("man4%d.png", i + 1)));
 		}
-		addAnimation("float", frames, 0.2f);
+		addAnimation("float", frames, 0.1f);
 	}
 
 	@Override
@@ -194,14 +194,15 @@ public class Runner extends GameSprite {
 		}
 	}
 
-	public void restart(CGPoint restartPoint) {
-		Logger.d(TAG, "restart. restartPoint=" + restartPoint);
+	public void resetPosition(CGPoint restartPoint) {
+		Logger.d(TAG, "resetPosition. restartPoint=" + restartPoint);
 		if (!getVisible()) {
 			setVisible(true);
 		}
+		stopAllActions();
+		setDisplayFrame("run", 0);
 		baseY = restartPoint.y;
 		setPosition(RELATIVE_SCREEN_LEFT, baseY + y_offset);
-		playeLoopAnimation("run");
 		acting = false;
 	}
 }

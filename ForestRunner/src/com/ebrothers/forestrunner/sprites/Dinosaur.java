@@ -55,7 +55,7 @@ public class Dinosaur extends GameSprite {
 	}
 
 	@Override
-	public void restore() {
+	public void onRestore() {
 		if (originalPosition != null) {
 			stopAllActions();
 			setDisplayFrame("rush", 0);

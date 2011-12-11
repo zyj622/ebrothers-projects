@@ -7,6 +7,8 @@ import java.util.List;
 
 import org.cocos2d.actions.UpdateCallback;
 import org.cocos2d.actions.instant.CCCallFunc;
+import org.cocos2d.actions.instant.CCCallFuncND;
+import org.cocos2d.actions.interval.CCDelayTime;
 import org.cocos2d.actions.interval.CCMoveBy;
 import org.cocos2d.actions.interval.CCMoveTo;
 import org.cocos2d.actions.interval.CCSequence;
@@ -49,7 +51,7 @@ public class GameLayer extends CCLayer implements UpdateCallback, GameDelegate {
 	private Background background;
 	private CCSequence moveAction;
 	// for break points
-	private static final float X_SPEED = 500f;// pixel/s
+	private static final float X_SPEED = 480f;// pixel/s
 	private float[] _bp_x;
 	private float[] _bp_y;
 	private int lbp_index = 0;
@@ -151,6 +153,7 @@ public class GameLayer extends CCLayer implements UpdateCallback, GameDelegate {
 		root.addChild(scoreIcon);
 
 		score = CCBitmapFontAtlas.bitmapFontAtlas("+0", "font2.fnt");
+		score.setScale(Game.scale_ratio);
 		score.setAnchorPoint(0, 0.5f);
 		score.setPosition(
 				scoreIcon.getPosition().x
@@ -159,8 +162,9 @@ public class GameLayer extends CCLayer implements UpdateCallback, GameDelegate {
 		addChild(score);
 
 		// add life counter
-		life = CCBitmapFontAtlas.bitmapFontAtlas("x4", "font2.fnt");
+		life = CCBitmapFontAtlas.bitmapFontAtlas("×4", "font2.fnt");
 		life.setPosition(winSize.width - 40, winSize.height - 40);
+		life.setScale(Game.scale_ratio);
 		addChild(life);
 
 		GameSprite lifeIcon = GameSprite.sprite("life01.png");
@@ -301,8 +305,8 @@ public class GameLayer extends CCLayer implements UpdateCallback, GameDelegate {
 			SceneManager.sharedSceneManager().replaceTo(
 					SceneManager.SCENE_GAMEOVER);
 		} else {
-			life.setString("x" + (remainLives - 1));
-			restartGame();
+			life.setString("×" + (remainLives - 1));
+			resetGame();
 		}
 	}
 
@@ -314,7 +318,7 @@ public class GameLayer extends CCLayer implements UpdateCallback, GameDelegate {
 	@Override
 	public void addLife() {
 		remainLives++;
-		life.setString("x" + (remainLives - 1));
+		life.setString("×" + (remainLives - 1));
 	}
 
 	@Override
@@ -485,26 +489,32 @@ public class GameLayer extends CCLayer implements UpdateCallback, GameDelegate {
 		setIsTouchEnabled(false);
 	}
 
-	private void restartGame() {
+	private void resetGame() {
 		SoundManager.sharedSoundManager().playEffect(SoundManager.MUSIC_RELIVE);
 		resetStates();
+		CGPoint restartPoint = signs[sign_index];
 		// restore all collision objects
 		for (int i = 0; i < collisionObjects.length; i++) {
-			collisionObjects[i].restore();
+			collisionObjects[i].onRestore();
 		}
-		CGPoint restartPoint = signs[sign_index];
 		// restore ground
-		float groundX = -restartPoint.x + getRunnerRX2Screen();
+		final float groundX = -restartPoint.x + getRunnerRX2Screen();
 		ground.setPosition(groundX, 0);
-		// restore runner
-		runner.restart(restartPoint);
+		runner.resetPosition(restartPoint);
+
+		runAction(CCSequence.actions(CCDelayTime.action(0.8f),
+				CCCallFuncND.action(this, "restartGame", groundX)));
+	}
+
+	public void restartGame(Object o, Object d) {
+		resumeSchedulerAndActions();
 		float winWidth = CCDirector.sharedDirector().winSize().width;
 		float moveDistance = totalWidth - winWidth;
 		moveAction = CCSequence.actions(
-				CCMoveTo.action((moveDistance + groundX) / X_SPEED,
+				CCMoveTo.action((moveDistance + (Float) d) / X_SPEED,
 						CGPoint.ccp(-moveDistance, 0)),
 				CCCallFunc.action(this, "moveDone"));
-		resumeSchedulerAndActions();
+		runner.run();
 		background.resumeSchedulerAndActions();
 		ground.runAction(moveAction);
 	}

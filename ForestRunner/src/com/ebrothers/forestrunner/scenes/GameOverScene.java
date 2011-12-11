@@ -15,7 +15,7 @@ public class GameOverScene extends CCScene {
 
 	private GameOverScene() {
 		super();
-		long score = Game.score;
+		long score = Game.isWin ? Game.score : 0;
 		addChild(new GameOverLayer(score));
 		addChild(new GameOverStarLayer(score));
 		addChild(new GameOverMenuLayer());
