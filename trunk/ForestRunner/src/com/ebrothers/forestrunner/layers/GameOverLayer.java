@@ -24,7 +24,7 @@ public class GameOverLayer extends BasicLayer {
 		scoreAtlas.setAnchorPoint(1, 1);
 		scoreAtlas.setPosition(winW * 9.3f / 10, winH * 6.0f / 8);
 		addChild(scoreAtlas, 3);
-		scoreAtlas.setColor(ccColor3B.ccRED);
+		scoreAtlas.setColor(ccColor3B.ccc3(156, 97, 0));
 
 		/****************************************************************************************/
 

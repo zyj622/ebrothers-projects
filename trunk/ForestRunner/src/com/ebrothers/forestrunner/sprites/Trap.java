@@ -43,7 +43,7 @@ public class Trap extends GameSprite {
 	}
 
 	@Override
-	public void restore() {
+	public void onRestore() {
 		stopAllActions();
 		setDisplayFrame(CCSpriteFrameCache.sharedSpriteFrameCache()
 				.getSpriteFrame("trap01.png"));

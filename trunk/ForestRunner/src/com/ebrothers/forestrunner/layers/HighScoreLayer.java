@@ -37,8 +37,8 @@ public class HighScoreLayer extends BasicLayer {
 		for (int j = 0; j < levelCount; j++) {
 			long levelScore = getLevelScore(j);
 			CCBitmapFontAtlas tmpLable = getFontLabel(
-					String.valueOf(levelScore), winW * 13 / 16, winH
-							* (11 - j) / 13, 30);
+					String.valueOf(levelScore), winW * 13 / 16, winH * (11 - j)
+							/ 13, 30);
 			addChild(tmpLable, 2);
 			totalScore += levelScore;
 		}
@@ -63,7 +63,7 @@ public class HighScoreLayer extends BasicLayer {
 		CCBitmapFontAtlas score = CCBitmapFontAtlas.bitmapFontAtlas(content,
 				"font1.fnt");
 		score.setPosition(x, y);
-		score.setColor(ccColor3B.ccRED);
+		score.setColor(ccColor3B.ccBLACK);
 		return score;
 	}
 }
