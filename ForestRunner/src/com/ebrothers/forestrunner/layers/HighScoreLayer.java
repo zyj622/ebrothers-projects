@@ -63,7 +63,7 @@ public class HighScoreLayer extends BasicLayer {
 		CCBitmapFontAtlas score = CCBitmapFontAtlas.bitmapFontAtlas(content,
 				"font1.fnt");
 		score.setPosition(x, y);
-		score.setColor(ccColor3B.ccBLACK);
+		score.setColor(ccColor3B.ccc3(156, 97, 0));
 		return score;
 	}
 }
