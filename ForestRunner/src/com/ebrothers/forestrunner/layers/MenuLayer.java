@@ -12,13 +12,13 @@ import android.net.Uri;
 import com.ebrothers.forestrunner.common.Game;
 import com.ebrothers.forestrunner.manager.SoundManager;
 
-public class BasicLayer extends CCLayer {
+public class MenuLayer extends CCLayer {
 	protected CCSpriteFrameCache cache;
 
 	protected float winW;
 	protected float winH;
 
-	public BasicLayer() {
+	public MenuLayer() {
 		super();
 		winW = CCDirector.sharedDirector().winSize().width;
 		winH = CCDirector.sharedDirector().winSize().height;

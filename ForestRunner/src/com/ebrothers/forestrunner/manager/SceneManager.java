@@ -66,6 +66,7 @@ public class SceneManager {
 	public boolean backTo() {
 		CCScene scene = CCDirector.sharedDirector().getRunningScene();
 		if (scene instanceof MainScene) {
+			((MainScene) scene).back();
 			return false;
 		} else if (scene instanceof LevelSelectScene) {
 			replaceTo(SCENE_MAINMENU);

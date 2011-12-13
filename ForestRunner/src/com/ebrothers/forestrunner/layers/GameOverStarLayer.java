@@ -8,7 +8,7 @@ import org.cocos2d.types.CGSize;
 import com.ebrothers.forestrunner.common.Constants;
 import com.ebrothers.forestrunner.common.Game;
 
-public class GameOverStarLayer extends BasicLayer {
+public class GameOverStarLayer extends MenuLayer {
 
 	public GameOverStarLayer(long score) {
 		super();

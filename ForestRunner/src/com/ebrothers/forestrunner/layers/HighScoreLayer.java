@@ -7,7 +7,7 @@ import org.cocos2d.types.ccColor3B;
 import com.ebrothers.forestrunner.common.Levels;
 import com.ebrothers.forestrunner.manager.LocalDataManager;
 
-public class HighScoreLayer extends BasicLayer {
+public class HighScoreLayer extends MenuLayer {
 	public HighScoreLayer() {
 		super();
 

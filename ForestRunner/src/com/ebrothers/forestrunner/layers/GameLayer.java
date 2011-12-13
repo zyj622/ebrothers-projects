@@ -372,12 +372,8 @@ public class GameLayer extends CCLayer implements UpdateCallback, GameDelegate {
 		}
 		GameSprite object = objects[co_index];
 		CGPoint position = object.getPosition();
-		runnerRect.set(runnerLx, currY, runner.getBoundingWidth(),
-				runner.getBoundingHeight());
 		CGSize objectSize = object.getTextureRect().size;
 		float objectLx = position.x - objectSize.width / 2f;
-		objectRect.set(objectLx, position.y, objectSize.width,
-				objectSize.height);
 
 		if (object instanceof Trap) {
 			Trap trap = (Trap) object;
@@ -391,29 +387,44 @@ public class GameLayer extends CCLayer implements UpdateCallback, GameDelegate {
 			}
 		}
 
-		if (CGRect.intersects(runnerRect, objectRect)) {
-			if (object.isFatal()) {
-				stopPlatform();
-			}
-			Logger.d(TAG, "collistion. runnerRect=" + runnerRect
-					+ ", objectRect=" + objectRect + ", object=" + object);
-			runner.onStartContact(object);
-			object.onStartContact(runner);
-			co_index++;
-		} else if (runnerRx > position.x) {
-			co_index++;
-		}
+		detectCollision(runnerLx, runnerRx, currY);
 
 		if (sign_index >= signs.length) {
 			return;
 		}
 
-		if (runnerLx >= signs[sign_index].x) {
+		if (runnerRx >= signs[sign_index].x) {
 			// save states after over signs
 			states_bak[0] = lbp_index;
 			states_bak[1] = rbp_index;
 			states_bak[2] = co_index;
 			sign_index++;
+		}
+	}
+
+	private void detectCollision(float runnerLx, float runnerRx, float currY) {
+		GameSprite[] objects = collisionObjects;
+		GameSprite object = objects[co_index];
+		CGPoint position = object.getPosition();
+		float objWidth = object.getBoundingWidth();
+		float objHeight = object.getBoundingHeight();
+		float objectLx = position.x - objWidth / 2f;
+		objectRect.set(objectLx, position.y, objWidth, objHeight);
+		runnerRect.set(runnerLx, currY, runner.getBoundingWidth(),
+				runner.getBoundingHeight());
+		if (CGRect.intersects(runnerRect, objectRect)) {
+			if (object.isFatal()) {
+				stopPlatform();
+			}
+			Logger.d(TAG, "collision. runnerRect=" + runnerRect
+					+ ", objectRect=" + objectRect + ", object=" + object);
+			runner.onStartContact(object);
+			object.onStartContact(runner);
+			co_index++;
+			detectCollision(runnerLx, runnerRx, currY);
+		} else if (runnerRx > position.x) {
+			co_index++;
+			detectCollision(runnerLx, runnerRx, currY);
 		}
 	}
 
@@ -534,5 +545,4 @@ public class GameLayer extends CCLayer implements UpdateCallback, GameDelegate {
 				+ lbp_index + ", rbp_index=" + rbp_index + ", co_index="
 				+ co_index);
 	}
-
 }

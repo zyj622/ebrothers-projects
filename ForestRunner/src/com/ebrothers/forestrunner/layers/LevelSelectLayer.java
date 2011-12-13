@@ -12,7 +12,7 @@ import com.ebrothers.forestrunner.manager.SceneManager;
 import com.ebrothers.forestrunner.manager.SoundManager;
 import com.ebrothers.forestrunner.sprites.LevelSelector;
 
-public class LevelSelectLayer extends BasicLayer {
+public class LevelSelectLayer extends MenuLayer {
 
 	public LevelSelectLayer() {
 		super();
