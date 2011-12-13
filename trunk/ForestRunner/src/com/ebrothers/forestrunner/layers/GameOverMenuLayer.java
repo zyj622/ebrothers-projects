@@ -11,7 +11,7 @@ import com.ebrothers.forestrunner.common.Levels;
 import com.ebrothers.forestrunner.manager.SceneManager;
 import com.ebrothers.forestrunner.manager.SoundManager;
 
-public class GameOverMenuLayer extends BasicLayer {
+public class GameOverMenuLayer extends MenuLayer {
 
 	public GameOverMenuLayer() {
 		super();
@@ -53,7 +53,7 @@ public class GameOverMenuLayer extends BasicLayer {
 
 		cmMenu.setAnchorPoint(1, 1);
 		cmMenu.alignItemsVertically();
-		cmMenu.alignItemsVertically(10f);
+		cmMenu.alignItemsVertically(20f);
 		float offsetX = 0f;
 		float offsetY = 0f;
 		for (CCNode child : cmMenu.getChildren()) {

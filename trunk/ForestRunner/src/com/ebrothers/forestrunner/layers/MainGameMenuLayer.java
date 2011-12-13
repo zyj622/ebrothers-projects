@@ -21,17 +21,17 @@ import com.ebrothers.forestrunner.manager.SoundManager;
  * 
  */
 
-public class MainGameMenuLayer extends BasicLayer {
+public class MainGameMenuLayer extends MenuLayer {
 	CCMenu cmMenuOpen;
 	CCMenu cmMenuClose;
+	private DifficultyDialog difficultyDialog;
 
 	public MainGameMenuLayer() {
 		super();
-
 		// 游戏名字
 		CCSprite spriteName = getNode("word.png", winW * 9 / 10, winH * 9 / 10,
 				1, 1);
-		addChild(spriteName, 4);
+		addChild(spriteName);
 
 		/*****************************************************************************/
 		// 游戏菜单
@@ -42,6 +42,14 @@ public class MainGameMenuLayer extends BasicLayer {
 		cmsStart.setScaleX(Game.scale_ratio_x);
 		cmsStart.setScaleY(Game.scale_ratio_y);
 		cmsStart.setAnchorPoint(1, 1);
+
+		CCSprite spriteDifficulty1 = getNode("button_difficuty01.png", 0, 0);
+		CCSprite spriteDifficulty2 = getNode("button_difficuty02.png", 0, 0);
+		CCMenuItemSprite cmsDifficulty = CCMenuItemSprite.item(
+				spriteDifficulty1, spriteDifficulty2, this, "setDifficulty");
+		cmsDifficulty.setScaleX(Game.scale_ratio_x);
+		cmsDifficulty.setScaleY(Game.scale_ratio_y);
+		cmsDifficulty.setAnchorPoint(1, 1);
 
 		CCSprite spriteHigh = getNode("button_high01.png", 0, 0);
 		CCSprite spriteHighSelect = getNode("button_high02.png", 0, 0);
@@ -60,10 +68,10 @@ public class MainGameMenuLayer extends BasicLayer {
 		cmsMore.setScaleY(Game.scale_ratio_y);
 		cmsMore.setAnchorPoint(1, 1);
 
-		CCMenu cmMenu = CCMenu.menu(cmsStart, cmsHigh, cmsMore);
+		CCMenu cmMenu = CCMenu.menu(cmsStart, cmsDifficulty, cmsHigh, cmsMore);
 		cmMenu.setAnchorPoint(1, 1);
 		cmMenu.alignItemsVertically();
-		cmMenu.alignItemsVertically(20f);
+		cmMenu.alignItemsVertically(10f);
 		float offsetX = 0f;
 		float offsetY = 0f;
 		for (CCNode child : cmMenu.getChildren()) {
@@ -86,7 +94,7 @@ public class MainGameMenuLayer extends BasicLayer {
 		cmMenuClose.alignItemsVertically();
 
 		cmMenuClose.setPosition(winW - 15, 15);
-		addChild(cmMenuClose, 6);
+		addChild(cmMenuClose);
 
 		CCSprite spriteSoundOpen = getNode("sound02.png", 0, 0);
 		CCMenuItemSprite cmsSoundOpen = CCMenuItemSprite.item(spriteSoundOpen,
@@ -98,7 +106,7 @@ public class MainGameMenuLayer extends BasicLayer {
 
 		cmMenuOpen.setPosition(winW - 15, 15);
 
-		addChild(cmMenuOpen, 6);
+		addChild(cmMenuOpen);
 
 		// 设置声音图标
 		boolean sound = (Boolean) LocalDataManager.getInstance().readSetting(
@@ -120,7 +128,9 @@ public class MainGameMenuLayer extends BasicLayer {
 		CCMenu cmMenuShare = CCMenu.menu(cmsShare);
 		cmMenuShare.setPosition(winW, winH);
 
-		addChild(cmMenuShare, 6);
+		addChild(cmMenuShare);
+
+		difficultyDialog = DifficultyDialog.dialog(this);
 	}
 
 	/**
@@ -187,13 +197,21 @@ public class MainGameMenuLayer extends BasicLayer {
 		SceneManager.sharedSceneManager().replaceTo(SceneManager.SCENE_STAGES);
 	}
 
+	public void setDifficulty(Object o) {
+		SoundManager.sharedSoundManager().playEffect(SoundManager.MUSIC_BUTTON);
+		if (difficultyDialog != null && !difficultyDialog.isShown()) {
+			difficultyDialog.show();
+		}
+	}
+
 	/**
 	 * 
 	 * @param o
 	 */
 	public void startHigh(Object o) {
 		SoundManager.sharedSoundManager().playEffect(SoundManager.MUSIC_BUTTON);
-		SceneManager.sharedSceneManager().replaceTo(SceneManager.SCENE_HIGHSCORE);
+		SceneManager.sharedSceneManager().replaceTo(
+				SceneManager.SCENE_HIGHSCORE);
 	}
 
 }

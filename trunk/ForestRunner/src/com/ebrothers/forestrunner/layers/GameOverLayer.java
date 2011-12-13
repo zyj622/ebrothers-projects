@@ -6,7 +6,7 @@ import org.cocos2d.types.ccColor3B;
 
 import com.ebrothers.forestrunner.common.Game;
 
-public class GameOverLayer extends BasicLayer {
+public class GameOverLayer extends MenuLayer {
 
 	public GameOverLayer(long score) {
 		super();

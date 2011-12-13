@@ -10,7 +10,7 @@ import com.ebrothers.forestrunner.sprites.Cloud;
  * @author Administrator
  * 
  */
-public class MainGameBackgroundLayer extends BasicLayer {
+public class MainGameBackgroundLayer extends MenuLayer {
 
 	public MainGameBackgroundLayer() {
 		super();

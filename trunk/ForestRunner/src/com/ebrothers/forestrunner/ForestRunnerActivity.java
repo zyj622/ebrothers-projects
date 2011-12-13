@@ -7,9 +7,6 @@ import org.cocos2d.opengl.CCGLSurfaceView;
 import org.cocos2d.types.CGSize;
 
 import android.app.Activity;
-import android.app.AlertDialog.Builder;
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.Window;
@@ -107,32 +104,29 @@ public class ForestRunnerActivity extends Activity {
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
 			// 后退键场景切换
-			if (!SceneManager.sharedSceneManager().backTo()) {
-				showDialog();
-			}
+			SceneManager.sharedSceneManager().backTo();
 		}
 		return true;
 	}
-
-	private void showDialog() {
-		Builder builder = new Builder(this);
-		// 设置对话框的标题
-		builder.setTitle("Exit");
-		// 设置对话框的提示文本
-		builder.setMessage("Are you sure you want to quit the game?");
-		// 监听左侧按钮
-		builder.setPositiveButton("Exit", new OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				ForestRunnerActivity.this.finish();
-			}
-		});
-		// 监听右侧按钮
-		builder.setNegativeButton("Keep Playing", new OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-			}
-		});
-		builder.show();
-	}
+	// private void showDialog() {
+	// Builder builder = new Builder(this);
+	// // 设置对话框的标题
+	// builder.setTitle("Exit");
+	// // 设置对话框的提示文本
+	// builder.setMessage("Are you sure you want to quit the game?");
+	// // 监听左侧按钮
+	// builder.setPositiveButton("Exit", new OnClickListener() {
+	// @Override
+	// public void onClick(DialogInterface dialog, int which) {
+	// ForestRunnerActivity.this.finish();
+	// }
+	// });
+	// // 监听右侧按钮
+	// builder.setNegativeButton("Keep Playing", new OnClickListener() {
+	// @Override
+	// public void onClick(DialogInterface dialog, int which) {
+	// }
+	// });
+	// builder.show();
+	// }
 }
