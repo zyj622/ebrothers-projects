@@ -16,4 +16,8 @@ public interface Constants {
 	public static final int LEVEL_FIVE = 70000;
 	public static final int LEVEL_SIX = 75000;
 	
+	public static final String EASY = "easy";
+	public static final String NORMAL = "normal";
+	public static final String DIFFICULTY = "difficulty";
+	
 }
