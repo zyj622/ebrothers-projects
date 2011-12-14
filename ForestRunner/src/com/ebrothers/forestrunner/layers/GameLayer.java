@@ -36,6 +36,7 @@ import com.ebrothers.forestrunner.manager.LocalDataManager;
 import com.ebrothers.forestrunner.manager.SceneManager;
 import com.ebrothers.forestrunner.manager.SoundManager;
 import com.ebrothers.forestrunner.sprites.Background;
+import com.ebrothers.forestrunner.sprites.Box;
 import com.ebrothers.forestrunner.sprites.Dinosaur;
 import com.ebrothers.forestrunner.sprites.GameSprite;
 import com.ebrothers.forestrunner.sprites.Runner;
@@ -61,7 +62,9 @@ public class GameLayer extends CCLayer implements UpdateCallback, GameDelegate {
 	private CCBitmapFontAtlas life;
 	// collision object
 	private GameSprite[] collisionObjects;
+	private GameSprite[] triggerObjects;
 	private int co_index = 0;
+	private int to_index = 0;
 	private CGRect runnerRect;
 	private CGRect objectRect;
 	private int remainLives = Game.LIFE_AMOUNT;
@@ -108,25 +111,35 @@ public class GameLayer extends CCLayer implements UpdateCallback, GameDelegate {
 
 		// get all collision objects
 		ArrayList<GameSprite> collisions = new ArrayList<GameSprite>();
+		ArrayList<GameSprite> triggers = new ArrayList<GameSprite>();
 		List<CCNode> childSprites = ground.getChildren();
 		if (childSprites != null && !childSprites.isEmpty()) {
 			int size = childSprites.size();
 			for (int j = 0; j < size; j++) {
 				CCNode node = childSprites.get(j);
-				if (node instanceof GameSprite
-						&& ((GameSprite) node).canCollision()) {
-					collisions.add((GameSprite) node);
+				if (node instanceof GameSprite) {
+					GameSprite o = (GameSprite) node;
+					if (o.canCollision()) {
+						collisions.add(o);
+					}
+					if (o.canTrigger()) {
+						triggers.add(o);
+					}
 				}
 			}
 		}
-		Collections.sort(collisions, new Comparator<GameSprite>() {
+		Comparator<GameSprite> comparator = new Comparator<GameSprite>() {
 			public int compare(GameSprite object1, GameSprite object2) {
 				return Float.compare(object1.getPosition().x,
 						object2.getPosition().x);
 			}
-		});
-		collisionObjects = collisions
-				.toArray(new GameSprite[collisions.size()]);
+		};
+		Collections.sort(collisions, comparator);
+		Collections.sort(triggers, comparator);
+		collisionObjects = new GameSprite[collisions.size()];
+		collisionObjects = collisions.toArray(collisionObjects);
+		triggerObjects = new GameSprite[triggers.size()];
+		triggerObjects = triggers.toArray(triggerObjects);
 		// get all signs: stop and start sign
 		ArrayList<CGPoint> points = builder.getSignPoints();
 		Collections.sort(points, new Comparator<CGPoint>() {
@@ -134,7 +147,8 @@ public class GameLayer extends CCLayer implements UpdateCallback, GameDelegate {
 				return Float.compare(object1.x, object2.x);
 			}
 		});
-		signs = points.toArray(new CGPoint[points.size()]);
+		signs = new CGPoint[points.size()];
+		signs = points.toArray(signs);
 
 		// init runner
 		runner = new Runner();
@@ -173,14 +187,14 @@ public class GameLayer extends CCLayer implements UpdateCallback, GameDelegate {
 		root.addChild(lifeIcon);
 
 		// pause/resume
-		GameSprite resumeSprite = GameSprite.sprite("pause02.png");
 		GameSprite pauseSprite = GameSprite.sprite("pause01.png");
-		CCMenuItemSprite resume = CCMenuItemSprite.item(resumeSprite,
-				resumeSprite);
+		GameSprite resumeSprite = GameSprite.sprite("pause02.png");
 		CCMenuItemSprite pause = CCMenuItemSprite
 				.item(pauseSprite, pauseSprite);
-		pauseToggle = CCMenuItemToggle.item(this, "onPauseOrResume", resume,
-				pause);
+		CCMenuItemSprite resume = CCMenuItemSprite.item(resumeSprite,
+				resumeSprite);
+		pauseToggle = CCMenuItemToggle.item(this, "onPauseOrResume", pause,
+				resume);
 		pauseToggle.setPosition(25, 25);
 		CCMenu menu = CCMenu.menu(pauseToggle);
 		menu.setScale(Game.scale_ratio);
@@ -198,7 +212,7 @@ public class GameLayer extends CCLayer implements UpdateCallback, GameDelegate {
 
 		runnerRect = CGRect.zero();
 		objectRect = CGRect.zero();
-		states_bak = new int[3];
+		states_bak = new int[4];
 
 		runner2RScreen = CCDirector.sharedDirector().winSize().width
 				* Game.scale_ratio - getRunnerRX2Screen();
@@ -331,6 +345,7 @@ public class GameLayer extends CCLayer implements UpdateCallback, GameDelegate {
 					CCMoveBy.action(during, CGPoint.ccp(distance, 0)),
 					CCCallFunc.action(this, "winGame")));
 		}
+
 		float runnerRx = getRunnerRx();
 		float runnerLx = getRunnerLx();
 		float runnerRy = getRunnerRy(runnerRx);
@@ -358,6 +373,36 @@ public class GameLayer extends CCLayer implements UpdateCallback, GameDelegate {
 			}
 		}
 
+		if (runner.isJumping() && currY < runnerRy) {
+			runner.knockDown();
+			stopPlatform();
+			ground.runAction(CCSequence.actions(
+					CCMoveBy.action(0.6f, CGPoint.ccp(150, 0)),
+					CCCallFunc.action(this, "loseGame")));
+			return;
+		}
+
+		GameSprite[] tos = triggerObjects;
+		if (to_index < tos.length) {
+			GameSprite o = triggerObjects[to_index];
+			float objectLx = o.getPosition().x - o.getTextureRect().size.width
+					/ 2f;
+			if (o instanceof Trap) {
+				Trap trap = (Trap) o;
+				if (!trap.isTriggered() && (objectLx - runnerRx) < 200) {
+					trap.trigger();
+					to_index++;
+				}
+			} else if (o instanceof Dinosaur) {
+				Dinosaur dinosaur = (Dinosaur) o;
+				if (!dinosaur.isRushed()
+						&& (objectLx - runnerRx) < runner2RScreen) {
+					dinosaur.rush();
+					to_index++;
+				}
+			}
+		}
+
 		GameSprite[] objects = collisionObjects;
 		if (co_index >= objects.length) {
 			return;
@@ -370,24 +415,8 @@ public class GameLayer extends CCLayer implements UpdateCallback, GameDelegate {
 				return;
 			}
 		}
-		GameSprite object = objects[co_index];
-		CGPoint position = object.getPosition();
-		CGSize objectSize = object.getTextureRect().size;
-		float objectLx = position.x - objectSize.width / 2f;
 
-		if (object instanceof Trap) {
-			Trap trap = (Trap) object;
-			if (!trap.isTriggered() && (objectLx - runnerRx) < 200) {
-				trap.trigger();
-			}
-		} else if (object instanceof Dinosaur) {
-			Dinosaur dinosaur = (Dinosaur) object;
-			if (!dinosaur.isRushed() && (objectLx - runnerRx) < runner2RScreen) {
-				dinosaur.rush();
-			}
-		}
-
-		detectCollision(runnerLx, runnerRx, currY);
+		detectCollision();
 
 		if (sign_index >= signs.length) {
 			return;
@@ -398,17 +427,24 @@ public class GameLayer extends CCLayer implements UpdateCallback, GameDelegate {
 			states_bak[0] = lbp_index;
 			states_bak[1] = rbp_index;
 			states_bak[2] = co_index;
+			states_bak[3] = to_index;
 			sign_index++;
 		}
 	}
 
-	private void detectCollision(float runnerLx, float runnerRx, float currY) {
+	private void detectCollision() {
 		GameSprite[] objects = collisionObjects;
+		if (co_index >= objects.length) {
+			return;
+		}
 		GameSprite object = objects[co_index];
 		CGPoint position = object.getPosition();
-		float objWidth = object.getBoundingWidth();
-		float objHeight = object.getBoundingHeight();
+		float objWidth = object.getTextureRect().size.width;
+		float objHeight = object.getTextureRect().size.height;
 		float objectLx = position.x - objWidth / 2f;
+		float currY = runner.getPosition().y - Runner.y_offset;
+		float runnerRx = getRunnerRx();
+		float runnerLx = getRunnerLx();
 		objectRect.set(objectLx, position.y, objWidth, objHeight);
 		runnerRect.set(runnerLx, currY, runner.getBoundingWidth(),
 				runner.getBoundingHeight());
@@ -420,11 +456,16 @@ public class GameLayer extends CCLayer implements UpdateCallback, GameDelegate {
 					+ ", objectRect=" + objectRect + ", object=" + object);
 			runner.onStartContact(object);
 			object.onStartContact(runner);
+			if (object instanceof Box || object instanceof Trap) {
+				ground.runAction(CCSequence.actions(
+						CCMoveBy.action(0.6f, CGPoint.ccp(150, 0)),
+						CCCallFunc.action(this, "loseGame")));
+			}
 			co_index++;
-			detectCollision(runnerLx, runnerRx, currY);
+			detectCollision();
 		} else if (runnerRx > position.x) {
 			co_index++;
-			detectCollision(runnerLx, runnerRx, currY);
+			detectCollision();
 		}
 	}
 
@@ -441,8 +482,9 @@ public class GameLayer extends CCLayer implements UpdateCallback, GameDelegate {
 	}
 
 	public float getFutureY(float futureX) {
-		for (int i = 0; i < _bp_x.length; i++) {
-			if (futureX < _bp_x[i]) {
+		float[] bp_x = _bp_x;
+		for (int i = 0; i < bp_x.length; i++) {
+			if (futureX < bp_x[i]) {
 				return _bp_y[i];
 			}
 		}
@@ -489,6 +531,7 @@ public class GameLayer extends CCLayer implements UpdateCallback, GameDelegate {
 	}
 
 	private void stopPlatform() {
+		setIsTouchEnabled(false);
 		pauseSchedulerAndActions();
 		background.pauseSchedulerAndActions();
 		ground.stopAllActions();
@@ -502,6 +545,7 @@ public class GameLayer extends CCLayer implements UpdateCallback, GameDelegate {
 
 	private void resetGame() {
 		SoundManager.sharedSoundManager().playEffect(SoundManager.MUSIC_RELIVE);
+		setIsTouchEnabled(false);
 		resetStates();
 		CGPoint restartPoint = signs[sign_index];
 		// restore all collision objects
@@ -518,6 +562,7 @@ public class GameLayer extends CCLayer implements UpdateCallback, GameDelegate {
 	}
 
 	public void restartGame(Object o, Object d) {
+		setIsTouchEnabled(true);
 		resumeSchedulerAndActions();
 		float winWidth = CCDirector.sharedDirector().winSize().width;
 		float moveDistance = totalWidth - winWidth;
@@ -541,6 +586,7 @@ public class GameLayer extends CCLayer implements UpdateCallback, GameDelegate {
 		rbp_index = states_bak[1];
 		// reset co_index
 		co_index = states_bak[2];
+		to_index = states_bak[3];
 		Logger.d(TAG, "resetStates. sign_index=" + sign_index + ", lbp_index="
 				+ lbp_index + ", rbp_index=" + rbp_index + ", co_index="
 				+ co_index);

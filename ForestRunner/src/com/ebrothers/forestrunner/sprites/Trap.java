@@ -38,6 +38,11 @@ public class Trap extends GameSprite {
 	}
 
 	@Override
+	public boolean canTrigger() {
+		return true;
+	}
+
+	@Override
 	public void onStartContact(GameSprite target) {
 		SoundManager.sharedSoundManager().playEffect(SoundManager.MUSIC_TRAP);
 	}

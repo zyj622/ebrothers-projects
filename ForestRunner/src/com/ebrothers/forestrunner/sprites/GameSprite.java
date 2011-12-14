@@ -92,6 +92,10 @@ public class GameSprite extends CCSprite {
 		return false;
 	}
 
+	public boolean canTrigger() {
+		return false;
+	}
+
 	public float getBoundingWidth() {
 		return getTextureRect().size.width * Game.scale_ratio;
 	}
