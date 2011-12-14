@@ -9,7 +9,9 @@ public class LocalDataManager {
 	// 用户配置数据
 	public static final String SOUND = "sound";
 	public static final String PASSED = "passed";
-
+	
+	public static final String DIFFICULTY_KEY = "difficulty";
+	
 	private static LocalDataManager instance;
 
 	private SharedPreferences settings = null;
