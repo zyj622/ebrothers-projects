@@ -3,6 +3,7 @@ package com.ebrothers.forestrunner.sprites;
 import java.util.ArrayList;
 
 import org.cocos2d.actions.instant.CCCallFunc;
+import org.cocos2d.actions.instant.CCCallFuncND;
 import org.cocos2d.actions.interval.CCJumpTo;
 import org.cocos2d.actions.interval.CCMoveBy;
 import org.cocos2d.actions.interval.CCMoveTo;
@@ -17,13 +18,14 @@ import com.ebrothers.forestrunner.manager.SoundManager;
 
 public class Runner extends GameSprite {
 	private static final String TAG = "Runner";
-	public static final int RELATIVE_SCREEN_LEFT = 100;
+	public static final int RELATIVE_SCREEN_LEFT = 120;
 	public static final float JUMP_DURING_LONG = .7f;
 	public static final float JUMP_DURING_SHORT = .6f;
 	public static final float FALL_DURING = .2f;
 	public static float y_offset;
 	private boolean acting;
 	public float baseY;
+	private boolean jumping;
 
 	public Runner() {
 		super("man01.png");
@@ -94,6 +96,7 @@ public class Runner extends GameSprite {
 
 	public void jump(float y) {
 		if (!acting) {
+			jumping = true;
 			SoundManager.sharedSoundManager().playEffect(
 					SoundManager.MUSIC_JUMP);
 			stopAllActions();
@@ -107,16 +110,17 @@ public class Runner extends GameSprite {
 			}
 			runAction(CCSequence.actions(
 					CCJumpTo.action(during, to, jHeight, 1),
-					CCCallFunc.action(this, "jumpDone")));
-			baseY = y;
+					CCCallFuncND.action(this, "jumpDone", y)));
 			acting = true;
 		}
 	}
 
-	public void jumpDone() {
+	public void jumpDone(Object t, Object d) {
+		baseY = (Float) d;
 		SoundManager.sharedSoundManager().playEffect(
 				SoundManager.MUSIC_JUMPDOWN);
 		actionDone();
+		jumping = false;
 	}
 
 	public void jumpToGap(Object target, String selector) {
@@ -161,19 +165,18 @@ public class Runner extends GameSprite {
 	}
 
 	public void knockDown() {
-		if (!acting) {
-			SoundManager.sharedSoundManager().playEffect(
-					SoundManager.MUSIC_UPSLOPE);
-			stopAllActions();
-			playeAnimation("knockDown", this, "knockDownDone");
-			acting = true;
-		}
+		SoundManager.sharedSoundManager()
+				.playEffect(SoundManager.MUSIC_UPSLOPE);
+		stopAllActions();
+		playeAnimation("knockDown", this, "knockDownDone");
 	}
 
 	public void knockDownDone() {
 		stopAllActions();
-		runAction(CCSequence
-				.actions(CCMoveBy.action(0.2f, CGPoint.ccp(0, -60))));
+		runAction(CCSequence.actions(CCMoveBy.action(
+				0.2f,
+				CGPoint.ccp(0, baseY - getPosition().y
+						+ getContentSize().height))));
 	}
 
 	public void loseGame() {
@@ -182,6 +185,7 @@ public class Runner extends GameSprite {
 
 	@Override
 	public void onStartContact(GameSprite target) {
+		Logger.d(TAG, "onStartContact. target=" + target);
 		if (target instanceof Fire || target instanceof Flower) {
 			stopAllActions();
 			setVisible(false);
@@ -190,8 +194,16 @@ public class Runner extends GameSprite {
 			playeAnimation("float", this, "loseGame");
 		} else if (target instanceof Box || target instanceof Trap) {
 			stopAllActions();
-			playeAnimation("knockDown1", this, "loseGame");
+			playeAnimation("knockDown1", this, "knockDown1Done");
 		}
+	}
+
+	public void knockDown1Done() {
+		stopAllActions();
+		runAction(CCSequence.actions(CCMoveBy.action(
+				0.2f,
+				CGPoint.ccp(0, baseY - getPosition().y
+						+ getContentSize().height))));
 	}
 
 	public void resetPosition(CGPoint restartPoint) {
@@ -204,5 +216,9 @@ public class Runner extends GameSprite {
 		baseY = restartPoint.y;
 		setPosition(RELATIVE_SCREEN_LEFT, baseY + y_offset);
 		acting = false;
+	}
+
+	public boolean isJumping() {
+		return jumping;
 	}
 }

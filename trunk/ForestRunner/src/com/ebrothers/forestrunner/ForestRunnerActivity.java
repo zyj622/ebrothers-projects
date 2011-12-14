@@ -69,7 +69,7 @@ public class ForestRunnerActivity extends Activity {
 
 		// show FPS
 		// set false to disable FPS display, but don't delete fps_images.png!!
-		CCDirector.sharedDirector().setDisplayFPS(true);
+		CCDirector.sharedDirector().setDisplayFPS(false);
 
 		// frames per second
 		CCDirector.sharedDirector().setAnimationInterval(1f / 60);
