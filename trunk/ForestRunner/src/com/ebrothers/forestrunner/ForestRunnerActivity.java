@@ -69,7 +69,7 @@ public class ForestRunnerActivity extends Activity {
 
 		// show FPS
 		// set false to disable FPS display, but don't delete fps_images.png!!
-		CCDirector.sharedDirector().setDisplayFPS(false);
+		CCDirector.sharedDirector().setDisplayFPS(true);
 
 		// frames per second
 		CCDirector.sharedDirector().setAnimationInterval(1f / 60);
@@ -104,29 +104,18 @@ public class ForestRunnerActivity extends Activity {
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
 			// 后退键场景切换
-			SceneManager.sharedSceneManager().backTo();
+			if (!SceneManager.sharedSceneManager().backTo()) {
+				// CustomAlertDialog.showExitConfirmDialog(this,
+				// new OnClickListener() {
+				// @Override
+				// public void onClick(DialogInterface dialog,
+				// int which) {
+				// ForestRunnerActivity.this.finish();
+				// }
+				// });
+			}
 		}
 		return true;
 	}
-	// private void showDialog() {
-	// Builder builder = new Builder(this);
-	// // 设置对话框的标题
-	// builder.setTitle("Exit");
-	// // 设置对话框的提示文本
-	// builder.setMessage("Are you sure you want to quit the game?");
-	// // 监听左侧按钮
-	// builder.setPositiveButton("Exit", new OnClickListener() {
-	// @Override
-	// public void onClick(DialogInterface dialog, int which) {
-	// ForestRunnerActivity.this.finish();
-	// }
-	// });
-	// // 监听右侧按钮
-	// builder.setNegativeButton("Keep Playing", new OnClickListener() {
-	// @Override
-	// public void onClick(DialogInterface dialog, int which) {
-	// }
-	// });
-	// builder.show();
-	// }
+
 }

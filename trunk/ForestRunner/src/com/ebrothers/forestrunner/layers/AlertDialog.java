@@ -9,6 +9,8 @@ import org.cocos2d.nodes.CCSpriteFrameCache;
 import org.cocos2d.opengl.CCBitmapFontAtlas;
 import org.cocos2d.types.CGSize;
 
+import com.ebrothers.forestrunner.common.Game;
+
 public class AlertDialog extends AbstractDialog {
 
 	public AlertDialog(CCNode parent) {
@@ -39,12 +41,14 @@ public class AlertDialog extends AbstractDialog {
 			title = CCBitmapFontAtlas.bitmapFontAtlas(text, fntFile);
 			title.setAnchorPoint(0, 0);
 			title.setPosition(20, -20);
+			title.setScale(Game.scale_ratio);
 			return this;
 		}
 
 		public Builder setMessage(String msg, String fntFile) {
 			message = CCBitmapFontAtlas.bitmapFontAtlas(msg, fntFile);
 			message.setAnchorPoint(0, 1);
+			message.setScale(Game.scale_ratio);
 			return this;
 		}
 

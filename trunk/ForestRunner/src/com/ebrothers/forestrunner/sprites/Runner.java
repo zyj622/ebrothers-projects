@@ -18,7 +18,7 @@ import com.ebrothers.forestrunner.manager.SoundManager;
 
 public class Runner extends GameSprite {
 	private static final String TAG = "Runner";
-	public static final int RELATIVE_SCREEN_LEFT = 120;
+	public static final float RELATIVE_SCREEN_LEFT = 80 * Game.scale_ratio;
 	public static final float JUMP_DURING_LONG = .7f;
 	public static final float JUMP_DURING_SHORT = .6f;
 	public static final float FALL_DURING = .2f;
@@ -30,7 +30,7 @@ public class Runner extends GameSprite {
 	public Runner() {
 		super("man01.png");
 		setAnchorPoint(0, 1);
-		y_offset = getBoundingHeight() - 5;
+		y_offset = getBoundingHeight() - 4 * Game.scale_ratio;
 		Logger.d(TAG, "Runner. y_offset=" + y_offset);
 		baseY = Game.groundM_y;
 		setPosition(RELATIVE_SCREEN_LEFT, baseY + y_offset);
@@ -70,12 +70,6 @@ public class Runner extends GameSprite {
 	}
 
 	@Override
-	public void onEnter() {
-		super.onEnter();
-		playeLoopAnimation("run");
-	}
-
-	@Override
 	public boolean canCollision() {
 		return true;
 	}
@@ -95,6 +89,7 @@ public class Runner extends GameSprite {
 	}
 
 	public void jump(float y) {
+		Logger.d(TAG, "jump. y=" + y);
 		if (!acting) {
 			jumping = true;
 			SoundManager.sharedSoundManager().playEffect(
@@ -102,10 +97,10 @@ public class Runner extends GameSprite {
 			stopAllActions();
 			playeDelayAnimation("jump", 0.2f, "fallToGround");
 			CGPoint to = CGPoint.ccp(getPosition().x, y + y_offset);
-			float jHeight = 150;
+			float jHeight = 100 * Game.scale_ratio;
 			float during = JUMP_DURING_LONG;
 			if (y > baseY) {
-				jHeight = 90;
+				jHeight = 60 * Game.scale_ratio;
 				during = JUMP_DURING_SHORT;
 			}
 			runAction(CCSequence.actions(
@@ -127,10 +122,10 @@ public class Runner extends GameSprite {
 		if (!acting) {
 			stopAllActions();
 			playeDelayAnimation("jump", 0.2f, "fallToGround");
-			runAction(CCSequence.actions(
-					CCJumpTo.action(JUMP_DURING_LONG, getPosition(), 150, 1),
-					CCCallFunc.action(this, "actionDone"),
-					CCCallFunc.action(target, selector)));
+			runAction(CCSequence.actions(CCJumpTo.action(JUMP_DURING_LONG,
+					getPosition(), 100 * Game.scale_ratio, 1), CCCallFunc
+					.action(this, "actionDone"), CCCallFunc.action(target,
+					selector)));
 			acting = true;
 		}
 	}
@@ -165,6 +160,7 @@ public class Runner extends GameSprite {
 	}
 
 	public void knockDown() {
+		Logger.d(TAG, "knockDown.");
 		SoundManager.sharedSoundManager()
 				.playEffect(SoundManager.MUSIC_UPSLOPE);
 		stopAllActions();

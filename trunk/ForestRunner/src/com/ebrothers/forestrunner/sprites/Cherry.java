@@ -36,7 +36,7 @@ public class Cherry extends GameSprite {
 			boolean offset) {
 		Cherry cherry = new Cherry();
 		cherry.setPosition(cx - 1, cherry.getBoundingHeight() / 2f
-				+ (offset ? cy + 110 : cy));
+				+ (offset ? cy + 75 * Game.scale_ratio : cy));
 		parent.addChild(cherry);
 	}
 

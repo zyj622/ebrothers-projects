@@ -4,6 +4,7 @@ import org.cocos2d.nodes.CCSprite;
 import org.cocos2d.opengl.CCBitmapFontAtlas;
 import org.cocos2d.types.ccColor3B;
 
+import com.ebrothers.forestrunner.common.Game;
 import com.ebrothers.forestrunner.common.Levels;
 import com.ebrothers.forestrunner.manager.LocalDataManager;
 
@@ -62,6 +63,7 @@ public class HighScoreLayer extends MenuLayer {
 			int fontSize) {
 		CCBitmapFontAtlas score = CCBitmapFontAtlas.bitmapFontAtlas(content,
 				"font1.fnt");
+		score.setScale(Game.scale_ratio);
 		score.setPosition(x, y);
 		score.setColor(ccColor3B.ccc3(156, 97, 0));
 		return score;

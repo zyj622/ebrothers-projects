@@ -21,6 +21,7 @@ public class GameOverLayer extends MenuLayer {
 
 		CCBitmapFontAtlas scoreAtlas = CCBitmapFontAtlas.bitmapFontAtlas(
 				"Score:" + score, "font1.fnt");
+		scoreAtlas.setScale(Game.scale_ratio);
 		scoreAtlas.setAnchorPoint(1, 1);
 		scoreAtlas.setPosition(winW * 9.3f / 10, winH * 6.0f / 8);
 		addChild(scoreAtlas, 3);

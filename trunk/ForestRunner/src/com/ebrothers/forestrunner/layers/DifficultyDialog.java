@@ -55,14 +55,15 @@ public class DifficultyDialog extends AbstractDialog {
 		addChild(menu, 2);
 
 		CCBitmapFontAtlas difficultyAtlasNormal = CCBitmapFontAtlas
-				.bitmapFontAtlas("Difficulty", "font1.fnt");
+				.bitmapFontAtlas("Hard", "font1.fnt");
 		difficultyAtlasNormal.setColor(ccColor3B.ccc3(156, 97, 0));
 		CCBitmapFontAtlas difficultyAtlasPress = CCBitmapFontAtlas
-				.bitmapFontAtlas("Difficulty", "font1.fnt");
+				.bitmapFontAtlas("Hard", "font1.fnt");
 		difficultyAtlasPress.setColor(ccColor3B.ccRED);
 		CCMenuItemSprite difficulty = CCMenuItemSprite.item(
 				difficultyAtlasNormal, difficultyAtlasPress, this,
 				"difficultySelect");
+		difficulty.setScale(Game.scale_ratio);
 		difficulty.setTag(1);
 		difficulty.setAnchorPoint(0, 1);
 		CCMenu difficultyMenu = CCMenu.menu(difficulty);
@@ -78,6 +79,7 @@ public class DifficultyDialog extends AbstractDialog {
 		normalAtlasPress.setColor(ccColor3B.ccRED);
 		CCMenuItemSprite normal = CCMenuItemSprite.item(normalAtlasNormal,
 				normalAtlasPress, this, "difficultySelect");
+		normal.setScale(Game.scale_ratio);
 		normal.setTag(2);
 		normal.setAnchorPoint(0, 0.5f);
 		CCMenu normalMenu = CCMenu.menu(normal);
@@ -93,6 +95,7 @@ public class DifficultyDialog extends AbstractDialog {
 		easyAtlasPress.setColor(ccColor3B.ccRED);
 		CCMenuItemSprite easy = CCMenuItemSprite.item(easyAtlasNormal,
 				easyAtlasPress, this, "difficultySelect");
+		easy.setScale(Game.scale_ratio);
 		easy.setTag(3);
 		easy.setAnchorPoint(0, 0.1f);
 		CCMenu easyMenu = CCMenu.menu(easy);

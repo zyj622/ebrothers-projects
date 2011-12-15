@@ -138,43 +138,50 @@ public class GameLevelBuilder {
 				break;
 			case SpriteType.DINORSAUR_1:
 				sprite = Dinosaur.dinosaur(Dinosaur.DINOSAUR_1);
-				sprite.setPosition(parentLeft + child.rx, parentTop - 15);
+				sprite.setPosition(parentLeft + child.rx, parentTop - 10
+						* Game.scale_ratio);
 				parent.addChild(sprite);
 				break;
 			case SpriteType.DINORSAUR_2:
 				sprite = Dinosaur.dinosaur(Dinosaur.DINOSAUR_2);
-				sprite.setPosition(parentLeft + child.rx, parentTop - 15);
+				sprite.setPosition(parentLeft + child.rx, parentTop - 10
+						* Game.scale_ratio);
 				parent.addChild(sprite);
 				break;
 			case SpriteType.DINORSAUR_3:
 				sprite = Dinosaur.dinosaur(Dinosaur.DINOSAUR_3);
-				sprite.setPosition(parentLeft + child.rx, parentTop - 15);
+				sprite.setPosition(parentLeft + child.rx, parentTop - 10
+						* Game.scale_ratio);
 				parent.addChild(sprite);
 				break;
 			case SpriteType.FIRE:
 				sprite = new Fire();
-				sprite.setPosition(parentLeft + child.rx, parentTop - 8);
+				sprite.setPosition(parentLeft + child.rx, parentTop - 6
+						* Game.scale_ratio);
 				parent.addChild(sprite, 1);
 				Cherry.addOnTop(parent, parentLeft + child.rx, parentTop, true);
 				Banana.addOn2Sides4(parent, parentLeft + child.rx, parentTop);
 				break;
 			case SpriteType.FLOWER:
 				sprite = new Flower();
-				sprite.setPosition(parentLeft + child.rx, parentTop - 4);
+				sprite.setPosition(parentLeft + child.rx, parentTop - 2
+						* Game.scale_ratio);
 				parent.addChild(sprite, 1);
 				Cherry.addOnTop(parent, parentLeft + child.rx, parentTop, true);
 				Banana.addOn2Sides4(parent, parentLeft + child.rx, parentTop);
 				break;
 			case SpriteType.GO_SIGN:
 				sprite = new GoSign();
-				sprite.setPosition(parentLeft + child.rx, parentTop - 4);
+				sprite.setPosition(parentLeft + child.rx, parentTop - 2
+						* Game.scale_ratio);
 				parent.addChild(sprite);
 				Banana.addOn2Sides2(parent, parentLeft + child.rx, parentTop);
 				signs.add(CGPoint.ccp(parentLeft + child.rx, parentTop));
 				break;
 			case SpriteType.STOP_SIGN:
 				sprite = new StopSign();
-				sprite.setPosition(parentLeft + child.rx, parentTop - 4);
+				sprite.setPosition(parentLeft + child.rx, parentTop - 2
+						* Game.scale_ratio);
 				parent.addChild(sprite);
 				Banana.addOn2Sides2(parent, parentLeft + child.rx, parentTop);
 				signs.add(CGPoint.ccp(parentLeft + child.rx, parentTop));
@@ -186,7 +193,8 @@ public class GameLevelBuilder {
 				break;
 			case SpriteType.TRAP:
 				sprite = new Trap();
-				sprite.setPosition(parentLeft + child.rx, parentTop - 4);
+				sprite.setPosition(parentLeft + child.rx, parentTop - 2
+						* Game.scale_ratio);
 				parent.addChild(sprite);
 				Cherry.addOnTop(parent, parentLeft + child.rx, parentTop, true);
 				Banana.addOn2Sides4(parent, parentLeft + child.rx, parentTop);
@@ -201,25 +209,26 @@ public class GameLevelBuilder {
 		float paddingLeft = 0;
 		float paddingRight = 0;
 		if (isGroundType(preType) && preType > type) {
-			paddingLeft = 180;
+			paddingLeft = 120 * Game.scale_ratio;
 			left -= paddingLeft;
 			width += paddingLeft;
 		}
 		if (isGroundType(nextType) && nextType > type) {
-			paddingRight = 80;
+			paddingRight = 54 * Game.scale_ratio;
 			width += paddingRight;
 		}
 		createGround(parent, left, top, width);
 
-		if (width > 550f) {
+		if (width > 550f * Game.scale_ratio) {
 			GameSprite sprite = GameSprite.sprite("ground37.png");
 			sprite.setAnchorPoint(0, 1);
 			sprite.setPosition(350f + left, top - 55f * Game.scale_ratio);
 			parent.addChild(sprite, 1);
-		} else if (width > 400f) {
+		} else if (width > 400f * Game.scale_ratio) {
 			GameSprite sprite = GameSprite.sprite("ground38.png");
 			sprite.setAnchorPoint(0, 1);
-			sprite.setPosition(130f + left, top - 55f * Game.scale_ratio);
+			sprite.setPosition(130f * Game.scale_ratio + left, top - 55f
+					* Game.scale_ratio);
 			parent.addChild(sprite, 1);
 		}
 	}
@@ -250,8 +259,8 @@ public class GameLevelBuilder {
 				middle = Ground.ground(Ground.GROUND_M2);
 				flag = true;
 			}
-			if (maxX - currentX < 50) {
-				middle.setPosition(currentX - 50, top);
+			if (maxX - currentX < 34 * Game.scale_ratio) {
+				middle.setPosition(currentX - 34 * Game.scale_ratio, top);
 			} else {
 				middle.setPosition(currentX, top);
 			}
