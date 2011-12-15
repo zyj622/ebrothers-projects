@@ -27,7 +27,7 @@ public class MainScene extends CCScene {
 		Builder builder = new Builder(this);
 		builder.setBackground("alert_dialog_bg.png");
 		builder.getBackground().setScale(Game.scale_ratio);
-		builder.setMessage("Are you sure you want\nto exit?", "font1.fnt");
+		builder.setMessage("Are you sure you want to exit?", "font1.fnt");
 		builder.setNegativeButton("button_no01.png", "button_no02.png", this,
 				"onNo");
 		builder.setPositiveButton("button_yes01.png", "button_yes02.png", this,

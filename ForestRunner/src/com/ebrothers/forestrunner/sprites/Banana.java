@@ -34,13 +34,16 @@ public class Banana extends GameSprite {
 	public static void addAsTopTriangle(CCNode parent, float cx, float cy) {
 		Banana banana = new Banana();
 		cy += banana.getBoundingHeight() / 2f;
-		banana.setPosition(cx + 140, cy + 8);
+		banana.setPosition(cx + 93 * Game.scale_ratio, cy + 5
+				* Game.scale_ratio);
 		parent.addChild(banana);
 		banana = new Banana();
-		banana.setPosition(cx + 20, cy + 80);
+		banana.setPosition(cx + 14 * Game.scale_ratio, cy + 54
+				* Game.scale_ratio);
 		parent.addChild(banana);
 		banana = new Banana();
-		banana.setPosition(cx - 100, cy + 8);
+		banana.setPosition(cx - 67 * Game.scale_ratio, cy + 6
+				* Game.scale_ratio);
 		parent.addChild(banana);
 	}
 
@@ -48,19 +51,23 @@ public class Banana extends GameSprite {
 		// left top
 		Banana banana = new Banana();
 		cy += banana.getBoundingHeight() / 2f;
-		banana.setPosition(cx - 80, cy + 50);
+		banana.setPosition(cx - 54 * Game.scale_ratio, cy + 34
+				* Game.scale_ratio);
 		parent.addChild(banana);
 		// right top
 		banana = new Banana();
-		banana.setPosition(cx + 80, cy + 50);
+		banana.setPosition(cx + 54 * Game.scale_ratio, cy + 34
+				* Game.scale_ratio);
 		parent.addChild(banana);
 		// left bottomd
 		banana = new Banana();
-		banana.setPosition(cx - 100, cy + 5);
+		banana.setPosition(cx - 67 * Game.scale_ratio, cy + 4
+				* Game.scale_ratio);
 		parent.addChild(banana);
 		// right bottom
 		banana = new Banana();
-		banana.setPosition(cx + 100, cy + 5);
+		banana.setPosition(cx + 67 * Game.scale_ratio, cy + 4
+				* Game.scale_ratio);
 		parent.addChild(banana);
 	}
 
@@ -68,11 +75,11 @@ public class Banana extends GameSprite {
 		// left
 		Banana banana = new Banana();
 		cy += banana.getBoundingHeight() / 2f;
-		banana.setPosition(cx - 120, cy);
+		banana.setPosition(cx - 80 * Game.scale_ratio, cy);
 		parent.addChild(banana);
 		// right
 		banana = new Banana();
-		banana.setPosition(cx + 40, cy);
+		banana.setPosition(cx + 28 * Game.scale_ratio, cy);
 		parent.addChild(banana);
 	}
 

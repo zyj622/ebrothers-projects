@@ -52,7 +52,7 @@ public class GameLayer extends CCLayer implements UpdateCallback, GameDelegate {
 	private Background background;
 	private CCSequence moveAction;
 	// for break points
-	private static final float X_SPEED = 480f;// pixel/s
+	private static final float X_SPEED = 320f * Game.scale_ratio;// pixel/s
 	private float[] _bp_x;
 	private float[] _bp_y;
 	private int lbp_index = 0;
@@ -81,7 +81,6 @@ public class GameLayer extends CCLayer implements UpdateCallback, GameDelegate {
 	public GameLayer(String level) {
 		super();
 		Logger.d(TAG, "GameLayer init...");
-		setIsTouchEnabled(true);
 
 		root = CCSpriteSheet.spriteSheet("sprites.png", 500);
 		addChild(root);
@@ -158,12 +157,14 @@ public class GameLayer extends CCLayer implements UpdateCallback, GameDelegate {
 		CGSize winSize = CCDirector.sharedDirector().winSize();
 		GameSprite title = GameSprite.sprite("gameover_stage"
 				+ (Game.current_level + 1) + ".png");
-		title.setPosition(winSize.width / 2f, winSize.height - 40);
+		title.setPosition(winSize.width / 2f, winSize.height - 28
+				* Game.scale_ratio);
 		root.addChild(title);
 
 		// add score
 		GameSprite scoreIcon = GameSprite.sprite("score01.png");
-		scoreIcon.setPosition(40, winSize.height - 40);
+		scoreIcon.setPosition(28 * Game.scale_ratio, winSize.height - 28
+				* Game.scale_ratio);
 		root.addChild(scoreIcon);
 
 		score = CCBitmapFontAtlas.bitmapFontAtlas("+0", "font2.fnt");
@@ -177,7 +178,8 @@ public class GameLayer extends CCLayer implements UpdateCallback, GameDelegate {
 
 		// add life counter
 		life = CCBitmapFontAtlas.bitmapFontAtlas("×4", "font2.fnt");
-		life.setPosition(winSize.width - 40, winSize.height - 40);
+		life.setPosition(winSize.width - 28 * Game.scale_ratio, winSize.height
+				- 28 * Game.scale_ratio);
 		life.setScale(Game.scale_ratio);
 		addChild(life);
 
@@ -247,8 +249,15 @@ public class GameLayer extends CCLayer implements UpdateCallback, GameDelegate {
 		SoundManager.sharedSoundManager().playEffect(SoundManager.MUSIC_START);
 		SoundManager.sharedSoundManager().playSound(
 				SoundManager.MUSIC_BACKGROUND, true);
-		ground.runAction(moveAction);
+		runAction(CCSequence.actions(CCDelayTime.action(0.8f),
+				CCCallFunc.action(this, "onStartGame")));
 		schedule(this);
+	}
+
+	public void onStartGame() {
+		setIsTouchEnabled(true);
+		runner.run();
+		ground.runAction(moveAction);
 	}
 
 	@Override
@@ -351,33 +360,35 @@ public class GameLayer extends CCLayer implements UpdateCallback, GameDelegate {
 		float runnerRy = getRunnerRy(runnerRx);
 		float runnerLy = getRunnerLy(runnerLx);
 		float currY = runner.getPosition().y - Runner.y_offset;
-		if (runnerRy != currY && !runner.isInAction()) {
+		if ((int) runnerRy != (int) currY && !runner.isInAction()) {
 			if (runnerLy == 0 || currY == 0) {
 				// fall in gap
 				runner.fallToGap(this, "loseGame");
 				stopPlatform();
 				return;
-			} else if (runnerLy < currY) {
+			} else if ((int) runnerLy < (int) currY) {
 				runner.fallToGround(runnerRy);
 			}
-			if (runnerRy > currY) {
+			if ((int) runnerRy > (int) currY) {
 				Logger.d(TAG, "update. runnerRy=" + runnerRy + ", currY="
 						+ currY);
 				// knock down
 				runner.knockDown();
 				stopPlatform();
 				ground.runAction(CCSequence.actions(
-						CCMoveBy.action(0.6f, CGPoint.ccp(150, 0)),
+						CCMoveBy.action(0.6f,
+								CGPoint.ccp(100 * Game.scale_ratio, 0)),
 						CCCallFunc.action(this, "loseGame")));
 				return;
 			}
 		}
 
-		if (runner.isJumping() && currY < runnerRy) {
+		if (runner.isJumping() && (int) currY < (int) runnerRy) {
 			runner.knockDown();
 			stopPlatform();
 			ground.runAction(CCSequence.actions(
-					CCMoveBy.action(0.6f, CGPoint.ccp(150, 0)),
+					CCMoveBy.action(0.6f,
+							CGPoint.ccp(100 * Game.scale_ratio, 0)),
 					CCCallFunc.action(this, "loseGame")));
 			return;
 		}
@@ -389,7 +400,8 @@ public class GameLayer extends CCLayer implements UpdateCallback, GameDelegate {
 					/ 2f;
 			if (o instanceof Trap) {
 				Trap trap = (Trap) o;
-				if (!trap.isTriggered() && (objectLx - runnerRx) < 200) {
+				if (!trap.isTriggered()
+						&& (objectLx - runnerRx) < 140 * Game.scale_ratio) {
 					trap.trigger();
 					to_index++;
 				}
@@ -439,8 +451,9 @@ public class GameLayer extends CCLayer implements UpdateCallback, GameDelegate {
 		}
 		GameSprite object = objects[co_index];
 		CGPoint position = object.getPosition();
-		float objWidth = object.getTextureRect().size.width;
-		float objHeight = object.getTextureRect().size.height;
+		float objWidth = object.getContentSize().width - 10 * Game.scale_ratio;
+		float objHeight = object.getContentSize().height - 10
+				* Game.scale_ratio;
 		float objectLx = position.x - objWidth / 2f;
 		float currY = runner.getPosition().y - Runner.y_offset;
 		float runnerRx = getRunnerRx();
@@ -458,14 +471,15 @@ public class GameLayer extends CCLayer implements UpdateCallback, GameDelegate {
 			object.onStartContact(runner);
 			if (object instanceof Box || object instanceof Trap) {
 				ground.runAction(CCSequence.actions(
-						CCMoveBy.action(0.6f, CGPoint.ccp(150, 0)),
+						CCMoveBy.action(0.6f,
+								CGPoint.ccp(100 * Game.scale_ratio, 0)),
 						CCCallFunc.action(this, "loseGame")));
 			}
 			co_index++;
-			detectCollision();
+			// detectCollision();
 		} else if (runnerRx > position.x) {
 			co_index++;
-			detectCollision();
+			// detectCollision();
 		}
 	}
 

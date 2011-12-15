@@ -25,8 +25,8 @@ public class Fire extends GameSprite {
 		burnSprite = GameSprite.sprite("man21.png");
 		burnSprite.setScale(1);
 		burnSprite.setAnchorPoint(0.5f, 1);
-		burnSprite.setPosition(burnSprite.getBoundingWidth() / 2f - 10f,
-				getBoundingHeight());
+		burnSprite.setPosition(getBoundingWidth() / 2f, getBoundingHeight()
+				+ 30 * Game.scale_ratio);
 		frames.clear();
 		for (int i = 0; i < 8; i++) {
 			frames.add(cache.getSpriteFrame(String.format("man2%d.png", i + 1)));

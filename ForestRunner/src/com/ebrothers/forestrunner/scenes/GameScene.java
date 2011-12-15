@@ -23,9 +23,4 @@ public class GameScene extends CCScene {
 		addChild(gameLayer);
 	}
 
-	@Override
-	public void onEnter() {
-		super.onEnter();
-	}
-
 }
