@@ -21,6 +21,7 @@ public class MainScene extends CCScene {
 
 	public MainScene() {
 		super();
+		
 		addChild(new MainGameBackgroundLayer());
 		addChild(new MainGameMenuLayer());
 
@@ -33,6 +34,7 @@ public class MainScene extends CCScene {
 		builder.setPositiveButton("button_yes01.png", "button_yes02.png", this,
 				"onYes");
 		confirmDialog = builder.create();
+		
 	}
 
 	public void onYes(Object obj) {
