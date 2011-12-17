@@ -5,13 +5,13 @@ import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.nodes.CCSpriteFrameCache;
 import org.cocos2d.opengl.CCGLSurfaceView;
 import org.cocos2d.types.CGSize;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.Window;
 import android.view.WindowManager;
-
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import com.ebrothers.forestrunner.common.Game;
 import com.ebrothers.forestrunner.common.Levels;
 import com.ebrothers.forestrunner.common.Logger;
@@ -19,6 +19,9 @@ import com.ebrothers.forestrunner.manager.LocalDataManager;
 import com.ebrothers.forestrunner.manager.SceneManager;
 import com.ebrothers.forestrunner.scenes.GameScene;
 import com.ebrothers.forestrunner.scenes.MainScene;
+import com.google.ads.AdRequest;
+import com.google.ads.AdSize;
+import com.google.ads.AdView;
 
 public class ForestRunnerActivity extends Activity {
 	private static final String TAG = "ForestRunnerActivity";
@@ -38,7 +41,21 @@ public class ForestRunnerActivity extends Activity {
 
 		mGLSurfaceView = new CCGLSurfaceView(this);
 
-		setContentView(mGLSurfaceView);
+		LinearLayout layout = new LinearLayout(this);
+		AdView adView = new AdView(this, AdSize.BANNER,
+				"a14eec12a2a283c");
+		layout.addView(adView);
+		AdRequest request = new AdRequest();
+		request.setTesting(true);
+
+		adView.loadAd(request);
+		
+
+		RelativeLayout rl = new RelativeLayout(this);
+		rl.addView(mGLSurfaceView);
+		rl.addView(layout);
+		setContentView(rl);
+//		setContentView(mGLSurfaceView);
 		// 初始化 preference
 		LocalDataManager.getInstance().initialize(this);
 
@@ -76,6 +93,7 @@ public class ForestRunnerActivity extends Activity {
 
 		// Make the Scene active
 		CCDirector.sharedDirector().runWithScene(MainScene.scene());
+		// CCDirector.sharedDirector().runWithScene(GameScene.scene(1));
 	}
 
 	@Override
