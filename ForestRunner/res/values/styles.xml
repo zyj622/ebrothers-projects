@@ -8,7 +8,6 @@
     </style>
 
     <style name="ButtonTextStyle">
-        <item name="android:textColor">#FFFFFF</item>
         <item name="android:textSize">16sp</item>
         <item name="android:textStyle">bold</item>
     </style>
@@ -18,16 +17,16 @@
     </style>
 
     <style name="AlertDialogTheme" parent="Theme.Dialog.Alert">
-<!--         <item name="android:fullDark">@drawable/dialog_bg_full</item> -->
-<!--         <item name="android:topDark">@drawable/dialog_bg_top</item> -->
-<!--         <item name="android:centerDark">@drawable/dialog_bg_middle</item> -->
-<!--         <item name="android:bottomDark">@drawable/dialog_bg_bottom</item> -->
-<!--         <item name="android:fullBright">@drawable/dialog_bg_full</item> -->
-<!--         <item name="android:topBright">@drawable/dialog_bg_top</item> -->
-<!--         <item name="android:centerBright">@drawable/dialog_bg_middle</item> -->
-<!--         <item name="android:bottomBright">@drawable/dialog_bg_bottom</item> -->
-<!--         <item name="android:bottomMedium">@drawable/dialog_bg_bottom</item> -->
-<!--         <item name="android:centerMedium">@drawable/dialog_bg_middle</item> -->
+        <item name="android:fullDark">@drawable/dialog_bg_full</item>
+        <item name="android:topDark">@drawable/dialog_bg_top</item>
+        <item name="android:centerDark">@drawable/dialog_bg_middle</item>
+        <item name="android:bottomDark">@drawable/dialog_bg_bottom</item>
+        <item name="android:fullBright">@drawable/dialog_bg_full</item>
+        <item name="android:topBright">@drawable/dialog_bg_top</item>
+        <item name="android:centerBright">@drawable/dialog_bg_middle</item>
+        <item name="android:bottomBright">@drawable/dialog_bg_bottom</item>
+        <item name="android:bottomMedium">@drawable/dialog_bg_bottom</item>
+        <item name="android:centerMedium">@drawable/dialog_bg_middle</item>
         <item name="android:buttonStyle">@style/DialogButton</item>
         <item name="android:textStyle">bold</item>
     </style>
