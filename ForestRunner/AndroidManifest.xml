@@ -24,6 +24,12 @@
             android:configChanges="orientation"
             android:name=".ForestRunnerActivity"
             android:screenOrientation="landscape" />
+        <activity
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|touchscreen|navigation|fontScale"
+            android:name="com.google.ads.AdActivity" />
     </application>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
 </manifest>
