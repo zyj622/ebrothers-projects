@@ -111,6 +111,7 @@ public class Runner extends GameSprite {
 	}
 
 	public void jumpDone(Object t, Object d) {
+		Logger.d(TAG, "jumpDone. d=" + d);
 		baseY = (Float) d;
 		SoundManager.sharedSoundManager().playEffect(
 				SoundManager.MUSIC_JUMPDOWN);
@@ -145,6 +146,7 @@ public class Runner extends GameSprite {
 	}
 
 	public void fallToGround(float y) {
+		Logger.d(TAG, "fallToGround.");
 		if (!acting) {
 			SoundManager.sharedSoundManager().playEffect(
 					SoundManager.MUSIC_DOWNSLOPE);

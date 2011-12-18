@@ -25,8 +25,9 @@ public class Fire extends GameSprite {
 		burnSprite = GameSprite.sprite("man21.png");
 		burnSprite.setScale(1);
 		burnSprite.setAnchorPoint(0.5f, 1);
-		burnSprite.setPosition(getBoundingWidth() / 2f, getBoundingHeight()
-				+ 30 * Game.scale_ratio);
+		burnSprite.setPosition(getContentSize().width / 2f,
+				getContentSize().height + burnSprite.getContentSize().height
+						/ 2f);
 		frames.clear();
 		for (int i = 0; i < 8; i++) {
 			frames.add(cache.getSpriteFrame(String.format("man2%d.png", i + 1)));
@@ -60,5 +61,15 @@ public class Fire extends GameSprite {
 	public void burnDone() {
 		removeChild(burnSprite, true);
 		Game.delegate.loseGame();
+	}
+
+	@Override
+	public float getBoundingHeight() {
+		return (getTextureRect().size.height - 20) * getScaleY();
+	}
+
+	@Override
+	public float getBoundingWidth() {
+		return (getTextureRect().size.width - 20) * getScaleX();
 	}
 }

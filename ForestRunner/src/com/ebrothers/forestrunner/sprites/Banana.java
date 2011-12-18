@@ -89,6 +89,11 @@ public class Banana extends GameSprite {
 	}
 
 	@Override
+	public boolean isStar() {
+		return true;
+	}
+
+	@Override
 	public void onStartContact(GameSprite target) {
 		SoundManager.sharedSoundManager()
 				.playEffect(SoundManager.MUSIC_START_1);
