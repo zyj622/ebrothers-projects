@@ -4,8 +4,8 @@ import android.util.Log;
 
 public class Logger {
 
-	public static final boolean LOGD = false;
-	public static final boolean LOGE = false;
+	public static final boolean LOGD = true;
+	public static final boolean LOGE = true;
 
 	public static void d(String tag, String msg) {
 		if (LOGD) {

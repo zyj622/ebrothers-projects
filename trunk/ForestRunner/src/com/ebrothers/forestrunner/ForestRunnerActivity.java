@@ -74,6 +74,7 @@ public class ForestRunnerActivity extends Activity {
 
 		CGSize winSize = CCDirector.sharedDirector().winSize();
 		Game.scale_ratio = winSize.height / 320f;
+		Logger.d(TAG, "onCreate. scale_ratio=" + Game.scale_ratio);
 		Game.scale_ratio_y = winSize.height / 320f;
 		Game.scale_ratio_x = winSize.width / 480f;
 
@@ -134,8 +135,9 @@ public class ForestRunnerActivity extends Activity {
 							}
 						});
 			}
+			return true;
 		}
-		return true;
+		return super.onKeyDown(keyCode, event);
 	}
 
 }

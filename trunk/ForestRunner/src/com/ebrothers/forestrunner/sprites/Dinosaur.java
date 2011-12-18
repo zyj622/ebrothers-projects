@@ -12,7 +12,7 @@ import com.ebrothers.forestrunner.manager.SoundManager;
 
 public class Dinosaur extends GameSprite {
 
-	private static final float MOVE_DISTANCE = 270 * Game.scale_ratio;
+	private static final float MOVE_DISTANCE = 300 * Game.scale_ratio;
 	public static final int DINOSAUR_1 = 1;
 	public static final int DINOSAUR_2 = 2;
 	public static final int DINOSAUR_3 = 3;
