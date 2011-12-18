@@ -5,13 +5,17 @@ import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.nodes.CCSpriteFrameCache;
 import org.cocos2d.opengl.CCGLSurfaceView;
 import org.cocos2d.types.CGSize;
+
 import android.app.Activity;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+
 import com.ebrothers.forestrunner.common.Game;
 import com.ebrothers.forestrunner.common.Levels;
 import com.ebrothers.forestrunner.common.Logger;
@@ -42,20 +46,18 @@ public class ForestRunnerActivity extends Activity {
 		mGLSurfaceView = new CCGLSurfaceView(this);
 
 		LinearLayout layout = new LinearLayout(this);
-		AdView adView = new AdView(this, AdSize.BANNER,
-				"a14eec12a2a283c");
+		AdView adView = new AdView(this, AdSize.BANNER, "a14eec12a2a283c");
 		layout.addView(adView);
 		AdRequest request = new AdRequest();
 		request.setTesting(true);
 
 		adView.loadAd(request);
-		
 
 		RelativeLayout rl = new RelativeLayout(this);
 		rl.addView(mGLSurfaceView);
 		rl.addView(layout);
 		setContentView(rl);
-//		setContentView(mGLSurfaceView);
+		// setContentView(mGLSurfaceView);
 		// 初始化 preference
 		LocalDataManager.getInstance().initialize(this);
 
@@ -123,14 +125,14 @@ public class ForestRunnerActivity extends Activity {
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
 			// 后退键场景切换
 			if (!SceneManager.sharedSceneManager().backTo()) {
-				// CustomAlertDialog.showExitConfirmDialog(this,
-				// new OnClickListener() {
-				// @Override
-				// public void onClick(DialogInterface dialog,
-				// int which) {
-				// ForestRunnerActivity.this.finish();
-				// }
-				// });
+				CustomAlertDialog.showExitConfirmDialog(this,
+						new OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog,
+									int which) {
+								ForestRunnerActivity.this.finish();
+							}
+						});
 			}
 		}
 		return true;
