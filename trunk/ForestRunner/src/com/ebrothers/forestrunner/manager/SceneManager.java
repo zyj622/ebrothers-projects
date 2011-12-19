@@ -94,6 +94,9 @@ public class SceneManager {
 		} else if (scene instanceof HighScoreScene) {
 			replaceTo(SCENE_MAINMENU);
 			return true;
+		} else if ( scene instanceof DifficultyScene) {
+			replaceTo(SCENE_MAINMENU);
+			return true;
 		}
 		return false;
 	}
