@@ -24,7 +24,7 @@ import com.ebrothers.forestrunner.manager.SoundManager;
 public class MainGameMenuLayer extends MenuLayer {
 	CCMenu cmMenuOpen;
 	CCMenu cmMenuClose;
-	private DifficultyDialog difficultyDialog;
+	//private DifficultyDialog difficultyDialog;
 
 	public MainGameMenuLayer() {
 		super();
@@ -130,7 +130,7 @@ public class MainGameMenuLayer extends MenuLayer {
 
 		addChild(cmMenuShare);
 
-		difficultyDialog = DifficultyDialog.dialog(this);
+		//difficultyDialog = DifficultyDialog.dialog(this);
 	}
 
 	/**
@@ -199,9 +199,7 @@ public class MainGameMenuLayer extends MenuLayer {
 
 	public void setDifficulty(Object o) {
 		SoundManager.sharedSoundManager().playEffect(SoundManager.MUSIC_BUTTON);
-		if (difficultyDialog != null && !difficultyDialog.isShown()) {
-			difficultyDialog.show();
-		}
+		SceneManager.sharedSceneManager().replaceTo(SceneManager.SCENE_DIFFICULTY);
 	}
 
 	/**
@@ -213,5 +211,6 @@ public class MainGameMenuLayer extends MenuLayer {
 		SceneManager.sharedSceneManager().replaceTo(
 				SceneManager.SCENE_HIGHSCORE);
 	}
+	
 
 }
