@@ -14,6 +14,7 @@ import android.view.KeyEvent;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
+import android.widget.LinearLayout.LayoutParams;
 import android.widget.RelativeLayout;
 
 import com.ebrothers.forestrunner.common.Game;
@@ -45,6 +46,9 @@ public class ForestRunnerActivity extends Activity {
 
 		mGLSurfaceView = new CCGLSurfaceView(this);
 
+		RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
+				LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+		params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
 		LinearLayout layout = new LinearLayout(this);
 		AdView adView = new AdView(this, AdSize.BANNER, "a14eec12a2a283c");
 		layout.addView(adView);
@@ -55,7 +59,7 @@ public class ForestRunnerActivity extends Activity {
 
 		RelativeLayout rl = new RelativeLayout(this);
 		rl.addView(mGLSurfaceView);
-		rl.addView(layout);
+		rl.addView(layout,params);
 		setContentView(rl);
 		// setContentView(mGLSurfaceView);
 		// 初始化 preference
