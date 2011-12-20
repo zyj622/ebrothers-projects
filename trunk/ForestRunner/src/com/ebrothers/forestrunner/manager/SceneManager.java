@@ -2,6 +2,10 @@ package com.ebrothers.forestrunner.manager;
 
 import org.cocos2d.layers.CCScene;
 import org.cocos2d.nodes.CCDirector;
+
+import android.content.Intent;
+
+import com.ebrothers.forestrunner.common.Constants;
 import com.ebrothers.forestrunner.common.Game;
 import com.ebrothers.forestrunner.scenes.DifficultyScene;
 import com.ebrothers.forestrunner.scenes.GameOverScene;
@@ -37,7 +41,6 @@ public class SceneManager {
 		}
 		return _instance;
 	}
-	
 
 	public void replaceTo(int scene) {
 		switch (scene) {
@@ -70,8 +73,16 @@ public class SceneManager {
 			break;
 		}
 	}
-	
-	public void setAds(boolean flag){
+
+	public void setAds(boolean flag) {
+		Intent mIntent = new Intent(Constants.ACTION_AD_CONTROL);
+		if(flag){
+			mIntent.putExtra("isShow", "1");
+		}else{
+			mIntent.putExtra("isShow", "0");
+		}
+		// 发送广播
+		CCDirector.sharedDirector().getActivity().sendBroadcast(mIntent);
 	}
 
 	/**
@@ -94,7 +105,7 @@ public class SceneManager {
 		} else if (scene instanceof HighScoreScene) {
 			replaceTo(SCENE_MAINMENU);
 			return true;
-		} else if ( scene instanceof DifficultyScene) {
+		} else if (scene instanceof DifficultyScene) {
 			replaceTo(SCENE_MAINMENU);
 			return true;
 		}
