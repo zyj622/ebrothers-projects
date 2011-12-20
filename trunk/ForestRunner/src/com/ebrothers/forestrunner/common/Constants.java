@@ -20,4 +20,6 @@ public interface Constants {
 	public static final String NORMAL = "normal";
 	public static final String DIFFICULTY = "difficulty";
 	
+	public static final String ACTION_AD_CONTROL = "com.ebrothers.ads";
+	
 }
