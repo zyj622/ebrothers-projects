@@ -7,16 +7,22 @@ import org.cocos2d.opengl.CCGLSurfaceView;
 import org.cocos2d.types.CGSize;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.RelativeLayout;
 
+import com.ebrothers.forestrunner.common.Constants;
 import com.ebrothers.forestrunner.common.Game;
 import com.ebrothers.forestrunner.common.Levels;
 import com.ebrothers.forestrunner.common.Logger;
@@ -31,6 +37,8 @@ import com.google.ads.AdView;
 public class ForestRunnerActivity extends Activity {
 	private static final String TAG = "ForestRunnerActivity";
 	private CCGLSurfaceView mGLSurfaceView;
+	private BroadcastReceiver mBroadcastReceiver;
+	private LinearLayout layout;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -49,7 +57,7 @@ public class ForestRunnerActivity extends Activity {
 		RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
 				LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 		params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
-		LinearLayout layout = new LinearLayout(this);
+		layout = new LinearLayout(this);
 		AdView adView = new AdView(this, AdSize.BANNER, "a14eec12a2a283c");
 		layout.addView(adView);
 		AdRequest request = new AdRequest();
@@ -59,7 +67,7 @@ public class ForestRunnerActivity extends Activity {
 
 		RelativeLayout rl = new RelativeLayout(this);
 		rl.addView(mGLSurfaceView);
-		rl.addView(layout,params);
+		rl.addView(layout, params);
 		setContentView(rl);
 		// setContentView(mGLSurfaceView);
 		// 初始化 preference
@@ -101,6 +109,23 @@ public class ForestRunnerActivity extends Activity {
 		// Make the Scene active
 		CCDirector.sharedDirector().runWithScene(MainScene.scene());
 		// CCDirector.sharedDirector().runWithScene(GameScene.scene(1));
+
+		mBroadcastReceiver = new BroadcastReceiver() {
+			@Override
+			public void onReceive(Context context, Intent intent) {
+				String isShow = intent.getExtras().getString("isShow");
+				if ("1".equals(isShow)) {
+					layout.setVisibility(View.VISIBLE);
+				} else {
+					layout.setVisibility(View.GONE);
+				}
+			}
+
+		};
+		IntentFilter myIntentFilter = new IntentFilter();
+		myIntentFilter.addAction(Constants.ACTION_AD_CONTROL);
+		// 注册广播
+		registerReceiver(mBroadcastReceiver, myIntentFilter);
 	}
 
 	@Override
@@ -122,6 +147,7 @@ public class ForestRunnerActivity extends Activity {
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
+		unregisterReceiver(mBroadcastReceiver);
 		CCDirector.sharedDirector().end();
 	}
 
