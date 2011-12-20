@@ -74,10 +74,8 @@ public class ForestRunnerActivity extends Activity {
 		LocalDataManager.getInstance().initialize(this);
 
 		CCSpriteFrameCache cache = CCSpriteFrameCache.sharedSpriteFrameCache();
+		cache.addSpriteFrames("menu.plist");
 		cache.addSpriteFrames("sprites.plist");
-		cache.addSpriteFrames("stages.plist");
-		cache.addSpriteFrames("mainmenu.plist");
-		cache.addSpriteFrames("gameover.plist");
 
 		Levels.load();
 
@@ -101,7 +99,7 @@ public class ForestRunnerActivity extends Activity {
 
 		// show FPS
 		// set false to disable FPS display, but don't delete fps_images.png!!
-		CCDirector.sharedDirector().setDisplayFPS(true);
+		CCDirector.sharedDirector().setDisplayFPS(false);
 
 		// frames per second
 		CCDirector.sharedDirector().setAnimationInterval(1f / 60);

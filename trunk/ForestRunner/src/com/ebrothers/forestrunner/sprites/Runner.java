@@ -18,9 +18,9 @@ import com.ebrothers.forestrunner.manager.SoundManager;
 
 public class Runner extends GameSprite {
 	private static final String TAG = "Runner";
+	private static final float MAX_JUMP_HEIGHT = 90 * Game.scale_ratio;
+	private static final float MIN_JUMP_HEIGHT = 60 * Game.scale_ratio;
 	public static final float RELATIVE_SCREEN_LEFT = 80 * Game.scale_ratio;
-	public static final float JUMP_DURING_LONG = .7f;
-	public static final float JUMP_DURING_SHORT = .6f;
 	public static final float FALL_DURING = .2f;
 	public static float y_offset;
 	private boolean acting;
@@ -39,7 +39,7 @@ public class Runner extends GameSprite {
 		for (int i = 0; i < 8; i++) {
 			frames.add(cache.getSpriteFrame(String.format("man0%d.png", i + 1)));
 		}
-		addAnimation("run", frames);
+		addAnimation("run", frames, Game.run_interval);
 		frames.clear();
 		for (int i = 0; i < 2; i++) {
 			frames.add(cache.getSpriteFrame(String.format("man1%d.png", i + 1)));
@@ -97,11 +97,12 @@ public class Runner extends GameSprite {
 			stopAllActions();
 			playeDelayAnimation("jump", 0.2f, "fallToGround");
 			CGPoint to = CGPoint.ccp(getPosition().x, y + y_offset);
-			float jHeight = 100 * Game.scale_ratio;
-			float during = JUMP_DURING_LONG;
+			float jHeight = MAX_JUMP_HEIGHT;
+			float during = Game.jump_duration;
 			if (y > baseY) {
-				jHeight = 60 * Game.scale_ratio;
-				during = JUMP_DURING_SHORT;
+				jHeight = MIN_JUMP_HEIGHT;
+				// during = MIN_JUMP_HEIGHT * Game.jump_duration /
+				// MAX_JUMP_HEIGHT;
 			}
 			runAction(CCSequence.actions(
 					CCJumpTo.action(during, to, jHeight, 1),
@@ -123,10 +124,9 @@ public class Runner extends GameSprite {
 		if (!acting) {
 			stopAllActions();
 			playeDelayAnimation("jump", 0.2f, "fallToGround");
-			runAction(CCSequence.actions(CCJumpTo.action(JUMP_DURING_LONG,
-					getPosition(), 100 * Game.scale_ratio, 1), CCCallFunc
-					.action(this, "actionDone"), CCCallFunc.action(target,
-					selector)));
+			runAction(CCSequence.actions(CCJumpTo.action(Game.jump_duration,
+					getPosition(), MAX_JUMP_HEIGHT, 1), CCCallFunc.action(this,
+					"actionDone"), CCCallFunc.action(target, selector)));
 			acting = true;
 		}
 	}
@@ -171,10 +171,8 @@ public class Runner extends GameSprite {
 
 	public void knockDownDone() {
 		stopAllActions();
-		runAction(CCSequence.actions(CCMoveBy.action(
-				0.2f,
-				CGPoint.ccp(0, baseY - getPosition().y
-						+ getContentSize().height))));
+		runAction(CCSequence.actions(CCMoveBy.action(0.2f, CGPoint.ccp(0, baseY
+				+ 20f * Game.scale_ratio - getPosition().y))));
 	}
 
 	public void loseGame() {
@@ -198,10 +196,8 @@ public class Runner extends GameSprite {
 
 	public void knockDown1Done() {
 		stopAllActions();
-		runAction(CCSequence.actions(CCMoveBy.action(
-				0.2f,
-				CGPoint.ccp(0, baseY - getPosition().y
-						+ getContentSize().height))));
+		runAction(CCSequence.actions(CCMoveBy.action(0.2f, CGPoint.ccp(0, baseY
+				+ 20f * Game.scale_ratio - getPosition().y))));
 	}
 
 	public void resetPosition(CGPoint restartPoint) {

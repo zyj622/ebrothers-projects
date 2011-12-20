@@ -55,7 +55,7 @@ public class Cherry extends GameSprite {
 		SoundManager.sharedSoundManager()
 				.playEffect(SoundManager.MUSIC_START_2);
 		playeAnimation("flash", this, "flashDone");
-		Game.score += 200;
+		Game.score += Game.cherry_score;
 		Game.delegate.updateScore();
 	}
 

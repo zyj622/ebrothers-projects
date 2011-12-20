@@ -28,7 +28,6 @@ import org.cocos2d.opengl.CCDrawingPrimitives;
 import org.cocos2d.types.CGPoint;
 import org.cocos2d.types.CGRect;
 import org.cocos2d.types.CGSize;
-import org.cocos2d.types.ccColor4F;
 
 import android.view.MotionEvent;
 
@@ -49,7 +48,7 @@ import com.ebrothers.forestrunner.sprites.Trap;
 public class GameLayer extends CCLayer implements UpdateCallback, GameDelegate {
 
 	private static final String TAG = "GameLayer";
-	private boolean collistion_debug = true;
+	private boolean collistion_debug = false;
 	private float totalWidth = 0;
 	private Runner runner;
 	private CCSpriteSheet root;
@@ -57,7 +56,7 @@ public class GameLayer extends CCLayer implements UpdateCallback, GameDelegate {
 	private Background background;
 	private CCSequence moveAction;
 	// for break points
-	private static final float X_SPEED = 320f * Game.scale_ratio;// pixel/s
+
 	private float[] _bp_x;
 	private float[] _bp_y;
 	private int lbp_index = 0;
@@ -224,7 +223,7 @@ public class GameLayer extends CCLayer implements UpdateCallback, GameDelegate {
 		float winWidth = CCDirector.sharedDirector().winSize().width;
 		float moveDistance = totalWidth - winWidth;
 		moveAction = CCSequence.actions(
-				CCMoveTo.action(moveDistance / X_SPEED,
+				CCMoveTo.action(moveDistance / Game.speed,
 						CGPoint.ccp(-moveDistance, 0)),
 				CCCallFunc.action(this, "moveDone"));
 
@@ -247,7 +246,7 @@ public class GameLayer extends CCLayer implements UpdateCallback, GameDelegate {
 		switch (event.getAction()) {
 		case MotionEvent.ACTION_DOWN:
 			float currX = getRunnerRx();
-			float futureX = currX + Runner.JUMP_DURING_LONG * X_SPEED;
+			float futureX = currX + Game.jump_duration * Game.speed;
 			float futureY = getFutureY(futureX);
 			if (futureY == 0) {
 				runner.jumpToGap(this, "jumpToGapDone");
@@ -276,6 +275,7 @@ public class GameLayer extends CCLayer implements UpdateCallback, GameDelegate {
 		setIsTouchEnabled(true);
 		runner.run();
 		ground.runAction(moveAction);
+		background.roll();
 	}
 
 	@Override
@@ -373,7 +373,7 @@ public class GameLayer extends CCLayer implements UpdateCallback, GameDelegate {
 		if (isPlatformMoveDone && !runner.isInAction()) {
 			float distance = CCDirector.sharedDirector().winSize().width
 					- Runner.RELATIVE_SCREEN_LEFT;
-			float during = distance / X_SPEED;
+			float during = distance / Game.speed;
 			runner.runAction(CCSequence.actions(
 					CCMoveBy.action(during, CGPoint.ccp(distance, 0)),
 					CCCallFunc.action(this, "winGame")));
@@ -440,8 +440,8 @@ public class GameLayer extends CCLayer implements UpdateCallback, GameDelegate {
 			}
 		}
 
-		runnerRect.set(runnerLx, currY, runner.getBoundingWidth(),
-				runner.getBoundingHeight());
+		runnerRect.set(runnerLx, currY, runner.getTextureRect().size.width,
+				runner.getTextureRect().size.height);
 
 		// detect enemy objects
 		GameSprite[] eObjects = enemyObjects;
@@ -454,8 +454,10 @@ public class GameLayer extends CCLayer implements UpdateCallback, GameDelegate {
 			}
 			GameSprite enemy = eObjects[eo_index];
 			CGPoint ePos = enemy.getPosition();
-			float eW = enemy.getBoundingWidth();
-			float eH = enemy.getBoundingHeight();
+			float eW = (enemy.getTextureRect().size.width - 20)
+					* Game.scale_ratio;
+			float eH = (enemy.getTextureRect().size.height - 20)
+					* Game.scale_ratio;
 			CGPoint eAP = enemy.getAnchorPoint();
 			enemyRect.set(ePos.x - eW * eAP.x, ePos.y - eH * eAP.y, eW, eH);
 
@@ -490,18 +492,17 @@ public class GameLayer extends CCLayer implements UpdateCallback, GameDelegate {
 			}
 			GameSprite star = sObjects[so_index];
 			CGPoint sPos = star.getPosition();
-			float sWidth = star.getBoundingWidth();
-			float sHeight = star.getBoundingHeight();
+			float sW = star.getBoundingWidth() + 10 * Game.scale_ratio;
+			float sH = star.getBoundingHeight() + 10 * Game.scale_ratio;
 			CGPoint sAP = star.getAnchorPoint();
-			starRect.set(sPos.x - sWidth * sAP.x, sPos.y - sHeight * sAP.y,
-					sWidth, sHeight);
+			starRect.set(sPos.x - sW * sAP.x, sPos.y - sH * sAP.y, sW, sH);
 			if (CGRect.intersects(runnerRect, starRect)) {
 				Logger.d(TAG, "collision. runnerRect=" + runnerRect
 						+ ", objectRect=" + starRect + ", object=" + star);
 				runner.onStartContact(star);
 				star.onStartContact(runner);
 				so_index++;
-			} else if (runnerRx > sPos.x) {
+			} else if (runnerLx > sPos.x - sW * sAP.x + sW) {
 				so_index++;
 			}
 		}
@@ -618,10 +619,10 @@ public class GameLayer extends CCLayer implements UpdateCallback, GameDelegate {
 		resumeSchedulerAndActions();
 		float winWidth = CCDirector.sharedDirector().winSize().width;
 		float moveDistance = totalWidth - winWidth;
-		moveAction = CCSequence.actions(
-				CCMoveTo.action((moveDistance + (Float) d) / X_SPEED,
-						CGPoint.ccp(-moveDistance, 0)),
-				CCCallFunc.action(this, "moveDone"));
+		moveAction = CCSequence.actions(CCMoveTo.action(
+				(moveDistance + (Float) d) / Game.speed,
+				CGPoint.ccp(-moveDistance, 0)), CCCallFunc.action(this,
+				"moveDone"));
 		runner.run();
 		background.resumeSchedulerAndActions();
 		ground.runAction(moveAction);

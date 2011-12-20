@@ -164,7 +164,7 @@ public class DifficultyDialog extends AbstractDialog {
 			spriteDifficultySelector.setVisible(false);
 			spriteNormalSelector.setVisible(false);
 			spriteEasySelector.setVisible(true);
-		} else if (difficultyKey.equals(Constants.DIFFICULTY)) {
+		} else if (difficultyKey.equals(Constants.HARD)) {
 			spriteDifficultySelector.setVisible(true);
 			spriteNormalSelector.setVisible(false);
 			spriteEasySelector.setVisible(false);
@@ -184,7 +184,7 @@ public class DifficultyDialog extends AbstractDialog {
 			int tag = cmis.getTag();
 			if (tag == 1) {
 				LocalDataManager.getInstance().writeSetting(
-						LocalDataManager.DIFFICULTY_KEY, Constants.DIFFICULTY);
+						LocalDataManager.DIFFICULTY_KEY, Constants.HARD);
 			} else if (tag == 3) {
 				LocalDataManager.getInstance().writeSetting(
 						LocalDataManager.DIFFICULTY_KEY, Constants.EASY);

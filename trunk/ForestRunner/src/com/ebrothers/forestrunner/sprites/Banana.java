@@ -61,12 +61,12 @@ public class Banana extends GameSprite {
 		parent.addChild(banana);
 		// left bottomd
 		banana = new Banana();
-		banana.setPosition(cx - 67 * Game.scale_ratio, cy + 4
+		banana.setPosition(cx - 75 * Game.scale_ratio, cy + 4
 				* Game.scale_ratio);
 		parent.addChild(banana);
 		// right bottom
 		banana = new Banana();
-		banana.setPosition(cx + 67 * Game.scale_ratio, cy + 4
+		banana.setPosition(cx + 75 * Game.scale_ratio, cy + 4
 				* Game.scale_ratio);
 		parent.addChild(banana);
 	}
@@ -98,7 +98,7 @@ public class Banana extends GameSprite {
 		SoundManager.sharedSoundManager()
 				.playEffect(SoundManager.MUSIC_START_1);
 		playeAnimation("flash", this, "flashDone");
-		Game.score += 450;
+		Game.score += Game.banana_score;
 		Game.delegate.updateScore();
 	}
 

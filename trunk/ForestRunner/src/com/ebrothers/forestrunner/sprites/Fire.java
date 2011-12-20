@@ -62,14 +62,4 @@ public class Fire extends GameSprite {
 		removeChild(burnSprite, true);
 		Game.delegate.loseGame();
 	}
-
-	@Override
-	public float getBoundingHeight() {
-		return (getTextureRect().size.height - 20) * getScaleY();
-	}
-
-	@Override
-	public float getBoundingWidth() {
-		return (getTextureRect().size.width - 20) * getScaleX();
-	}
 }
