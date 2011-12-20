@@ -28,4 +28,5 @@ public final class Game {
 		score = 0;
 		isWin = false;
 	}
+	
 }
