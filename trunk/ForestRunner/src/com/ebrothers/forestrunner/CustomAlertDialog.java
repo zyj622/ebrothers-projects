@@ -25,4 +25,24 @@ public class CustomAlertDialog extends AlertDialog {
 				});
 		dialog.show();
 	}
+	
+	public static void showRatingDialog(Context context,
+			OnClickListener onRateClicked,OnClickListener onShareClicked){
+		final CustomAlertDialog dialog = new CustomAlertDialog(context);
+		dialog.setTitle("Like it !");
+		
+		dialog.setMessage("Do you like our game? Please help \nrate and share if you like it!");
+		dialog.setButton(BUTTON_POSITIVE,
+				"Rate", onRateClicked);
+		dialog.setButton(BUTTON_NEUTRAL,
+				"Share", onShareClicked);
+		dialog.setButton(BUTTON_NEGATIVE,
+				"Not Now", new OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						dialog.dismiss();
+					}
+				});
+		dialog.show();
+	}
 }
