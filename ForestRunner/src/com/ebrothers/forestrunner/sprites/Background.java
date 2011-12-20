@@ -56,9 +56,7 @@ public class Background extends CCSprite {
 		runAction(sequence);
 	}
 
-	@Override
-	public void onEnter() {
+	public void roll() {
 		runAction(sequence);
-		super.onEnter();
 	}
 }
