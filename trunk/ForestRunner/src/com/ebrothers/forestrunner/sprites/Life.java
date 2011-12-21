@@ -23,6 +23,11 @@ public class Life extends GameSprite {
 	public boolean canCollision() {
 		return true;
 	}
+	
+	@Override
+	public boolean isStar() {
+		return true;
+	}
 
 	@Override
 	public void onStartContact(GameSprite target) {

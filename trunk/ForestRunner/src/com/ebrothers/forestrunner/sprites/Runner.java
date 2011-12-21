@@ -18,8 +18,6 @@ import com.ebrothers.forestrunner.manager.SoundManager;
 
 public class Runner extends GameSprite {
 	private static final String TAG = "Runner";
-	private static final float MAX_JUMP_HEIGHT = 90 * Game.scale_ratio;
-	private static final float MIN_JUMP_HEIGHT = 60 * Game.scale_ratio;
 	public static final float RELATIVE_SCREEN_LEFT = 80 * Game.scale_ratio;
 	public static final float FALL_DURING = .2f;
 	public static float y_offset;
@@ -79,75 +77,69 @@ public class Runner extends GameSprite {
 	}
 
 	public void actionDone() {
-		run();
 		acting = false;
+		run();
 	}
 
 	public void run() {
-		stopAllActions();
+		// stopAllActions();
 		playeLoopAnimation("run");
 	}
 
-	public void jump(float y) {
+	public void jump(float y, float during, float height) {
 		Logger.d(TAG, "jump. y=" + y);
 		if (!acting) {
 			jumping = true;
-			SoundManager.sharedSoundManager().playEffect(
-					SoundManager.MUSIC_JUMP);
+			acting = true;
 			stopAllActions();
 			playeDelayAnimation("jump", 0.2f, "fallToGround");
 			CGPoint to = CGPoint.ccp(getPosition().x, y + y_offset);
-			float jHeight = MAX_JUMP_HEIGHT;
-			float during = Game.jump_duration;
-			if (y > baseY) {
-				jHeight = MIN_JUMP_HEIGHT;
-				// during = MIN_JUMP_HEIGHT * Game.jump_duration /
-				// MAX_JUMP_HEIGHT;
-			}
 			runAction(CCSequence.actions(
-					CCJumpTo.action(during, to, jHeight, 1),
+					CCJumpTo.action(during, to, height, 1),
 					CCCallFuncND.action(this, "jumpDone", y)));
-			acting = true;
+			SoundManager.sharedSoundManager().playEffect(
+					SoundManager.MUSIC_JUMP);
 		}
 	}
 
 	public void jumpDone(Object t, Object d) {
 		Logger.d(TAG, "jumpDone. d=" + d);
 		baseY = (Float) d;
-		SoundManager.sharedSoundManager().playEffect(
-				SoundManager.MUSIC_JUMPDOWN);
 		actionDone();
 		jumping = false;
+		SoundManager.sharedSoundManager().playEffect(
+				SoundManager.MUSIC_JUMPDOWN);
 	}
 
 	public void jumpToGap(Object target, String selector) {
 		if (!acting) {
+			acting = true;
 			stopAllActions();
 			playeDelayAnimation("jump", 0.2f, "fallToGround");
 			runAction(CCSequence.actions(CCJumpTo.action(Game.jump_duration,
-					getPosition(), MAX_JUMP_HEIGHT, 1), CCCallFunc.action(this,
-					"actionDone"), CCCallFunc.action(target, selector)));
-			acting = true;
+					getPosition(), Game.jump_max_height, 1), CCCallFunc.action(
+					this, "actionDone"), CCCallFunc.action(target, selector)));
 		}
 	}
 
 	public void fallToGap(Object target, String selector) {
 		if (!acting) {
 			Logger.d(TAG, "fallToGap. ");
-			SoundManager.sharedSoundManager().playEffect(
-					SoundManager.MUSIC_DOWN);
+			acting = true;
 			stopAllActions();
 			playeAnimation("fallToGap");
 			CGPoint to = CGPoint.ccp(getPosition().x, 0);
 			runAction(CCSequence.actions(CCMoveTo.action(0.3f, to),
 					CCCallFunc.action(target, selector)));
-			acting = true;
+			SoundManager.sharedSoundManager().playEffect(
+					SoundManager.MUSIC_DOWN);
 		}
 	}
 
 	public void fallToGround(float y) {
 		Logger.d(TAG, "fallToGround.");
 		if (!acting) {
+			acting = true;
 			SoundManager.sharedSoundManager().playEffect(
 					SoundManager.MUSIC_DOWNSLOPE);
 			stopAllActions();
@@ -157,7 +149,6 @@ public class Runner extends GameSprite {
 					CCJumpTo.action(FALL_DURING, to, 5, 1),
 					CCCallFunc.action(this, "actionDone")));
 			baseY = y;
-			acting = true;
 		}
 	}
 
