@@ -41,6 +41,7 @@ import com.ebrothers.forestrunner.manager.SoundManager;
 import com.ebrothers.forestrunner.sprites.Background;
 import com.ebrothers.forestrunner.sprites.Box;
 import com.ebrothers.forestrunner.sprites.Dinosaur;
+import com.ebrothers.forestrunner.sprites.Fire;
 import com.ebrothers.forestrunner.sprites.GameSprite;
 import com.ebrothers.forestrunner.sprites.Runner;
 import com.ebrothers.forestrunner.sprites.Trap;
@@ -206,6 +207,8 @@ public class GameLayer extends CCLayer implements UpdateCallback, GameDelegate {
 		// pause/resume
 		GameSprite pauseSprite = GameSprite.sprite("pause01.png");
 		GameSprite resumeSprite = GameSprite.sprite("pause02.png");
+		pauseSprite.setScale(1);
+		resumeSprite.setScale(1);
 		CCMenuItemSprite pause = CCMenuItemSprite
 				.item(pauseSprite, pauseSprite);
 		CCMenuItemSprite resume = CCMenuItemSprite.item(resumeSprite,
@@ -246,12 +249,16 @@ public class GameLayer extends CCLayer implements UpdateCallback, GameDelegate {
 		switch (event.getAction()) {
 		case MotionEvent.ACTION_DOWN:
 			float currX = getRunnerRx();
-			float futureX = currX + Game.jump_duration * Game.speed;
-			float futureY = getFutureY(futureX);
-			if (futureY == 0) {
+			float futureMaxX = currX + Game.jump_duration * Game.speed;
+			float futureMinX = currX + Game.jump_duration_up * Game.speed;
+			float y_max = getFutureY(futureMaxX);
+			float y_min = getFutureY(futureMinX);
+			if (y_max == 0) {
 				runner.jumpToGap(this, "jumpToGapDone");
+			} else if (y_min > runner.baseY) {
+				runner.jump(y_min, Game.jump_duration_up, Game.jump_min_height);
 			} else {
-				runner.jump(futureY);
+				runner.jump(y_max, Game.jump_duration, Game.jump_max_height);
 			}
 			break;
 		default:
@@ -454,10 +461,20 @@ public class GameLayer extends CCLayer implements UpdateCallback, GameDelegate {
 			}
 			GameSprite enemy = eObjects[eo_index];
 			CGPoint ePos = enemy.getPosition();
-			float eW = (enemy.getTextureRect().size.width - 20)
-					* Game.scale_ratio;
-			float eH = (enemy.getTextureRect().size.height - 20)
-					* Game.scale_ratio;
+			float eW;
+			float eH;
+			if (enemy instanceof Fire) {
+				eW = (enemy.getTextureRect().size.width - 25)
+						* Game.scale_ratio;
+				eH = (enemy.getTextureRect().size.height - 25)
+						* Game.scale_ratio;
+			} else {
+				eW = (enemy.getTextureRect().size.width - 20)
+						* Game.scale_ratio;
+				eH = (enemy.getTextureRect().size.height - 20)
+						* Game.scale_ratio;
+			}
+
 			CGPoint eAP = enemy.getAnchorPoint();
 			enemyRect.set(ePos.x - eW * eAP.x, ePos.y - eH * eAP.y, eW, eH);
 
