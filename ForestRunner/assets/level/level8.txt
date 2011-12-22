@@ -57,7 +57,7 @@ Ground M 300
 Dinosaur 240
 Ground H 200
 Ground M 350
-Flower 150
+Flower 130
 Ground L 500
 Trap 230
 Ground M 190

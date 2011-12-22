@@ -257,6 +257,8 @@ public class GameLayer extends CCLayer implements UpdateCallback, GameDelegate {
 				runner.jumpToGap(this, "jumpToGapDone");
 			} else if (y_min > runner.baseY) {
 				runner.jump(y_min, Game.jump_duration_up, Game.jump_min_height);
+			} else if (y_max > runner.baseY) {
+				runner.jump(y_max, Game.jump_duration, Game.jump_min_height);
 			} else {
 				runner.jump(y_max, Game.jump_duration, Game.jump_max_height);
 			}

@@ -92,7 +92,7 @@ public class Runner extends GameSprite {
 			jumping = true;
 			acting = true;
 			stopAllActions();
-			playeDelayAnimation("jump", 0.2f, "fallToGround");
+			playeDelayAnimation("jump", 0.3f, "fallToGround");
 			CGPoint to = CGPoint.ccp(getPosition().x, y + y_offset);
 			runAction(CCSequence.actions(
 					CCJumpTo.action(during, to, height, 1),

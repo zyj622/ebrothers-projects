@@ -4,7 +4,7 @@ import com.ebrothers.forestrunner.layers.GameDelegate;
 import com.ebrothers.forestrunner.manager.LocalDataManager;
 
 public final class Game {
-	public static final int LIFE_AMOUNT = 5;
+	public static final int LIFE_AMOUNT = 100;
 	/**
 	 * Current level index, based 0.
 	 */
@@ -25,7 +25,7 @@ public final class Game {
 	public static long score;
 	public static boolean isWin;
 
-	private static final float SPEED_EASY = 280f;// pixel/s
+	private static final float SPEED_EASY = 300f;// pixel/s
 	private static final float SPEED_NORMAL = 320f;// pixel/s
 	private static final float SPEED_HARD = 360f;// pixel/s
 	private static final float JUMP_DURATION_NORMAL = .65f;// s
@@ -33,8 +33,8 @@ public final class Game {
 	private static final float RUN_INTERVAL_NORMAL = .06f;// s
 	private static final int BANABA_SCORE_NORMAL = 450;
 	private static final int CHERRY_SCORE_NORMAL = 200;
-	private static final float MAX_JUMP_HEIGHT = 100;
-	private static final float MIN_JUMP_HEIGHT = 50 * Game.scale_ratio;
+	private static final float MAX_JUMP_HEIGHT = 110;
+	private static final float MIN_JUMP_HEIGHT = 80;
 
 	public static float speed = SPEED_NORMAL;
 	public static float jump_duration = JUMP_DURATION_NORMAL;
