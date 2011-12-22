@@ -90,7 +90,7 @@ Gap 170
 Ground L 400
 Flower 140
 Gap 175
-Ground M 270
+Ground M 300
 Flower 140
 Gap 150
 Stone
@@ -107,10 +107,10 @@ Box 100
 Gap 180
 Ground M 200
 Gap 180
-Ground M 1600
+Ground M 1800
 Box 430
 Box 630
 Box 850
 Dinosaur 1300
-Stopsign 1450
+Stopsign 1550
 End
