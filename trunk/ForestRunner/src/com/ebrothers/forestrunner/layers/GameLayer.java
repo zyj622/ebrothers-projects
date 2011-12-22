@@ -509,8 +509,8 @@ public class GameLayer extends CCLayer implements UpdateCallback, GameDelegate {
 			}
 			GameSprite star = sObjects[so_index];
 			CGPoint sPos = star.getPosition();
-			float sW = star.getBoundingWidth() + 10 * Game.scale_ratio;
-			float sH = star.getBoundingHeight() + 10 * Game.scale_ratio;
+			float sW = star.getBoundingWidth() + 5 * Game.scale_ratio;
+			float sH = star.getBoundingHeight() + 5 * Game.scale_ratio;
 			CGPoint sAP = star.getAnchorPoint();
 			starRect.set(sPos.x - sW * sAP.x, sPos.y - sH * sAP.y, sW, sH);
 			if (CGRect.intersects(runnerRect, starRect)) {
