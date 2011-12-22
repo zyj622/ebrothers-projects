@@ -193,7 +193,8 @@ public class GameLayer extends CCLayer implements UpdateCallback, GameDelegate {
 		addChild(score);
 
 		// add life counter
-		life = CCBitmapFontAtlas.bitmapFontAtlas("×4", "font2.fnt");
+		life = CCBitmapFontAtlas
+				.bitmapFontAtlas("×" + remainLives, "font2.fnt");
 		life.setPosition(winSize.width - 28 * Game.scale_ratio, winSize.height
 				- 28 * Game.scale_ratio);
 		life.setScale(Game.scale_ratio);
@@ -335,7 +336,7 @@ public class GameLayer extends CCLayer implements UpdateCallback, GameDelegate {
 		pauseToggle.setIsEnabled(false);
 		pauseGame();
 		Game.isWin = true;
-		Game.score += (remainLives * 10000);
+		Game.score += (remainLives * Game.LIFE_SCORE_NORMAL);
 		// save passed level
 		LocalDataManager ldm = LocalDataManager.getInstance();
 		if (Game.current_level > (Integer) ldm.readSetting(

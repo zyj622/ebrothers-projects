@@ -4,7 +4,7 @@ import com.ebrothers.forestrunner.layers.GameDelegate;
 import com.ebrothers.forestrunner.manager.LocalDataManager;
 
 public final class Game {
-	public static final int LIFE_AMOUNT = 100;
+	public static final int LIFE_AMOUNT = 10;
 	/**
 	 * Current level index, based 0.
 	 */
@@ -33,6 +33,7 @@ public final class Game {
 	private static final float RUN_INTERVAL_NORMAL = .06f;// s
 	private static final int BANABA_SCORE_NORMAL = 450;
 	private static final int CHERRY_SCORE_NORMAL = 200;
+	public static final int LIFE_SCORE_NORMAL = 50000 / LIFE_AMOUNT;
 	private static final float MAX_JUMP_HEIGHT = 110;
 	private static final float MIN_JUMP_HEIGHT = 80;
 
