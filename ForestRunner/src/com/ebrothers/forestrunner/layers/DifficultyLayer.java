@@ -34,7 +34,7 @@ public class DifficultyLayer extends MenuLayer {
 				"Hard", "font1.fnt");
 		hardAtlasPress.setColor(ccColor3B.ccRED);
 		CCMenuItemSprite difficulty = CCMenuItemSprite.item(hardAtlasNormal,
-				hardAtlasNormal, this, "difficultySelect");
+				hardAtlasNormal, this, "setDifficulty");
 		difficulty.setScale(Game.scale_ratio * 1.5f);
 		difficulty.setTag(1);
 		difficulty.setAnchorPoint(0, 0.5f);
@@ -49,7 +49,7 @@ public class DifficultyLayer extends MenuLayer {
 				"Normal", "font1.fnt");
 		normalAtlasPress.setColor(ccColor3B.ccRED);
 		CCMenuItemSprite normal = CCMenuItemSprite.item(normalAtlasNormal,
-				normalAtlasNormal, this, "difficultySelect");
+				normalAtlasNormal, this, "setDifficulty");
 		normal.setScale(Game.scale_ratio * 1.5f);
 		normal.setTag(2);
 		normal.setAnchorPoint(0, 0.5f);
@@ -64,7 +64,7 @@ public class DifficultyLayer extends MenuLayer {
 				"Easy", "font1.fnt");
 		easyAtlasPress.setColor(ccColor3B.ccRED);
 		CCMenuItemSprite easy = CCMenuItemSprite.item(easyAtlasNormal,
-				easyAtlasNormal, this, "difficultySelect");
+				easyAtlasNormal, this, "setDifficulty");
 		easy.setScale(Game.scale_ratio * 1.5f);
 		easy.setTag(3);
 		easy.setAnchorPoint(0, 0.5f);
@@ -167,9 +167,6 @@ public class DifficultyLayer extends MenuLayer {
 			}
 			showCheckBox();
 		}
-	}
-
-	public void difficultySelect(Object o) {
 	}
 
 }
