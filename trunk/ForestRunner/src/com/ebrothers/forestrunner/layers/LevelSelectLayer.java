@@ -5,14 +5,17 @@ import org.cocos2d.menus.CCMenuItemSprite;
 import org.cocos2d.nodes.CCNode;
 import org.cocos2d.nodes.CCSprite;
 
+import com.ebrothers.forestrunner.common.Constants;
 import com.ebrothers.forestrunner.common.Game;
 import com.ebrothers.forestrunner.common.Levels;
+import com.ebrothers.forestrunner.common.Logger;
 import com.ebrothers.forestrunner.manager.LocalDataManager;
 import com.ebrothers.forestrunner.manager.SceneManager;
 import com.ebrothers.forestrunner.manager.SoundManager;
 import com.ebrothers.forestrunner.sprites.LevelSelector;
 
 public class LevelSelectLayer extends MenuLayer {
+	private static final String TAG = "LevelSelectLayer";
 
 	public LevelSelectLayer() {
 		super();
@@ -30,13 +33,35 @@ public class LevelSelectLayer extends MenuLayer {
 		CCSprite disableSprite;
 		CCMenuItemSprite item;
 		CCMenu menu;
-		int passedLevel = (Integer) LocalDataManager.getInstance().readSetting(
-				LocalDataManager.PASSED, -1);
+		final LocalDataManager ldm = LocalDataManager.getInstance();
+		String difficulty = (String) ldm.readSetting(
+				LocalDataManager.DIFFICULTY_KEY, Constants.NORMAL);
+		int hardPassed = (Integer) ldm.readSetting(
+				LocalDataManager.HARD_PASSED, -1);
+		int normalPassed = (Integer) ldm.readSetting(
+				LocalDataManager.NORMAL_PASSED, -1);
+		int easyPassed = (Integer) ldm.readSetting(
+				LocalDataManager.EASY_PASSED, -1);
+		int passedLevel = -1;
+		if (Constants.HARD.equals(difficulty)) {
+			passedLevel = hardPassed;
+		} else if (Constants.NORMAL.equals(difficulty)) {
+			passedLevel = Math.max(hardPassed, normalPassed);
+		} else if (Constants.EASY.equals(difficulty)) {
+			passedLevel = Math.max(easyPassed,
+					Math.max(hardPassed, normalPassed));
+		}
+
 		for (int i = 0; i < 3; i++) {
 			menu = CCMenu.menu();
 			for (int j = 0; j < 3; j++) {
 				int level = i * 3 + j;
-				long score = getLevelScore(level);
+				long score = 0;
+				Logger.d(TAG, "LevelSelectLayer. level=" + level
+						+ ", passedLevel=" + passedLevel);
+				if (level <= passedLevel) {
+					score = getLevelScore(level);
+				}
 				if (level < levelCount) {
 					noramlSprite = LevelSelector.levelSprite(level + 1, score,
 							true);
@@ -85,7 +110,8 @@ public class LevelSelectLayer extends MenuLayer {
 			SoundManager.sharedSoundManager().playEffect(
 					SoundManager.MUSIC_BUTTON);
 			Game.current_level = cmis.getTag();
-			SceneManager.sharedSceneManager().replaceTo(SceneManager.SCENE_GAME);
+			SceneManager.sharedSceneManager()
+					.replaceTo(SceneManager.SCENE_GAME);
 		}
 	}
 }
