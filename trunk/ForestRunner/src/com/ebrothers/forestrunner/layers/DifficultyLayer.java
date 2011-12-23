@@ -34,7 +34,7 @@ public class DifficultyLayer extends MenuLayer {
 				"Hard", "font1.fnt");
 		hardAtlasPress.setColor(ccColor3B.ccRED);
 		CCMenuItemSprite difficulty = CCMenuItemSprite.item(hardAtlasNormal,
-				hardAtlasPress, this, "difficultySelect");
+				hardAtlasNormal, this, "difficultySelect");
 		difficulty.setScale(Game.scale_ratio * 1.5f);
 		difficulty.setTag(1);
 		difficulty.setAnchorPoint(0, 0.5f);
@@ -49,7 +49,7 @@ public class DifficultyLayer extends MenuLayer {
 				"Normal", "font1.fnt");
 		normalAtlasPress.setColor(ccColor3B.ccRED);
 		CCMenuItemSprite normal = CCMenuItemSprite.item(normalAtlasNormal,
-				normalAtlasPress, this, "difficultySelect");
+				normalAtlasNormal, this, "difficultySelect");
 		normal.setScale(Game.scale_ratio * 1.5f);
 		normal.setTag(2);
 		normal.setAnchorPoint(0, 0.5f);
@@ -64,7 +64,7 @@ public class DifficultyLayer extends MenuLayer {
 				"Easy", "font1.fnt");
 		easyAtlasPress.setColor(ccColor3B.ccRED);
 		CCMenuItemSprite easy = CCMenuItemSprite.item(easyAtlasNormal,
-				easyAtlasPress, this, "difficultySelect");
+				easyAtlasNormal, this, "difficultySelect");
 		easy.setScale(Game.scale_ratio * 1.5f);
 		easy.setTag(3);
 		easy.setAnchorPoint(0, 0.5f);
@@ -74,10 +74,16 @@ public class DifficultyLayer extends MenuLayer {
 
 		spriteDifficultyNormal = CCSprite.sprite(cache
 				.getSpriteFrame("checkbox01.png"));
-		spriteDifficultyNormal.setAnchorPoint(1, 0.5f);
-		spriteDifficultyNormal.setScale(Game.scale_ratio_x);
-		spriteDifficultyNormal.setPosition(winW * 2 / 3f - 20f, winH / 3f);
-		addChild(spriteDifficultyNormal, 2);
+		CCMenuItemSprite difficultyMenuItemDifficulty = CCMenuItemSprite.item(
+				spriteDifficultyNormal, spriteDifficultyNormal, this,
+				"setDifficulty");
+		difficultyMenuItemDifficulty.setAnchorPoint(1, 0.5f);
+		difficultyMenuItemDifficulty.setTag(1);
+		difficultyMenuItemDifficulty.setScale(Game.scale_ratio_x);
+		CCMenu difficultyMenuDifficulty = CCMenu
+				.menu(difficultyMenuItemDifficulty);
+		difficultyMenuDifficulty.setPosition(winW * 2 / 3f - 20f, winH / 3f);
+		addChild(difficultyMenuDifficulty, 2);
 
 		spriteDifficultySelector = CCSprite.sprite(cache
 				.getSpriteFrame("checkbox02.png"));
@@ -88,10 +94,15 @@ public class DifficultyLayer extends MenuLayer {
 
 		spriteNormalNofmal = CCSprite.sprite(cache
 				.getSpriteFrame("checkbox01.png"));
-		spriteNormalNofmal.setAnchorPoint(1, 0.5f);
-		spriteNormalNofmal.setScale(Game.scale_ratio_x);
-		spriteNormalNofmal.setPosition(winW * 2 / 3f - 20f, winH / 2f);
-		addChild(spriteNormalNofmal, 2);
+		CCMenuItemSprite difficultyMenuItemNormal = CCMenuItemSprite.item(
+				spriteNormalNofmal, spriteNormalNofmal, this, "setDifficulty");
+		difficultyMenuItemNormal.setAnchorPoint(1, 0.5f);
+		difficultyMenuItemNormal.setTag(2);
+		difficultyMenuItemNormal.setScale(Game.scale_ratio_x);
+		CCMenu difficultyMenuNormal = CCMenu.menu(difficultyMenuItemNormal);
+		difficultyMenuNormal.setPosition(winW * 2 / 3f - 20f, winH / 2f);
+		addChild(difficultyMenuNormal, 2);
+
 		spriteNormalSelector = CCSprite.sprite(cache
 				.getSpriteFrame("checkbox02.png"));
 		spriteNormalSelector.setAnchorPoint(1, 0.5f);
@@ -101,10 +112,14 @@ public class DifficultyLayer extends MenuLayer {
 
 		spriteEasyNomal = CCSprite.sprite(cache
 				.getSpriteFrame("checkbox01.png"));
-		spriteEasyNomal.setAnchorPoint(1, 0.5f);
-		spriteEasyNomal.setScale(Game.scale_ratio_x);
-		spriteEasyNomal.setPosition(winW * 2 / 3f - 20f, winH * 2 / 3f);
-		addChild(spriteEasyNomal, 2);
+		CCMenuItemSprite difficultyMenuItemEasy = CCMenuItemSprite.item(
+				spriteEasyNomal, spriteEasyNomal, this, "setDifficulty");
+		difficultyMenuItemEasy.setAnchorPoint(1, 0.5f);
+		difficultyMenuItemEasy.setTag(3);
+		difficultyMenuItemEasy.setScale(Game.scale_ratio_x);
+		CCMenu difficultyMenuEasy = CCMenu.menu(difficultyMenuItemEasy);
+		difficultyMenuEasy.setPosition(winW * 2 / 3f - 20f, winH * 2 / 3f);
+		addChild(difficultyMenuEasy, 2);
 		spriteEasySelector = CCSprite.sprite(cache
 				.getSpriteFrame("checkbox02.png"));
 		spriteEasySelector.setAnchorPoint(1, 0.5f);
@@ -134,7 +149,7 @@ public class DifficultyLayer extends MenuLayer {
 		}
 	}
 
-	public void difficultySelect(Object o) {
+	public void setDifficulty(Object o) {
 		CCMenuItemSprite cmis = (CCMenuItemSprite) o;
 		if (cmis.isEnabled()) {
 			SoundManager.sharedSoundManager().playEffect(
@@ -152,6 +167,9 @@ public class DifficultyLayer extends MenuLayer {
 			}
 			showCheckBox();
 		}
+	}
+
+	public void difficultySelect(Object o) {
 	}
 
 }
