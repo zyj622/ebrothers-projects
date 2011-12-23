@@ -8,7 +8,9 @@ public class LocalDataManager {
 
 	// 用户配置数据
 	public static final String SOUND = "sound";
-	public static final String PASSED = "passed";
+	public static final String EASY_PASSED = "easy_passed";
+	public static final String NORMAL_PASSED = "normal_passed";
+	public static final String HARD_PASSED = "hard_passed";
 	
 	public static final String DIFFICULTY_KEY = "difficulty";
 	

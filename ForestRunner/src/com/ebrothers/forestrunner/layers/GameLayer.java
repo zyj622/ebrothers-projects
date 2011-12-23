@@ -31,6 +31,7 @@ import org.cocos2d.types.CGSize;
 
 import android.view.MotionEvent;
 
+import com.ebrothers.forestrunner.common.Constants;
 import com.ebrothers.forestrunner.common.Game;
 import com.ebrothers.forestrunner.common.Logger;
 import com.ebrothers.forestrunner.data.LevelData;
@@ -89,7 +90,8 @@ public class GameLayer extends CCLayer implements UpdateCallback, GameDelegate {
 	public GameLayer(String level) {
 		super();
 		Logger.d(TAG, "GameLayer init...");
-
+		Game.score = 0;
+		
 		root = CCSpriteSheet.spriteSheet("sprites.png", 500);
 		addChild(root, -1);
 
@@ -183,7 +185,8 @@ public class GameLayer extends CCLayer implements UpdateCallback, GameDelegate {
 				* Game.scale_ratio);
 		root.addChild(scoreIcon);
 
-		score = CCBitmapFontAtlas.bitmapFontAtlas("+0", "font2.fnt");
+		score = CCBitmapFontAtlas
+				.bitmapFontAtlas("+" + Game.score, "font2.fnt");
 		score.setScale(Game.scale_ratio);
 		score.setAnchorPoint(0, 0.5f);
 		score.setPosition(
@@ -339,9 +342,10 @@ public class GameLayer extends CCLayer implements UpdateCallback, GameDelegate {
 		Game.score += (remainLives * Game.LIFE_SCORE_NORMAL);
 		// save passed level
 		LocalDataManager ldm = LocalDataManager.getInstance();
-		if (Game.current_level > (Integer) ldm.readSetting(
-				LocalDataManager.PASSED, -1)) {
-			ldm.writeSetting(LocalDataManager.PASSED, Game.current_level);
+		Logger.d(TAG, "winGame. Game.current_level=" + Game.current_level
+				+ ", getPassedLevel()=" + getPassedLevel());
+		if (Game.current_level > getPassedLevel()) {
+			savePassedLevel();
 		}
 		// save score of current level
 		String level = String.valueOf(Game.current_level);
@@ -350,6 +354,37 @@ public class GameLayer extends CCLayer implements UpdateCallback, GameDelegate {
 		}
 		SceneManager.sharedSceneManager()
 				.replaceTo(SceneManager.SCENE_GAMEOVER);
+	}
+
+	private void savePassedLevel() {
+		LocalDataManager ldm = LocalDataManager.getInstance();
+		String difficulty = getCurrDifficulty();
+		if (Constants.EASY.equals(difficulty)) {
+			ldm.writeSetting(LocalDataManager.EASY_PASSED, Game.current_level);
+		} else if (Constants.NORMAL.equals(difficulty)) {
+			ldm.writeSetting(LocalDataManager.NORMAL_PASSED, Game.current_level);
+		} else if (Constants.HARD.equals(difficulty)) {
+			ldm.writeSetting(LocalDataManager.HARD_PASSED, Game.current_level);
+		}
+	}
+
+	public int getPassedLevel() {
+		LocalDataManager ldm = LocalDataManager.getInstance();
+		String difficulty = getCurrDifficulty();
+		if (Constants.EASY.equals(difficulty)) {
+			return (Integer) ldm.readSetting(LocalDataManager.EASY_PASSED, -1);
+		} else if (Constants.NORMAL.equals(difficulty)) {
+			return (Integer) ldm
+					.readSetting(LocalDataManager.NORMAL_PASSED, -1);
+		} else if (Constants.HARD.equals(difficulty)) {
+			return (Integer) ldm.readSetting(LocalDataManager.HARD_PASSED, -1);
+		}
+		return -1;
+	}
+
+	public String getCurrDifficulty() {
+		return (String) LocalDataManager.getInstance().readSetting(
+				LocalDataManager.DIFFICULTY_KEY, Constants.NORMAL);
 	}
 
 	@Override

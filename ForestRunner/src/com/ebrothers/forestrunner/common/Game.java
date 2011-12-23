@@ -4,7 +4,7 @@ import com.ebrothers.forestrunner.layers.GameDelegate;
 import com.ebrothers.forestrunner.manager.LocalDataManager;
 
 public final class Game {
-	public static final int LIFE_AMOUNT = 10;
+	public static final int LIFE_AMOUNT = 5;
 	/**
 	 * Current level index, based 0.
 	 */
