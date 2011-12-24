@@ -91,7 +91,7 @@ public class GameLayer extends CCLayer implements UpdateCallback, GameDelegate {
 		super();
 		Logger.d(TAG, "GameLayer init...");
 		Game.score = 0;
-		
+
 		root = CCSpriteSheet.spriteSheet("sprites.png", 500);
 		addChild(root, -1);
 
@@ -196,8 +196,8 @@ public class GameLayer extends CCLayer implements UpdateCallback, GameDelegate {
 		addChild(score);
 
 		// add life counter
-		life = CCBitmapFontAtlas
-				.bitmapFontAtlas("×" + remainLives, "font2.fnt");
+		life = CCBitmapFontAtlas.bitmapFontAtlas("×" + (remainLives - 1),
+				"font2.fnt");
 		life.setPosition(winSize.width - 28 * Game.scale_ratio, winSize.height
 				- 28 * Game.scale_ratio);
 		life.setScale(Game.scale_ratio);
