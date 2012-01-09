@@ -157,12 +157,7 @@ public class GB2ShapeCache {
 	}
 
 	private CGPoint stringToCGPoint(String str) {
-		String theString = str;
-		theString = theString.replace("{ ", "");
-		theString = theString.replace(" }", "");
-		String[] array = theString.split(",");
-		return CGPoint.make(Float.parseFloat(array[0]),
-				Float.parseFloat(array[1]));
+		return GeometryUtil.CGPointFromString(str);
 	}
 
 	public float ptmRatio() {
