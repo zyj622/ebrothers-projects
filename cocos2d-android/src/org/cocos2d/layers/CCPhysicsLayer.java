@@ -17,6 +17,10 @@ import com.badlogic.gdx.physics.box2d.World;
 public abstract class CCPhysicsLayer extends CCLayer {
 	// Simulation space should be larger than window per Box2D
 	// recommendation.
+	static {
+		System.loadLibrary("gdx");
+	}
+	
 	protected static final float BUFFER = 1.0f;
 
 	// FPS for the PhysicsWorld to sync to
