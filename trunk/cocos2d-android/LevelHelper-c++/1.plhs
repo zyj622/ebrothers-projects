@@ -17,11 +17,239 @@
 	<key>LHVersion</key>
 	<string>1.4.3</string>
 	<key>LoadedImages</key>
-	<array/>
+	<array>
+		<dict>
+			<key>Image</key>
+			<string>scene1.png</string>
+			<key>OrderZ</key>
+			<integer>0</integer>
+		</dict>
+	</array>
 	<key>PARALLAX_INFO</key>
 	<array/>
 	<key>SPRITES_INFO</key>
-	<array/>
+	<array>
+		<dict>
+			<key>GeneralProperties</key>
+			<dict>
+				<key>Angle</key>
+				<integer>0</integer>
+				<key>AnimAtStart</key>
+				<false/>
+				<key>AnimLoop</key>
+				<false/>
+				<key>AnimName</key>
+				<string></string>
+				<key>AnimRepetitions</key>
+				<integer>0</integer>
+				<key>AnimSpeed</key>
+				<real>0.0</real>
+				<key>Color</key>
+				<string>{{1, 1}, {1, 0}}</string>
+				<key>Image</key>
+				<string>scene1.png</string>
+				<key>IsDrawable</key>
+				<true/>
+				<key>IsInParallax</key>
+				<false/>
+				<key>Locked</key>
+				<false/>
+				<key>Opacity</key>
+				<real>1</real>
+				<key>PathFlipX</key>
+				<false/>
+				<key>PathFlipY</key>
+				<false/>
+				<key>PathIsCyclic</key>
+				<false/>
+				<key>PathName</key>
+				<string></string>
+				<key>PathOrientation</key>
+				<integer>0</integer>
+				<key>PathOtherEnd</key>
+				<false/>
+				<key>PathSpeed</key>
+				<real>0.20000000298023224</real>
+				<key>PathStartPoint</key>
+				<integer>0</integer>
+				<key>Position</key>
+				<string>{96, 168}</string>
+				<key>SHName</key>
+				<string>rider_head_bunny</string>
+				<key>SHScene</key>
+				<string>/Volumes/Macintosh HD 2/Carl/levelhelper/resources/scene1.pshs</string>
+				<key>Scale</key>
+				<string>{1, 1}</string>
+				<key>Size</key>
+				<string>{17, 22}</string>
+				<key>Tag</key>
+				<integer>0</integer>
+				<key>TagName</key>
+				<string>DEFAULT</string>
+				<key>UV</key>
+				<string>{{0, 55}, {17, 22}}</string>
+				<key>UniqueName</key>
+				<string>rider_head_bunny</string>
+				<key>ZOrder</key>
+				<integer>0</integer>
+			</dict>
+			<key>PhysicProperties</key>
+			<dict>
+				<key>AngularDamping</key>
+				<real>0.0</real>
+				<key>AngularVelocity</key>
+				<real>0.0</real>
+				<key>CanSleep</key>
+				<true/>
+				<key>Category</key>
+				<integer>1</integer>
+				<key>Density</key>
+				<real>0.20000000298023224</real>
+				<key>FixedRot</key>
+				<false/>
+				<key>Friction</key>
+				<real>0.20000000298023224</real>
+				<key>GravityScale</key>
+				<real>1</real>
+				<key>Group</key>
+				<integer>0</integer>
+				<key>HandledBySH</key>
+				<true/>
+				<key>IsBullet</key>
+				<false/>
+				<key>IsCircle</key>
+				<false/>
+				<key>IsSensor</key>
+				<false/>
+				<key>LinearDamping</key>
+				<real>0.0</real>
+				<key>LinearVelocity</key>
+				<string>{0, 0}</string>
+				<key>Mask</key>
+				<integer>65535</integer>
+				<key>Restitution</key>
+				<real>0.20000000298023224</real>
+				<key>ShapeBorder</key>
+				<string>{0, 0}</string>
+				<key>ShapeFixtures</key>
+				<array/>
+				<key>ShapePositionOffset</key>
+				<string>{0, 0}</string>
+				<key>Type</key>
+				<integer>0</integer>
+			</dict>
+		</dict>
+		<dict>
+			<key>GeneralProperties</key>
+			<dict>
+				<key>Angle</key>
+				<integer>0</integer>
+				<key>AnimAtStart</key>
+				<false/>
+				<key>AnimLoop</key>
+				<false/>
+				<key>AnimName</key>
+				<string></string>
+				<key>AnimRepetitions</key>
+				<integer>0</integer>
+				<key>AnimSpeed</key>
+				<real>0.0</real>
+				<key>Color</key>
+				<string>{{1, 1}, {1, 0}}</string>
+				<key>Image</key>
+				<string>scene1.png</string>
+				<key>IsDrawable</key>
+				<true/>
+				<key>IsInParallax</key>
+				<false/>
+				<key>Locked</key>
+				<false/>
+				<key>Opacity</key>
+				<real>1</real>
+				<key>PathFlipX</key>
+				<false/>
+				<key>PathFlipY</key>
+				<false/>
+				<key>PathIsCyclic</key>
+				<false/>
+				<key>PathName</key>
+				<string></string>
+				<key>PathOrientation</key>
+				<integer>0</integer>
+				<key>PathOtherEnd</key>
+				<false/>
+				<key>PathSpeed</key>
+				<real>0.20000000298023224</real>
+				<key>PathStartPoint</key>
+				<integer>0</integer>
+				<key>Position</key>
+				<string>{192, 168}</string>
+				<key>SHName</key>
+				<string>rider_head</string>
+				<key>SHScene</key>
+				<string>/Volumes/Macintosh HD 2/Carl/levelhelper/resources/scene1.pshs</string>
+				<key>Scale</key>
+				<string>{1, 1}</string>
+				<key>Size</key>
+				<string>{25.5, 22}</string>
+				<key>Tag</key>
+				<integer>0</integer>
+				<key>TagName</key>
+				<string>DEFAULT</string>
+				<key>UV</key>
+				<string>{{28, 30}, {25.5, 22}}</string>
+				<key>UniqueName</key>
+				<string>rider_head</string>
+				<key>ZOrder</key>
+				<integer>0</integer>
+			</dict>
+			<key>PhysicProperties</key>
+			<dict>
+				<key>AngularDamping</key>
+				<real>0.0</real>
+				<key>AngularVelocity</key>
+				<real>0.0</real>
+				<key>CanSleep</key>
+				<true/>
+				<key>Category</key>
+				<integer>1</integer>
+				<key>Density</key>
+				<real>0.20000000298023224</real>
+				<key>FixedRot</key>
+				<false/>
+				<key>Friction</key>
+				<real>0.20000000298023224</real>
+				<key>GravityScale</key>
+				<real>1</real>
+				<key>Group</key>
+				<integer>0</integer>
+				<key>HandledBySH</key>
+				<false/>
+				<key>IsBullet</key>
+				<false/>
+				<key>IsCircle</key>
+				<false/>
+				<key>IsSensor</key>
+				<true/>
+				<key>LinearDamping</key>
+				<real>0.0</real>
+				<key>LinearVelocity</key>
+				<string>{0, 0}</string>
+				<key>Mask</key>
+				<integer>65535</integer>
+				<key>Restitution</key>
+				<real>0.20000000298023224</real>
+				<key>ShapeBorder</key>
+				<string>{0, 0}</string>
+				<key>ShapeFixtures</key>
+				<array/>
+				<key>ShapePositionOffset</key>
+				<string>{0, 0}</string>
+				<key>Type</key>
+				<integer>0</integer>
+			</dict>
+		</dict>
+	</array>
 	<key>ScenePreference</key>
 	<dict>
 		<key>BackgroundColor</key>
@@ -29,23 +257,23 @@
 		<key>GameWorld</key>
 		<string>{{0, 0}, {480, 320}}</string>
 		<key>LevelsPath</key>
-		<string>file://localhost/Volumes/Macintosh%20HD%202/Carl/levelhelper/levels/</string>
+		<string>file://localhost/Volumes/Macintosh%20HD%202/Carl/levelhelper/resources/</string>
 		<key>PanValue</key>
-		<string>{398.85605526361559, -51.896541564202337}</string>
+		<string>{194, 144}</string>
 		<key>ProjectName</key>
 		<string>Demo</string>
 		<key>SHScenesPath</key>
 		<string>file://localhost/Volumes/Macintosh%20HD%202/Carl/levelhelper/resources/</string>
 		<key>SafeFrame</key>
-		<string>{320, 480}</string>
+		<string>{480, 320}</string>
 		<key>ScreenSize</key>
-		<integer>0</integer>
+		<integer>1</integer>
 		<key>Tags</key>
 		<array>
 			<string>DEFAULT</string>
 		</array>
 		<key>ZoomValue</key>
-		<real>1.9425848722457886</real>
+		<real>1</real>
 	</dict>
 </dict>
 </plist>
