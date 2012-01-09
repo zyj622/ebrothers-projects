@@ -264,6 +264,18 @@
                 <category android:name="android.intent.category.TEST" />
             </intent-filter>
         </activity>
+        
+        <activity
+            android:debuggable="true"
+            android:label="@string/activity_petest"
+            android:launchMode="singleInstance"
+            android:name=".tests.PhysicsEditorTest" >
+            <intent-filter >
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.TEST" />
+            </intent-filter>
+        </activity>
     </application>
 
     <uses-sdk android:minSdkVersion="4" >

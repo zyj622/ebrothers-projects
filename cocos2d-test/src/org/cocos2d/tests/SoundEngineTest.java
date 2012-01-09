@@ -96,7 +96,7 @@ public class SoundEngineTest extends Activity {
         @Override
         public boolean ccTouchesBegan(MotionEvent event) {
             
-        	SoundEngine.sharedEngine().playEffect(app, R.raw.effect);
+        	SoundEngine.sharedEngine().playEffect(app, R.raw.music_box);
 
             return CCTouchDispatcher.kEventHandled;
         }
