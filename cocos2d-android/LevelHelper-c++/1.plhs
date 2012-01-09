@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>ANIMS_INFO</key>
+	<array/>
+	<key>Author</key>
+	<string>Bogdan Vladu</string>
+	<key>BEZIER_INFO</key>
+	<array/>
+	<key>CreatedWith</key>
+	<string>LevelHelper</string>
+	<key>Gravity</key>
+	<string>{0, 0}</string>
+	<key>JOINTS_INFO</key>
+	<array/>
+	<key>LHVersion</key>
+	<string>1.4.3</string>
+	<key>LoadedImages</key>
+	<array/>
+	<key>PARALLAX_INFO</key>
+	<array/>
+	<key>SPRITES_INFO</key>
+	<array/>
+	<key>ScenePreference</key>
+	<dict>
+		<key>BackgroundColor</key>
+		<string>{{0, 0}, {0, 0}}</string>
+		<key>GameWorld</key>
+		<string>{{0, 0}, {480, 320}}</string>
+		<key>LevelsPath</key>
+		<string>file://localhost/Volumes/Macintosh%20HD%202/Carl/levelhelper/levels/</string>
+		<key>PanValue</key>
+		<string>{398.85605526361559, -51.896541564202337}</string>
+		<key>ProjectName</key>
+		<string>Demo</string>
+		<key>SHScenesPath</key>
+		<string>file://localhost/Volumes/Macintosh%20HD%202/Carl/levelhelper/resources/</string>
+		<key>SafeFrame</key>
+		<string>{320, 480}</string>
+		<key>ScreenSize</key>
+		<integer>0</integer>
+		<key>Tags</key>
+		<array>
+			<string>DEFAULT</string>
+		</array>
+		<key>ZoomValue</key>
+		<real>1.9425848722457886</real>
+	</dict>
+</dict>
+</plist>
