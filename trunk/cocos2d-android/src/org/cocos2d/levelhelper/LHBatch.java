@@ -19,4 +19,14 @@ public class LHBatch {
 		
 	}
 
+	public CCSpriteSheet getSpriteSheet() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public int getZ() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }
