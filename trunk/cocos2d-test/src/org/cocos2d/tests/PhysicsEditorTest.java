@@ -1,6 +1,5 @@
 package org.cocos2d.tests;
 
-import org.cocos2d.actions.CCProgressTimer;
 import org.cocos2d.layers.CCPhysicsLayer;
 import org.cocos2d.layers.CCScene;
 import org.cocos2d.nodes.CCDirector;
@@ -17,6 +16,9 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 
 public class PhysicsEditorTest extends Activity {
+//	static {
+//		System.loadLibrary("gdx");
+//	}
 	public static PhysicsEditorTest app;
 	private CCGLSurfaceView mGLSurfaceView;
 
@@ -87,7 +89,7 @@ public class PhysicsEditorTest extends Activity {
 				def.position.set(100 / PTM_RATIO, 100 / PTM_RATIO);
 				Body body = world.createBody(def);
 				cache.addFixturesToBody(body, "orange");
-				
+
 				def = new BodyDef();
 				def.type = BodyType.StaticBody;
 				def.position.set(200 / PTM_RATIO, 200 / PTM_RATIO);
