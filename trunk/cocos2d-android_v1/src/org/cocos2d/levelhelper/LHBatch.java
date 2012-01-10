@@ -29,4 +29,9 @@ public class LHBatch {
 		return 0;
 	}
 
+	public String getUniqueName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

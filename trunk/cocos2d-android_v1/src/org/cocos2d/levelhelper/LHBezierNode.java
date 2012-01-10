@@ -16,4 +16,11 @@ public class LHBezierNode extends CCNode {
 		return null;
 	}
 
+	public LHPathNode addSpriteOnPath(LHSprite ccsprite, float time,
+			boolean startAtEndPoint, boolean isCyclic, boolean restartOtherEnd,
+			int axis, boolean flipx, boolean flipy, boolean deltaMove) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
