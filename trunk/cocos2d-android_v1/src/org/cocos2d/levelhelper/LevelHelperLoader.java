@@ -571,7 +571,7 @@ public class LevelHelperLoader {
 		if (animNode != null) {
 			LHBatch batch = batchNodeForFile(animNode.getImageName());
 			if (batch != null) {
-				animNode.setBatchNode(batch.getSpriteSheet());
+				animNode.setSpriteSheet(batch.getSpriteSheet());
 				animNode.computeFrames();
 				if (target == null) {
 					animNode.runAnimationOnSprite(sprite, animNotifierTarget,
@@ -598,7 +598,7 @@ public class LevelHelperLoader {
 			return;
 		LHBatch batch = batchNodeForFile(animNode.getImageName());
 		if (batch != null) {
-			animNode.setBatchNode(batch.getSpriteSheet());
+			animNode.setSpriteSheet(batch.getSpriteSheet());
 			animNode.computeFrames();
 			sprite.setAnimation(animNode);
 		}
@@ -1062,7 +1062,7 @@ public class LevelHelperLoader {
 				if (animNode.startAtLaunch) {
 					LHBatch batch = batchNodeForFile(animNode.getImageName());
 					if (batch != null) {
-						animNode.setBatchNode(batch.getSpriteSheet());
+						animNode.setSpriteSheet(batch.getSpriteSheet());
 						animNode.computeFrames();
 						animNode.runAnimationOnSprite(ccsprite,
 								animNotifierTarget, animNotifierSelector,
