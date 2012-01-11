@@ -1,7 +1,8 @@
-package org.cocos2d.levelhelper;
+package org.cocos2d.levelhelper.nodes;
 
 import java.util.ArrayList;
 
+import org.cocos2d.nodes.CCSpriteFrame;
 import org.cocos2d.nodes.CCSpriteSheet;
 import org.cocos2d.types.CGRect;
 
@@ -41,6 +42,26 @@ public class LHAnimationNode {
 			boolean notifOnLoopForeverAnim) {
 		// TODO Auto-generated method stub
 		
+	}
+	public void setAnimationTexturePropertiesOnSprite(LHSprite lhSprite) {
+		// TODO Auto-generated method stub
+		
+	}
+	public String getUniqueName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	public int getNumberOfFrames() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	public void setFrame(int frmNo, LHSprite lhSprite) {
+		// TODO Auto-generated method stub
+		
+	}
+	public ArrayList<CCSpriteFrame> getFrames() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
