@@ -1,4 +1,4 @@
-package org.cocos2d.levelhelper;
+package org.cocos2d.levelhelper.nodes;
 
 import org.cocos2d.levelhelper.LevelHelperLoader.LevelHelper_TAG;
 import org.cocos2d.nodes.CCNode;

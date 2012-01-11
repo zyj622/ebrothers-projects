@@ -5,6 +5,15 @@ import java.util.HashMap;
 
 import org.cocos2d.config.ccMacros;
 import org.cocos2d.layers.CCLayer;
+import org.cocos2d.levelhelper.nodes.LHAnimationNode;
+import org.cocos2d.levelhelper.nodes.LHBatch;
+import org.cocos2d.levelhelper.nodes.LHBezierNode;
+import org.cocos2d.levelhelper.nodes.LHContactNode;
+import org.cocos2d.levelhelper.nodes.LHJoint;
+import org.cocos2d.levelhelper.nodes.LHParallaxNode;
+import org.cocos2d.levelhelper.nodes.LHPathNode;
+import org.cocos2d.levelhelper.nodes.LHSettings;
+import org.cocos2d.levelhelper.nodes.LHSprite;
 import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.nodes.CCSpriteSheet;
 import org.cocos2d.types.CGPoint;
@@ -21,6 +30,7 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.CircleShape;
+import com.badlogic.gdx.physics.box2d.EdgeShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.Joint;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
@@ -47,6 +57,7 @@ public class LevelHelperLoader {
 
 	private HashMap<String, LHAnimationNode> animationsInLevel;
 	private HashMap<String, LHSprite> spritesInLevel;
+	private HashMap<String, LHSprite> physicBoundariesInLevel;
 	private HashMap<String, LHJoint> jointsInLevel;
 	private HashMap<String, LHParallaxNode> parallaxesInLevel;
 	private HashMap<String, LHBezierNode> beziersInLevel;
@@ -62,17 +73,17 @@ public class LevelHelperLoader {
 	private CGPoint safeFrame;
 	private CGRect gameWorldRect;
 	private CGPoint gravity;
-	private LHObject wb;
+	private HashMap<String, LHObject> wb;
 	private CCLayer _cocosLayer;
 	private World _box2dWorld;
 	private LHContactNode contactNode;
 
-	enum LevelHelper_TAG {
-		DEFAULT_TAG, NUMBER_OF_TAGS
-	};
+	// private static final int LH_PATH_ACTION_TAG = 0;
+	public static final int LH_ANIM_ACTION_TAG = 1;
+	public static final boolean LH_SCENE_TESTER = false;
 
-	enum LH_ACTIONS_TAGS {
-		LH_PATH_ACTION_TAG, LH_ANIM_ACTION_TAG
+	public enum LevelHelper_TAG {
+		DEFAULT_TAG, NUMBER_OF_TAGS
 	};
 
 	public LevelHelperLoader(String levelFile) {
@@ -236,12 +247,133 @@ public class LevelHelperLoader {
 	};
 
 	// //////////////////////////////////////////////////////////////////////////////
-	// SPRITES
+	// CREATION
 	// //////////////////////////////////////////////////////////////////////////////
+	// New sprite and associated body will be released automatically
+	// or you can use removeFromParentAndCleanup(true), CCSprite method, to do
+	// it at a specific time
+	// you must set the desired position after creation
+
+	// sprites returned needs to be added in the layer by you
+	// new sprite unique name for the returned sprite will be
+	// [OLDNAME]_LH_NEW__SPRITE_XX and [OLDNAME]_LH_NEW_BODY_XX
+	// no physic body
+	public LHSprite newSpriteWithUniqueName(String name) {
+		int count = lhSprites.size();
+		for (int i = 0; i < count; ++i) {
+			HashMap<String, LHObject> dictionary = lhSprites.get(i).dictValue();
+			HashMap<String, LHObject> spriteProp = dictionary.get(
+					"GeneralProperties").dictValue();
+			if (spriteProp.get("UniqueName").stringValue() == name) {
+				LHSprite ccsprite = spriteFromDictionary(spriteProp);
+				String uName = name + "_LH_NEW_SPRITE_"
+						+ LHSettings.sharedInstance().newBodyId();
+				ccsprite.setUniqueName(uName);
+				return ccsprite;
+			}
+		}
+		return null;
+	}
+
+	// with physic body
+	public LHSprite newPhysicalSpriteWithUniqueName(String name) {
+		int count = lhSprites.size();
+		for (int i = 0; i < count; ++i) {
+			HashMap<String, LHObject> dictionary = lhSprites.get(i).dictValue();
+			HashMap<String, LHObject> spriteProp = dictionary.get(
+					"GeneralProperties").dictValue();
+			if (spriteProp.get("UniqueName").stringValue() == name) {
+				HashMap<String, LHObject> physicProp = dictionary.get(
+						"PhysicProperties").dictValue();
+				LHSprite ccsprite = spriteFromDictionary(spriteProp);
+				Body body = b2BodyFromDictionary(physicProp, spriteProp,
+						ccsprite, _box2dWorld);
+				if (body != null)
+					ccsprite.setBody(body);
+				String uName = name + "_LH_NEW_BODY_"
+						+ LHSettings.sharedInstance().newBodyId();
+				ccsprite.setUniqueName(uName);
+				return ccsprite;
+			}
+		}
+		return null;
+	}
+
+	// sprites are added in the coresponding batch node automatically
+	// new sprite unique name for the returned sprite will be
+	// [OLDNAME]_LH_NEW_BATCH_SPRITE_XX and [OLDNAME]_LH_NEW_BATCH_BODY_XX
+	// no physic body
+	public LHSprite newBatchSpriteWithUniqueName(String name) {
+		int count = lhSprites.size();
+		for (int i = 0; i < count; ++i) {
+			HashMap<String, LHObject> dictionary = lhSprites.get(i).dictValue();
+			HashMap<String, LHObject> spriteProp = dictionary.get(
+					"GeneralProperties").dictValue();
+			if (spriteProp.get("UniqueName").stringValue().equals(name)) {
+				// find the coresponding batch node for this sprite
+				LHBatch bNode = batchNodeForFile(spriteProp.get("Image")
+						.stringValue());
+				if (bNode != null) {
+					CCSpriteSheet batch = bNode.getSpriteSheet();
+					if (batch != null) {
+						LHSprite ccsprite = spriteWithBatchFromDictionary(
+								spriteProp, bNode);
+						batch.addChild(ccsprite, spriteProp.get("ZOrder")
+								.intValue());
+						String uName = name + "_LH_NEW_BATCH_SPRITE_"
+								+ LHSettings.sharedInstance().newBodyId();
+						ccsprite.setUniqueName(uName);
+						return ccsprite;
+					}
+				}
+			}
+		}
+		return null;
+	}
+
+	// with physic body
+	public LHSprite newPhysicalBatchSpriteWithUniqueName(String name) {
+		int count = lhSprites.size();
+		for (int i = 0; i < count; ++i) {
+			HashMap<String, LHObject> dictionary = lhSprites.get(i).dictValue();
+			HashMap<String, LHObject> spriteProp = dictionary.get(
+					"GeneralProperties").dictValue();
+			if (spriteProp.get("UniqueName").stringValue().equals(name)) {
+				// find the coresponding batch node for this sprite
+				LHBatch bNode = batchNodeForFile(spriteProp.get("Image")
+						.stringValue());
+				if (bNode != null) {
+					CCSpriteSheet batch = bNode.getSpriteSheet();
+					if (batch != null) {
+						LHSprite ccsprite = spriteWithBatchFromDictionary(
+								spriteProp, bNode);
+						batch.addChild(ccsprite, spriteProp.get("ZOrder")
+								.intValue());
+
+						HashMap<String, LHObject> physicProp = dictionary.get(
+								"PhysicProperties").dictValue();
+						Body body = b2BodyFromDictionary(physicProp,
+								spriteProp, ccsprite, _box2dWorld);
+						if (body != null)
+							ccsprite.setBody(body);
+						String uName = name + "_LH_NEW_BATCH_BODY_"
+								+ LHSettings.sharedInstance().newBodyId();
+						ccsprite.setUniqueName(uName);
+						return ccsprite;
+					}
+				}
+			}
+		}
+		return null;
+	}
+
 	public LHJoint jointWithUniqueName(String key) {
 		return jointsInLevel.get(key);
 	}
 
+	// //////////////////////////////////////////////////////////////////////////////
+	// JOIN
+	// //////////////////////////////////////////////////////////////////////////////
 	public ArrayList<LHJoint> jointsWithTag(LevelHelper_TAG tag) {
 		ArrayList<LHJoint> jointsWithTag = new ArrayList<LHJoint>();
 		for (String key : jointsInLevel.keySet()) {
@@ -278,6 +410,13 @@ public class LevelHelperLoader {
 	}
 
 	// //////////////////////////////////////////////////////////////////////////////
+	// PARALLAX
+	// //////////////////////////////////////////////////////////////////////////////
+	public LHParallaxNode paralaxNodeWithUniqueName(String uniqueName) {
+		return parallaxesInLevel.get(uniqueName);
+	}
+
+	// //////////////////////////////////////////////////////////////////////////////
 	// BEZIER
 	// //////////////////////////////////////////////////////////////////////////////
 	public LHBezierNode bezierNodeWithUniqueName(String name) {
@@ -311,15 +450,222 @@ public class LevelHelperLoader {
 	};
 
 	// //////////////////////////////////////////////////////////////////////////////
-	// PARALLAX
+	// PHYSIC BOUNDARIES
 	// //////////////////////////////////////////////////////////////////////////////
-	public LHParallaxNode paralaxNodeWithUniqueName(String uniqueName) {
-		return parallaxesInLevel.get(uniqueName);
+	public void createPhysicBoundaries(World _world) {
+		CGPoint wbConv = LHSettings.sharedInstance().realConvertRatio();
+		createPhysicBoundariesHelper(_world, wbConv, CGPoint.make(0.0f, 0.0f));
+	}
+
+	// this method should be used when using dontStretchArtOnIpad
+	// see api documentatin for more info
+	public void createPhysicBoundariesNoStretching(World _world) {
+		CGPoint pos_offset = LHSettings.sharedInstance().possitionOffset();
+		CGPoint wbConv = LHSettings.sharedInstance().convertRatio();
+		createPhysicBoundariesHelper(_world, wbConv,
+				CGPoint.make(pos_offset.x / 2.0f, pos_offset.y / 2.0f));
+	}
+
+	public CGRect physicBoundariesRect() {
+		CGPoint wbConv = LHSettings.sharedInstance().convertRatio();
+		CGRect rect = stringToCGRect(wb.get("WBRect").stringValue());
+		rect.origin.x = rect.origin.x * wbConv.x;
+		rect.origin.y = rect.origin.y * wbConv.y;
+		rect.size.width = rect.size.width * wbConv.x;
+		rect.size.height = rect.size.height * wbConv.y;
+		return rect;
+	}
+
+	public boolean hasPhysicBoundaries() {
+		if (wb == null) {
+			return false;
+		}
+		CGRect rect = stringToCGRect(wb.get("WBRect").stringValue());
+		if (rect.size.width == 0 || rect.size.height == 0)
+			return false;
+		return true;
+	}
+
+	public Body leftPhysicBoundary() {
+		return physicBoundarieForKey("LHPhysicBoundarieLeft");
+	}
+
+	public LHSprite leftPhysicBoundarySprite() {
+		return physicBoundariesInLevel.get("LHPhysicBoundarieLeft");
+	}
+
+	public Body rightPhysicBoundary() {
+		return physicBoundarieForKey("LHPhysicBoundarieRight");
+	}
+
+	public LHSprite rightPhysicBoundarySprite() {
+		return physicBoundariesInLevel.get("LHPhysicBoundarieRight");
+	}
+
+	public Body topPhysicBoundary() {
+		return physicBoundarieForKey("LHPhysicBoundarieTop");
+	}
+
+	public LHSprite topPhysicBoundarySprite() {
+		return physicBoundariesInLevel.get("LHPhysicBoundarieTop");
+	}
+
+	public Body bottomPhysicBoundary() {
+		return physicBoundarieForKey("LHPhysicBoundarieBottom");
+	}
+
+	public LHSprite bottomPhysicBoundarySprite() {
+		return physicBoundariesInLevel.get("LHPhysicBoundarieBottom");
+	}
+
+	public void removePhysicBoundaries() {
+		physicBoundariesInLevel.clear();
+	}
+
+	// //////////////////////////////////////////////////////////////////////////////
+	// LEVEL INFO
+	// //////////////////////////////////////////////////////////////////////////////
+	// the device size set in loaded level
+	public CGSize gameScreenSize() {
+		return CGSize.make(safeFrame.x, safeFrame.y);
+	}
+
+	// the size of the game world
+	public CGRect gameWorldSize() {
+		CGPoint wbConv = LHSettings.sharedInstance().convertRatio();
+		CGRect ws = gameWorldRect;
+		ws.origin.x *= wbConv.x;
+		ws.origin.y *= wbConv.y;
+		ws.size.width *= wbConv.x;
+		ws.size.height *= wbConv.y;
+		return ws;
+	}
+
+	// //////////////////////////////////////////////////////////////////////////////
+	// BATCH
+	// //////////////////////////////////////////////////////////////////////////////
+	public int numberOfBatchNodesUsed() {
+		return batchNodesInLevel.size() - 1;
+	}
+
+	public void removeUnusedBatchesFromMemory() {
+		// TODO no getDescendants() method in CCSpriteSheet
+		// for (String key : batchNodesInLevel.keySet()) {
+		// LHBatch bNode = batchNodesInLevel.get(key);
+		// if (bNode != null) {
+		// CCSpriteSheet cNode = bNode.getSpriteSheet();
+		// if (cNode.getDescendants().isEmpty()) {
+		// // delete bNode;
+		// batchNodesInLevel.remove(key);
+		// }
+		// }
+		// }
+	}
+
+	// //////////////////////////////////////////////////////////////////////////////
+	// ANIMATION
+	// //////////////////////////////////////////////////////////////////////////////
+	public void startAnimationWithUniqueName(String animationName,
+			LHSprite sprite, Object target, String selector) {
+		LHAnimationNode animNode = animationsInLevel.get(animationName);
+		if (animNode != null) {
+			LHBatch batch = batchNodeForFile(animNode.getImageName());
+			if (batch != null) {
+				animNode.setBatchNode(batch.getSpriteSheet());
+				animNode.computeFrames();
+				if (target == null) {
+					animNode.runAnimationOnSprite(sprite, animNotifierTarget,
+							animNotifierSelector, notifOnLoopForeverAnim);
+				} else {
+					animNode.runAnimationOnSprite(sprite, target, selector,
+							notifOnLoopForeverAnim);
+				}
+			}
+		}
+	}
+
+	public void stopAnimationOnSprite(LHSprite sprite) {
+		if (sprite != null) {
+			sprite.stopAction(LH_ANIM_ACTION_TAG);
+			sprite.setAnimation(null);
+		}
+	}
+
+	// this will not start the animation - it will just prepare it
+	private void prepareAnimationWithUniqueName(String animName, LHSprite sprite) {
+		LHAnimationNode animNode = animationsInLevel.get(animName);
+		if (animNode == null)
+			return;
+		LHBatch batch = batchNodeForFile(animNode.getImageName());
+		if (batch != null) {
+			animNode.setBatchNode(batch.getSpriteSheet());
+			animNode.computeFrames();
+			sprite.setAnimation(animNode);
+		}
+	}
+
+	// needs to be called before addObjectsToWorld or addSpritesToLayer
+	// signature for registered method should be like this: void
+	// HelloWorld.spriteAnimHasEnded(CCSprite* spr, const std.string&
+	// animName);
+	// registration is done like this: lh.registerNotifierOnAnimationEnds(this,
+	// callfuncND_selector(HelloWorld.spriteAnimHasEnded));
+	// this will trigger for all type of animations even for the ones controlled
+	// by you will next/prevFrameFor...
+	public void registerNotifierOnAllAnimationEnds(Object target,
+			String selector) {
+		animNotifierTarget = target;
+		animNotifierSelector = selector;
+	}
+
+	/**
+	 * by default the notification on animation end works only on
+	 * non-"loop forever" animations if you want to receive notifications on
+	 * "loop forever" animations enable this behaviour before addObjectsToWorld
+	 * by calling the following function
+	 */
+	public void enableNotifOnLoopForeverAnimations() {
+		notifOnLoopForeverAnim = true;
+	}
+
+	// //////////////////////////////////////////////////////////////////////////////
+	// PATH
+	// //////////////////////////////////////////////////////////////////////////////
+	// describe path movement without setting the sprite position on the actual
+	// points on the path
+	public void moveSpriteOnPathWithUniqueName(LHSprite ccsprite,
+			String pathUniqueName, float time, boolean startAtEndPoint,
+			boolean isCyclic, boolean restartOtherEnd, int axis, boolean flipx,
+			boolean flipy, boolean deltaMove) {
+		if (ccsprite == null)
+			return;
+		LHBezierNode node = bezierNodeWithUniqueName(pathUniqueName);
+		if (node != null) {
+			LHPathNode pathNode = node.addSpriteOnPath(ccsprite, time,
+					startAtEndPoint, isCyclic, restartOtherEnd, axis, flipx,
+					flipy, deltaMove);
+			if (pathNode != null) {
+				pathNode.setPathNotifierObject(pathNotifierTarget);
+				pathNode.setPathNotifierSelector(pathNotifierSelector);
+			}
+		}
+	}
+
+	// DISCUSSION
+	// signature for registered method should be like this: void
+	// HelloWorld.spriteMoveOnPathEnded(LHSprite spr);
+	// registration is done like this: lh.registerNotifierOnPathEnd(this,
+	// callfuncN_selector(HelloWorld.spriteMoveOnPathEnded));
+	public void registerNotifierOnAllPathEndPoints(Object target,
+			String selector) {
+		pathNotifierTarget = target;
+		pathNotifierSelector = selector;
 	}
 
 	// //////////////////////////////////////////////////////////////////////////////
 	// PRIVATE METHOD
 	// //////////////////////////////////////////////////////////////////////////////
+
 	private void createJoints() {
 		int count = lhJoints.size();
 		for (int i = 0; i < count; ++i) {
@@ -594,7 +940,7 @@ public class LevelHelperLoader {
 		}
 
 		LHJoint levelJoint = LHJoint.jointWithUniqueName(joint
-				.get("UniqueName").stringValue(), tag, type);
+				.get("UniqueName").stringValue(), tag, type, boxJoint);
 		// levelJoint.getTag() = tag;
 		// levelJoint.type = (LH_JOINT_TYPE)type;
 		// levelJoint.joint = boxJoint;
@@ -730,18 +1076,6 @@ public class LevelHelperLoader {
 
 	}
 
-	private void prepareAnimationWithUniqueName(String animName, LHSprite sprite) {
-		LHAnimationNode animNode = animationsInLevel.get(animName);
-		if (animNode == null)
-			return;
-		LHBatch batch = batchNodeForFile(animNode.getImageName());
-		if (batch != null) {
-			animNode.setBatchNode(batch.getSpriteSheet());
-			animNode.computeFrames();
-			sprite.setAnimation(animNode);
-		}
-	}
-
 	private void createPathOnSprite(LHSprite ccsprite,
 			HashMap<String, LHObject> spriteProp) {
 		if (ccsprite == null || spriteProp == null)
@@ -764,25 +1098,6 @@ public class LevelHelperLoader {
 				flipX, flipY, true);
 	}
 
-	private void moveSpriteOnPathWithUniqueName(LHSprite ccsprite,
-			String pathUniqueName, float time, boolean startAtEndPoint,
-			boolean isCyclic, boolean restartOtherEnd, int axis, boolean flipx,
-			boolean flipy, boolean deltaMove) {
-		if (ccsprite == null)
-			return;
-		LHBezierNode node = bezierNodeWithUniqueName(pathUniqueName);
-		if (node != null) {
-			LHPathNode pathNode = node.addSpriteOnPath(ccsprite, time,
-					startAtEndPoint, isCyclic, restartOtherEnd, axis, flipx,
-					flipy, deltaMove);
-
-			if (pathNode != null) {
-				pathNode.setPathNotifierObject(pathNotifierTarget);
-				pathNode.setPathNotifierSelector(pathNotifierSelector);
-			}
-		}
-	}
-
 	private LHSprite spriteWithBatchFromDictionary(
 			HashMap<String, LHObject> spriteProp, LHBatch lhBatch) {
 		CGRect uv = stringToCGRect(spriteProp.get("UV").stringValue());
@@ -802,7 +1117,7 @@ public class LevelHelperLoader {
 		}
 		LHSprite ccsprite = null;
 		if (!LHSettings.sharedInstance().isCoronaUser())
-			ccsprite = LHSprite.spriteWithBatchNode(batch, uv);
+			ccsprite = LHSprite.spriteWithSpriteSheet(batch, uv);
 		else
 			ccsprite = LHSprite.spriteWithFile(img, uv);
 		setSpriteProperties(ccsprite, spriteProp);
@@ -823,13 +1138,13 @@ public class LevelHelperLoader {
 		position.y -= pos_offset.y;
 		ccsprite.setPosition(position);
 		ccsprite.setRotation(spriteProp.get("Angle").intValue());
-		ccsprite.setOpacity(255 * spriteProp.get("Opacity").floatValue()
-				* LHSettings.sharedInstance().customAlpha());
+		ccsprite.setOpacity((int) (255 * spriteProp.get("Opacity").floatValue() * LHSettings
+				.sharedInstance().customAlpha()));
 		CGRect color = stringToCGRect(spriteProp.get("Color").stringValue());
 		ccsprite.setColor(ccColor3B.ccc3((int) (255 * color.origin.x),
 				(int) (255 * color.origin.y), (int) (255 * color.size.width)));
 		CGPoint scale = stringToCGPoint(spriteProp.get("Scale").stringValue());
-		ccsprite.setIsVisible(spriteProp.get("IsDrawable").boolValue());
+		ccsprite.setVisible(spriteProp.get("IsDrawable").boolValue());
 		ccsprite.setTag(spriteProp.get("Tag").intValue());
 		scale.x *= LHSettings.sharedInstance().convertRatio().x;
 		scale.y *= LHSettings.sharedInstance().convertRatio().y;
@@ -1061,6 +1376,138 @@ public class LevelHelperLoader {
 
 	}
 
+	private void createPhysicBoundariesHelper(World _world, CGPoint wbConv,
+			CGPoint pos_offset) {
+		if (!hasPhysicBoundaries()) {
+			Log.w(TAG,
+					"LevelHelper WARNING - Please create physic boundaries in LevelHelper in order to call method \"createPhysicBoundaries\"");
+			return;
+		}
+		BodyDef bodyDef = new BodyDef();
+		bodyDef.type = BodyType.StaticBody;
+		bodyDef.position.set(0.0f, 0.0f);
+		Body wbBodyT = _world.createBody(bodyDef);
+		Body wbBodyL = _world.createBody(bodyDef);
+		Body wbBodyB = _world.createBody(bodyDef);
+		Body wbBodyR = _world.createBody(bodyDef);
+		{
+			LHSprite spr = LHSprite.sprite();
+			spr.setTag(wb.get("TagLeft").intValue());
+			spr.setVisible(false);
+			spr.setUniqueName("LHPhysicBoundarieLeft");
+			spr.setBody(wbBodyL);
+			wbBodyL.setUserData(spr);
+			physicBoundariesInLevel.put("LHPhysicBoundarieLeft", spr);
+		}
+		{
+			LHSprite spr = LHSprite.sprite();
+			spr.setTag(wb.get("TagRight").intValue());
+			spr.setVisible(false);
+			spr.setUniqueName("LHPhysicBoundarieRight");
+			spr.setBody(wbBodyR);
+			wbBodyR.setUserData(spr);
+			physicBoundariesInLevel.put("LHPhysicBoundarieRight", spr);
+		}
+		{
+			LHSprite spr = LHSprite.sprite();
+			spr.setTag(wb.get("TagTop").intValue());
+			spr.setVisible(false);
+			spr.setUniqueName("LHPhysicBoundarieTop");
+			spr.setBody(wbBodyT);
+			wbBodyT.setUserData(spr);
+			physicBoundariesInLevel.put("LHPhysicBoundarieTop", spr);
+		}
+		{
+			LHSprite spr = LHSprite.sprite();
+			spr.setTag(wb.get("TagBottom").intValue());
+			spr.setVisible(false);
+			spr.setUniqueName("LHPhysicBoundarieBottom");
+			spr.setBody(wbBodyB);
+			wbBodyB.setUserData(spr);
+			physicBoundariesInLevel.put("LHPhysicBoundarieBottom", spr);
+		}
+
+		wbBodyT.setSleepingAllowed(wb.get("CanSleep").boolValue());
+		wbBodyL.setSleepingAllowed(wb.get("CanSleep").boolValue());
+		wbBodyB.setSleepingAllowed(wb.get("CanSleep").boolValue());
+		wbBodyR.setSleepingAllowed(wb.get("CanSleep").boolValue());
+
+		CGRect rect = stringToCGRect(wb.get("WBRect").stringValue());
+		CGSize winSize = CCDirector.sharedDirector().winSize();
+
+		if (LH_SCENE_TESTER) {
+			rect.origin.x += pos_offset.x;
+			rect.origin.y += pos_offset.y;
+		} else {
+			rect.origin.x += pos_offset.x * 2.0f;
+			rect.origin.y += pos_offset.y * 2.0f;
+		}
+		float ptm = LHSettings.sharedInstance().lhPtmRatio();
+		{// TOP
+			EdgeShape shape = new EdgeShape();
+			Vector2 pos1 = new Vector2(rect.origin.x / ptm * wbConv.x,
+					(winSize.height - rect.origin.y * wbConv.y) / ptm);
+			Vector2 pos2 = new Vector2((rect.origin.x + rect.size.width)
+					* wbConv.x / ptm, (winSize.height - rect.origin.y
+					* wbConv.y)
+					/ ptm);
+			shape.set(pos1, pos2);
+			FixtureDef fixture = new FixtureDef();
+			setFixtureDefPropertiesFromDictionary(wb, fixture);
+			fixture.shape = shape;
+			wbBodyT.createFixture(fixture);
+		}
+		{// LEFT
+			EdgeShape shape = new EdgeShape();
+			Vector2 pos1 = new Vector2(rect.origin.x * wbConv.x / ptm,
+					(winSize.height - rect.origin.y * wbConv.y) / ptm);
+			Vector2 pos2 = new Vector2((rect.origin.x * wbConv.x) / ptm,
+					(winSize.height - (rect.origin.y + rect.size.height)
+							* wbConv.y)
+							/ ptm);
+			shape.set(pos1, pos2);
+			FixtureDef fixture = new FixtureDef();
+			setFixtureDefPropertiesFromDictionary(wb, fixture);
+			fixture.shape = shape;
+			wbBodyL.createFixture(fixture);
+		}
+		{// RIGHT
+			EdgeShape shape = new EdgeShape();
+			Vector2 pos1 = new Vector2((rect.origin.x + rect.size.width)
+					* wbConv.x / ptm, (winSize.height - rect.origin.y
+					* wbConv.y)
+					/ ptm);
+
+			Vector2 pos2 = new Vector2((rect.origin.x + rect.size.width)
+					* wbConv.x / ptm,
+					(winSize.height - (rect.origin.y + rect.size.height)
+							* wbConv.y)
+							/ ptm);
+			shape.set(pos1, pos2);
+			FixtureDef fixture = new FixtureDef();
+			setFixtureDefPropertiesFromDictionary(wb, fixture);
+			fixture.shape = shape;
+			wbBodyR.createFixture(fixture);
+		}
+		{// BOTTOM
+			EdgeShape shape = new EdgeShape();
+			Vector2 pos1 = new Vector2(rect.origin.x * wbConv.x / ptm,
+					(winSize.height - (rect.origin.y + rect.size.height)
+							* wbConv.y)
+							/ ptm);
+			Vector2 pos2 = new Vector2((rect.origin.x + rect.size.width)
+					* wbConv.x / ptm,
+					(winSize.height - (rect.origin.y + rect.size.height)
+							* wbConv.y)
+							/ ptm);
+			shape.set(pos1, pos2);
+			FixtureDef fixture = new FixtureDef();
+			setFixtureDefPropertiesFromDictionary(wb, fixture);
+			fixture.shape = shape;
+			wbBodyB.createFixture(fixture);
+		}
+	}
+
 	// //////////////////////////////////////////////////////////////////////////////
 	// BEZIERS
 	// //////////////////////////////////////////////////////////////////////////////
@@ -1166,7 +1613,7 @@ public class LevelHelperLoader {
 		// //////////////////////LOAD WORLD
 		// BOUNDARIES///////////////////////////////
 		if (null != dictionary.get("WBInfo")) {
-			wb = dictionary.get("WBInfo");
+			wb = dictionary.get("WBInfo").dictValue();
 		}
 
 		// //////////////////////LOAD
@@ -1221,7 +1668,7 @@ public class LevelHelperLoader {
 			return null;
 
 		CCSpriteSheet sheet = CCSpriteSheet.spriteSheet(image);
-		// LHSettings.sharedInstance().imagePath(image.c_str()).c_str());
+		// LHSettings.sharedInstance().imagePath(image));
 		LHBatch bNode = LHBatch.batchWithUniqueName(image);
 		bNode.setSpriteSheet(sheet);
 
@@ -1238,6 +1685,28 @@ public class LevelHelperLoader {
 
 	private CGRect stringToCGRect(String str) {
 		return GeometryUtil.CGRectFromString(str);
+	}
+
+	private Body physicBoundarieForKey(String key) {
+		LHSprite spr = physicBoundariesInLevel.get(key);
+		if (spr == null)
+			return null;
+		return spr.getBody();
+	}
+
+	private LHSprite spriteFromDictionary(HashMap<String, LHObject> spriteProp) {
+		CGRect uv = stringToCGRect(spriteProp.get("UV").stringValue());
+		String img = LHSettings.sharedInstance().imagePath(
+				spriteProp.get("Image").stringValue());
+		if (LHSettings.sharedInstance().shouldScaleImageOnRetina(img)) {
+			uv.origin.x *= 2.0f;
+			uv.origin.y *= 2.0f;
+			uv.size.width *= 2.0f;
+			uv.size.height *= 2.0f;
+		}
+		LHSprite ccsprite = LHSprite.spriteWithFile(img, uv);
+		setSpriteProperties(ccsprite, spriteProp);
+		return ccsprite;
 	}
 
 	// //////////////////////////////////////////////////////////////////////////////

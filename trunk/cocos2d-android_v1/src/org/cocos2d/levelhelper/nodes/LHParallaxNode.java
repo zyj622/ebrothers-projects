@@ -1,7 +1,8 @@
-package org.cocos2d.levelhelper;
+package org.cocos2d.levelhelper.nodes;
 
 import java.util.HashMap;
 
+import org.cocos2d.levelhelper.LHObject;
 import org.cocos2d.nodes.CCNode;
 import org.cocos2d.types.CGPoint;
 

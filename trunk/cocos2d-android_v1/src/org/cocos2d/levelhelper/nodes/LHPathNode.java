@@ -1,6 +1,8 @@
-package org.cocos2d.levelhelper;
+package org.cocos2d.levelhelper.nodes;
 
-public class LHPathNode {
+import org.cocos2d.nodes.CCNode;
+
+public class LHPathNode extends CCNode {
 	public void setPathNotifierObject(Object pathNotifierTarget) {
 		// TODO Auto-generated method stub
 
@@ -9,6 +11,11 @@ public class LHPathNode {
 	public void setPathNotifierSelector(String pathNotifierSelector) {
 		// TODO Auto-generated method stub
 
+	}
+
+	public void setPaused(boolean pauseStatus) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

@@ -1,4 +1,4 @@
-package org.cocos2d.levelhelper;
+package org.cocos2d.levelhelper.nodes;
 
 import java.io.File;
 
