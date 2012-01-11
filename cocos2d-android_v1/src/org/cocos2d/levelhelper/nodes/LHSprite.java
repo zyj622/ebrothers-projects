@@ -31,6 +31,7 @@ public class LHSprite extends CCSprite {
 	// used for the joints in case you create a level with SD graphics using
 	// ipad template
 	private CGSize realScale;
+	private CCSpriteSheet spriteSheet;
 
 	// private LHParallaxNode parallaxFollowingThisSprite;
 
@@ -262,5 +263,13 @@ public class LHSprite extends CCSprite {
 	public static LHSprite spriteWithSpriteSheet(CCSpriteSheet spriteSheet,
 			CGRect rect) {
 		return new LHSprite(spriteSheet, rect);
+	}
+
+	public CCSpriteSheet getSpriteSheet() {
+		return spriteSheet;
+	}
+
+	public void setSpriteSheet(CCSpriteSheet spriteSheet) {
+		this.spriteSheet = spriteSheet;
 	}
 }
