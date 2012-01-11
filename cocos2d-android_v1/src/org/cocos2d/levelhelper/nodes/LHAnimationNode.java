@@ -2,9 +2,13 @@ package org.cocos2d.levelhelper.nodes;
 
 import java.util.ArrayList;
 
-import org.cocos2d.actions.base.CCFiniteTimeAction;
+import org.cocos2d.actions.base.CCAction;
+import org.cocos2d.actions.base.CCRepeatForever;
+import org.cocos2d.actions.instant.CCCallFuncND;
 import org.cocos2d.actions.interval.CCAnimate;
 import org.cocos2d.actions.interval.CCRepeat;
+import org.cocos2d.actions.interval.CCSequence;
+import org.cocos2d.levelhelper.LevelHelperLoader;
 import org.cocos2d.nodes.CCAnimation;
 import org.cocos2d.nodes.CCSpriteFrame;
 import org.cocos2d.nodes.CCSpriteSheet;
@@ -73,52 +77,39 @@ public class LHAnimationNode {
 
 	public void runAnimationOnSprite(LHSprite ccsprite,
 			Object animNotifierTarget, String animNotifierSelector,
-			boolean notifOnLoopForeverAnim) {
+			boolean notifOnLoop) {
 		CCAnimation anim = CCAnimation.animation("", speed, frames);
-	    CCFiniteTimeAction seq;
-	    if(!loop)
-	    {
-	        CCRepeat animAct = CCRepeat.action(CCAnimate.action(anim, false), 
-	                                                       repetitions);
-	        if(0 != animNotifierId)
-	        {
-	            CCCallFuncND* actionRestart = CCCallFuncND::actionWithTarget(animNotifierId,
-	                                                                         animNotifierSel,
-	                                                                         (void*)&uniqueName);
-	            seq = CCSequence::actionOneTwo(animAct,actionRestart);
-	        }
-	        else{
-	            seq = animAct;
-	        }
-	    }
-	    else
-	    {
-	        if(notifOnLoop && 0 != animNotifierId)
-	        {
-	            CCCallFuncND* actionRestart = CCCallFuncND::actionWithTarget(animNotifierId, 
-	                                                                         animNotifierSel,
-	                                                                         (void*)&uniqueName);
-	            
-	            CCSequence* animAct = CCSequence::actionOneTwo(CCAnimate::actionWithAnimation(anim, false), 
-	                                                           actionRestart);
-	            
-	            seq = CCRepeatForever::actionWithAction(animAct);
-	        }
-	        else
-	        {
-	            seq = CCRepeatForever::actionWithAction(CCAnimate::actionWithAnimation(anim , false));
-	        }
-	    }
-	    
-	    if(0 != seq)
-	    {
-	        seq->setTag(LH_ANIM_ACTION_TAG);
+		CCAction seq;
+		if (!loop) {
+			CCRepeat animAct = CCRepeat.action(CCAnimate.action(anim, false),
+					repetitions);
+			if (animNotifierTarget != null) {
+				CCCallFuncND actionRestart = CCCallFuncND.action(
+						animNotifierTarget, animNotifierSelector, uniqueName);
+				seq = CCSequence.actions(animAct, actionRestart);
+			} else {
+				seq = animAct;
+			}
+		} else {
+			if (notifOnLoop && animNotifierTarget != null) {
+				CCCallFuncND actionRestart = CCCallFuncND.action(
+						animNotifierTarget, animNotifierSelector, uniqueName);
 
-	        printf ("set anim--------------------------\n");
-	        ccsprite->setAnimation(this);
-	        //setAnimationTexturePropertiesOnSprite(ccsprite);
-	        ccsprite->runAction(seq);    
-	    }
+				CCSequence animAct = CCSequence.actions(
+						CCAnimate.action(anim, false), actionRestart);
+
+				seq = CCRepeatForever.action(animAct);
+			} else {
+				seq = CCRepeatForever.action(CCAnimate.action(anim, false));
+			}
+		}
+
+		if (seq != null) {
+			seq.setTag(LevelHelperLoader.LH_ANIM_ACTION_TAG);
+			ccsprite.setAnimation(this);
+			// setAnimationTexturePropertiesOnSprite(ccsprite);
+			ccsprite.runAction(seq);
+		}
 	}
 
 	public void setAnimationTexturePropertiesOnSprite(LHSprite ccsprite) {
