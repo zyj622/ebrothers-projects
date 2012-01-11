@@ -50,6 +50,18 @@ public class Fire extends GameSprite {
 	public boolean isFatal() {
 		return true;
 	}
+	
+	@Override
+	public void resumeSchedulerAndActions() {
+		super.resumeSchedulerAndActions();
+		burnSprite.resumeSchedulerAndActions();
+	}
+	
+	@Override
+	public void pauseSchedulerAndActions() {
+		super.pauseSchedulerAndActions();
+		burnSprite.pauseSchedulerAndActions();
+	}
 
 	@Override
 	public void onStartContact(GameSprite target) {
