@@ -9,11 +9,13 @@ import org.cocos2d.levelhelper.nodes.LHAnimationNode;
 import org.cocos2d.levelhelper.nodes.LHBatch;
 import org.cocos2d.levelhelper.nodes.LHBezierNode;
 import org.cocos2d.levelhelper.nodes.LHContactNode;
+import org.cocos2d.levelhelper.nodes.LHContactNode.ContactNodeNotifier;
 import org.cocos2d.levelhelper.nodes.LHJoint;
 import org.cocos2d.levelhelper.nodes.LHParallaxNode;
 import org.cocos2d.levelhelper.nodes.LHPathNode;
 import org.cocos2d.levelhelper.nodes.LHSettings;
 import org.cocos2d.levelhelper.nodes.LHSprite;
+import org.cocos2d.levelhelper.nodes.LHPathNode.PathNodeNotifier;
 import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.nodes.CCSpriteSheet;
 import org.cocos2d.types.CGPoint;
@@ -67,8 +69,7 @@ public class LevelHelperLoader {
 	private Object animNotifierTarget;
 	private String animNotifierSelector;
 
-	private Object pathNotifierTarget;
-	private String pathNotifierSelector;
+	private PathNodeNotifier pathNotifier;
 
 	private CGPoint safeFrame;
 	private CGRect gameWorldRect;
@@ -157,13 +158,13 @@ public class LevelHelperLoader {
 	};
 
 	public void registerPreColisionCallbackBetweenTagA(LevelHelper_TAG tagA,
-			LevelHelper_TAG tagB, Object target, String selector) {
+			LevelHelper_TAG tagB, ContactNodeNotifier _notifier) {
 		if (contactNode == null) {
 			Log.w(TAG,
 					"LevelHelper WARNING: Please call registerPreColisionCallbackBetweenTagA after useLevelHelperCollisionHandling");
 		}
-		contactNode.registerPreColisionCallbackBetweenTagA(tagA, tagB, target,
-				selector);
+		contactNode.registerPreColisionCallbackBetweenTagA(tagA.ordinal(),
+				tagB.ordinal(), _notifier);
 	};
 
 	public void cancelPreCollisionCallbackBetweenTagA(LevelHelper_TAG tagA,
@@ -177,13 +178,13 @@ public class LevelHelperLoader {
 	};
 
 	public void registerPostColisionCallbackBetweenTagA(LevelHelper_TAG tagA,
-			LevelHelper_TAG tagB, Object target, String selector) {
+			LevelHelper_TAG tagB, ContactNodeNotifier _notifier) {
 		if (contactNode == null) {
 			Log.w(TAG,
 					"LevelHelper WARNING: Please call registerPostColisionCallbackBetweenTagA after useLevelHelperCollisionHandling");
 		}
-		contactNode.registerPreColisionCallbackBetweenTagA(tagA, tagB, target,
-				selector);
+		contactNode.registerPreColisionCallbackBetweenTagA(tagA.ordinal(),
+				tagB.ordinal(), _notifier);
 	};
 
 	public void cancelPostCollisionCallbackBetweenTagA(LevelHelper_TAG tagA,
@@ -645,8 +646,7 @@ public class LevelHelperLoader {
 					startAtEndPoint, isCyclic, restartOtherEnd, axis, flipx,
 					flipy, deltaMove);
 			if (pathNode != null) {
-				pathNode.setPathNotifierObject(pathNotifierTarget);
-				pathNode.setPathNotifierSelector(pathNotifierSelector);
+				pathNode.setNotifer(pathNotifier);
 			}
 		}
 	}
@@ -656,10 +656,8 @@ public class LevelHelperLoader {
 	// HelloWorld.spriteMoveOnPathEnded(LHSprite spr);
 	// registration is done like this: lh.registerNotifierOnPathEnd(this,
 	// callfuncN_selector(HelloWorld.spriteMoveOnPathEnded));
-	public void registerNotifierOnAllPathEndPoints(Object target,
-			String selector) {
-		pathNotifierTarget = target;
-		pathNotifierSelector = selector;
+	public void registerNotifierOnAllPathEndPoints(PathNodeNotifier notifier) {
+		pathNotifier = notifier;
 	}
 
 	// //////////////////////////////////////////////////////////////////////////////
