@@ -1,172 +1,202 @@
 package org.cocos2d.levelhelper.nodes;
 
+import java.util.HashMap;
+
 import org.cocos2d.nodes.CCNode;
 
+import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Contact;
+import com.badlogic.gdx.physics.box2d.ContactImpulse;
+import com.badlogic.gdx.physics.box2d.ContactListener;
+import com.badlogic.gdx.physics.box2d.Manifold;
 import com.badlogic.gdx.physics.box2d.World;
 
 public class LHContactNode extends CCNode {
-	CCMutableDictionary<int> preCollisionMap;
-    CCMutableDictionary<int> postCollisionMap;
+	HashMap<Integer, HashMap<Integer, LHContactNodeInfo>> preCollisionMap;
+	HashMap<Integer, HashMap<Integer, LHContactNodeInfo>> postCollisionMap;
 
-    LHContactListener lhContactListener;
-	boolean initContactNodeWithWorld(World world){
-	    if(world == null)
-	        return false;
-	    lhContactListener = new LHContactListener();
-	    world.setContactListener(lhContactListener);
-	    lhContactListener.nodeObject = this;
-	    lhContactListener.preSolveSelector = &lhContact_CallPreSolveMethod;
-	    lhContactListener.postSolveSelector = &lhContact_CallPostSolveMethod;
+	private ContactListener lhContactListener = new ContactListener() {
+		@Override
+		public void beginContact(Contact contact) {
 
-	    return true;
-	}
-	LHContactNode contactNodeWithWorld(World world){
-	    
-	    LHContactNode pobNode = new LHContactNode();
-	    if (pobNode != null && pobNode.initContactNodeWithWorld(world))
-	    {
-	        return pobNode;
-	    }
-	    return null;
-	}
-	////////////////////////////////////////////////////////////////////////////////
-	void registerPreColisionCallbackBetweenTagA(int tagA, 
-	                                                           int tagB,
-	                                                           SelectorProtocol* obj, 
-	                                                           SEL_CallFuncO sel)
-	{
-	    CCMutableDictionary<int>* tableA = preCollisionMap.objectForKey(tagA);
-	    
-	    
-	    if(tableA == NULL){
-	        LHContactNodeInfo* info = LHContactNodeInfo::contactInfoWithTag(tagB, obj, sel);
-	        
-	        CCMutableDictionary<int>* map = new CCMutableDictionary<int>();
-	        map.setObject(info, tagB);
-	        preCollisionMap.setObject(map, tagA);
-	    }
-	    else{
-	        LHContactNodeInfo* info = LHContactNodeInfo::contactInfoWithTag(tagB, obj, sel);
-	        tableA.setObject(info, tagB);
-	    }   
-	}
-	////////////////////////////////////////////////////////////////////////////////
-	void cancelPreColisionCallbackBetweenTagA(int tagA,
-	                                                         int tagB){
-	    CCMutableDictionary<int>* tableA = (CCMutableDictionary<int>*)preCollisionMap.objectForKey(tagA);
+		}
 
-	    if(NULL != tableA)
-	    {
-	        tableA.removeObjectForKey(tagB);
-	    }
-	}
-	////////////////////////////////////////////////////////////////////////////////
-	void registerPostColisionCallbackBetweenTagA(int tagA,
-	                                                            int tagB,
-	                                                            SelectorProtocol* obj, 
-	                                                            SEL_CallFuncO sel)
-	{
-	    
-	    CCMutableDictionary<int>* tableA = (CCMutableDictionary<int>*)postCollisionMap.objectForKey(tagA);
-	    
-	    
-	    if(tableA == NULL){
-	        LHContactNodeInfo info = LHContactNodeInfo.contactInfoWithTag(tagB, obj, sel);
-	        
-	        CCMutableDictionary<int>* map = new CCMutableDictionary<int>();
-	        map.setObject(info, tagB);
-	        postCollisionMap.setObject(map, tagA);
-	    }
-	    else{
-	        LHContactNodeInfo* info = LHContactNodeInfo::contactInfoWithTag(tagB, obj, sel);
-	        tableA.setObject(info, tagB);
-	    }   
-	}
-	////////////////////////////////////////////////////////////////////////////////
-	void cancelPostColisionCallbackBetweenTagA(int tagA,
-	                                                          int tagB)
-	{
-	    CCMutableDictionary<int>* tableA = (CCMutableDictionary<int>*)postCollisionMap.objectForKey(tagA);
-	    
-	    if(NULL != tableA)
-	    {
-	        tableA.removeObjectForKey(tagB);
-	    }
-	}
-	////////////////////////////////////////////////////////////////////////////////
-	void preSolve(Contact contact,                     
-	                             const b2Manifold* oldManifold)
-	{
-	    b2Body *bodyA = contact.GetFixtureA().GetBody();
-		b2Body *bodyB = contact.GetFixtureB().GetBody();
-		
-	    
-	    CCNode* nodeA = (CCNode*)bodyA.GetUserData();
-	    CCNode* nodeB = (CCNode*)bodyB.GetUserData();
-	        
-	    CCMutableDictionary<int>* info = (CCMutableDictionary<int>*)preCollisionMap.objectForKey(nodeA.getTag());
-	    
-	    if(info != NULL){
+		@Override
+		public void endContact(Contact contact) {
 
-	        LHContactNodeInfo* contactInfo = (LHContactNodeInfo*)info.objectForKey(nodeB.getTag());
-	        
-	        if(NULL != contactInfo)
-	        {
-	            contactInfo.callListenerWithBodyA(bodyA,bodyB,contact,oldManifold,0);
-	        }
-	    }
-	    else
-	    {
-	        info = (CCMutableDictionary<int>*)preCollisionMap.objectForKey(nodeB.getTag());
-	        
-	        if(NULL != info){
-	            
-	            LHContactNodeInfo* contactInfo = (LHContactNodeInfo*)info.objectForKey(nodeA.getTag());
-	            
-	            if(NULL != contactInfo)
-	            {
-	                contactInfo.callListenerWithBodyA(bodyB, bodyA, contact, oldManifold, 0);
-	            }
-	        }        
-	    }
+		}
+
+		@Override
+		public void preSolve(Contact contact, Manifold oldManifold) {
+			preSolve(contact, oldManifold);
+		}
+
+		@Override
+		public void postSolve(Contact contact, ContactImpulse impulse) {
+			postSolve(contact, impulse);
+		}
+	};
+
+	boolean initContactNodeWithWorld(World world) {
+		if (world == null)
+			return false;
+		world.setContactListener(lhContactListener);
+		return true;
 	}
-	////////////////////////////////////////////////////////////////////////////////
-	void postSolve(Contact contact,
-	                              const b2ContactImpulse* impulse){
-	    
-	    b2Body *bodyA = contact.GetFixtureA().GetBody();
-		b2Body *bodyB = contact.GetFixtureB().GetBody();
-		
-	    
-	    CCNode* nodeA = (CCNode*)bodyA.GetUserData();
-	    CCNode* nodeB = (CCNode*)bodyB.GetUserData();
-	    
-	    CCMutableDictionary<int>* info = (CCMutableDictionary<int>*)preCollisionMap.objectForKey(nodeA.getTag());
-	    
-	    if(info != NULL){
-	        
-	        LHContactNodeInfo* contactInfo = (LHContactNodeInfo*)info.objectForKey(nodeB.getTag());
-	        
-	        if(NULL != contactInfo)
-	        {
-	            contactInfo.callListenerWithBodyA(bodyA,bodyB,contact,0,impulse);
-	        }
-	    }
-	    else
-	    {
-	        info = (CCMutableDictionary<int>*)preCollisionMap.objectForKey(nodeB.getTag());
-	        
-	        if(NULL != info){
-	            
-	            LHContactNodeInfo* contactInfo = (LHContactNodeInfo*)info.objectForKey(nodeA.getTag());
-	            
-	            if(NULL != contactInfo)
-	            {
-	                contactInfo.callListenerWithBodyA(bodyB, bodyA, contact, 0, impulse);
-	            }
-	        }        
-	    }    
+
+	public static LHContactNode contactNodeWithWorld(World world) {
+		LHContactNode pobNode = new LHContactNode();
+		pobNode.initContactNodeWithWorld(world);
+		return pobNode;
+	}
+
+	public LHContactNode() {
+		preCollisionMap = new HashMap<Integer, HashMap<Integer, LHContactNodeInfo>>();
+		postCollisionMap = new HashMap<Integer, HashMap<Integer, LHContactNodeInfo>>();
+	}
+
+	// //////////////////////////////////////////////////////////////////////////////
+	public void registerPreColisionCallbackBetweenTagA(int tagA, int tagB,
+			ContactNodeNotifier _notifier) {
+		HashMap<Integer, LHContactNodeInfo> tableA = preCollisionMap.get(tagA);
+		if (tableA == null) {
+			LHContactNodeInfo info = LHContactNodeInfo.contactInfoWithTag(tagB,
+					_notifier);
+			HashMap<Integer, LHContactNodeInfo> map = new HashMap<Integer, LHContactNodeInfo>();
+			map.put(tagB, info);
+			preCollisionMap.put(tagA, map);
+		} else {
+			LHContactNodeInfo info = LHContactNodeInfo.contactInfoWithTag(tagB,
+					_notifier);
+			tableA.put(tagB, info);
+		}
+	}
+
+	// //////////////////////////////////////////////////////////////////////////////
+	public void cancelPreColisionCallbackBetweenTagA(int tagA, int tagB) {
+		HashMap<Integer, LHContactNodeInfo> tableA = preCollisionMap.get(tagA);
+
+		if (null != tableA) {
+			tableA.remove(tagB);
+		}
+	}
+
+	// //////////////////////////////////////////////////////////////////////////////
+	public void registerPostColisionCallbackBetweenTagA(int tagA, int tagB,
+			ContactNodeNotifier _notifier) {
+		HashMap<Integer, LHContactNodeInfo> tableA = postCollisionMap.get(tagA);
+		if (tableA == null) {
+			LHContactNodeInfo info = LHContactNodeInfo.contactInfoWithTag(tagB,
+					_notifier);
+			HashMap<Integer, LHContactNodeInfo> map = new HashMap<Integer, LHContactNodeInfo>();
+			map.put(tagB, info);
+			postCollisionMap.put(tagA, map);
+		} else {
+			LHContactNodeInfo info = LHContactNodeInfo.contactInfoWithTag(tagB,
+					_notifier);
+			tableA.put(tagB, info);
+		}
+	}
+
+	// //////////////////////////////////////////////////////////////////////////////
+	public void cancelPostColisionCallbackBetweenTagA(int tagA, int tagB) {
+		HashMap<Integer, LHContactNodeInfo> tableA = postCollisionMap.get(tagA);
+
+		if (null != tableA) {
+			tableA.remove(tagB);
+		}
+	}
+
+	// //////////////////////////////////////////////////////////////////////////////
+	public void preSolve(Contact contact, Manifold oldManifold) {
+		Body bodyA = contact.getFixtureA().getBody();
+		Body bodyB = contact.getFixtureB().getBody();
+		CCNode nodeA = (CCNode) bodyA.getUserData();
+		CCNode nodeB = (CCNode) bodyB.getUserData();
+		HashMap<Integer, LHContactNodeInfo> info = preCollisionMap.get(nodeA
+				.getTag());
+		if (info != null) {
+			LHContactNodeInfo contactInfo = (LHContactNodeInfo) info.get(nodeB
+					.getTag());
+			if (null != contactInfo) {
+				contactInfo.callListenerWithBodyA(bodyA, bodyB, contact,
+						oldManifold, null);
+			}
+		} else {
+			info = preCollisionMap.get(nodeB.getTag());
+			if (null != info) {
+				LHContactNodeInfo contactInfo = (LHContactNodeInfo) info
+						.get(nodeA.getTag());
+				if (null != contactInfo) {
+					contactInfo.callListenerWithBodyA(bodyB, bodyA, contact,
+							oldManifold, null);
+				}
+			}
+		}
+	}
+
+	// //////////////////////////////////////////////////////////////////////////////
+	public void postSolve(Contact contact, ContactImpulse impulse) {
+		Body bodyA = contact.getFixtureA().getBody();
+		Body bodyB = contact.getFixtureB().getBody();
+		CCNode nodeA = (CCNode) bodyA.getUserData();
+		CCNode nodeB = (CCNode) bodyB.getUserData();
+		HashMap<Integer, LHContactNodeInfo> info = preCollisionMap.get(nodeA
+				.getTag());
+		if (info != null) {
+			LHContactNodeInfo contactInfo = info.get(nodeB.getTag());
+			if (null != contactInfo) {
+				contactInfo.callListenerWithBodyA(bodyA, bodyB, contact, null,
+						impulse);
+			}
+		} else {
+			info = preCollisionMap.get(nodeB.getTag());
+			if (null != info) {
+				LHContactNodeInfo contactInfo = info.get(nodeA.getTag());
+				if (null != contactInfo) {
+					contactInfo.callListenerWithBodyA(bodyB, bodyA, contact,
+							null, impulse);
+				}
+			}
+		}
+	}
+
+	public static class LHContactNodeInfo {
+		int tagB;
+		ContactNodeNotifier notifier;
+
+		LHContactNodeInfo() {
+		}
+
+		boolean initcontactInfoWithTag(int _tagB, ContactNodeNotifier _notifier) {
+			tagB = _tagB;
+			notifier = _notifier;
+			return true;
+		}
+
+		static LHContactNodeInfo contactInfoWithTag(int tagB,
+				ContactNodeNotifier _notifier) {
+			LHContactNodeInfo pobInfo = new LHContactNodeInfo();
+			pobInfo.initcontactInfoWithTag(tagB, _notifier);
+			return pobInfo;
+		}
+
+		int getTagB() {
+			return tagB;
+		}
+
+		public void callListenerWithBodyA(Body A, Body B, Contact contact,
+				Manifold oldManifold, ContactImpulse impulse) {
+			LHContactInfo info = LHContactInfo.contactInfo(A, B, contact,
+					oldManifold, impulse);
+			if (notifier != null) {
+				notifier.onContactNodeNotify(info);
+			}
+		}
+	}
+
+	public interface ContactNodeNotifier {
+		public void onContactNodeNotify(LHContactInfo info);
 	}
 
 }

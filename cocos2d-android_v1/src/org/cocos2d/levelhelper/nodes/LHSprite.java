@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import org.cocos2d.config.ccMacros;
 import org.cocos2d.levelhelper.LevelHelperLoader;
+import org.cocos2d.levelhelper.nodes.LHPathNode.PathNodeNotifier;
 import org.cocos2d.nodes.CCSprite;
 import org.cocos2d.nodes.CCSpriteFrame;
 import org.cocos2d.nodes.CCSpriteSheet;
@@ -33,7 +34,7 @@ public class LHSprite extends CCSprite {
 	private CGSize realScale;
 	private CCSpriteSheet spriteSheet;
 
-	// private LHParallaxNode parallaxFollowingThisSprite;
+	public LHParallaxNode parallaxFollowingThisSprite;
 
 	public static LHSprite sprite() {
 		return new LHSprite();
@@ -197,11 +198,10 @@ public class LHSprite extends CCSprite {
 		}
 	}
 
-	public void registerNotifierOnPathEndPoints(Object target, String selector) {
+	public void registerNotifierOnPathEndPoints(PathNodeNotifier notifier) {
 		if (pathNode == null)
 			return;
-		pathNode.setPathNotifierObject(target);
-		pathNode.setPathNotifierSelector(selector);
+		pathNode.setNotifer(notifier);
 	}
 
 	// USER INFO
