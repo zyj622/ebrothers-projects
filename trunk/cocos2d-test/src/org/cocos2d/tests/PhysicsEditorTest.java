@@ -3,6 +3,7 @@ package org.cocos2d.tests;
 import org.cocos2d.layers.CCPhysicsLayer;
 import org.cocos2d.layers.CCScene;
 import org.cocos2d.nodes.CCDirector;
+import org.cocos2d.nodes.CCSprite;
 import org.cocos2d.opengl.CCGLSurfaceView;
 import org.cocos2d.utils.GB2ShapeCache;
 
@@ -11,14 +12,16 @@ import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
+import com.badlogic.gdx.physics.box2d.EdgeShape;
 
 public class PhysicsEditorTest extends Activity {
-//	static {
-//		System.loadLibrary("gdx");
-//	}
+	// static {
+	// System.loadLibrary("gdx");
+	// }
 	public static PhysicsEditorTest app;
 	private CCGLSurfaceView mGLSurfaceView;
 
@@ -74,28 +77,63 @@ public class PhysicsEditorTest extends Activity {
 	}
 
 	static class MainLayer extends CCPhysicsLayer {
-		static final int PTM_RATIO = 32;
+		static final float PTM_RATIO = 32;
 
 		public MainLayer() {
-			super(32);
+			super();
 
 			useDebugDraw();
+			
+			// Vector2 lower = new Vector2(-BUFFER, -BUFFER);
+			// Vector2 upper = new Vector2(scaledWidth+BUFFER,
+			// scaledHeight+BUFFER);
 
-			synchronized (world) {
-				GB2ShapeCache cache = GB2ShapeCache.sharedShapeCache();
-				cache.addShapesWithFile("shapedefs.plist");
-				BodyDef def = new BodyDef();
-				def.type = BodyType.StaticBody;
-				def.position.set(100 / PTM_RATIO, 100 / PTM_RATIO);
-				Body body = world.createBody(def);
-				cache.addFixturesToBody(body, "orange");
+			// Define the ground body.
+			BodyDef bxGroundBodyDef = new BodyDef();
+			bxGroundBodyDef.position.set(0.0f, 0.0f);
 
-				def = new BodyDef();
-				def.type = BodyType.StaticBody;
-				def.position.set(200 / PTM_RATIO, 200 / PTM_RATIO);
-				body = world.createBody(def);
-				cache.addFixturesToBody(body, "hamburger");
-			}
+			// Call the body factory which allocates memory for the ground body
+			// from a pool and creates the ground box shape (also from a pool).
+			// The body is also added to the world.
+			Body groundBody = world.createBody(bxGroundBodyDef);
+
+			// Define the ground box shape.
+			Vector2 bottomLeft = new Vector2(0f, 0f);
+			Vector2 topLeft = new Vector2(0f, scaledHeight);
+			Vector2 topRight = new Vector2(scaledWidth, scaledHeight);
+			Vector2 bottomRight = new Vector2(scaledWidth, 0f);
+
+			EdgeShape bottom = new EdgeShape();
+			// bottom
+			bottom.set(bottomLeft, bottomRight);
+			groundBody.createFixture(bottom, 0);
+
+			// // top
+			EdgeShape top = new EdgeShape();
+			top.set(topLeft, topRight);
+			groundBody.createFixture(top, 0);
+			// left
+			EdgeShape left = new EdgeShape();
+			left.set(topLeft, bottomLeft);
+			groundBody.createFixture(left, 0);
+
+			// right
+			EdgeShape right = new EdgeShape();
+			right.set(topRight, bottomRight);
+			groundBody.createFixture(right, 0);
+
+			GB2ShapeCache cache = GB2ShapeCache.sharedShapeCache();
+			cache.addShapesWithFile("rider_head_bear.plist");
+			BodyDef def = new BodyDef();
+			def.type = BodyType.DynamicBody;
+			def.position.set(10, 10);
+			Body body = world.createBody(def);
+			cache.addFixturesToBody(body, "rider_head_bear");
+
+			CCSprite sprite = CCSprite.sprite("rider_head_bear.png");
+			sprite.setAnchorPoint(cache.anchorPointForShape("rider_head_bear"));
+			body.setUserData(sprite);
+			addChild(sprite);
 		}
 	}
 

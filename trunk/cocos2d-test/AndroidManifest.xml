@@ -269,7 +269,8 @@
             android:name=".tests.PhysicsEditorTest"
             android:debuggable="true"
             android:label="@string/activity_petest"
-            android:launchMode="singleInstance" >
+            android:launchMode="singleInstance"
+            android:screenOrientation="landscape" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
