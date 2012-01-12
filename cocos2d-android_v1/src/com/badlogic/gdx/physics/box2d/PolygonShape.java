@@ -44,10 +44,10 @@ public class PolygonShape extends Shape {
 			verts[i] = vertices[j].x;
 			verts[i + 1] = vertices[j].y;
 		}
-		jniSet(addr, verts);
+		jniSet(addr, verts, verts.length);
 	}
 
-	private native void jniSet (long addr, float[] verts);
+	private native void jniSet (long addr, float[] verts, int count);
 
 	/** Build vertices to represent an axis-aligned box.
 	 * @param hx the half-width.

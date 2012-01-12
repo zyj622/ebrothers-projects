@@ -8,21 +8,17 @@ import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.Manifold;
 
 public class LHContactInfo {
-	private Body bodyA; // week ptr;
-	private Body bodyB; // week ptr;
-	private Contact contact; // available at both pre and post solve
-	private Manifold oldManifold;// available at pre solve - else is nil
-	private ContactImpulse impulse; // available at post solve - else is nil
+	public Body bodyA; // week ptr;
+	public Body bodyB; // week ptr;
+	public Contact contact; // available at both pre and post solve
+	public Manifold oldManifold;// available at pre solve - else is nil
+	public ContactImpulse impulse; // available at post solve - else is nil
 
 	public static LHContactInfo contactInfo(Body _bodyA, Body _bodyB,
 			Contact _contact, Manifold _manifold, ContactImpulse _impulse) {
 		LHContactInfo pobContact = new LHContactInfo();
-		if (pobContact != null
-				&& pobContact.initWithInfo(_bodyA, _bodyB, _contact, _manifold,
-						_impulse)) {
-			return pobContact;
-		}
-		return null;
+		pobContact.initWithInfo(_bodyA, _bodyB, _contact, _manifold, _impulse);
+		return pobContact;
 	}
 
 	public boolean initWithInfo(Body _bodyA, Body _bodyB, Contact _contact,
