@@ -6,6 +6,8 @@ import java.util.Map.Entry;
 
 import org.cocos2d.types.CGPoint;
 
+import android.util.Log;
+
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.CircleShape;
@@ -111,12 +113,13 @@ public class GB2ShapeCache {
 					for (Object object : polygonsArray) {
 						ArrayList<?> polygonArray = (ArrayList<?>) object;
 						GBFixtureDef fix = new GBFixtureDef();
-						fix.fixture = basicData; // copy basic data
+						// copy basic data
+						fix.fixture = copyFixtureDef(basicData);
 						fix.callbackData = callbackData;
 						PolygonShape polyshape = new PolygonShape();
 						int verticesCount = polygonArray.size();
 						assert (verticesCount <= MAX_POLYGON_VERTICES);
-						Vector2[] vertices = new Vector2[polygonArray.size()];
+						Vector2[] vertices = new Vector2[verticesCount];
 						for (int j = 0; j < verticesCount; j++) {
 							Object pointString = polygonArray.get(j);
 							CGPoint offset = stringToCGPoint((String) pointString);
@@ -154,6 +157,24 @@ public class GB2ShapeCache {
 			// add the body element to the hash
 			shapeObjects_.put(bodyName, bodyDef);
 		}
+	}
+
+	private FixtureDef copyFixtureDef(FixtureDef def) {
+		FixtureDef copy = new FixtureDef();
+		copy.density = def.density;
+		copy.friction = def.friction;
+		copy.isSensor = def.isSensor;
+		copy.restitution = def.restitution;
+		copy.filter.categoryBits = def.filter.categoryBits;
+		copy.filter.groupIndex = def.filter.groupIndex;
+		copy.filter.maskBits = def.filter.maskBits;
+		Log.e("", ""+copy.density);
+		Log.e("", ""+copy.friction);
+		Log.e("", ""+copy.restitution);
+		Log.e("", ""+copy.filter.categoryBits);
+		Log.e("", ""+copy.filter.groupIndex);
+		Log.e("", ""+copy.filter.maskBits);
+		return copy;
 	}
 
 	private CGPoint stringToCGPoint(String str) {
