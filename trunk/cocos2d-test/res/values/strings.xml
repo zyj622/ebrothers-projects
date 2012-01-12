@@ -25,5 +25,6 @@
     <string name="activity_rotateworldtest"> Rotate World Test </string>
     <string name="activity_parallaxtest"> Parallax Test </string>
     <string name="activity_petest"> Physics Editor Test </string>
+    <string name="activity_debugdrawtest"> Debug Draw Test </string>
     
 </resources>

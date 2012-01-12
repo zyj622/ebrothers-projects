@@ -8,11 +8,10 @@ import org.cocos2d.config.ccMacros;
 import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.nodes.CCSprite;
 import org.cocos2d.types.CGSize;
+import org.cocos2d.utils.GLESDebugDraw;
 
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 
 public abstract class CCPhysicsLayer extends CCLayer {
@@ -26,38 +25,34 @@ public abstract class CCPhysicsLayer extends CCLayer {
 			.getAnimationInterval();
 	private static float rdelta = 0;
 
-	private float mRatio = 1f;
+	protected float ptm_ratio = 32f;
 	protected final World world;
-	private Box2DDebugRenderer debugDraw;
+	protected GLESDebugDraw debugDraw;
 	protected final float scaledWidth;
 	protected final float scaledHeight;
 
-	private OrthographicCamera camera;
-
 	public CCPhysicsLayer(float ratio) {
 		super();
-		mRatio = ratio;
+		ptm_ratio = ratio;
 		CGSize s = CCDirector.sharedDirector().winSize();
-		scaledWidth = s.width / mRatio;
-		scaledHeight = s.height / mRatio;
-
-		camera = new OrthographicCamera(s.width, s.height);
-		camera.position.set(0, 16, 0);
-
+		scaledWidth = s.width / ptm_ratio;
+		scaledHeight = s.height / ptm_ratio;
 		world = new World(new Vector2(0, -10), true);
 		world.setContinuousPhysics(true);
 	}
 
+	public CCPhysicsLayer() {
+		this(32f);
+	}
+
 	public void useDebugDraw() {
-		debugDraw = new Box2DDebugRenderer();
+		debugDraw = new GLESDebugDraw(world, ptm_ratio);
 	}
 
 	@Override
 	public void draw(GL10 gl) {
 		if (debugDraw != null) {
-			camera.update();
-			camera.apply(gl);
-			debugDraw.render(world, camera.combined);
+			debugDraw.drawDebugData(gl);
 		}
 	}
 
@@ -107,7 +102,7 @@ public abstract class CCPhysicsLayer extends CCLayer {
 				// corresponding body
 				final CCSprite sprite = (CCSprite) userData;
 				final Vector2 pos = b.getPosition();
-				sprite.setPosition(pos.x * mRatio, pos.y * mRatio);
+				sprite.setPosition(pos.x * ptm_ratio, pos.y * ptm_ratio);
 				sprite.setRotation(-1.0f
 						* ccMacros.CC_RADIANS_TO_DEGREES(b.getAngle()));
 			}

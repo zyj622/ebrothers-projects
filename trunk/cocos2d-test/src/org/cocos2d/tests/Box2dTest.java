@@ -1,11 +1,8 @@
 package org.cocos2d.tests;
 
-import java.util.Iterator;
-
-import org.cocos2d.actions.UpdateCallback;
 import org.cocos2d.config.ccMacros;
 import org.cocos2d.events.CCTouchDispatcher;
-import org.cocos2d.layers.CCLayer;
+import org.cocos2d.layers.CCPhysicsLayer;
 import org.cocos2d.layers.CCScene;
 import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.nodes.CCLabel;
@@ -30,7 +27,6 @@ import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.EdgeShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
-import com.badlogic.gdx.physics.box2d.World;
 
 /**
  * A test that demonstrates basic JBox2D integration by using AtlasSprites
@@ -48,10 +44,6 @@ import com.badlogic.gdx.physics.box2d.World;
 //
 public class Box2dTest extends Activity {
 	// private static final String LOG_TAG = JBox2DTest.class.getSimpleName();
-
-	static {
-		System.loadLibrary("gdx");
-	}
 
 	private CCGLSurfaceView mGLSurfaceView;
 
@@ -118,49 +110,22 @@ public class Box2dTest extends Activity {
 	//
 	// by Steve Oldmeadow
 	//
-	static class Box2DTestLayer extends CCLayer {
+	static class Box2DTestLayer extends CCPhysicsLayer {
 		public static final int kTagTileMap = 1;
 		public static final int kTagSpriteManager = 1;
 		public static final int kTagAnimation1 = 1;
 
-		// Pixel to meters ratio. Box2D uses meters as the unit for measurement.
-		// This ratio defines how many pixels correspond to 1 Box2D "meter"
-		// Box2D is optimized for objects of 1x1 meter therefore it makes sense
-		// to define the ratio so that your most common object type is 1x1
-		// meter.
-		protected static final float PTM_RATIO = 32.0f;
-
-		// Simulation space should be larger than window per Box2D
-		// recommendation.
-		protected static final float BUFFER = 1.0f;
-
-		// FPS for the PhysicsWorld to sync to
-		protected static final float FPS = (float) CCDirector.sharedDirector()
-				.getAnimationInterval();
-		private static float rdelta = 0;
-
-		protected final World bxWorld;
-
 		public Box2DTestLayer() {
 			super();
-
+			useDebugDraw();
 			this.setIsTouchEnabled(true);
 			this.setIsAccelerometerEnabled(true);
 
 			CGSize s = CCDirector.sharedDirector().winSize();
 
-			// Define the gravity vector.
-			Vector2 gravity = new Vector2(9.8f, -9.8f);
-
-			float scaledWidth = s.width / PTM_RATIO;
-			float scaledHeight = s.height / PTM_RATIO;
-
 			// Vector2 lower = new Vector2(-BUFFER, -BUFFER);
 			// Vector2 upper = new Vector2(scaledWidth+BUFFER,
 			// scaledHeight+BUFFER);
-
-			bxWorld = new World(gravity, true);
-			bxWorld.setContinuousPhysics(true);
 
 			// Define the ground body.
 			BodyDef bxGroundBodyDef = new BodyDef();
@@ -169,7 +134,7 @@ public class Box2dTest extends Activity {
 			// Call the body factory which allocates memory for the ground body
 			// from a pool and creates the ground box shape (also from a pool).
 			// The body is also added to the world.
-			Body groundBody = bxWorld.createBody(bxGroundBodyDef);
+			Body groundBody = world.createBody(bxGroundBodyDef);
 
 			// Define the ground box shape.
 			Vector2 bottomLeft = new Vector2(0f, 0f);
@@ -208,30 +173,6 @@ public class Box2dTest extends Activity {
 			addChild(label);
 		}
 
-		private UpdateCallback tickCallback = new UpdateCallback() {
-
-			@Override
-			public void update(float d) {
-				tick(d);
-			}
-		};
-
-		@Override
-		public void onEnter() {
-			super.onEnter();
-
-			// start ticking (for physics simulation)
-			schedule(tickCallback);
-		}
-
-		@Override
-		public void onExit() {
-			super.onExit();
-
-			// stop ticking (for physics simulation)
-			unschedule(tickCallback);
-		}
-
 		private void addNewSpriteWithCoords(CGPoint pos) {
 			CCSpriteSheet sheet = (CCSpriteSheet) getChildByTag(kTagSpriteManager);
 
@@ -254,7 +195,7 @@ public class Box2dTest extends Activity {
 			// Set up a 1m squared box in the physics world
 			BodyDef bodyDef = new BodyDef();
 			bodyDef.type = BodyType.DynamicBody;
-			bodyDef.position.set(pos.x / PTM_RATIO, pos.y / PTM_RATIO);
+			bodyDef.position.set(pos.x / ptm_ratio, pos.y / ptm_ratio);
 
 			// Define another box shape for our dynamic body.
 			PolygonShape dynamicBox = new PolygonShape();
@@ -262,9 +203,9 @@ public class Box2dTest extends Activity {
 			// dynamicBox.density = 1.0f;
 			// dynamicBox.friction = 0.3f;
 
-			synchronized (bxWorld) {
+			synchronized (world) {
 				// Define the dynamic body fixture and set mass so it's dynamic.
-				Body body = bxWorld.createBody(bodyDef);
+				Body body = world.createBody(bodyDef);
 				body.setUserData(sprite);
 
 				FixtureDef fixtureDef = new FixtureDef();
@@ -272,43 +213,6 @@ public class Box2dTest extends Activity {
 				fixtureDef.density = 1.0f;
 				fixtureDef.friction = 0.3f;
 				body.createFixture(fixtureDef);
-			}
-		}
-
-		public synchronized void tick(float delta) {
-			if ((rdelta += delta) < FPS)
-				return;
-
-			// It is recommended that a fixed time step is used with Box2D for
-			// stability
-			// of the simulation, however, we are using a variable time step
-			// here.
-			// You need to make an informed choice, the following URL is useful
-			// http://gafferongames.com/game-physics/fix-your-timestep/
-
-			// Instruct the world to perform a simulation step. It is
-			// generally best to keep the time step and iterations fixed.
-			synchronized (bxWorld) {
-				bxWorld.step(FPS, 8, 1);
-			}
-
-			rdelta = 0;
-
-			// Iterate over the bodies in the physics world
-			Iterator<Body> it = bxWorld.getBodies();
-			while (it.hasNext()) {
-				Body b = it.next();
-				Object userData = b.getUserData();
-
-				if (userData != null && userData instanceof CCSprite) {
-					// Synchronize the Sprites position and rotation with the
-					// corresponding body
-					final CCSprite sprite = (CCSprite) userData;
-					final Vector2 pos = b.getPosition();
-					sprite.setPosition(pos.x * PTM_RATIO, pos.y * PTM_RATIO);
-					sprite.setRotation(-1.0f
-							* ccMacros.CC_RADIANS_TO_DEGREES(b.getAngle()));
-				}
 			}
 		}
 
@@ -345,7 +249,7 @@ public class Box2dTest extends Activity {
 			// no filtering being done in this demo (just magnify the gravity a
 			// bit)
 			gravity.set(accY * 9.8f, accX * -9.8f);
-			bxWorld.setGravity(gravity);
+			world.setGravity(gravity);
 		}
 
 	}
