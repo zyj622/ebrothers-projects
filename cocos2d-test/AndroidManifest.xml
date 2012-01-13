@@ -289,6 +289,19 @@
                 <category android:name="android.intent.category.TEST" />
             </intent-filter>
         </activity>
+        
+        <activity
+            android:name=".tests.LevelHelperTest"
+            android:debuggable="true"
+            android:label="@string/activity_leveHelpertest"
+            android:launchMode="singleInstance"
+            android:screenOrientation="landscape" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.TEST" />
+            </intent-filter>
+        </activity>
     </application>
 
     <uses-sdk android:minSdkVersion="4" >
