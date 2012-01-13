@@ -3,6 +3,7 @@ package org.cocos2d.tests;
 import org.cocos2d.layers.CCMultiplexLayer;
 import org.cocos2d.layers.CCPhysicsLayer;
 import org.cocos2d.layers.CCScene;
+import org.cocos2d.levelhelper.LevelHelperLoader;
 import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.opengl.CCGLSurfaceView;
 import org.cocos2d.tests.FontTest.Layer2;
@@ -79,7 +80,10 @@ public class LevelHelperTest extends Activity {
 		public Layer1() {
 			super();
 			
+			useDebugDraw();
 			
+			LevelHelperLoader loader = new LevelHelperLoader("1.plhs");
+			loader.addObjectsToWorld(world, this);
 		}
 	}
 }
