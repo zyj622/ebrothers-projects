@@ -100,9 +100,11 @@ public class CCBReader {
 				.get("properties");
 		String customClass = (String) props.get("customClass");
 		ArrayList<?> children = (ArrayList<?>) nodeGraph.get("children");
+		if(extraProps != null) customClass = null;
 
 		CCNode node = null;
 		if (className.equalsIgnoreCase("CCParticleSystem")) {
+			//暂时有问题
 			String spriteFile = (String) props.get("spriteFile");
 			CCParticleSystem sys = new CCQuadParticleSystem(256);
 			sys.cleanup();
@@ -124,7 +126,6 @@ public class CCBReader {
 			String spriteSheetFile = (String) props.get("spriteFramesFile");
 			if(spriteSheetFile != null && !spriteSheetFile.equals("")){
 				spriteSheetFile = assetsDir + spriteSheetFile;
-				
 			}else{
 				spriteNormal = CCSprite.sprite(spriteFileNormal);
 				spriteSelected = CCSprite.sprite(spriteFileSelected);
@@ -133,7 +134,7 @@ public class CCBReader {
 				
 			CCNode target = null;
 			String selector = null;
-			if(extraProps != null){
+			if(extraProps == null){
 				int targetType = intValFromDict(props, "target");
 				if(targetType == kCCBMemberVarAssignmentTypeDocumentRoot)
 					target = root;
@@ -142,7 +143,7 @@ public class CCBReader {
 				
 				String selectorName = (String) props.get("selector");
 				if(selectorName != null && !selectorName.equals("") && target != null){
-					
+					selector = selectorName;
 				}
 			}
 			node = CCMenuItemImage.item(spriteNormal, spriteSelected, spriteDisabled, target, selector);
@@ -179,6 +180,7 @@ public class CCBReader {
 			setPropsForNode(node, props, extraProps);
 			setPropsForSprite((CCSprite) node, props, extraProps);
 		} else if (className.equalsIgnoreCase("CCLayerGradient")) {
+			//有点问题
 			node = (CCLayerGradient) createCustomClassWithName(customClass);
 			if(node == null){
 				node = CCLayerGradient.node(new ccColor4B(255, 255, 0, 255));
@@ -217,7 +219,7 @@ public class CCBReader {
 			return null;
 		}
 
-		if (root != null)
+		if (root == null)
 			root = node;
 
 		for (int i = 0; i < children.size(); i++) {
@@ -233,7 +235,7 @@ public class CCBReader {
 			}
 		}
 
-		if (extraProps != null) {
+		if (extraProps == null) {
 			String assignmentName = (String) props
 					.get("memberVarAssignmentName");
 			int assignmentType = (Integer) props.get("memberVarAssignmentType");
