@@ -90,6 +90,10 @@ public class LevelHelperLoader {
 	public LevelHelperLoader(String levelFile) {
 		assert (levelFile != null && levelFile.length() != 0);
 		lhBatchInfo = new HashMap<String, LHObject>();
+		batchNodesInLevel = new HashMap<String, LHBatch>();
+		spritesInLevel = new HashMap<String, LHSprite>();
+		beziersInLevel = new HashMap<String, LHBezierNode>();
+		animationsInLevel = new HashMap<String, LHAnimationNode>();
 		loadLevelHelperSceneFile(levelFile);
 	}
 
@@ -1259,6 +1263,9 @@ public class LevelHelperLoader {
 				int vsize = 4;
 				Vector2[] verts = new Vector2[vsize];
 				PolygonShape shape = new PolygonShape();
+				for (int i = 0; i < verts.length; i++) {
+					verts[i] = new Vector2();
+				}
 
 				if (scale.x * scale.y < 0.0f) {
 					verts[3].x = ((-1 * size.x + border.x / 2.0f) * scale.x
@@ -1591,8 +1598,8 @@ public class LevelHelperLoader {
 
 		CGRect color = stringToCGRect(scenePref.dictValue()
 				.get("BackgroundColor").stringValue());
-		CCDirector.gl.glClearColor(color.origin.x, color.origin.y,
-				color.size.width, 1);
+//		CCDirector.gl.glClearColor(color.origin.x, color.origin.y,
+//				color.size.width, 1);
 
 		CGSize winSize = CCDirector.sharedDirector().winSize();
 		LHSettings.sharedInstance().setConvertRatio(

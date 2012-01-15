@@ -77,7 +77,7 @@ public class LHSprite extends CCSprite {
 	}
 
 	public void setRealScale(CGSize _realScale) {
-		realScale.set(_realScale);
+		realScale = CGSize.make(_realScale.width, _realScale.height);
 	}
 
 	public CGSize getRealScale() {
