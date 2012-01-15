@@ -40,6 +40,9 @@ public class LHObject {
 			array.addAll((ArrayList<LHObject>) o);
 			_o = array;
 			_type = TYPE_LH_ARRAY;
+		} else if (o instanceof Boolean) {
+			_o = o;
+			_type = TYPE_BOOL;
 		} else if (o instanceof Void) {
 			_type = TYPE_VOID_TYPE;
 		}
