@@ -34,7 +34,7 @@ public class CCColorLayer extends CCLayer
 	protected ccBlendFunc	blendFunc_;
 
     private FastFloatBuffer squareVertices_;
-    private FastFloatBuffer squareColors_;
+    protected FastFloatBuffer squareColors_;
 
     /** creates a CCLayer with color. Width and height are the window size. */
     public static CCColorLayer node(ccColor4B color) {
@@ -80,7 +80,7 @@ public class CCColorLayer extends CCLayer
         setContentSize(CGSize.make(w, h));
     }
 
-    private void updateColor() {
+    protected void updateColor() {
         for (int i = 0; i < squareColors_.limit(); i++) {
             switch (i % 4) {
                 case 0:
