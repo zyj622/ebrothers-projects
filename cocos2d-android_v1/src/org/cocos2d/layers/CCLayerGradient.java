@@ -4,6 +4,7 @@ import org.cocos2d.types.CGPoint;
 import org.cocos2d.types.ccColor3B;
 import org.cocos2d.types.ccColor4B;
 
+import android.util.FloatMath;
 
 public class CCLayerGradient extends CCColorLayer {
 
@@ -15,13 +16,12 @@ public class CCLayerGradient extends CCColorLayer {
 
 	protected CCLayerGradient(ccColor4B color) {
 		super(color);
-		
+
 	}
 
 	public static CCLayerGradient node(ccColor4B color) {
 		return new CCLayerGradient(color);
 	}
-
 
 	public ccColor3B startColor() {
 		return color_;
@@ -58,7 +58,7 @@ public class CCLayerGradient extends CCColorLayer {
 	public void setCompressedInterpolation(boolean compress) {
 		compressedInterpolation_ = compress;
 	}
-	
+
 	@Override
 	protected void init(ccColor4B color, float w, float h) {
 		endColor_ = ccColor3B.ccc3(color.a, color.g, color.b);
@@ -77,11 +77,11 @@ public class CCLayerGradient extends CCColorLayer {
 			return;
 		}
 
-		double c = Math.sqrt(2);
+		float c = FloatMath.sqrt(2);
 		CGPoint u = CGPoint.ccp(vector_.x / h, vector_.y / h);
 		if (compressedInterpolation_) {
 			float h2 = 1 / (Math.abs(u.x) + Math.abs(u.y));
-			u = CGPoint.ccpMult(u, h2 * (float) c);
+			u = CGPoint.ccpMult(u, h2 * c);
 		}
 
 		float opacityf = (float) opacity_ / 255.0f;
