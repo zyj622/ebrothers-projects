@@ -100,18 +100,21 @@ public class CCBReader {
 				.get("properties");
 		String customClass = (String) props.get("customClass");
 		ArrayList<?> children = (ArrayList<?>) nodeGraph.get("children");
-		if(extraProps != null) customClass = null;
+		if (extraProps != null)
+			customClass = null;
 
 		CCNode node = null;
 		if (className.equalsIgnoreCase("CCParticleSystem")) {
-			//暂时有问题
+			// 暂时有问题
 			String spriteFile = (String) props.get("spriteFile");
 			CCParticleSystem sys = new CCQuadParticleSystem(256);
 			sys.cleanup();
-			sys.setTexture(CCTextureCache.sharedTextureCache().addImage(spriteFile));
+			sys.setTexture(CCTextureCache.sharedTextureCache().addImage(
+					spriteFile));
 			node = sys;
 			setPropsForNode(node, props, extraProps);
-			setPropsForParticleSystem((CCParticleSystem) node, props, extraProps);
+			setPropsForParticleSystem((CCParticleSystem) node, props,
+					extraProps);
 		} else if (className.equalsIgnoreCase("CCMenuItemImage")) {
 			String spriteFileNormal = assetsDir + props.get("spriteFileNormal");
 			String spriteFileSelected = assetsDir
@@ -122,48 +125,50 @@ public class CCBReader {
 			CCSprite spriteNormal = null;
 			CCSprite spriteSelected = null;
 			CCSprite spriteDisabled = null;
-			
+
 			String spriteSheetFile = (String) props.get("spriteFramesFile");
-			if(spriteSheetFile != null && !spriteSheetFile.equals("")){
+			if (spriteSheetFile != null && !spriteSheetFile.equals("")) {
 				spriteSheetFile = assetsDir + spriteSheetFile;
-			}else{
+			} else {
 				spriteNormal = CCSprite.sprite(spriteFileNormal);
 				spriteSelected = CCSprite.sprite(spriteFileSelected);
 				spriteDisabled = CCSprite.sprite(spriteFileDisabled);
 			}
-				
+
 			CCNode target = null;
 			String selector = null;
-			if(extraProps == null){
+			if (extraProps == null) {
 				int targetType = intValFromDict(props, "target");
-				if(targetType == kCCBMemberVarAssignmentTypeDocumentRoot)
+				if (targetType == kCCBMemberVarAssignmentTypeDocumentRoot)
 					target = root;
-				else if(targetType == kCCBMemberVarAssignmentTypeOwner)
+				else if (targetType == kCCBMemberVarAssignmentTypeOwner)
 					target = (CCNode) o;
-				
+
 				String selectorName = (String) props.get("selector");
-				if(selectorName != null && !selectorName.equals("") && target != null){
+				if (selectorName != null && !selectorName.equals("")
+						&& target != null) {
 					selector = selectorName;
 				}
 			}
-			node = CCMenuItemImage.item(spriteNormal, spriteSelected, spriteDisabled, target, selector);
-			
+			node = CCMenuItemImage.item(spriteNormal, spriteSelected,
+					spriteDisabled, target, selector);
+
 			setPropsForNode(node, props, extraProps);
-			setPropsForMenuItem((CCMenuItem) node,props,extraProps);
-			setPropsForMenuItemImage((CCMenuItemSprite)node, props, extraProps);
+			setPropsForMenuItem((CCMenuItem) node, props, extraProps);
+			setPropsForMenuItemImage((CCMenuItemSprite) node, props, extraProps);
 		} else if (className.equalsIgnoreCase("CCMenu")) {
 			node = CCMenu.menu();
 			setPropsForNode(node, props, extraProps);
-			setPropsForLayer((CCLayer)node, props, extraProps);
+			setPropsForLayer((CCLayer) node, props, extraProps);
 		} else if (className.equalsIgnoreCase("CCLabelBMFont")) {
 			String fontFile = assetsDir + props.get("fontFile");
 			String str = (String) props.get("string");
 			node = CCBitmapFontAtlas.bitmapFontAtlas(str, fontFile);
-			if(node == null){
+			if (node == null) {
 				node = CCBitmapFontAtlas.bitmapFontAtlas(str, "");
 			}
 			setPropsForNode(node, props, extraProps);
-			setPropsForLabelBMFont((CCBitmapFontAtlas)node, props, extraProps);
+			setPropsForLabelBMFont((CCBitmapFontAtlas) node, props, extraProps);
 		} else if (className.equalsIgnoreCase("CCSprite")) {
 			String spriteFile = (String) props.get("spriteFile");
 			String spriteSheetFile = (String) props.get("spriteFramesFile");
@@ -180,23 +185,22 @@ public class CCBReader {
 			setPropsForNode(node, props, extraProps);
 			setPropsForSprite((CCSprite) node, props, extraProps);
 		} else if (className.equalsIgnoreCase("CCLayerGradient")) {
-			//有点问题
 			node = (CCLayerGradient) createCustomClassWithName(customClass);
-			if(node == null){
+			if (node == null) {
 				node = CCLayerGradient.node(new ccColor4B(255, 255, 0, 255));
 			}
 			setPropsForNode(node, props, extraProps);
-			setPropsForLayer((CCLayer)node, props, extraProps);
-			setPropsForLayerColor((CCColorLayer)node, props, extraProps);
-			setPropsForLayerGradient((CCLayerGradient)node,props,extraProps);
+			setPropsForLayer((CCLayer) node, props, extraProps);
+			setPropsForLayerColor((CCColorLayer) node, props, extraProps);
+			setPropsForLayerGradient((CCLayerGradient) node, props, extraProps);
 		} else if (className.equalsIgnoreCase("CCLayerColor")) {
 			node = (CCNode) createCustomClassWithName(customClass);
-			if(node == null){
+			if (node == null) {
 				node = CCColorLayer.node(new ccColor4B(255, 255, 0, 255));
 			}
 			setPropsForNode(node, props, extraProps);
-			setPropsForLayer((CCLayer)node, props, extraProps);
-			setPropsForLayerColor((CCColorLayer)node, props, extraProps);
+			setPropsForLayer((CCLayer) node, props, extraProps);
+			setPropsForLayerColor((CCColorLayer) node, props, extraProps);
 		} else if (className.equalsIgnoreCase("CCLayer")) {
 			node = (CCNode) createCustomClassWithName(customClass);
 			if (node == null) {
@@ -230,7 +234,7 @@ public class CCBReader {
 			int zOrder = intValFromDict(
 					(HashMap<String, Object>) childrenDict.get("properties"),
 					"zOrder");
-			if (child != null){
+			if (child != null) {
 				node.addChild(child, zOrder);
 			}
 		}
@@ -308,7 +312,8 @@ public class CCBReader {
 		double gg = (Double) arr.get(1);
 		double bb = (Double) arr.get(2);
 		double aa = (Double) arr.get(3);
-		return ccColor4F.ccc4FFromccc4B(new ccColor4B((int)rr, (int)gg, (int)bb, (int)aa));
+		return ccColor4F.ccc4FFromccc4B(new ccColor4B((int) rr, (int) gg,
+				(int) bb, (int) aa));
 	}
 
 	public static ccBlendFunc blendFuncValFromDict(
@@ -349,15 +354,15 @@ public class CCBReader {
 		}
 	}
 
-	public static void setExtraProp(Object prop, String key,
-			int tag, HashMap<String, Object> dict) {
-		 @SuppressWarnings("unchecked")
+	public static void setExtraProp(Object prop, String key, int tag,
+			HashMap<String, Object> dict) {
+		@SuppressWarnings("unchecked")
 		HashMap<String, Object> props = (HashMap<String, Object>) dict.get(tag);
-		 if(props == null){
-			 props = new HashMap<String, Object>();
-			 dict.put(key, props);
-		 }
-		 props.put(key, prop);
+		if (props == null) {
+			props = new HashMap<String, Object>();
+			dict.put(key, props);
+		}
+		props.put(key, prop);
 	}
 
 	public static void setPropsForSprite(CCSprite node,
@@ -368,7 +373,13 @@ public class CCBReader {
 		node.setFlipY(boolValFromDict(props, "flipY"));
 		node.setBlendFunc(blendFuncValFromDict(props, "blendFunc"));
 		if (extraProps != null) {
-
+			setExtraProp(props.get("spriteFile"), "spriteFile", node.getTag(),
+					extraProps);
+			String spriteFramesFile = (String) props.get("spriteFramesFile");
+			if (spriteFramesFile != null) {
+				setExtraProp(spriteFramesFile, "spriteSheetFile",
+						node.getTag(), extraProps);
+			}
 		}
 	}
 
@@ -378,14 +389,14 @@ public class CCBReader {
 		node.setEmissionRate(floatValFromDict(props, "emissionRate"));
 		node.setDuration(floatValFromDict(props, "duration"));
 		node.setPosVar(pointValFromDict(props, "posVar"));
-		//node.setTotalParticles(intValFromDict(props, "totalParticles"));
+		// node.setTotalParticles(intValFromDict(props, "totalParticles"));
 		node.setLife(floatValFromDict(props, "life"));
 		node.setLifeVar(floatValFromDict(props, "lifeVar"));
 		node.setStartSize(intValFromDict(props, "startSize"));
-		node.setStartSizeVar(intValFromDict(props,"startSizeVar"));
+		node.setStartSizeVar(intValFromDict(props, "startSizeVar"));
 		node.setEndSize(intValFromDict(props, "endSize"));
 		node.setEndSizeVar(intValFromDict(props, "endSizeVar"));
-		if(node instanceof CCQuadParticleSystem){
+		if (node instanceof CCQuadParticleSystem) {
 			node.setStartSpin(intValFromDict(props, "startSpin"));
 			node.setStartSpinVar(intValFromDict(props, "startSpinVar"));
 			node.setEndSpin(intValFromDict(props, "endSpin"));
@@ -396,71 +407,86 @@ public class CCBReader {
 		node.setEndColor(color4fValFromDict(props, "endColor"));
 		node.setEndColorVar(color4fValFromDict(props, "endColorVar"));
 		node.setBlendFunc(blendFuncValFromDict(props, "blendFunc"));
-		if(intValFromDict(props, "emitterMode") == CCParticleSystem.kCCParticleModeGravity){
+		if (intValFromDict(props, "emitterMode") == CCParticleSystem.kCCParticleModeGravity) {
 			node.setGravity(pointValFromDict(props, "gravity"));
 			node.setAngle(intValFromDict(props, "angle"));
 			node.setAngleVar(intValFromDict(props, "angleVar"));
 			node.setSpeed(intValFromDict(props, "speed"));
 			node.setSpeedVar(intValFromDict(props, "speedVar"));
 			node.setTangentialAccel(intValFromDict(props, "tangentialAccel"));
-			node.setTangentialAccelVar(intValFromDict(props, "tangentialAccelVar"));
+			node.setTangentialAccelVar(intValFromDict(props,
+					"tangentialAccelVar"));
 			node.setRadialAccel(intValFromDict(props, "radialAccel"));
 			node.setRadialAccelVar(intValFromDict(props, "radialAccelVar"));
-		}else{
+		} else {
 			node.setStartRadius(intValFromDict(props, "startRadius"));
 			node.setStartRadiusVar(intValFromDict(props, "startRadiusVar"));
 			node.setEndRadius(intValFromDict(props, "endRadius"));
 			node.setEndRadiusVar(intValFromDict(props, "endRadiusVar"));
 			node.setRotatePerSecond(intValFromDict(props, "rotatePerSecond"));
-			node.setRotatePerSecondVar(intValFromDict(props, "rotatePerSecondVar"));
+			node.setRotatePerSecondVar(intValFromDict(props,
+					"rotatePerSecondVar"));
 		}
-		if(extraProps != null){
-			setExtraProp(props.get("spriteFile"), "spriteFile", node.getTag(), extraProps);
+		if (extraProps != null) {
+			setExtraProp(props.get("spriteFile"), "spriteFile", node.getTag(),
+					extraProps);
 		}
 		node.setPositionType(CCParticleSystem.kCCPositionTypeGrouped);
-		
+
 	}
-	
-	
-	public static void setPropsForMenuItem(CCMenuItem node,HashMap<String, Object> props, HashMap<String, Object> extraProps){
+
+	public static void setPropsForMenuItem(CCMenuItem node,
+			HashMap<String, Object> props, HashMap<String, Object> extraProps) {
 		node.setIsEnabled(boolValFromDict(props, "isEnabled"));
-		if(extraProps != null){
-			setExtraProp(props.get("selector"), "selector", node.getTag(), extraProps);
-			setExtraProp(props.get("target"), "target", node.getTag(), extraProps);
+		if (extraProps != null) {
+			setExtraProp(props.get("selector"), "selector", node.getTag(),
+					extraProps);
+			setExtraProp(props.get("target"), "target", node.getTag(),
+					extraProps);
 			String spriteFramesFile = (String) props.get("spriteFramesFile");
-			if(spriteFramesFile != null){
-				setExtraProp(spriteFramesFile, "spriteFramesFile", node.getTag(), extraProps);
+			if (spriteFramesFile != null) {
+				setExtraProp(spriteFramesFile, "spriteFramesFile",
+						node.getTag(), extraProps);
 			}
 		}
 	}
-	
-	public static void setPropsForMenuItemImage(CCMenuItemSprite node,HashMap<String, Object> props, HashMap<String, Object> extraProps){
-		if(extraProps != null){
-			setExtraProp(props.get("spriteFileNormal"), "spriteFileNormal", node.getTag(), extraProps);
-			setExtraProp(props.get("spriteFileSelected"), "spriteFileSelected", node.getTag(), extraProps);
-			setExtraProp(props.get("spriteFileDisabled"), "spriteFileDisabled", node.getTag(), extraProps);
+
+	public static void setPropsForMenuItemImage(CCMenuItemSprite node,
+			HashMap<String, Object> props, HashMap<String, Object> extraProps) {
+		if (extraProps != null) {
+			setExtraProp(props.get("spriteFileNormal"), "spriteFileNormal",
+					node.getTag(), extraProps);
+			setExtraProp(props.get("spriteFileSelected"), "spriteFileSelected",
+					node.getTag(), extraProps);
+			setExtraProp(props.get("spriteFileDisabled"), "spriteFileDisabled",
+					node.getTag(), extraProps);
 		}
 	}
-	
-	public static void setPropsForMenu(CCMenu node, HashMap<String, Object> props, HashMap<String, Object> extraProps){
-		if(extraProps != null){
+
+	public static void setPropsForMenu(CCMenu node,
+			HashMap<String, Object> props, HashMap<String, Object> extraProps) {
+		if (extraProps != null) {
 		}
 	}
-	
-	public static void setPropsForLabelBMFont(CCBitmapFontAtlas node, HashMap<String, Object> props, HashMap<String, Object> extraProps){
+
+	public static void setPropsForLabelBMFont(CCBitmapFontAtlas node,
+			HashMap<String, Object> props, HashMap<String, Object> extraProps) {
 		node.setOpacity(intValFromDict(props, "opacity"));
 		node.setColor(color3ValFromDict(props, "color"));
-		if(extraProps != null){
-			setExtraProp(props.get("fontFile"), "fontFile", node.getTag(), extraProps);
+		if (extraProps != null) {
+			setExtraProp(props.get("fontFile"), "fontFile", node.getTag(),
+					extraProps);
 		}
 	}
-	
-	public static void setPropsForLayerColor(CCColorLayer node,HashMap<String, Object> props, HashMap<String, Object> extraProps){
+
+	public static void setPropsForLayerColor(CCColorLayer node,
+			HashMap<String, Object> props, HashMap<String, Object> extraProps) {
 		node.setColor(color3ValFromDict(props, "color"));
 		node.setOpacity(intValFromDict(props, "opacity"));
 	}
-	
-	public static void setPropsForLayerGradient(CCLayerGradient node,HashMap<String, Object> props, HashMap<String, Object> extraProps){
+
+	public static void setPropsForLayerGradient(CCLayerGradient node,
+			HashMap<String, Object> props, HashMap<String, Object> extraProps) {
 		node.setStartColor(color3ValFromDict(props, "color"));
 		node.setStartOpacity(intValFromDict(props, "opacity"));
 		node.setEndColor(color3ValFromDict(props, "endColor"));

@@ -28,7 +28,6 @@ import org.cocos2d.config.ccMacros;
 import org.cocos2d.events.CCKeyDispatcher;
 import org.cocos2d.events.CCTouchDispatcher;
 import org.cocos2d.layers.CCScene;
-import org.cocos2d.layers.CCScreenAdapter;
 import org.cocos2d.nodes.CCLabel.TextAlignment;
 import org.cocos2d.opengl.CCTexture2D;
 import org.cocos2d.opengl.GLResourceHelper;
@@ -913,7 +912,7 @@ public class CCDirector implements GLSurfaceView.Renderer {
     private boolean initOpenGLViewWithView(View view, CGRect rect) {
         surfaceSize_.set(rect.size);
         screenSize_.set(surfaceSize_);
-        CCScreenAdapter.sharedSceneAdapter().init();
+
 //        try {
         if (openGLView_ != view) {
         	openGLView_ = (GLSurfaceView) view;
