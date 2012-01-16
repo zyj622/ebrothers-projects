@@ -1,5 +1,6 @@
 package org.cocos2d.tests;
 
+import org.cocos2d.layers.CCAdaptedScene;
 import org.cocos2d.layers.CCScene;
 import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.opengl.CCGLSurfaceView;
@@ -10,17 +11,17 @@ import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
 
-public class CocosBuilder extends Activity{
-	
+public class CocosBuilder extends Activity {
+
 	private CCGLSurfaceView mGLSurfaceView;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
-		getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON, 
+		getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON,
 				WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
 		mGLSurfaceView = new CCGLSurfaceView(this);
@@ -28,7 +29,6 @@ public class CocosBuilder extends Activity{
 		director.attachInView(mGLSurfaceView);
 		director.setDeviceOrientation(CCDirector.kCCDeviceOrientationLandscapeLeft);
 		setContentView(mGLSurfaceView);
-		
 
 		// show FPS
 		CCDirector.sharedDirector().setDisplayFPS(true);
@@ -37,38 +37,37 @@ public class CocosBuilder extends Activity{
 		CCDirector.sharedDirector().setAnimationInterval(1.0f / 30);
 
 		CCScene scene = CCBReader.sceneWithNodeGraphFromFile("example.ccb");
-
+		CCAdaptedScene.decorate(scene, CCAdaptedScene.MODE_ADAPTE_BY_HV);
 		// Make the Scene active
 		CCDirector.sharedDirector().runWithScene(scene);
 	}
-	
-	 @Override
-	    public void onStart() {
-	        super.onStart();
 
-	    }
+	@Override
+	public void onStart() {
+		super.onStart();
 
-	    @Override
-	    public void onPause() {
-	        super.onPause();
+	}
 
-	        CCDirector.sharedDirector().onPause();
-	    }
+	@Override
+	public void onPause() {
+		super.onPause();
 
-	    @Override
-	    public void onResume() {
-	        super.onResume();
+		CCDirector.sharedDirector().onPause();
+	}
 
-	        CCDirector.sharedDirector().onResume();
-	    }
+	@Override
+	public void onResume() {
+		super.onResume();
 
-	    @Override
-	    public void onDestroy() {
-	        super.onDestroy();
+		CCDirector.sharedDirector().onResume();
+	}
 
-	        CCDirector.sharedDirector().end();
-	        //CCTextureCache.sharedTextureCache().removeAllTextures();
-	    }
-	
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+
+		CCDirector.sharedDirector().end();
+		// CCTextureCache.sharedTextureCache().removeAllTextures();
+	}
 
 }
