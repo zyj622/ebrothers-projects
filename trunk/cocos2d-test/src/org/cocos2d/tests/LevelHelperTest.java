@@ -77,13 +77,24 @@ public class LevelHelperTest extends Activity {
 	}
 
 	static class Layer1 extends CCPhysicsLayer {
+		private LevelHelperLoader loader;
+
 		public Layer1() {
 			super();
-			
 			useDebugDraw();
-			
-			LevelHelperLoader loader = new LevelHelperLoader("1.plhs");
+		}
+
+		@Override
+		public void onEnter() {
+			loader = new LevelHelperLoader("1.plhs");
 			loader.addObjectsToWorld(world, this);
+			super.onEnter();
+		}
+
+		@Override
+		public void onExit() {
+			loader.dispose();
+			super.onExit();
 		}
 	}
 }
