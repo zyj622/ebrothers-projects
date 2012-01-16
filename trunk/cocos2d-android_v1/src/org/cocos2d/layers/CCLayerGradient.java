@@ -12,7 +12,7 @@ public class CCLayerGradient extends CCColorLayer {
 	protected int startOpacity_;
 	protected int endOpacity_;
 	protected CGPoint vector_;
-	protected boolean compressedInterpolation_;
+	protected boolean compressedInterpolation_ = true;
 
 	protected CCLayerGradient(ccColor4B color) {
 		super(color);
@@ -33,22 +33,22 @@ public class CCLayerGradient extends CCColorLayer {
 
 	public void setEndColor(ccColor3B colors) {
 		endColor_ = colors;
-
+		updateColor();
 	}
 
 	public void setStartOpacity(int o) {
 		startOpacity_ = o;
-
+		updateColor();
 	}
 
 	public void setEndOpacity(int o) {
 		endOpacity_ = o;
-
+		updateColor();
 	}
 
 	public void setVector(CGPoint point) {
 		vector_ = point;
-
+		updateColor();
 	}
 
 	public boolean compressedInterpolation() {
@@ -57,11 +57,12 @@ public class CCLayerGradient extends CCColorLayer {
 
 	public void setCompressedInterpolation(boolean compress) {
 		compressedInterpolation_ = compress;
+		updateColor();
 	}
 
 	@Override
 	protected void init(ccColor4B color, float w, float h) {
-		endColor_ = ccColor3B.ccc3(color.a, color.g, color.b);
+		endColor_ = ccColor3B.ccc3(color.r, color.g, color.b);
 		endOpacity_ = color.a;
 		startOpacity_ = color.a;
 		vector_ = CGPoint.ccp(0, -1);
@@ -91,28 +92,43 @@ public class CCLayerGradient extends CCColorLayer {
 		ccColor4B E = new ccColor4B(endColor_.r, endColor_.g, endColor_.b,
 				(int) (endOpacity_ * opacityf));
 
-		for (int i = 0; i < squareColors_.limit(); i++) {
-			switch (i % 4) {
-			case 0:
-
-				squareColors_.put(i, (float) (E.r + (S.r - E.r)
-						* ((c - u.x + u.y) / (2.0f * c))));
-				break;
-			case 1:
-				squareColors_.put(i, (float) (E.g + (S.g - E.g)
-						* ((c - u.x + u.y) / (2.0f * c))));
-				break;
-			case 2:
-				squareColors_.put(i, (float) (E.b + (S.b - E.b)
-						* ((c - u.x + u.y) / (2.0f * c))));
-				break;
-			default:
-				squareColors_.put(i, (float) (E.a + (S.a - E.a)
-						* ((c - u.x - u.y) / (2.0f * c))));
-			}
-			squareColors_.position(0);
-		}
+		// (-1, -1)
+		squareColors_.put(0, (float) (E.r + (S.r - E.r)
+				* ((c + u.x + u.y) / (2.0f * c))));
+		squareColors_.put(1, (float) (E.g + (S.g - E.g)
+				* ((c + u.x + u.y) / (2.0f * c))));
+		squareColors_.put(2, (float) (E.b + (S.b - E.b)
+				* ((c + u.x + u.y) / (2.0f * c))));
+		squareColors_.put(3, (float) (E.a + (S.a - E.a)
+				* ((c + u.x + u.y) / (2.0f * c))));
+		// (1, -1)
+		squareColors_.put(4, (float) (E.r + (S.r - E.r)
+				* ((c - u.x + u.y) / (2.0f * c))));
+		squareColors_.put(5, (float) (E.g + (S.g - E.g)
+				* ((c - u.x + u.y) / (2.0f * c))));
+		squareColors_.put(6, (float) (E.b + (S.b - E.b)
+				* ((c - u.x + u.y) / (2.0f * c))));
+		squareColors_.put(7, (float) (E.a + (S.a - E.a)
+				* ((c - u.x + u.y) / (2.0f * c))));
+		// (-1, 1)
+		squareColors_.put(8, (float) (E.r + (S.r - E.r)
+				* ((c + u.x - u.y) / (2.0f * c))));
+		squareColors_.put(9, (float) (E.g + (S.g - E.g)
+				* ((c + u.x - u.y) / (2.0f * c))));
+		squareColors_.put(10, (float) (E.b + (S.b - E.b)
+				* ((c + u.x - u.y) / (2.0f * c))));
+		squareColors_.put(11, (float) (E.a + (S.a - E.a)
+				* ((c + u.x - u.y) / (2.0f * c))));
+		// (1, 1)
+		squareColors_.put(12, (float) (E.r + (S.r - E.r)
+				* ((c - u.x - u.y) / (2.0f * c))));
+		squareColors_.put(13, (float) (E.g + (S.g - E.g)
+				* ((c - u.x - u.y) / (2.0f * c))));
+		squareColors_.put(14, (float) (E.b + (S.b - E.b)
+				* ((c - u.x - u.y) / (2.0f * c))));
+		squareColors_.put(15, (float) (E.a + (S.a - E.a)
+				* ((c - u.x - u.y) / (2.0f * c))));
+		squareColors_.position(0);
 
 	}
-
 }

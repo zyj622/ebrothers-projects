@@ -95,8 +95,8 @@ public class CCColorLayer extends CCLayer
                 default:
                     squareColors_.put(i, opacity_ / 255f);
             }
-            squareColors_.position(0);
         }
+        squareColors_.position(0);
     }
 
     @Override

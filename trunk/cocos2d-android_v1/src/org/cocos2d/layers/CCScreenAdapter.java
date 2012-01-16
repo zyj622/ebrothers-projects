@@ -6,8 +6,8 @@ import org.cocos2d.types.CGSize;
 
 public class CCScreenAdapter {
 	// default portrait screen size
-	private CGSize baseSize_p = CGSize.make(320f, 480f);
-	private CGSize baseSize_l = CGSize.make(480f, 320f);
+	private static final float DEFAULT_WIDTH = 480f;
+	private static final float DEFAULT_HEIGHT = 320f;
 
 	private static CCScreenAdapter sInstance;
 
@@ -18,46 +18,58 @@ public class CCScreenAdapter {
 		return sInstance;
 	}
 
-	private float _scale_ratio_h = 1f;
-	private float _scale_ratio_v = 1f;
-
-	public void init() {
+	public float getHorizontalScaleRatio() {
 		final CGSize winSize = CCDirector.sharedDirector().winSize();
 		if (CCDirector.sharedDirector().getLandscape()) {
-			_scale_ratio_h = winSize.width / baseSize_l.width;
-			_scale_ratio_v = winSize.height / baseSize_l.height;
+			return winSize.width / DEFAULT_WIDTH;
 		} else {
-			_scale_ratio_h = winSize.width / baseSize_p.width;
-			_scale_ratio_v = winSize.height / baseSize_p.height;
+			return winSize.width / DEFAULT_HEIGHT;
+		}
+	}
+
+	public float getVerticalScaleRatio() {
+		final CGSize winSize = CCDirector.sharedDirector().winSize();
+		if (CCDirector.sharedDirector().getLandscape()) {
+			return winSize.height / DEFAULT_HEIGHT;
+		} else {
+			return winSize.height / DEFAULT_WIDTH;
 		}
 	}
 
 	public void adapte(CCNode node) {
-		node.setScaleX(_scale_ratio_h);
-		node.setScaleY(_scale_ratio_v);
+		node.setScaleX(getHorizontalScaleRatio());
+		node.setScaleY(getVerticalScaleRatio());
 	}
 
 	public void adapteByHorizontal(CCNode node) {
-		node.setScale(_scale_ratio_h);
+		node.setScale(getHorizontalScaleRatio());
 	}
 
 	public void adapteByVertical(CCNode node) {
-		node.setScale(_scale_ratio_v);
+		node.setScale(getVerticalScaleRatio());
 	}
 
 	public float getAdaptedX(float x) {
-		return x * _scale_ratio_h;
+		return x * getHorizontalScaleRatio();
 	}
 
 	public float getAdaptedY(float y) {
-		return y * _scale_ratio_v;
+		return y * getVerticalScaleRatio();
 	}
 
-	public CGSize getBasedSize() {
+	public float getBasedWidth() {
 		if (CCDirector.sharedDirector().getLandscape()) {
-			return baseSize_l;
+			return DEFAULT_WIDTH;
 		} else {
-			return baseSize_p;
+			return DEFAULT_HEIGHT;
+		}
+	}
+
+	public float getBasedHeight() {
+		if (CCDirector.sharedDirector().getLandscape()) {
+			return DEFAULT_HEIGHT;
+		} else {
+			return DEFAULT_WIDTH;
 		}
 	}
 }

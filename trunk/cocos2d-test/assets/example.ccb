@@ -33,9 +33,9 @@
 					</array>
 					<key>color</key>
 					<array>
-						<integer>106</integer>
-						<integer>236</integer>
-						<integer>205</integer>
+						<integer>0</integer>
+						<integer>255</integer>
+						<integer>44</integer>
 					</array>
 					<key>contentSize</key>
 					<array>
@@ -46,9 +46,9 @@
 					<string></string>
 					<key>endColor</key>
 					<array>
-						<integer>149</integer>
+						<integer>255</integer>
 						<integer>0</integer>
-						<integer>202</integer>
+						<integer>0</integer>
 					</array>
 					<key>endOpacity</key>
 					<integer>255</integer>
@@ -85,8 +85,8 @@
 					<integer>0</integer>
 					<key>vector</key>
 					<array>
-						<real>-0.79863536357879639</real>
-						<real>-0.60181498527526855</real>
+						<real>0.99999982118606567</real>
+						<real>0.0</real>
 					</array>
 					<key>visible</key>
 					<true/>
@@ -608,7 +608,7 @@
 									<key>scaleY</key>
 									<real>1</real>
 									<key>selector</key>
-									<string>pressedButton</string>
+									<string></string>
 									<key>spriteFileDisabled</key>
 									<string>btn-test-2.png</string>
 									<key>spriteFileNormal</key>
@@ -618,7 +618,7 @@
 									<key>tag</key>
 									<integer>-1</integer>
 									<key>target</key>
-									<integer>1</integer>
+									<integer>0</integer>
 									<key>visible</key>
 									<true/>
 									<key>zOrder</key>

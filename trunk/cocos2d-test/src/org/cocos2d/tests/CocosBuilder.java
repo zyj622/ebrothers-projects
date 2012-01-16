@@ -37,7 +37,7 @@ public class CocosBuilder extends Activity {
 		CCDirector.sharedDirector().setAnimationInterval(1.0f / 30);
 
 		CCScene scene = CCBReader.sceneWithNodeGraphFromFile("example.ccb");
-		CCAdaptedScene.decorate(scene, CCAdaptedScene.MODE_ADAPTE_BY_HV);
+		CCAdaptedScene.decorate(scene);
 		// Make the Scene active
 		CCDirector.sharedDirector().runWithScene(scene);
 	}

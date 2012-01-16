@@ -48,7 +48,7 @@ public class CCAdaptedScene extends CCScene {
 			scene.setPosition(scene.getPosition().x, scene.getPosition().y
 					- (scene.getScaleY()
 							* CCScreenAdapter.sharedSceneAdapter()
-									.getBasedSize().height - CCDirector
+									.getBasedHeight() - CCDirector
 							.sharedDirector().winSize().height) / 2f);
 			break;
 		case MODE_ADAPTE_BY_V:
@@ -56,7 +56,7 @@ public class CCAdaptedScene extends CCScene {
 			scene.setPosition(
 					scene.getPosition().x
 							+ (CCDirector.sharedDirector().winSize().width - CCScreenAdapter
-									.sharedSceneAdapter().getBasedSize().width
+									.sharedSceneAdapter().getBasedWidth()
 									* scene.getScaleX()) / 2f,
 					scene.getPosition().y);
 			break;
