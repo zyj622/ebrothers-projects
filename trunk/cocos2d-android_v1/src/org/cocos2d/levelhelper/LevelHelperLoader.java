@@ -13,9 +13,9 @@ import org.cocos2d.levelhelper.nodes.LHContactNode.ContactNodeNotifier;
 import org.cocos2d.levelhelper.nodes.LHJoint;
 import org.cocos2d.levelhelper.nodes.LHParallaxNode;
 import org.cocos2d.levelhelper.nodes.LHPathNode;
+import org.cocos2d.levelhelper.nodes.LHPathNode.PathNodeNotifier;
 import org.cocos2d.levelhelper.nodes.LHSettings;
 import org.cocos2d.levelhelper.nodes.LHSprite;
-import org.cocos2d.levelhelper.nodes.LHPathNode.PathNodeNotifier;
 import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.nodes.CCSpriteSheet;
 import org.cocos2d.types.CGPoint;
@@ -85,7 +85,7 @@ public class LevelHelperLoader {
 
 	public enum LevelHelper_TAG {
 		DEFAULT_TAG, NUMBER_OF_TAGS
-	};
+	}
 
 	public LevelHelperLoader(String levelFile) {
 		assert (levelFile != null && levelFile.length() != 0);
@@ -94,6 +94,9 @@ public class LevelHelperLoader {
 		spritesInLevel = new HashMap<String, LHSprite>();
 		beziersInLevel = new HashMap<String, LHBezierNode>();
 		animationsInLevel = new HashMap<String, LHAnimationNode>();
+		physicBoundariesInLevel = new HashMap<String, LHSprite>();
+		jointsInLevel = new HashMap<String, LHJoint>();
+		parallaxesInLevel = new HashMap<String, LHParallaxNode>();
 		loadLevelHelperSceneFile(levelFile);
 	}
 
@@ -121,6 +124,52 @@ public class LevelHelperLoader {
 	public void addSpritesToLayer(CCLayer cocosLayer) {
 		throw new RuntimeException(
 				"Method addSpritesToLayer is not yet implemented. Please use addObjectsToWorld with all sprites set to NO PHYSICS");
+	}
+
+	public void dispose() {
+		physicBoundariesInLevel.clear();
+		physicBoundariesInLevel = null;
+		removeAllBezierNodes();
+		releaseAllParallaxes();
+		removeAllJoints();
+		removeAllSprites();
+		batchNodesInLevel.clear();
+		batchNodesInLevel = null;
+
+		lhSprites.clear();
+		lhSprites = null;
+		lhJoints.clear();
+		lhJoints = null;
+		lhParallax.clear();
+		lhParallax = null;
+		lhBeziers.clear();
+		lhBeziers = null;
+		lhAnims.clear();
+		lhAnims = null;
+		// animationsInLevel.clear();
+		lhBatchInfo.clear();
+		lhBatchInfo = null;
+
+		if (wb != null) {
+			wb.clear();
+			wb = null;
+		}
+
+		if (null != contactNode) {
+			contactNode.removeFromParentAndCleanup(true);
+			contactNode = null;
+		}
+	}
+
+	private void releaseAllParallaxes() {
+		for (String key : parallaxesInLevel.keySet()) {
+			LHParallaxNode par = parallaxesInLevel.get(key);
+			if (null != par) {
+				par.removeFromParentAndCleanup(true);
+			}
+		}
+		parallaxesInLevel.clear();
+		parallaxesInLevel = null;
 	}
 
 	// //////////////////////////////////////////////////////////////////////////////
@@ -159,7 +208,7 @@ public class LevelHelperLoader {
 		if (_cocosLayer != null) {
 			_cocosLayer.addChild(contactNode);
 		}
-	};
+	}
 
 	public void registerPreColisionCallbackBetweenTagA(LevelHelper_TAG tagA,
 			LevelHelper_TAG tagB, ContactNodeNotifier _notifier) {
@@ -169,7 +218,7 @@ public class LevelHelperLoader {
 		}
 		contactNode.registerPreColisionCallbackBetweenTagA(tagA.ordinal(),
 				tagB.ordinal(), _notifier);
-	};
+	}
 
 	public void cancelPreCollisionCallbackBetweenTagA(LevelHelper_TAG tagA,
 			LevelHelper_TAG tagB) {
@@ -179,7 +228,7 @@ public class LevelHelperLoader {
 		}
 		contactNode.cancelPreColisionCallbackBetweenTagA(tagA.ordinal(),
 				tagB.ordinal());
-	};
+	}
 
 	public void registerPostColisionCallbackBetweenTagA(LevelHelper_TAG tagA,
 			LevelHelper_TAG tagB, ContactNodeNotifier _notifier) {
@@ -189,7 +238,7 @@ public class LevelHelperLoader {
 		}
 		contactNode.registerPreColisionCallbackBetweenTagA(tagA.ordinal(),
 				tagB.ordinal(), _notifier);
-	};
+	}
 
 	public void cancelPostCollisionCallbackBetweenTagA(LevelHelper_TAG tagA,
 			LevelHelper_TAG tagB) {
@@ -199,7 +248,7 @@ public class LevelHelperLoader {
 		}
 		contactNode.cancelPostColisionCallbackBetweenTagA(tagA.ordinal(),
 				tagB.ordinal());
-	};
+	}
 
 	// //////////////////////////////////////////////////////////////////////////////
 	// SPRITES
@@ -217,7 +266,7 @@ public class LevelHelperLoader {
 			}
 		}
 		return array;
-	};
+	}
 
 	public boolean removeSprite(LHSprite sprite) {
 		if (sprite == null)
@@ -225,7 +274,7 @@ public class LevelHelperLoader {
 		sprite.removeFromParentAndCleanup(true);
 		spritesInLevel.remove(sprite.getUniqueName());
 		return true;
-	};
+	}
 
 	public boolean removeSpritesWithTag(LevelHelper_TAG tag) {
 		for (String key : spritesInLevel.keySet()) {
@@ -238,18 +287,19 @@ public class LevelHelperLoader {
 			}
 		}
 		return false;
-	};
+	}
 
-	public boolean removeAllSprites() {
-		for (String key : spritesInLevel.keySet()) {
+	public void removeAllSprites() {
+		Object[] keys = spritesInLevel.keySet().toArray();
+		for (Object key : keys) {
 			LHSprite spr = spritesInLevel.get(key);
 			if (spr != null) {
 				removeSprite(spr);
-				return true;
 			}
 		}
-		return false;
-	};
+		spritesInLevel.clear();
+		spritesInLevel = null;
+	}
 
 	// //////////////////////////////////////////////////////////////////////////////
 	// CREATION
@@ -391,9 +441,9 @@ public class LevelHelperLoader {
 	}
 
 	public void removeJointsWithTag(LevelHelper_TAG tag) {
-		for (String key : jointsInLevel.keySet()) {
+		Object[] keys = jointsInLevel.keySet().toArray();
+		for (Object key : keys) {
 			LHJoint jt = jointsInLevel.get(key);
-
 			if (jt != null) {
 				if (jt.getTag() == tag.ordinal()) {
 					jointsInLevel.remove(key);
@@ -402,16 +452,15 @@ public class LevelHelperLoader {
 		}
 	}
 
-	public boolean removeJoint(LHJoint joint) {
+	public void removeJoint(LHJoint joint) {
 		if (joint == null)
-			return false;
+			return;
 		jointsInLevel.remove(joint.getUniqueName());
-		return true;
 	}
 
-	public boolean removeAllJoints() {
+	public void removeAllJoints() {
 		jointsInLevel.clear();
-		return true;
+		jointsInLevel = null;
 	}
 
 	// //////////////////////////////////////////////////////////////////////////////
@@ -436,6 +485,7 @@ public class LevelHelperLoader {
 			}
 		}
 		beziersInLevel.clear();
+		beziersInLevel = null;
 	}
 
 	// //////////////////////////////////////////////////////////////////////////////
@@ -445,14 +495,14 @@ public class LevelHelperLoader {
 		if (gravity.x == 0 && gravity.y == 0)
 			return true;
 		return false;
-	};
+	}
 
 	public void createGravity(World world) {
 		if (isGravityZero())
 			Log.w(TAG,
 					"LevelHelper Warning: Gravity is not defined in the level. Are you sure you want to set a zero gravity?");
 		world.setGravity(new Vector2(gravity.x, gravity.y));
-	};
+	}
 
 	// //////////////////////////////////////////////////////////////////////////////
 	// PHYSIC BOUNDARIES
@@ -561,7 +611,7 @@ public class LevelHelperLoader {
 		// CCSpriteSheet cNode = bNode.getSpriteSheet();
 		// if (cNode.getDescendants().isEmpty()) {
 		// // delete bNode;
-		// batchNodesInLevel.remove(key);
+		// batchNodesInLevel.}(key);
 		// }
 		// }
 		// }
@@ -1596,10 +1646,12 @@ public class LevelHelperLoader {
 		gameWorldRect = stringToCGRect(scenePref.dictValue().get("GameWorld")
 				.stringValue());
 
-		CGRect color = stringToCGRect(scenePref.dictValue()
-				.get("BackgroundColor").stringValue());
-//		CCDirector.gl.glClearColor(color.origin.x, color.origin.y,
-//				color.size.width, 1);
+		if (CCDirector.gl != null) {
+			CGRect color = stringToCGRect(scenePref.dictValue()
+					.get("BackgroundColor").stringValue());
+			CCDirector.gl.glClearColor(color.origin.x, color.origin.y,
+					color.size.width, 1);
+		}
 
 		CGSize winSize = CCDirector.sharedDirector().winSize();
 		LHSettings.sharedInstance().setConvertRatio(
