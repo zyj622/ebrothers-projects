@@ -253,7 +253,7 @@
 	<key>ScenePreference</key>
 	<dict>
 		<key>BackgroundColor</key>
-		<string>{{0, 0}, {0, 0}}</string>
+		<string>{{1, 0}, {0, 0}}</string>
 		<key>GameWorld</key>
 		<string>{{0, 0}, {480, 320}}</string>
 		<key>LevelsPath</key>
