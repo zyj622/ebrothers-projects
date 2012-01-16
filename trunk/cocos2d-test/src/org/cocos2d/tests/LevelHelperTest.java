@@ -29,30 +29,30 @@ public class LevelHelperTest extends Activity {
 
 		mGLSurfaceView = new CCGLSurfaceView(this);
 		setContentView(mGLSurfaceView);
+		// attach the OpenGL view to a window
+		CCDirector.sharedDirector().attachInView(mGLSurfaceView);
+		
+		// set landscape mode
+		CCDirector.sharedDirector().setLandscape(true);
+		
+		// show FPS
+		CCDirector.sharedDirector().setDisplayFPS(true);
+		
+		// frames per second
+		CCDirector.sharedDirector().setAnimationInterval(1.0f / 60);
+		
+		CCScene scene = CCScene.node();
+		
+		CCMultiplexLayer layer = CCMultiplexLayer.node(new Layer1(),
+				new Layer2(), new Layer3(), new Layer4());
+		scene.addChild(layer, 0);
+		CCDirector.sharedDirector().runWithScene(scene);
 	}
 
 	@Override
 	public void onStart() {
 		super.onStart();
 
-		// attach the OpenGL view to a window
-		CCDirector.sharedDirector().attachInView(mGLSurfaceView);
-
-		// set landscape mode
-		CCDirector.sharedDirector().setLandscape(false);
-
-		// show FPS
-		CCDirector.sharedDirector().setDisplayFPS(true);
-
-		// frames per second
-		CCDirector.sharedDirector().setAnimationInterval(1.0f / 60);
-
-		CCScene scene = CCScene.node();
-
-		CCMultiplexLayer layer = CCMultiplexLayer.node(new Layer1(),
-				new Layer2(), new Layer3(), new Layer4());
-		scene.addChild(layer, 0);
-		CCDirector.sharedDirector().runWithScene(scene);
 	}
 
 	@Override
@@ -86,7 +86,7 @@ public class LevelHelperTest extends Activity {
 
 		@Override
 		public void onEnter() {
-			loader = new LevelHelperLoader("1.plhs");
+			loader = new LevelHelperLoader("lh_example.plhs");
 			loader.addObjectsToWorld(world, this);
 			super.onEnter();
 		}
