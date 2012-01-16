@@ -42,7 +42,33 @@ public class CocosBuilder extends Activity{
 		CCDirector.sharedDirector().runWithScene(scene);
 	}
 	
-	
+	 @Override
+	    public void onStart() {
+	        super.onStart();
+
+	    }
+
+	    @Override
+	    public void onPause() {
+	        super.onPause();
+
+	        CCDirector.sharedDirector().onPause();
+	    }
+
+	    @Override
+	    public void onResume() {
+	        super.onResume();
+
+	        CCDirector.sharedDirector().onResume();
+	    }
+
+	    @Override
+	    public void onDestroy() {
+	        super.onDestroy();
+
+	        CCDirector.sharedDirector().end();
+	        //CCTextureCache.sharedTextureCache().removeAllTextures();
+	    }
 	
 
 }
