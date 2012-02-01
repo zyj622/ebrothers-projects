@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AutoGenerateCode</key>
+	<false/>
+	<key>CodePathRelative</key>
+	<string>./</string>
+	<key>CustomScreenSize</key>
+	<string>{480, 320}</string>
+	<key>Engine</key>
+	<integer>0</integer>
+	<key>LastLevelLoaded</key>
+	<string>/Volumes/Macintosh HD 2/Carl/android/workspace/MX Mayhem Lite/assets/rider_bear.plhs</string>
+	<key>LevelsPathRelative</key>
+	<string>./</string>
+	<key>ProjectName</key>
+	<string>rider_bear</string>
+	<key>SHScenesPathRelative</key>
+	<string>./</string>
+	<key>ScreenSize</key>
+	<integer>1</integer>
+	<key>Tags</key>
+	<array>
+		<string>DEFAULT</string>
+	</array>
+</dict>
+</plist>

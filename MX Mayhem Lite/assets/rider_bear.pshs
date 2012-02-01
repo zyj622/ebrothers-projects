@@ -1,0 +1,1691 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>ANIMATION_INFO</key>
+	<array/>
+	<key>Author</key>
+	<string>Bogdan Vladu</string>
+	<key>BatchZOrder</key>
+	<integer>0</integer>
+	<key>CreatedWith</key>
+	<string>SpriteHelper</string>
+	<key>ImportedImages</key>
+	<array>
+		<string>/Volumes/Macintosh HD 2/Carl/android/workspace/MX Mayhem Lite/assets/rider_bear.png</string>
+	</array>
+	<key>ImportedImages-HD</key>
+	<array>
+		<string>/Volumes/Macintosh HD 2/Carl/android/workspace/MX Mayhem Lite/assets/rider_bear-hd.png</string>
+	</array>
+	<key>ImportedImages-HD_relative</key>
+	<array>
+		<string>rider_bear-hd.png</string>
+	</array>
+	<key>ImportedImages_relative</key>
+	<array>
+		<string>rider_bear.png</string>
+	</array>
+	<key>SPRITES_INFO</key>
+	<array>
+		<dict>
+			<key>PhysicProperties</key>
+			<dict>
+				<key>AngularDamping</key>
+				<real>0.0</real>
+				<key>AngularVelocity</key>
+				<real>0.0</real>
+				<key>CanSleep</key>
+				<true/>
+				<key>Category</key>
+				<integer>1</integer>
+				<key>Density</key>
+				<real>0.20000000298023224</real>
+				<key>Fixtures</key>
+				<array>
+					<array>
+						<string>{41.822632, 5.3607082}</string>
+						<string>{51.884766, 1.7970352}</string>
+						<string>{48.949974, 5.3607082}</string>
+						<string>{39.307098, 8.9243813}</string>
+					</array>
+					<array>
+						<string>{-50.623253, 4.9414539}</string>
+						<string>{-50.413628, 4.7318249}</string>
+						<string>{-44.753674, 4.7318249}</string>
+						<string>{-31.414734, 9.1110249}</string>
+						<string>{-51.461765, 7.8762436}</string>
+					</array>
+					<array>
+						<string>{-12.261356, -19.375378}</string>
+						<string>{-5.7628937, -24.406448}</string>
+						<string>{8.0725441, -24.825706}</string>
+						<string>{23.794632, 0.9585228}</string>
+						<string>{6.3955269, 11.439917}</string>
+						<string>{-11.842102, -12.876915}</string>
+					</array>
+					<array>
+						<string>{-44.12479, 0.53926849}</string>
+						<string>{-29.660469, -6.3784523}</string>
+						<string>{-17.502052, -9.9421234}</string>
+						<string>{6.3955269, 11.439917}</string>
+						<string>{-31.414734, 9.1110239}</string>
+						<string>{-44.753674, 4.7318249}</string>
+					</array>
+					<array>
+						<string>{-15.825031, -13.505798}</string>
+						<string>{-14.567265, -11.619148}</string>
+						<string>{-17.502052, -9.9421234}</string>
+						<string>{-18.969448, -12.876915}</string>
+						<string>{-18.969448, -17.488728}</string>
+					</array>
+					<array>
+						<string>{-16.03466, -17.279099}</string>
+						<string>{-15.825031, -13.505798}</string>
+						<string>{-18.969448, -17.488728}</string>
+					</array>
+					<array>
+						<string>{-11.842102, -12.876915}</string>
+						<string>{6.3955269, 11.439917}</string>
+						<string>{-17.502052, -9.9421234}</string>
+						<string>{-14.567265, -11.619148}</string>
+					</array>
+					<array>
+						<string>{8.7014236, 15.422846}</string>
+						<string>{23.794632, 0.9585228}</string>
+						<string>{27.737686, -0.23991013}</string>
+						<string>{29.244957, 3.264431}</string>
+						<string>{29.035332, 8.2954979}</string>
+						<string>{22.32724, 20.663544}</string>
+						<string>{12.474731, 20.453915}</string>
+						<string>{9.3303108, 18.148006}</string>
+					</array>
+					<array>
+						<string>{12.474731, 20.453915}</string>
+						<string>{22.32724, 20.663544}</string>
+						<string>{16.038406, 25.065727}</string>
+						<string>{10.797707, 22.969448}</string>
+					</array>
+					<array>
+						<string>{33.647141, 5.3607082}</string>
+						<string>{41.822632, 5.3607082}</string>
+						<string>{39.307098, 8.9243813}</string>
+						<string>{29.035332, 8.2954979}</string>
+					</array>
+					<array>
+						<string>{12.684357, -21.681282}</string>
+						<string>{16.66729, -10.780636}</string>
+						<string>{8.0725441, -24.825706}</string>
+					</array>
+					<array>
+						<string>{6.3955269, 11.439917}</string>
+						<string>{23.794632, 0.9585228}</string>
+						<string>{8.7014236, 15.422846}</string>
+					</array>
+					<array>
+						<string>{28.156723, -0.23991013}</string>
+						<string>{29.244957, 3.264431}</string>
+						<string>{27.737686, -0.23991013}</string>
+					</array>
+					<array>
+						<string>{29.244957, 3.264431}</string>
+						<string>{33.647141, 5.3607082}</string>
+						<string>{29.035332, 8.2954979}</string>
+					</array>
+				</array>
+				<key>Friction</key>
+				<real>0.20000000298023224</real>
+				<key>Group</key>
+				<integer>0</integer>
+				<key>IsBullet</key>
+				<false/>
+				<key>IsCircle</key>
+				<false/>
+				<key>IsFixedRot</key>
+				<false/>
+				<key>IsSensor</key>
+				<false/>
+				<key>LinearDamping</key>
+				<real>0.0</real>
+				<key>LinearVelocityX</key>
+				<real>0.0</real>
+				<key>LinearVelocityY</key>
+				<real>0.0</real>
+				<key>Mask</key>
+				<integer>65535</integer>
+				<key>PhysicType</key>
+				<integer>2</integer>
+				<key>Restitution</key>
+				<real>0.20000000298023224</real>
+				<key>SHHolesPoints</key>
+				<array/>
+				<key>SHShapePoints</key>
+				<array>
+					<string>{4.6727448, 42.53635}</string>
+					<string>{15.992653, 42.53635}</string>
+					<string>{17.25042, 50.921463}</string>
+					<string>{46.179062, 64.756905}</string>
+					<string>{70.495895, 71.884247}</string>
+					<string>{67.561104, 77.75383}</string>
+					<string>{67.561104, 86.977455}</string>
+					<string>{73.430679, 86.558197}</string>
+					<string>{73.849937, 79.011597}</string>
+					<string>{76.365471, 75.238297}</string>
+					<string>{81.815796, 77.75383}</string>
+					<string>{80.977287, 90.750755}</string>
+					<string>{93.974213, 100.8129}</string>
+					<string>{121.64509, 101.65141}</string>
+					<string>{130.86871, 95.362564}</string>
+					<string>{138.83458, 73.561272}</string>
+					<string>{153.08926, 50.082954}</string>
+					<string>{160.97537, 52.47982}</string>
+					<string>{161.81345, 52.47982}</string>
+					<string>{163.98991, 45.471138}</string>
+					<string>{172.79428, 41.278584}</string>
+					<string>{189.14526, 41.278584}</string>
+					<string>{209.26953, 48.40593}</string>
+					<string>{203.39995, 41.278584}</string>
+					<string>{184.1142, 34.151237}</string>
+					<string>{163.57066, 35.409004}</string>
+					<string>{150.15448, 10.672913}</string>
+					<string>{137.57681, 1.8685455}</string>
+					<string>{127.09541, 6.0611038}</string>
+					<string>{130.44946, 11.092171}</string>
+					<string>{124.16062, 15.703987}</string>
+					<string>{122.90285, 21.154308}</string>
+					<string>{118.29105, 29.120167}</string>
+					<string>{2.5764694, 36.247513}</string>
+					<string>{4.2534943, 42.117092}</string>
+				</array>
+				<key>ShapeBorderH</key>
+				<integer>0</integer>
+				<key>ShapeBorderW</key>
+				<integer>0</integer>
+				<key>ShapePositionOffsetX</key>
+				<integer>0</integer>
+				<key>ShapePositionOffsetY</key>
+				<integer>0</integer>
+			</dict>
+			<key>TextureProperties</key>
+			<dict>
+				<key>Color</key>
+				<string>{{1, 1}, {1, 0}}</string>
+				<key>Frame</key>
+				<string>{{0, 0}, {105.5, 52}}</string>
+				<key>Frame-HD</key>
+				<string>{{0, 0}, {211, 104}}</string>
+				<key>FrameUV</key>
+				<string>{{0, 0}, {0.81153846, 0.39393941}}</string>
+				<key>HD_ImageSize</key>
+				<string>{260, 264}</string>
+				<key>Image</key>
+				<string>rider_bear.png</string>
+				<key>Image-HD</key>
+				<string>rider_bear-hd.png</string>
+				<key>ImageURL</key>
+				<string>/Volumes/Macintosh HD 2/Carl/android/workspace/MX Mayhem Lite/assets/rider_bear.png</string>
+				<key>ImageURL-HD</key>
+				<string>/Volumes/Macintosh HD 2/Carl/android/workspace/MX Mayhem Lite/assets/rider_bear-hd.png</string>
+				<key>Name</key>
+				<string>bike_body_bear</string>
+				<key>Opacity</key>
+				<real>1</real>
+				<key>SD_ImageSize</key>
+				<string>{130, 132}</string>
+				<key>Scale</key>
+				<string>{1, 1}</string>
+				<key>ZOrder</key>
+				<integer>0</integer>
+			</dict>
+		</dict>
+		<dict>
+			<key>PhysicProperties</key>
+			<dict>
+				<key>AngularDamping</key>
+				<real>0.0</real>
+				<key>AngularVelocity</key>
+				<real>0.0</real>
+				<key>CanSleep</key>
+				<true/>
+				<key>Category</key>
+				<integer>1</integer>
+				<key>Density</key>
+				<real>0.20000000298023224</real>
+				<key>Fixtures</key>
+				<array/>
+				<key>Friction</key>
+				<real>0.20000000298023224</real>
+				<key>Group</key>
+				<integer>0</integer>
+				<key>IsBullet</key>
+				<false/>
+				<key>IsCircle</key>
+				<true/>
+				<key>IsFixedRot</key>
+				<false/>
+				<key>IsSensor</key>
+				<false/>
+				<key>LinearDamping</key>
+				<real>0.0</real>
+				<key>LinearVelocityX</key>
+				<real>0.0</real>
+				<key>LinearVelocityY</key>
+				<real>0.0</real>
+				<key>Mask</key>
+				<integer>65535</integer>
+				<key>PhysicType</key>
+				<integer>2</integer>
+				<key>Restitution</key>
+				<real>0.20000000298023224</real>
+				<key>SHHolesPoints</key>
+				<array/>
+				<key>SHShapePoints</key>
+				<array/>
+				<key>ShapeBorderH</key>
+				<integer>0</integer>
+				<key>ShapeBorderW</key>
+				<integer>0</integer>
+				<key>ShapePositionOffsetX</key>
+				<integer>0</integer>
+				<key>ShapePositionOffsetY</key>
+				<integer>0</integer>
+			</dict>
+			<key>TextureProperties</key>
+			<dict>
+				<key>Color</key>
+				<string>{{1, 1}, {1, 0}}</string>
+				<key>Frame</key>
+				<string>{{0, 55}, {37, 37}}</string>
+				<key>Frame-HD</key>
+				<string>{{0, 110}, {74, 74}}</string>
+				<key>FrameUV</key>
+				<string>{{0, 0.41666666}, {0.2846154, 0.69696969}}</string>
+				<key>HD_ImageSize</key>
+				<string>{260, 264}</string>
+				<key>Image</key>
+				<string>rider_bear.png</string>
+				<key>Image-HD</key>
+				<string>rider_bear-hd.png</string>
+				<key>ImageURL</key>
+				<string>/Volumes/Macintosh HD 2/Carl/android/workspace/MX Mayhem Lite/assets/rider_bear.png</string>
+				<key>ImageURL-HD</key>
+				<string>/Volumes/Macintosh HD 2/Carl/android/workspace/MX Mayhem Lite/assets/rider_bear-hd.png</string>
+				<key>Name</key>
+				<string>bike_tire_front_bear</string>
+				<key>Opacity</key>
+				<real>1</real>
+				<key>SD_ImageSize</key>
+				<string>{130, 132}</string>
+				<key>Scale</key>
+				<string>{1, 1}</string>
+				<key>ZOrder</key>
+				<integer>0</integer>
+			</dict>
+		</dict>
+		<dict>
+			<key>PhysicProperties</key>
+			<dict>
+				<key>AngularDamping</key>
+				<real>0.0</real>
+				<key>AngularVelocity</key>
+				<real>0.0</real>
+				<key>CanSleep</key>
+				<true/>
+				<key>Category</key>
+				<integer>1</integer>
+				<key>Density</key>
+				<real>0.20000000298023224</real>
+				<key>Fixtures</key>
+				<array/>
+				<key>Friction</key>
+				<real>0.20000000298023224</real>
+				<key>Group</key>
+				<integer>0</integer>
+				<key>IsBullet</key>
+				<false/>
+				<key>IsCircle</key>
+				<true/>
+				<key>IsFixedRot</key>
+				<false/>
+				<key>IsSensor</key>
+				<false/>
+				<key>LinearDamping</key>
+				<real>0.0</real>
+				<key>LinearVelocityX</key>
+				<real>0.0</real>
+				<key>LinearVelocityY</key>
+				<real>0.0</real>
+				<key>Mask</key>
+				<integer>65535</integer>
+				<key>PhysicType</key>
+				<integer>2</integer>
+				<key>Restitution</key>
+				<real>0.20000000298023224</real>
+				<key>SHHolesPoints</key>
+				<array/>
+				<key>SHShapePoints</key>
+				<array/>
+				<key>ShapeBorderH</key>
+				<integer>0</integer>
+				<key>ShapeBorderW</key>
+				<integer>0</integer>
+				<key>ShapePositionOffsetX</key>
+				<integer>0</integer>
+				<key>ShapePositionOffsetY</key>
+				<integer>0</integer>
+			</dict>
+			<key>TextureProperties</key>
+			<dict>
+				<key>Color</key>
+				<string>{{1, 1}, {1, 0}}</string>
+				<key>Frame</key>
+				<string>{{0, 94}, {37, 37}}</string>
+				<key>Frame-HD</key>
+				<string>{{0, 188}, {74, 74}}</string>
+				<key>FrameUV</key>
+				<string>{{0, 0.71212119}, {0.2846154, 0.99242425}}</string>
+				<key>HD_ImageSize</key>
+				<string>{260, 264}</string>
+				<key>Image</key>
+				<string>rider_bear.png</string>
+				<key>Image-HD</key>
+				<string>rider_bear-hd.png</string>
+				<key>ImageURL</key>
+				<string>/Volumes/Macintosh HD 2/Carl/android/workspace/MX Mayhem Lite/assets/rider_bear.png</string>
+				<key>ImageURL-HD</key>
+				<string>/Volumes/Macintosh HD 2/Carl/android/workspace/MX Mayhem Lite/assets/rider_bear-hd.png</string>
+				<key>Name</key>
+				<string>bike_tire_rear_bear</string>
+				<key>Opacity</key>
+				<real>1</real>
+				<key>SD_ImageSize</key>
+				<string>{130, 132}</string>
+				<key>Scale</key>
+				<string>{1, 1}</string>
+				<key>ZOrder</key>
+				<integer>0</integer>
+			</dict>
+		</dict>
+		<dict>
+			<key>PhysicProperties</key>
+			<dict>
+				<key>AngularDamping</key>
+				<real>0.0</real>
+				<key>AngularVelocity</key>
+				<real>0.0</real>
+				<key>CanSleep</key>
+				<true/>
+				<key>Category</key>
+				<integer>1</integer>
+				<key>Density</key>
+				<real>0.20000000298023224</real>
+				<key>Fixtures</key>
+				<array>
+					<array>
+						<string>{10.844074, -1.4388962}</string>
+						<string>{11.971039, 7.0566635}</string>
+						<string>{1.9150658, 15.378857}</string>
+						<string>{-2.8528557, 10.957691}</string>
+						<string>{-7.0139465, 5.9297028}</string>
+						<string>{-9.7880096, 0.38158417}</string>
+						<string>{-11.435104, -4.8197861}</string>
+						<string>{8.6768417, -7.5071564}</string>
+					</array>
+					<array>
+						<string>{1.9150658, 15.378857}</string>
+						<string>{11.971039, 7.0566635}</string>
+						<string>{9.8037987, 15.465542}</string>
+						<string>{2.0017548, 15.465542}</string>
+					</array>
+					<array>
+						<string>{-9.5279388, -13.488724}</string>
+						<string>{-5.1934662, -15.309204}</string>
+						<string>{2.0017548, -15.309204}</string>
+						<string>{5.2959518, -13.228661}</string>
+						<string>{8.6768417, -7.5071564}</string>
+						<string>{-11.435104, -4.8197861}</string>
+						<string>{-11.088348, -10.367905}</string>
+					</array>
+				</array>
+				<key>Friction</key>
+				<real>0.20000000298023224</real>
+				<key>Group</key>
+				<integer>-1</integer>
+				<key>IsBullet</key>
+				<false/>
+				<key>IsCircle</key>
+				<false/>
+				<key>IsFixedRot</key>
+				<false/>
+				<key>IsSensor</key>
+				<false/>
+				<key>LinearDamping</key>
+				<real>0.0</real>
+				<key>LinearVelocityX</key>
+				<real>0.0</real>
+				<key>LinearVelocityY</key>
+				<real>0.0</real>
+				<key>Mask</key>
+				<integer>65535</integer>
+				<key>PhysicType</key>
+				<integer>2</integer>
+				<key>Restitution</key>
+				<real>0.20000000298023224</real>
+				<key>SHHolesPoints</key>
+				<array/>
+				<key>SHShapePoints</key>
+				<array>
+					<string>{109.00351, 111.06892}</string>
+					<string>{124.6076, 111.06892}</string>
+					<string>{128.94208, 127.88667}</string>
+					<string>{126.68815, 144.87779}</string>
+					<string>{122.35368, 157.01431}</string>
+					<string>{115.5919, 168.45732}</string>
+					<string>{109.00351, 172.61841}</string>
+					<string>{94.613068, 172.61841}</string>
+					<string>{85.944122, 168.97745}</string>
+					<string>{82.823303, 162.73581}</string>
+					<string>{82.129791, 151.63957}</string>
+					<string>{85.423981, 141.23683}</string>
+					<string>{90.972107, 130.14059}</string>
+					<string>{99.294289, 120.08462}</string>
+					<string>{108.83013, 111.24229}</string>
+				</array>
+				<key>ShapeBorderH</key>
+				<integer>0</integer>
+				<key>ShapeBorderW</key>
+				<integer>0</integer>
+				<key>ShapePositionOffsetX</key>
+				<integer>0</integer>
+				<key>ShapePositionOffsetY</key>
+				<integer>0</integer>
+			</dict>
+			<key>TextureProperties</key>
+			<dict>
+				<key>Color</key>
+				<string>{{1, 1}, {1, 0}}</string>
+				<key>Frame</key>
+				<string>{{40, 55}, {25, 32}}</string>
+				<key>Frame-HD</key>
+				<string>{{80, 110}, {50, 64}}</string>
+				<key>FrameUV</key>
+				<string>{{0.30769232, 0.41666666}, {0.5, 0.65909094}}</string>
+				<key>HD_ImageSize</key>
+				<string>{260, 264}</string>
+				<key>Image</key>
+				<string>rider_bear.png</string>
+				<key>Image-HD</key>
+				<string>rider_bear-hd.png</string>
+				<key>ImageURL</key>
+				<string>/Volumes/Macintosh HD 2/Carl/android/workspace/MX Mayhem Lite/assets/rider_bear.png</string>
+				<key>ImageURL-HD</key>
+				<string>/Volumes/Macintosh HD 2/Carl/android/workspace/MX Mayhem Lite/assets/rider_bear-hd.png</string>
+				<key>Name</key>
+				<string>rider_torso_bear</string>
+				<key>Opacity</key>
+				<real>1</real>
+				<key>SD_ImageSize</key>
+				<string>{130, 132}</string>
+				<key>Scale</key>
+				<string>{1, 1}</string>
+				<key>ZOrder</key>
+				<integer>0</integer>
+			</dict>
+		</dict>
+		<dict>
+			<key>PhysicProperties</key>
+			<dict>
+				<key>AngularDamping</key>
+				<real>0.0</real>
+				<key>AngularVelocity</key>
+				<real>0.0</real>
+				<key>CanSleep</key>
+				<true/>
+				<key>Category</key>
+				<integer>1</integer>
+				<key>Density</key>
+				<real>0.20000000298023224</real>
+				<key>Fixtures</key>
+				<array>
+					<array>
+						<string>{8.804451, 9.7668209}</string>
+						<string>{9.2892456, 15.220688}</string>
+						<string>{6.7441025, 17.523432}</string>
+						<string>{2.6234055, 18.129417}</string>
+						<string>{2.381012, 18.129417}</string>
+						<string>{-2.2244797, 12.433156}</string>
+						<string>{-4.1636276, 6.1309099}</string>
+						<string>{7.9560699, 6.8580923}</string>
+					</array>
+					<array>
+						<string>{-4.5272217, 1.8890133}</string>
+						<string>{2.865799, -5.3828087}</string>
+						<string>{7.9560699, 6.8580923}</string>
+						<string>{-4.1636276, 6.1309099}</string>
+					</array>
+					<array>
+						<string>{2.6234055, -17.987305}</string>
+						<string>{7.2288895, -16.532936}</string>
+						<string>{6.1381226, -13.260616}</string>
+						<string>{2.865799, -9.8670998}</string>
+						<string>{1.0478439, -16.169346}</string>
+					</array>
+					<array>
+						<string>{1.0478439, -16.169346}</string>
+						<string>{2.865799, -9.8670998}</string>
+						<string>{2.865799, -5.3828087}</string>
+						<string>{-4.5272217, 1.8890133}</string>
+						<string>{-8.2843323, -9.0187206}</string>
+						<string>{-8.1631317, -12.897026}</string>
+					</array>
+				</array>
+				<key>Friction</key>
+				<real>0.20000000298023224</real>
+				<key>Group</key>
+				<integer>-1</integer>
+				<key>IsBullet</key>
+				<false/>
+				<key>IsCircle</key>
+				<false/>
+				<key>IsFixedRot</key>
+				<false/>
+				<key>IsSensor</key>
+				<false/>
+				<key>LinearDamping</key>
+				<real>0.0</real>
+				<key>LinearVelocityX</key>
+				<real>0.0</real>
+				<key>LinearVelocityY</key>
+				<real>0.0</real>
+				<key>Mask</key>
+				<integer>65535</integer>
+				<key>PhysicType</key>
+				<integer>2</integer>
+				<key>Restitution</key>
+				<real>0.20000000298023224</real>
+				<key>SHHolesPoints</key>
+				<array/>
+				<key>SHShapePoints</key>
+				<array>
+					<string>{239.76202, 1.2411652}</string>
+					<string>{230.55104, 12.633688}</string>
+					<string>{226.67274, 25.23818}</string>
+					<string>{225.94556, 33.721973}</string>
+					<string>{218.43134, 55.537441}</string>
+					<string>{218.67374, 63.294052}</string>
+					<string>{237.09569, 69.838692}</string>
+					<string>{240.24681, 73.474609}</string>
+					<string>{249.45778, 70.565872}</string>
+					<string>{247.27625, 64.021233}</string>
+					<string>{240.7316, 57.2342}</string>
+					<string>{240.7316, 48.265617}</string>
+					<string>{250.91214, 23.783815}</string>
+					<string>{252.6089, 17.966358}</string>
+					<string>{253.57849, 7.0586243}</string>
+					<string>{248.4882, 2.4531364}</string>
+					<string>{240.24681, 1.2411652}</string>
+				</array>
+				<key>ShapeBorderH</key>
+				<integer>0</integer>
+				<key>ShapeBorderW</key>
+				<integer>0</integer>
+				<key>ShapePositionOffsetX</key>
+				<integer>0</integer>
+				<key>ShapePositionOffsetY</key>
+				<integer>0</integer>
+			</dict>
+			<key>TextureProperties</key>
+			<dict>
+				<key>Color</key>
+				<string>{{1, 1}, {1, 0}}</string>
+				<key>Frame</key>
+				<string>{{108, 0}, {19, 37.5}}</string>
+				<key>Frame-HD</key>
+				<string>{{216, 0}, {38, 75}}</string>
+				<key>FrameUV</key>
+				<string>{{0.83076924, 0}, {0.97692305, 0.28409091}}</string>
+				<key>HD_ImageSize</key>
+				<string>{260, 264}</string>
+				<key>Image</key>
+				<string>rider_bear.png</string>
+				<key>Image-HD</key>
+				<string>rider_bear-hd.png</string>
+				<key>ImageURL</key>
+				<string>/Volumes/Macintosh HD 2/Carl/android/workspace/MX Mayhem Lite/assets/rider_bear.png</string>
+				<key>ImageURL-HD</key>
+				<string>/Volumes/Macintosh HD 2/Carl/android/workspace/MX Mayhem Lite/assets/rider_bear-hd.png</string>
+				<key>Name</key>
+				<string>rider_leg_lower_bear</string>
+				<key>Opacity</key>
+				<real>1</real>
+				<key>SD_ImageSize</key>
+				<string>{130, 132}</string>
+				<key>Scale</key>
+				<string>{1, 1}</string>
+				<key>ZOrder</key>
+				<integer>0</integer>
+			</dict>
+		</dict>
+		<dict>
+			<key>PhysicProperties</key>
+			<dict>
+				<key>AngularDamping</key>
+				<real>0.0</real>
+				<key>AngularVelocity</key>
+				<real>0.0</real>
+				<key>CanSleep</key>
+				<true/>
+				<key>Category</key>
+				<integer>1</integer>
+				<key>Density</key>
+				<real>0.20000000298023224</real>
+				<key>Fixtures</key>
+				<array>
+					<array>
+						<string>{11.264622, 3.1881027}</string>
+						<string>{11.612274, 5.0654373}</string>
+						<string>{5.6326256, 6.6646423}</string>
+						<string>{5.9107513, -1.4009247}</string>
+						<string>{9.6654167, -0.91421509}</string>
+					</array>
+					<array>
+						<string>{-11.193825, -2.3743591}</string>
+						<string>{-9.6641464, -6.198555}</string>
+						<string>{-1.3899841, -10.787582}</string>
+						<string>{5.9107513, -1.4009247}</string>
+						<string>{0.69593811, 10.002121}</string>
+						<string>{-3.6149673, 10.906021}</string>
+						<string>{-11.332886, 9.7935257}</string>
+						<string>{-11.471947, 6.3169861}</string>
+					</array>
+					<array>
+						<string>{-1.3899841, -10.787582}</string>
+						<string>{3.3381119, -10.370399}</string>
+						<string>{6.3974648, -8.4235382}</string>
+						<string>{6.3974648, -5.7118378}</string>
+						<string>{5.9107513, -1.4009247}</string>
+					</array>
+					<array>
+						<string>{-11.332886, 9.7935257}</string>
+						<string>{-3.6149673, 10.906021}</string>
+						<string>{-7.1610374, 12.783356}</string>
+						<string>{-10.011803, 12.088043}</string>
+					</array>
+					<array>
+						<string>{-9.5250854, -11.204773}</string>
+						<string>{-6.813385, -12.873505}</string>
+						<string>{-3.9626236, -12.873505}</string>
+						<string>{-1.5985756, -10.857117}</string>
+						<string>{-9.6641464, -6.198555}</string>
+					</array>
+					<array>
+						<string>{0.69593811, 10.002121}</string>
+						<string>{5.9107513, -1.4009247}</string>
+						<string>{5.6326256, 6.6646423}</string>
+					</array>
+				</array>
+				<key>Friction</key>
+				<real>0.20000000298023224</real>
+				<key>Group</key>
+				<integer>-1</integer>
+				<key>IsBullet</key>
+				<false/>
+				<key>IsCircle</key>
+				<false/>
+				<key>IsFixedRot</key>
+				<false/>
+				<key>IsSensor</key>
+				<false/>
+				<key>LinearDamping</key>
+				<real>0.0</real>
+				<key>LinearVelocityX</key>
+				<real>0.0</real>
+				<key>LinearVelocityY</key>
+				<real>0.0</real>
+				<key>Mask</key>
+				<integer>65535</integer>
+				<key>PhysicType</key>
+				<integer>2</integer>
+				<key>Restitution</key>
+				<real>0.20000000298023224</real>
+				<key>SHHolesPoints</key>
+				<array/>
+				<key>SHShapePoints</key>
+				<array>
+					<string>{101.22003, 226.57516}</string>
+					<string>{110.67622, 225.7408}</string>
+					<string>{116.79493, 221.84708}</string>
+					<string>{116.79493, 216.42368}</string>
+					<string>{115.8215, 207.80185}</string>
+					<string>{123.33083, 206.82843}</string>
+					<string>{126.52924, 198.62379}</string>
+					<string>{127.22455, 194.86913}</string>
+					<string>{115.26525, 191.67072}</string>
+					<string>{105.39188, 184.99576}</string>
+					<string>{96.770065, 183.18796}</string>
+					<string>{89.677925, 179.43329}</string>
+					<string>{83.976395, 180.82391}</string>
+					<string>{81.334229, 185.41295}</string>
+					<string>{81.056107, 192.36603}</string>
+					<string>{81.61235, 209.74872}</string>
+					<string>{84.671707, 217.39711}</string>
+					<string>{84.949829, 227.40955}</string>
+					<string>{90.37323, 230.74701}</string>
+					<string>{96.074753, 230.74701}</string>
+					<string>{100.80285, 226.71423}</string>
+				</array>
+				<key>ShapeBorderH</key>
+				<integer>0</integer>
+				<key>ShapeBorderW</key>
+				<integer>0</integer>
+				<key>ShapePositionOffsetX</key>
+				<integer>0</integer>
+				<key>ShapePositionOffsetY</key>
+				<integer>0</integer>
+			</dict>
+			<key>TextureProperties</key>
+			<dict>
+				<key>Color</key>
+				<string>{{1, 1}, {1, 0}}</string>
+				<key>Frame</key>
+				<string>{{40, 89}, {24, 27}}</string>
+				<key>Frame-HD</key>
+				<string>{{80, 178}, {48, 54}}</string>
+				<key>FrameUV</key>
+				<string>{{0.30769232, 0.67424244}, {0.49230769, 0.87878788}}</string>
+				<key>HD_ImageSize</key>
+				<string>{260, 264}</string>
+				<key>Image</key>
+				<string>rider_bear.png</string>
+				<key>Image-HD</key>
+				<string>rider_bear-hd.png</string>
+				<key>ImageURL</key>
+				<string>/Volumes/Macintosh HD 2/Carl/android/workspace/MX Mayhem Lite/assets/rider_bear.png</string>
+				<key>ImageURL-HD</key>
+				<string>/Volumes/Macintosh HD 2/Carl/android/workspace/MX Mayhem Lite/assets/rider_bear-hd.png</string>
+				<key>Name</key>
+				<string>rider_head_bear</string>
+				<key>Opacity</key>
+				<real>1</real>
+				<key>SD_ImageSize</key>
+				<string>{130, 132}</string>
+				<key>Scale</key>
+				<string>{1, 1}</string>
+				<key>ZOrder</key>
+				<integer>0</integer>
+			</dict>
+		</dict>
+		<dict>
+			<key>PhysicProperties</key>
+			<dict>
+				<key>AngularDamping</key>
+				<real>0.0</real>
+				<key>AngularVelocity</key>
+				<real>0.0</real>
+				<key>CanSleep</key>
+				<true/>
+				<key>Category</key>
+				<integer>1</integer>
+				<key>Density</key>
+				<real>0.20000000298023224</real>
+				<key>Fixtures</key>
+				<array>
+					<array>
+						<string>{-14.419014, -4.3382187}</string>
+						<string>{-12.148041, -4.6746597}</string>
+						<string>{-11.054611, 0.54016113}</string>
+						<string>{-15.091896, -1.310257}</string>
+					</array>
+					<array>
+						<string>{9.6364517, -2.4036865}</string>
+						<string>{15.103607, 0.11961365}</string>
+						<string>{14.935387, 2.5588036}</string>
+						<string>{12.327972, 5.8390961}</string>
+						<string>{8.3748016, 7.3530731}</string>
+						<string>{6.5243835, 5.7549858}</string>
+						<string>{6.356163, -0.13271332}</string>
+						<string>{6.6926041, -2.4878006}</string>
+					</array>
+					<array>
+						<string>{8.3748016, 7.3530731}</string>
+						<string>{12.327972, 5.8390961}</string>
+						<string>{11.991531, 9.6240463}</string>
+						<string>{8.5430222, 9.6240463}</string>
+					</array>
+					<array>
+						<string>{-12.148041, -4.6746597}</string>
+						<string>{-10.465843, -5.0111008}</string>
+						<string>{-4.8304749, -2.9083481}</string>
+						<string>{-4.6622543, 2.6429138}</string>
+						<string>{-5.0828018, 3.9886742}</string>
+						<string>{-7.1014404, 3.9886742}</string>
+						<string>{-9.6247406, 3.3998985}</string>
+						<string>{-11.054611, 0.54016113}</string>
+					</array>
+					<array>
+						<string>{-10.213516, -8.8801575}</string>
+						<string>{-8.3630905, -8.6278305}</string>
+						<string>{-5.7556839, -6.1886368}</string>
+						<string>{-4.8304749, -2.9083481}</string>
+						<string>{-10.465843, -5.0111008}</string>
+					</array>
+					<array>
+						<string>{-11.054611, 0.54016113}</string>
+						<string>{-9.6247406, 3.3998985}</string>
+						<string>{-11.222832, 2.9793549}</string>
+					</array>
+					<array>
+						<string>{6.5243835, 5.7549858}</string>
+						<string>{8.3748016, 7.3530731}</string>
+						<string>{6.944931, 7.1007462}</string>
+					</array>
+					<array>
+						<string>{6.356163, -0.13271332}</string>
+						<string>{6.5243835, 5.7549858}</string>
+						<string>{-4.6622543, 2.6429138}</string>
+						<string>{-4.8304749, -2.9083481}</string>
+					</array>
+				</array>
+				<key>Friction</key>
+				<real>0.20000000298023224</real>
+				<key>Group</key>
+				<integer>0</integer>
+				<key>IsBullet</key>
+				<false/>
+				<key>IsCircle</key>
+				<false/>
+				<key>IsFixedRot</key>
+				<false/>
+				<key>IsSensor</key>
+				<false/>
+				<key>LinearDamping</key>
+				<real>0.0</real>
+				<key>LinearVelocityX</key>
+				<real>0.0</real>
+				<key>LinearVelocityY</key>
+				<real>0.0</real>
+				<key>Mask</key>
+				<integer>65535</integer>
+				<key>PhysicType</key>
+				<integer>2</integer>
+				<key>Restitution</key>
+				<real>0.20000000298023224</real>
+				<key>SHHolesPoints</key>
+				<array/>
+				<key>SHShapePoints</key>
+				<array>
+					<string>{156.17549, 124.71417}</string>
+					<string>{178.54877, 118.49003}</string>
+					<string>{179.38986, 115.79851}</string>
+					<string>{182.2496, 115.29385}</string>
+					<string>{182.58604, 110.75191}</string>
+					<string>{189.48306, 110.75191}</string>
+					<string>{190.15594, 118.32181}</string>
+					<string>{195.37077, 124.88239}</string>
+					<string>{195.70721, 129.76077}</string>
+					<string>{184.7729, 134.80737}</string>
+					<string>{178.88521, 134.9756}</string>
+					<string>{178.21233, 130.26543}</string>
+					<string>{155.83905, 135.8167}</string>
+					<string>{153.98863, 142.37727}</string>
+					<string>{148.77382, 147.25566}</string>
+					<string>{145.07297, 147.76031}</string>
+					<string>{144.56831, 140.0222}</string>
+					<string>{141.20392, 139.34932}</string>
+					<string>{136.66197, 138.67644}</string>
+					<string>{135.31621, 132.62051}</string>
+					<string>{143.39078, 128.91968}</string>
+					<string>{143.05434, 124.04129}</string>
+					<string>{146.25052, 123.2002}</string>
+					<string>{151.29712, 122.02265}</string>
+					<string>{155.3344, 122.02265}</string>
+					<string>{156.68016, 124.88239}</string>
+				</array>
+				<key>ShapeBorderH</key>
+				<integer>0</integer>
+				<key>ShapeBorderW</key>
+				<integer>0</integer>
+				<key>ShapePositionOffsetX</key>
+				<integer>0</integer>
+				<key>ShapePositionOffsetY</key>
+				<integer>0</integer>
+			</dict>
+			<key>TextureProperties</key>
+			<dict>
+				<key>Color</key>
+				<string>{{1, 1}, {1, 0}}</string>
+				<key>Frame</key>
+				<string>{{67, 55}, {31.5, 20}}</string>
+				<key>Frame-HD</key>
+				<string>{{134, 110}, {63, 40}}</string>
+				<key>FrameUV</key>
+				<string>{{0.51538461, 0.41666666}, {0.75769234, 0.56818181}}</string>
+				<key>HD_ImageSize</key>
+				<string>{260, 264}</string>
+				<key>Image</key>
+				<string>rider_bear.png</string>
+				<key>Image-HD</key>
+				<string>rider_bear-hd.png</string>
+				<key>ImageURL</key>
+				<string>/Volumes/Macintosh HD 2/Carl/android/workspace/MX Mayhem Lite/assets/rider_bear.png</string>
+				<key>ImageURL-HD</key>
+				<string>/Volumes/Macintosh HD 2/Carl/android/workspace/MX Mayhem Lite/assets/rider_bear-hd.png</string>
+				<key>Name</key>
+				<string>bike_shock_rear_bear</string>
+				<key>Opacity</key>
+				<real>1</real>
+				<key>SD_ImageSize</key>
+				<string>{130, 132}</string>
+				<key>Scale</key>
+				<string>{1, 1}</string>
+				<key>ZOrder</key>
+				<integer>0</integer>
+			</dict>
+		</dict>
+		<dict>
+			<key>PhysicProperties</key>
+			<dict>
+				<key>AngularDamping</key>
+				<real>0.0</real>
+				<key>AngularVelocity</key>
+				<real>0.0</real>
+				<key>CanSleep</key>
+				<true/>
+				<key>Category</key>
+				<integer>1</integer>
+				<key>Density</key>
+				<real>0.20000000298023224</real>
+				<key>Fixtures</key>
+				<array>
+					<array>
+						<string>{13.842209, -5.839035}</string>
+						<string>{14.497658, -1.1572418}</string>
+						<string>{11.126762, 2.4945602}</string>
+						<string>{6.351326, 5.1163712}</string>
+						<string>{1.482254, 7.0827255}</string>
+						<string>{0.639534, -7.0563049}</string>
+						<string>{6.4449615, -9.4908447}</string>
+						<string>{10.939491, -9.3972015}</string>
+					</array>
+					<array>
+						<string>{-14.716766, -1.4381485}</string>
+						<string>{-10.971329, -5.3708572}</string>
+						<string>{-6.1022568, -7.1499405}</string>
+						<string>{-4.3231735, 8.9554443}</string>
+						<string>{-10.784058, 8.8618088}</string>
+						<string>{-13.405861, 7.6445389}</string>
+						<string>{-14.716766, 5.1163712}</string>
+					</array>
+					<array>
+						<string>{-6.1022568, -7.1499405}</string>
+						<string>{0.639534, -7.0563049}</string>
+						<string>{1.482254, 7.0827255}</string>
+						<string>{-4.3231735, 8.9554443}</string>
+					</array>
+				</array>
+				<key>Friction</key>
+				<real>0.20000000298023224</real>
+				<key>Group</key>
+				<integer>-1</integer>
+				<key>IsBullet</key>
+				<false/>
+				<key>IsCircle</key>
+				<false/>
+				<key>IsFixedRot</key>
+				<false/>
+				<key>IsSensor</key>
+				<false/>
+				<key>LinearDamping</key>
+				<real>0.0</real>
+				<key>LinearVelocityX</key>
+				<real>0.0</real>
+				<key>LinearVelocityY</key>
+				<real>0.0</real>
+				<key>Mask</key>
+				<integer>65535</integer>
+				<key>PhysicType</key>
+				<integer>2</integer>
+				<key>Restitution</key>
+				<real>0.20000000298023224</real>
+				<key>SHHolesPoints</key>
+				<array/>
+				<key>SHShapePoints</key>
+				<array>
+					<string>{135.06647, 164.26726}</string>
+					<string>{135.06647, 177.3763}</string>
+					<string>{142.55734, 185.24171}</string>
+					<string>{152.29549, 188.79988}</string>
+					<string>{165.77907, 188.61261}</string>
+					<string>{177.38992, 193.48169}</string>
+					<string>{186.37898, 193.2944}</string>
+					<string>{192.18442, 186.17807}</string>
+					<string>{193.49532, 176.81448}</string>
+					<string>{186.75352, 169.51088}</string>
+					<string>{177.20265, 164.26726}</string>
+					<string>{167.46451, 160.33455}</string>
+					<string>{155.85365, 156.58911}</string>
+					<string>{142.93188, 156.77638}</string>
+					<string>{137.68828, 159.21092}</string>
+					<string>{135.25374, 163.89272}</string>
+				</array>
+				<key>ShapeBorderH</key>
+				<integer>0</integer>
+				<key>ShapeBorderW</key>
+				<integer>0</integer>
+				<key>ShapePositionOffsetX</key>
+				<integer>0</integer>
+				<key>ShapePositionOffsetY</key>
+				<integer>0</integer>
+			</dict>
+			<key>TextureProperties</key>
+			<dict>
+				<key>Color</key>
+				<string>{{1, 1}, {1, 0}}</string>
+				<key>Frame</key>
+				<string>{{67, 77}, {30.5, 20.5}}</string>
+				<key>Frame-HD</key>
+				<string>{{134, 154}, {61, 41}}</string>
+				<key>FrameUV</key>
+				<string>{{0.51538461, 0.58333331}, {0.75, 0.73863637}}</string>
+				<key>HD_ImageSize</key>
+				<string>{260, 264}</string>
+				<key>Image</key>
+				<string>rider_bear.png</string>
+				<key>Image-HD</key>
+				<string>rider_bear-hd.png</string>
+				<key>ImageURL</key>
+				<string>/Volumes/Macintosh HD 2/Carl/android/workspace/MX Mayhem Lite/assets/rider_bear.png</string>
+				<key>ImageURL-HD</key>
+				<string>/Volumes/Macintosh HD 2/Carl/android/workspace/MX Mayhem Lite/assets/rider_bear-hd.png</string>
+				<key>Name</key>
+				<string>rider_leg_upper_bear</string>
+				<key>Opacity</key>
+				<real>1</real>
+				<key>SD_ImageSize</key>
+				<string>{130, 132}</string>
+				<key>Scale</key>
+				<string>{1, 1}</string>
+				<key>ZOrder</key>
+				<integer>0</integer>
+			</dict>
+		</dict>
+		<dict>
+			<key>PhysicProperties</key>
+			<dict>
+				<key>AngularDamping</key>
+				<real>0.0</real>
+				<key>AngularVelocity</key>
+				<real>0.0</real>
+				<key>CanSleep</key>
+				<true/>
+				<key>Category</key>
+				<integer>1</integer>
+				<key>Density</key>
+				<real>0.20000000298023224</real>
+				<key>Fixtures</key>
+				<array/>
+				<key>Friction</key>
+				<real>0.20000000298023224</real>
+				<key>Group</key>
+				<integer>0</integer>
+				<key>IsBullet</key>
+				<false/>
+				<key>IsCircle</key>
+				<false/>
+				<key>IsFixedRot</key>
+				<false/>
+				<key>IsSensor</key>
+				<false/>
+				<key>LinearDamping</key>
+				<real>0.0</real>
+				<key>LinearVelocityX</key>
+				<real>0.0</real>
+				<key>LinearVelocityY</key>
+				<real>0.0</real>
+				<key>Mask</key>
+				<integer>65535</integer>
+				<key>PhysicType</key>
+				<integer>2</integer>
+				<key>Restitution</key>
+				<real>0.20000000298023224</real>
+				<key>SHHolesPoints</key>
+				<array/>
+				<key>SHShapePoints</key>
+				<array/>
+				<key>ShapeBorderH</key>
+				<integer>0</integer>
+				<key>ShapeBorderW</key>
+				<integer>0</integer>
+				<key>ShapePositionOffsetX</key>
+				<integer>0</integer>
+				<key>ShapePositionOffsetY</key>
+				<integer>0</integer>
+			</dict>
+			<key>TextureProperties</key>
+			<dict>
+				<key>Color</key>
+				<string>{{1, 1}, {1, 0}}</string>
+				<key>Frame</key>
+				<string>{{100, 77}, {28.5, 15.5}}</string>
+				<key>Frame-HD</key>
+				<string>{{200, 154}, {57, 31}}</string>
+				<key>FrameUV</key>
+				<string>{{0.76923078, 0.58333331}, {0.98846155, 0.70075756}}</string>
+				<key>HD_ImageSize</key>
+				<string>{260, 264}</string>
+				<key>Image</key>
+				<string>rider_bear.png</string>
+				<key>Image-HD</key>
+				<string>rider_bear-hd.png</string>
+				<key>ImageURL</key>
+				<string>/Volumes/Macintosh HD 2/Carl/android/workspace/MX Mayhem Lite/assets/rider_bear.png</string>
+				<key>ImageURL-HD</key>
+				<string>/Volumes/Macintosh HD 2/Carl/android/workspace/MX Mayhem Lite/assets/rider_bear-hd.png</string>
+				<key>Name</key>
+				<string>bike_chain</string>
+				<key>Opacity</key>
+				<real>1</real>
+				<key>SD_ImageSize</key>
+				<string>{130, 132}</string>
+				<key>Scale</key>
+				<string>{1, 1}</string>
+				<key>ZOrder</key>
+				<integer>0</integer>
+			</dict>
+		</dict>
+		<dict>
+			<key>PhysicProperties</key>
+			<dict>
+				<key>AngularDamping</key>
+				<real>0.0</real>
+				<key>AngularVelocity</key>
+				<real>0.0</real>
+				<key>CanSleep</key>
+				<true/>
+				<key>Category</key>
+				<integer>1</integer>
+				<key>Density</key>
+				<real>0.20000000298023224</real>
+				<key>Fixtures</key>
+				<array>
+					<array>
+						<string>{-14.790047, -1.9352493}</string>
+						<string>{-14.936958, -3.5512695}</string>
+						<string>{-13.027122, -4.7265472}</string>
+						<string>{-9.0605469, -4.0654526}</string>
+						<string>{-6.1223373, 4.6022568}</string>
+						<string>{-10.382736, 4.3818893}</string>
+						<string>{-12.659851, 2.8393326}</string>
+						<string>{-13.761673, 0.48876953}</string>
+					</array>
+					<array>
+						<string>{14.445099, -1.2006989}</string>
+						<string>{14.885834, 1.5905914}</string>
+						<string>{14.004372, -0.68651581}</string>
+					</array>
+					<array>
+						<string>{14.004372, -0.68651581}</string>
+						<string>{14.885834, 1.5905914}</string>
+						<string>{12.682175, 3.3535156}</string>
+						<string>{12.167992, 0.63568115}</string>
+					</array>
+					<array>
+						<string>{10.772346, 0.41531372}</string>
+						<string>{12.682175, 3.3535156}</string>
+						<string>{8.6421432, 3.3535156}</string>
+						<string>{6.1446686, 2.7658768}</string>
+						<string>{0.85590363, -2.8167114}</string>
+						<string>{8.1279602, -1.7148895}</string>
+					</array>
+					<array>
+						<string>{-9.0605469, -4.0654526}</string>
+						<string>{-4.8736038, -3.6247177}</string>
+						<string>{0.85590363, -2.8167114}</string>
+						<string>{6.1446686, 2.7658768}</string>
+						<string>{-6.1223373, 4.6022568}</string>
+					</array>
+					<array>
+						<string>{-9.0605469, -4.0654526}</string>
+						<string>{-6.1223373, 4.6022568}</string>
+						<string>{-13.027122, -4.7265472}</string>
+					</array>
+					<array>
+						<string>{-6.1223373, 4.6022568}</string>
+						<string>{10.772346, 0.41531372}</string>
+						<string>{8.6421432, 3.3535156}</string>
+					</array>
+					<array>
+						<string>{12.167992, 0.63568115}</string>
+						<string>{12.682175, 3.3535156}</string>
+						<string>{10.772346, 0.41531372}</string>
+					</array>
+				</array>
+				<key>Friction</key>
+				<real>0.20000000298023224</real>
+				<key>Group</key>
+				<integer>-1</integer>
+				<key>IsBullet</key>
+				<false/>
+				<key>IsCircle</key>
+				<false/>
+				<key>IsFixedRot</key>
+				<false/>
+				<key>IsSensor</key>
+				<false/>
+				<key>LinearDamping</key>
+				<real>0.0</real>
+				<key>LinearVelocityX</key>
+				<real>0.0</real>
+				<key>LinearVelocityY</key>
+				<real>0.0</real>
+				<key>Mask</key>
+				<integer>65535</integer>
+				<key>PhysicType</key>
+				<integer>2</integer>
+				<key>Restitution</key>
+				<real>0.20000000298023224</real>
+				<key>SHHolesPoints</key>
+				<array/>
+				<key>SHShapePoints</key>
+				<array>
+					<string>{135.62608, 217.60254}</string>
+					<string>{139.44576, 219.95309}</string>
+					<string>{147.37891, 218.63091}</string>
+					<string>{155.75279, 217.74944}</string>
+					<string>{167.21181, 216.13342}</string>
+					<string>{181.75592, 213.92978}</string>
+					<string>{187.04469, 209.66937}</string>
+					<string>{189.83598, 209.22864}</string>
+					<string>{193.50874, 211.87303}</string>
+					<string>{194.3902, 212.9014}</string>
+					<string>{195.27167, 207.31882}</string>
+					<string>{190.86435, 203.79297}</string>
+					<string>{182.78429, 203.79297}</string>
+					<string>{177.78934, 204.96825}</string>
+					<string>{164.86124, 202.9115}</string>
+					<string>{153.25533, 201.29549}</string>
+					<string>{144.73453, 201.73622}</string>
+					<string>{140.1803, 204.82133}</string>
+					<string>{137.97665, 209.52246}</string>
+					<string>{135.91991, 214.3705}</string>
+					<string>{135.47917, 218.04326}</string>
+				</array>
+				<key>ShapeBorderH</key>
+				<integer>0</integer>
+				<key>ShapeBorderW</key>
+				<integer>0</integer>
+				<key>ShapePositionOffsetX</key>
+				<integer>0</integer>
+				<key>ShapePositionOffsetY</key>
+				<integer>0</integer>
+			</dict>
+			<key>TextureProperties</key>
+			<dict>
+				<key>Color</key>
+				<string>{{1, 1}, {1, 0}}</string>
+				<key>Frame</key>
+				<string>{{67, 100}, {31.5, 10.5}}</string>
+				<key>Frame-HD</key>
+				<string>{{134, 200}, {63, 21}}</string>
+				<key>FrameUV</key>
+				<string>{{0.51538461, 0.75757575}, {0.75769234, 0.83712119}}</string>
+				<key>HD_ImageSize</key>
+				<string>{260, 264}</string>
+				<key>Image</key>
+				<string>rider_bear.png</string>
+				<key>Image-HD</key>
+				<string>rider_bear-hd.png</string>
+				<key>ImageURL</key>
+				<string>/Volumes/Macintosh HD 2/Carl/android/workspace/MX Mayhem Lite/assets/rider_bear.png</string>
+				<key>ImageURL-HD</key>
+				<string>/Volumes/Macintosh HD 2/Carl/android/workspace/MX Mayhem Lite/assets/rider_bear-hd.png</string>
+				<key>Name</key>
+				<string>rider_arm_lower_bear</string>
+				<key>Opacity</key>
+				<real>1</real>
+				<key>SD_ImageSize</key>
+				<string>{130, 132}</string>
+				<key>Scale</key>
+				<string>{1, 1}</string>
+				<key>ZOrder</key>
+				<integer>0</integer>
+			</dict>
+		</dict>
+		<dict>
+			<key>PhysicProperties</key>
+			<dict>
+				<key>AngularDamping</key>
+				<real>0.0</real>
+				<key>AngularVelocity</key>
+				<real>0.0</real>
+				<key>CanSleep</key>
+				<true/>
+				<key>Category</key>
+				<integer>1</integer>
+				<key>Density</key>
+				<real>0.20000000298023224</real>
+				<key>Fixtures</key>
+				<array>
+					<array>
+						<string>{-6.0163422, 0.93848419}</string>
+						<string>{-2.9981461, -4.5841827}</string>
+						<string>{3.5519943, -6.3180389}</string>
+						<string>{-5.6310425, 11.98381}</string>
+						<string>{-5.8236923, 11.98381}</string>
+					</array>
+					<array>
+						<string>{3.5519943, -6.3180389}</string>
+						<string>{0.53379059, -9.7215424}</string>
+						<string>{1.8823471, -10.106842}</string>
+						<string>{6.0564575, -9.4646759}</string>
+						<string>{5.7353668, -6.4464722}</string>
+					</array>
+					<array>
+						<string>{0.53379059, -9.7215424}</string>
+						<string>{3.5519943, -6.3180389}</string>
+						<string>{-2.9981461, -4.5841827}</string>
+						<string>{-4.3467026, -5.4832153}</string>
+						<string>{-5.4383926, -8.8225021}</string>
+					</array>
+					<array>
+						<string>{-3.4476624, -11.904922}</string>
+						<string>{-0.94319916, -11.648056}</string>
+						<string>{0.53379059, -9.7215424}</string>
+						<string>{-5.4383926, -8.8225021}</string>
+					</array>
+				</array>
+				<key>Friction</key>
+				<real>0.20000000298023224</real>
+				<key>Group</key>
+				<integer>0</integer>
+				<key>IsBullet</key>
+				<false/>
+				<key>IsCircle</key>
+				<false/>
+				<key>IsFixedRot</key>
+				<false/>
+				<key>IsSensor</key>
+				<false/>
+				<key>LinearDamping</key>
+				<real>0.0</real>
+				<key>LinearVelocityX</key>
+				<real>0.0</real>
+				<key>LinearVelocityY</key>
+				<real>0.0</real>
+				<key>Mask</key>
+				<integer>65535</integer>
+				<key>PhysicType</key>
+				<integer>2</integer>
+				<key>Restitution</key>
+				<real>0.20000000298023224</real>
+				<key>SHHolesPoints</key>
+				<array/>
+				<key>SHShapePoints</key>
+				<array>
+					<string>{203.73792, 201.03238}</string>
+					<string>{222.10399, 237.63608}</string>
+					<string>{226.47073, 237.89294}</string>
+					<string>{227.11292, 243.92935}</string>
+					<string>{218.76469, 245.21368}</string>
+					<string>{216.06758, 244.44308}</string>
+					<string>{213.1136, 248.29611}</string>
+					<string>{208.10468, 248.80984}</string>
+					<string>{204.12321, 242.645}</string>
+					<string>{206.30659, 235.96643}</string>
+					<string>{209.00371, 234.16837}</string>
+					<string>{202.96732, 223.12303}</string>
+					<string>{203.35262, 201.03238}</string>
+				</array>
+				<key>ShapeBorderH</key>
+				<integer>0</integer>
+				<key>ShapeBorderW</key>
+				<integer>0</integer>
+				<key>ShapePositionOffsetX</key>
+				<integer>0</integer>
+				<key>ShapePositionOffsetY</key>
+				<integer>0</integer>
+			</dict>
+			<key>TextureProperties</key>
+			<dict>
+				<key>Color</key>
+				<string>{{1, 1}, {1, 0}}</string>
+				<key>Frame</key>
+				<string>{{101, 100}, {13, 25}}</string>
+				<key>Frame-HD</key>
+				<string>{{202, 200}, {26, 50}}</string>
+				<key>FrameUV</key>
+				<string>{{0.77692306, 0.75757575}, {0.87692308, 0.94696969}}</string>
+				<key>HD_ImageSize</key>
+				<string>{260, 264}</string>
+				<key>Image</key>
+				<string>rider_bear.png</string>
+				<key>Image-HD</key>
+				<string>rider_bear-hd.png</string>
+				<key>ImageURL</key>
+				<string>/Volumes/Macintosh HD 2/Carl/android/workspace/MX Mayhem Lite/assets/rider_bear.png</string>
+				<key>ImageURL-HD</key>
+				<string>/Volumes/Macintosh HD 2/Carl/android/workspace/MX Mayhem Lite/assets/rider_bear-hd.png</string>
+				<key>Name</key>
+				<string>bike_shock_front_bear</string>
+				<key>Opacity</key>
+				<real>1</real>
+				<key>SD_ImageSize</key>
+				<string>{130, 132}</string>
+				<key>Scale</key>
+				<string>{1, 1}</string>
+				<key>ZOrder</key>
+				<integer>0</integer>
+			</dict>
+		</dict>
+		<dict>
+			<key>PhysicProperties</key>
+			<dict>
+				<key>AngularDamping</key>
+				<real>0.0</real>
+				<key>AngularVelocity</key>
+				<real>0.0</real>
+				<key>CanSleep</key>
+				<true/>
+				<key>Category</key>
+				<integer>1</integer>
+				<key>Density</key>
+				<real>0.20000000298023224</real>
+				<key>Fixtures</key>
+				<array/>
+				<key>Friction</key>
+				<real>0.20000000298023224</real>
+				<key>Group</key>
+				<integer>-1</integer>
+				<key>IsBullet</key>
+				<false/>
+				<key>IsCircle</key>
+				<false/>
+				<key>IsFixedRot</key>
+				<false/>
+				<key>IsSensor</key>
+				<false/>
+				<key>LinearDamping</key>
+				<real>0.0</real>
+				<key>LinearVelocityX</key>
+				<real>0.0</real>
+				<key>LinearVelocityY</key>
+				<real>0.0</real>
+				<key>Mask</key>
+				<integer>65535</integer>
+				<key>PhysicType</key>
+				<integer>2</integer>
+				<key>Restitution</key>
+				<real>0.20000000298023224</real>
+				<key>SHHolesPoints</key>
+				<array/>
+				<key>SHShapePoints</key>
+				<array/>
+				<key>ShapeBorderH</key>
+				<integer>0</integer>
+				<key>ShapeBorderW</key>
+				<integer>0</integer>
+				<key>ShapePositionOffsetX</key>
+				<integer>0</integer>
+				<key>ShapePositionOffsetY</key>
+				<integer>0</integer>
+			</dict>
+			<key>TextureProperties</key>
+			<dict>
+				<key>Color</key>
+				<string>{{1, 1}, {1, 0}}</string>
+				<key>Frame</key>
+				<string>{{117, 100}, {9.5, 30.5}}</string>
+				<key>Frame-HD</key>
+				<string>{{234, 200}, {19, 61}}</string>
+				<key>FrameUV</key>
+				<string>{{0.89999998, 0.75757575}, {0.97307694, 0.98863637}}</string>
+				<key>HD_ImageSize</key>
+				<string>{260, 264}</string>
+				<key>Image</key>
+				<string>rider_bear.png</string>
+				<key>Image-HD</key>
+				<string>rider_bear-hd.png</string>
+				<key>ImageURL</key>
+				<string>/Volumes/Macintosh HD 2/Carl/android/workspace/MX Mayhem Lite/assets/rider_bear.png</string>
+				<key>ImageURL-HD</key>
+				<string>/Volumes/Macintosh HD 2/Carl/android/workspace/MX Mayhem Lite/assets/rider_bear-hd.png</string>
+				<key>Name</key>
+				<string>bike_brakeline</string>
+				<key>Opacity</key>
+				<real>1</real>
+				<key>SD_ImageSize</key>
+				<string>{130, 132}</string>
+				<key>Scale</key>
+				<string>{1, 1}</string>
+				<key>ZOrder</key>
+				<integer>0</integer>
+			</dict>
+		</dict>
+		<dict>
+			<key>PhysicProperties</key>
+			<dict>
+				<key>AngularDamping</key>
+				<real>0.0</real>
+				<key>AngularVelocity</key>
+				<real>0.0</real>
+				<key>CanSleep</key>
+				<true/>
+				<key>Category</key>
+				<integer>1</integer>
+				<key>Density</key>
+				<real>0.20000000298023224</real>
+				<key>Fixtures</key>
+				<array>
+					<array>
+						<string>{-0.63990021, -8.3549347}</string>
+						<string>{3.6570663, -8.3549347}</string>
+						<string>{5.6981201, -5.9916}</string>
+						<string>{5.5906982, -1.6946335}</string>
+						<string>{4.731308, 2.6023293}</string>
+						<string>{-5.9036789, 2.9245987}</string>
+						<string>{-5.4739838, -1.2649384}</string>
+						<string>{-3.7552032, -5.7767487}</string>
+					</array>
+					<array>
+						<string>{-5.9036789, 2.9245987}</string>
+						<string>{4.731308, 2.6023293}</string>
+						<string>{2.4754028, 6.7918701}</string>
+						<string>{0.97145844, 8.4032288}</string>
+						<string>{-3.8626251, 7.5438385}</string>
+						<string>{-3.970047, 7.4364166}</string>
+					</array>
+				</array>
+				<key>Friction</key>
+				<real>0.20000000298023224</real>
+				<key>Group</key>
+				<integer>-1</integer>
+				<key>IsBullet</key>
+				<false/>
+				<key>IsCircle</key>
+				<false/>
+				<key>IsFixedRot</key>
+				<false/>
+				<key>IsSensor</key>
+				<false/>
+				<key>LinearDamping</key>
+				<real>0.0</real>
+				<key>LinearVelocityX</key>
+				<real>0.0</real>
+				<key>LinearVelocityY</key>
+				<real>0.0</real>
+				<key>Mask</key>
+				<integer>65535</integer>
+				<key>PhysicType</key>
+				<integer>2</integer>
+				<key>Restitution</key>
+				<real>0.20000000298023224</real>
+				<key>SHHolesPoints</key>
+				<array/>
+				<key>SHShapePoints</key>
+				<array>
+					<string>{206.55991, 113.12717}</string>
+					<string>{202.69264, 122.1508}</string>
+					<string>{203.55203, 130.52988}</string>
+					<string>{206.98959, 139.5535}</string>
+					<string>{213.2202, 144.70987}</string>
+					<string>{221.81413, 144.70987}</string>
+					<string>{225.89624, 139.9832}</string>
+					<string>{225.6814, 131.38927}</string>
+					<string>{223.96262, 122.79534}</string>
+					<string>{219.45081, 114.41626}</string>
+					<string>{216.44292, 111.19354}</string>
+					<string>{206.77475, 112.91232}</string>
+				</array>
+				<key>ShapeBorderH</key>
+				<integer>0</integer>
+				<key>ShapeBorderW</key>
+				<integer>0</integer>
+				<key>ShapePositionOffsetX</key>
+				<integer>0</integer>
+				<key>ShapePositionOffsetY</key>
+				<integer>0</integer>
+			</dict>
+			<key>TextureProperties</key>
+			<dict>
+				<key>Color</key>
+				<string>{{1, 1}, {1, 0}}</string>
+				<key>Frame</key>
+				<string>{{101, 55}, {12.5, 18}}</string>
+				<key>Frame-HD</key>
+				<string>{{202, 110}, {25, 36}}</string>
+				<key>FrameUV</key>
+				<string>{{0.77692306, 0.41666666}, {0.87307692, 0.55303031}}</string>
+				<key>HD_ImageSize</key>
+				<string>{260, 264}</string>
+				<key>Image</key>
+				<string>rider_bear.png</string>
+				<key>Image-HD</key>
+				<string>rider_bear-hd.png</string>
+				<key>ImageURL</key>
+				<string>/Volumes/Macintosh HD 2/Carl/android/workspace/MX Mayhem Lite/assets/rider_bear.png</string>
+				<key>ImageURL-HD</key>
+				<string>/Volumes/Macintosh HD 2/Carl/android/workspace/MX Mayhem Lite/assets/rider_bear-hd.png</string>
+				<key>Name</key>
+				<string>rider_arm_upper_bear</string>
+				<key>Opacity</key>
+				<real>1</real>
+				<key>SD_ImageSize</key>
+				<string>{130, 132}</string>
+				<key>Scale</key>
+				<string>{1, 1}</string>
+				<key>ZOrder</key>
+				<integer>0</integer>
+			</dict>
+		</dict>
+	</array>
+	<key>ScenePreference</key>
+	<dict>
+		<key>BackgroundColor</key>
+		<string>{{0.89399999, 0.89399999}, {0.89399999, 1}}</string>
+		<key>GridSize</key>
+		<integer>32</integer>
+	</dict>
+	<key>Version</key>
+	<string>1.7.4</string>
+</dict>
+</plist>
