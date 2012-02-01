@@ -1,0 +1,2904 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>ANIMS_INFO</key>
+	<array/>
+	<key>Author</key>
+	<string>Bogdan Vladu</string>
+	<key>BEZIER_INFO</key>
+	<array/>
+	<key>CreatedWith</key>
+	<string>LevelHelper</string>
+	<key>Gravity</key>
+	<string>{0, -10}</string>
+	<key>JOINTS_INFO</key>
+	<array>
+		<dict>
+			<key>AnchorA</key>
+			<string>{0, 0}</string>
+			<key>AnchorB</key>
+			<string>{0, 0}</string>
+			<key>CenterOfMass</key>
+			<false/>
+			<key>CollideConnected</key>
+			<false/>
+			<key>EnableLimit</key>
+			<false/>
+			<key>EnableMotor</key>
+			<false/>
+			<key>LHAnchorA</key>
+			<string>{0, 0}</string>
+			<key>LHAnchorB</key>
+			<string>{0, 0}</string>
+			<key>LowerAngle</key>
+			<real>0.0</real>
+			<key>MaxTorque</key>
+			<real>0.0</real>
+			<key>MotorSpeed</key>
+			<real>0.0</real>
+			<key>ObjectA</key>
+			<string>bike_tire_rear_bear</string>
+			<key>ObjectB</key>
+			<string>bike_shock_rear_bear</string>
+			<key>PointRelativeness</key>
+			<integer>0</integer>
+			<key>RefAngle</key>
+			<real>0.0</real>
+			<key>Tag</key>
+			<integer>0</integer>
+			<key>TagName</key>
+			<string>DEFAULT</string>
+			<key>Type</key>
+			<integer>1</integer>
+			<key>UniqueName</key>
+			<string>Untitled_Joint_1</string>
+			<key>UpperAngle</key>
+			<real>0.0</real>
+		</dict>
+		<dict>
+			<key>AnchorA</key>
+			<string>{3.1777775883674622, 8.3333332091569901}</string>
+			<key>AnchorB</key>
+			<string>{0, 0}</string>
+			<key>CenterOfMass</key>
+			<false/>
+			<key>CollideConnected</key>
+			<false/>
+			<key>EnableLimit</key>
+			<false/>
+			<key>EnableMotor</key>
+			<false/>
+			<key>LHAnchorA</key>
+			<string>{3.1777775883674622, -8.3333332091569901}</string>
+			<key>LHAnchorB</key>
+			<string>{0, 0}</string>
+			<key>LowerAngle</key>
+			<real>0.0</real>
+			<key>MaxTorque</key>
+			<real>0.0</real>
+			<key>MotorSpeed</key>
+			<real>0.0</real>
+			<key>ObjectA</key>
+			<string>bike_shock_front_bear</string>
+			<key>ObjectB</key>
+			<string>bike_tire_front_bear</string>
+			<key>PointRelativeness</key>
+			<integer>0</integer>
+			<key>RefAngle</key>
+			<real>0.0</real>
+			<key>Tag</key>
+			<integer>0</integer>
+			<key>TagName</key>
+			<string>DEFAULT</string>
+			<key>Type</key>
+			<integer>1</integer>
+			<key>UniqueName</key>
+			<string>Untitled_Joint_2</string>
+			<key>UpperAngle</key>
+			<real>0.0</real>
+		</dict>
+		<dict>
+			<key>AnchorA</key>
+			<string>{6.1111107468605042, -7.8222217559814453}</string>
+			<key>AnchorB</key>
+			<string>{-1.111111044883728, -5.1999996900558472}</string>
+			<key>CenterOfMass</key>
+			<false/>
+			<key>CollideConnected</key>
+			<false/>
+			<key>Damping</key>
+			<real>0.0</real>
+			<key>Frequency</key>
+			<real>0.0</real>
+			<key>LHAnchorA</key>
+			<string>{6.1111107468605042, 7.8222217559814453}</string>
+			<key>LHAnchorB</key>
+			<string>{-1.111111044883728, 5.1999996900558472}</string>
+			<key>ObjectA</key>
+			<string>rider_torso_bear</string>
+			<key>ObjectB</key>
+			<string>rider_arm_upper_bear</string>
+			<key>PointRelativeness</key>
+			<integer>0</integer>
+			<key>Tag</key>
+			<integer>0</integer>
+			<key>TagName</key>
+			<string>DEFAULT</string>
+			<key>Type</key>
+			<integer>0</integer>
+			<key>UniqueName</key>
+			<string>upper_arm_body1</string>
+		</dict>
+		<dict>
+			<key>AnchorA</key>
+			<string>{1.38888880610466, 3.9999997615814209}</string>
+			<key>AnchorB</key>
+			<string>{-13.649999890476465, -0.23333331942558289}</string>
+			<key>CenterOfMass</key>
+			<false/>
+			<key>CollideConnected</key>
+			<false/>
+			<key>Damping</key>
+			<real>0.0</real>
+			<key>Frequency</key>
+			<real>0.0</real>
+			<key>LHAnchorA</key>
+			<string>{1.38888880610466, -3.9999997615814209}</string>
+			<key>LHAnchorB</key>
+			<string>{-13.649999890476465, 0.23333331942558289}</string>
+			<key>ObjectA</key>
+			<string>rider_arm_upper_bear</string>
+			<key>ObjectB</key>
+			<string>rider_arm_lower_bear</string>
+			<key>PointRelativeness</key>
+			<integer>0</integer>
+			<key>Tag</key>
+			<integer>0</integer>
+			<key>TagName</key>
+			<string>DEFAULT</string>
+			<key>Type</key>
+			<integer>0</integer>
+			<key>UniqueName</key>
+			<string>upper_arm_lower_arm1</string>
+		</dict>
+		<dict>
+			<key>AnchorA</key>
+			<string>{-3.8888886570930481, 10.666666507720947}</string>
+			<key>AnchorB</key>
+			<string>{-8.1333328485488892, -3.1888886988162994}</string>
+			<key>CenterOfMass</key>
+			<false/>
+			<key>CollideConnected</key>
+			<false/>
+			<key>Damping</key>
+			<real>0.0</real>
+			<key>Frequency</key>
+			<real>0.0</real>
+			<key>LHAnchorA</key>
+			<string>{-3.8888886570930481, -10.666666507720947}</string>
+			<key>LHAnchorB</key>
+			<string>{-8.1333328485488892, 3.1888886988162994}</string>
+			<key>ObjectA</key>
+			<string>rider_torso_bear</string>
+			<key>ObjectB</key>
+			<string>rider_leg_upper_bear</string>
+			<key>PointRelativeness</key>
+			<integer>0</integer>
+			<key>Tag</key>
+			<integer>0</integer>
+			<key>TagName</key>
+			<string>DEFAULT</string>
+			<key>Type</key>
+			<integer>0</integer>
+			<key>UniqueName</key>
+			<string>upper_leg_body1</string>
+		</dict>
+		<dict>
+			<key>AnchorA</key>
+			<string>{8.8111105859279633, 4.0999997556209564}</string>
+			<key>AnchorB</key>
+			<string>{2.1111109852790833, -14.999996870756149}</string>
+			<key>CenterOfMass</key>
+			<false/>
+			<key>CollideConnected</key>
+			<false/>
+			<key>Damping</key>
+			<real>0.0</real>
+			<key>Frequency</key>
+			<real>0.0</real>
+			<key>LHAnchorA</key>
+			<string>{8.8111105859279633, -4.0999997556209564}</string>
+			<key>LHAnchorB</key>
+			<string>{2.1111109852790833, 14.999996870756149}</string>
+			<key>ObjectA</key>
+			<string>rider_leg_upper_bear</string>
+			<key>ObjectB</key>
+			<string>rider_leg_lower_bear</string>
+			<key>PointRelativeness</key>
+			<integer>0</integer>
+			<key>Tag</key>
+			<integer>0</integer>
+			<key>TagName</key>
+			<string>DEFAULT</string>
+			<key>Type</key>
+			<integer>0</integer>
+			<key>UniqueName</key>
+			<string>lower_leg_upper_leg1</string>
+		</dict>
+		<dict>
+			<key>AnchorA</key>
+			<string>{6.1111107468605042, -7.8222217559814453}</string>
+			<key>AnchorB</key>
+			<string>{-1.111111044883728, -4.7999997138977051}</string>
+			<key>CenterOfMass</key>
+			<false/>
+			<key>CollideConnected</key>
+			<false/>
+			<key>Damping</key>
+			<real>0.0</real>
+			<key>Frequency</key>
+			<real>0.0</real>
+			<key>LHAnchorA</key>
+			<string>{6.1111107468605042, 7.8222217559814453}</string>
+			<key>LHAnchorB</key>
+			<string>{-1.111111044883728, 4.7999997138977051}</string>
+			<key>ObjectA</key>
+			<string>rider_torso_bear</string>
+			<key>ObjectB</key>
+			<string>rider_arm_upper_bear_1</string>
+			<key>PointRelativeness</key>
+			<integer>0</integer>
+			<key>Tag</key>
+			<integer>0</integer>
+			<key>TagName</key>
+			<string>DEFAULT</string>
+			<key>Type</key>
+			<integer>0</integer>
+			<key>UniqueName</key>
+			<string>upper_arm_body2</string>
+		</dict>
+		<dict>
+			<key>AnchorA</key>
+			<string>{1.111111044883728, 3.9999997615814209}</string>
+			<key>AnchorB</key>
+			<string>{-13.999999517574906, -0.23333331942558289}</string>
+			<key>CenterOfMass</key>
+			<false/>
+			<key>CollideConnected</key>
+			<false/>
+			<key>Damping</key>
+			<real>0.0</real>
+			<key>Frequency</key>
+			<real>0.0</real>
+			<key>LHAnchorA</key>
+			<string>{1.111111044883728, -3.9999997615814209}</string>
+			<key>LHAnchorB</key>
+			<string>{-13.999999517574906, 0.23333331942558289}</string>
+			<key>ObjectA</key>
+			<string>rider_arm_upper_bear_1</string>
+			<key>ObjectB</key>
+			<string>rider_arm_lower_bear_1</string>
+			<key>PointRelativeness</key>
+			<integer>0</integer>
+			<key>Tag</key>
+			<integer>0</integer>
+			<key>TagName</key>
+			<string>DEFAULT</string>
+			<key>Type</key>
+			<integer>0</integer>
+			<key>UniqueName</key>
+			<string>upper_arm_lower_arm2</string>
+		</dict>
+		<dict>
+			<key>AnchorA</key>
+			<string>{-3.8888886570930481, 10.666666507720947}</string>
+			<key>AnchorB</key>
+			<string>{-8.1333328485488892, -2.7333331704139709}</string>
+			<key>CenterOfMass</key>
+			<false/>
+			<key>CollideConnected</key>
+			<false/>
+			<key>Damping</key>
+			<real>0.0</real>
+			<key>Frequency</key>
+			<real>0.0</real>
+			<key>LHAnchorA</key>
+			<string>{-3.8888886570930481, -10.666666507720947}</string>
+			<key>LHAnchorB</key>
+			<string>{-8.1333328485488892, 2.7333331704139709}</string>
+			<key>ObjectA</key>
+			<string>rider_torso_bear</string>
+			<key>ObjectB</key>
+			<string>rider_leg_upper_bear_1</string>
+			<key>PointRelativeness</key>
+			<integer>0</integer>
+			<key>Tag</key>
+			<integer>0</integer>
+			<key>TagName</key>
+			<string>DEFAULT</string>
+			<key>Type</key>
+			<integer>0</integer>
+			<key>UniqueName</key>
+			<string>upper_leg_body2</string>
+		</dict>
+		<dict>
+			<key>AnchorA</key>
+			<string>{8.8111105859279633, 5.0111108124256134}</string>
+			<key>AnchorB</key>
+			<string>{1.6888887882232666, -14.166663587093353}</string>
+			<key>CenterOfMass</key>
+			<false/>
+			<key>CollideConnected</key>
+			<false/>
+			<key>Damping</key>
+			<real>0.0</real>
+			<key>Frequency</key>
+			<real>0.0</real>
+			<key>LHAnchorA</key>
+			<string>{8.8111105859279633, -5.0111108124256134}</string>
+			<key>LHAnchorB</key>
+			<string>{1.6888887882232666, 14.166663587093353}</string>
+			<key>ObjectA</key>
+			<string>rider_leg_upper_bear_1</string>
+			<key>ObjectB</key>
+			<string>rider_leg_lower_bear_1</string>
+			<key>PointRelativeness</key>
+			<integer>0</integer>
+			<key>Tag</key>
+			<integer>0</integer>
+			<key>TagName</key>
+			<string>DEFAULT</string>
+			<key>Type</key>
+			<integer>0</integer>
+			<key>UniqueName</key>
+			<string>lower_leg_upper_leg2</string>
+		</dict>
+		<dict>
+			<key>AnchorA</key>
+			<string>{0, 0}</string>
+			<key>AnchorB</key>
+			<string>{0, 0}</string>
+			<key>CenterOfMass</key>
+			<false/>
+			<key>CollideConnected</key>
+			<false/>
+			<key>Damping</key>
+			<real>0.0</real>
+			<key>Frequency</key>
+			<real>0.0</real>
+			<key>LHAnchorA</key>
+			<string>{0, 0}</string>
+			<key>LHAnchorB</key>
+			<string>{0, 0}</string>
+			<key>ObjectA</key>
+			<string>rider_head_bear</string>
+			<key>ObjectB</key>
+			<string>rider_torso_bear</string>
+			<key>PointRelativeness</key>
+			<integer>0</integer>
+			<key>Tag</key>
+			<integer>0</integer>
+			<key>TagName</key>
+			<string>DEFAULT</string>
+			<key>Type</key>
+			<integer>6</integer>
+			<key>UniqueName</key>
+			<string>Untitled_Joint_3</string>
+		</dict>
+		<dict>
+			<key>AnchorA</key>
+			<string>{25.788887351751328, -4.6222219467163086}</string>
+			<key>AnchorB</key>
+			<string>{0, 0}</string>
+			<key>CenterOfMass</key>
+			<false/>
+			<key>CollideConnected</key>
+			<false/>
+			<key>Damping</key>
+			<real>0.0</real>
+			<key>Frequency</key>
+			<real>0.0</real>
+			<key>LHAnchorA</key>
+			<string>{25.788887351751328, 4.6222219467163086}</string>
+			<key>LHAnchorB</key>
+			<string>{0, 0}</string>
+			<key>ObjectA</key>
+			<string>bike_body_bear</string>
+			<key>ObjectB</key>
+			<string>bike_shock_front_bear</string>
+			<key>PointRelativeness</key>
+			<integer>0</integer>
+			<key>Tag</key>
+			<integer>0</integer>
+			<key>TagName</key>
+			<string>DEFAULT</string>
+			<key>Type</key>
+			<integer>6</integer>
+			<key>UniqueName</key>
+			<string>Untitled_Joint_4</string>
+		</dict>
+		<dict>
+			<key>AnchorA</key>
+			<string>{-4.6888886094093323, 16.17777681350708}</string>
+			<key>AnchorB</key>
+			<string>{0, 0}</string>
+			<key>CenterOfMass</key>
+			<false/>
+			<key>CollideConnected</key>
+			<false/>
+			<key>Damping</key>
+			<real>0.0</real>
+			<key>Frequency</key>
+			<real>0.0</real>
+			<key>LHAnchorA</key>
+			<string>{-4.6888886094093323, -16.17777681350708}</string>
+			<key>LHAnchorB</key>
+			<string>{0, 0}</string>
+			<key>ObjectA</key>
+			<string>bike_body_bear</string>
+			<key>ObjectB</key>
+			<string>bike_shock_rear_bear</string>
+			<key>PointRelativeness</key>
+			<integer>0</integer>
+			<key>Tag</key>
+			<integer>0</integer>
+			<key>TagName</key>
+			<string>DEFAULT</string>
+			<key>Type</key>
+			<integer>6</integer>
+			<key>UniqueName</key>
+			<string>Untitled_Joint_5</string>
+		</dict>
+	</array>
+	<key>LHVersion</key>
+	<string>1.4.3</string>
+	<key>LoadedImages</key>
+	<array>
+		<dict>
+			<key>Image</key>
+			<string>rider_bear.png</string>
+			<key>OrderZ</key>
+			<integer>0</integer>
+		</dict>
+	</array>
+	<key>PARALLAX_INFO</key>
+	<array/>
+	<key>SPRITES_INFO</key>
+	<array>
+		<dict>
+			<key>GeneralProperties</key>
+			<dict>
+				<key>Angle</key>
+				<integer>0</integer>
+				<key>AnimAtStart</key>
+				<false/>
+				<key>AnimLoop</key>
+				<false/>
+				<key>AnimName</key>
+				<string></string>
+				<key>AnimRepetitions</key>
+				<integer>0</integer>
+				<key>AnimSpeed</key>
+				<real>0.0</real>
+				<key>Color</key>
+				<string>{{1, 1}, {1, 0}}</string>
+				<key>Image</key>
+				<string>rider_bear.png</string>
+				<key>IsDrawable</key>
+				<true/>
+				<key>IsInParallax</key>
+				<false/>
+				<key>Locked</key>
+				<false/>
+				<key>Opacity</key>
+				<real>1</real>
+				<key>PathFlipX</key>
+				<false/>
+				<key>PathFlipY</key>
+				<false/>
+				<key>PathIsCyclic</key>
+				<false/>
+				<key>PathName</key>
+				<string></string>
+				<key>PathOrientation</key>
+				<integer>0</integer>
+				<key>PathOtherEnd</key>
+				<false/>
+				<key>PathSpeed</key>
+				<real>0.20000000298023224</real>
+				<key>PathStartPoint</key>
+				<integer>0</integer>
+				<key>Position</key>
+				<string>{345.5286409381448, 175.94399554820586}</string>
+				<key>SHName</key>
+				<string>rider_arm_lower_bear</string>
+				<key>SHScene</key>
+				<string>file://localhost/Volumes/Macintosh%20HD%202/Carl/android/workspace/MX%20Mayhem%20Lite/assets/rider_bear.pshs</string>
+				<key>Scale</key>
+				<string>{1, 1}</string>
+				<key>Size</key>
+				<string>{31.5, 10.5}</string>
+				<key>Tag</key>
+				<integer>0</integer>
+				<key>TagName</key>
+				<string>DEFAULT</string>
+				<key>UV</key>
+				<string>{{67, 100}, {31.5, 10.5}}</string>
+				<key>UniqueName</key>
+				<string>rider_arm_lower_bear_1</string>
+				<key>ZOrder</key>
+				<integer>0</integer>
+			</dict>
+			<key>PhysicProperties</key>
+			<dict>
+				<key>AngularDamping</key>
+				<real>0.0</real>
+				<key>AngularVelocity</key>
+				<real>0.0</real>
+				<key>CanSleep</key>
+				<true/>
+				<key>Category</key>
+				<integer>1</integer>
+				<key>Density</key>
+				<real>0.20000000298023224</real>
+				<key>FixedRot</key>
+				<false/>
+				<key>Friction</key>
+				<real>0.20000000298023224</real>
+				<key>GravityScale</key>
+				<real>1</real>
+				<key>Group</key>
+				<integer>-1</integer>
+				<key>HandledBySH</key>
+				<true/>
+				<key>IsBullet</key>
+				<false/>
+				<key>IsCircle</key>
+				<false/>
+				<key>IsSensor</key>
+				<false/>
+				<key>LinearDamping</key>
+				<real>0.0</real>
+				<key>LinearVelocity</key>
+				<string>{0, 0}</string>
+				<key>Mask</key>
+				<integer>65535</integer>
+				<key>Restitution</key>
+				<real>0.20000000298023224</real>
+				<key>ShapeBorder</key>
+				<string>{0, 0}</string>
+				<key>ShapeFixtures</key>
+				<array>
+					<array>
+						<string>{-14.790047, -1.9352493}</string>
+						<string>{-14.936958, -3.5512695}</string>
+						<string>{-13.027122, -4.7265472}</string>
+						<string>{-9.0605469, -4.0654526}</string>
+						<string>{-6.1223373, 4.6022568}</string>
+						<string>{-10.382736, 4.3818893}</string>
+						<string>{-12.659851, 2.8393326}</string>
+						<string>{-13.761673, 0.48876953}</string>
+					</array>
+					<array>
+						<string>{14.445099, -1.2006989}</string>
+						<string>{14.885834, 1.5905914}</string>
+						<string>{14.004372, -0.68651581}</string>
+					</array>
+					<array>
+						<string>{14.004372, -0.68651581}</string>
+						<string>{14.885834, 1.5905914}</string>
+						<string>{12.682175, 3.3535156}</string>
+						<string>{12.167992, 0.63568115}</string>
+					</array>
+					<array>
+						<string>{10.772346, 0.41531372}</string>
+						<string>{12.682175, 3.3535156}</string>
+						<string>{8.6421432, 3.3535156}</string>
+						<string>{6.1446686, 2.7658768}</string>
+						<string>{0.85590363, -2.8167114}</string>
+						<string>{8.1279602, -1.7148895}</string>
+					</array>
+					<array>
+						<string>{-9.0605469, -4.0654526}</string>
+						<string>{-4.8736038, -3.6247177}</string>
+						<string>{0.85590363, -2.8167114}</string>
+						<string>{6.1446686, 2.7658768}</string>
+						<string>{-6.1223373, 4.6022568}</string>
+					</array>
+					<array>
+						<string>{-9.0605469, -4.0654526}</string>
+						<string>{-6.1223373, 4.6022568}</string>
+						<string>{-13.027122, -4.7265472}</string>
+					</array>
+					<array>
+						<string>{-6.1223373, 4.6022568}</string>
+						<string>{10.772346, 0.41531372}</string>
+						<string>{8.6421432, 3.3535156}</string>
+					</array>
+					<array>
+						<string>{12.167992, 0.63568115}</string>
+						<string>{12.682175, 3.3535156}</string>
+						<string>{10.772346, 0.41531372}</string>
+					</array>
+				</array>
+				<key>ShapePositionOffset</key>
+				<string>{0, 0}</string>
+				<key>Type</key>
+				<integer>2</integer>
+			</dict>
+		</dict>
+		<dict>
+			<key>GeneralProperties</key>
+			<dict>
+				<key>Angle</key>
+				<integer>0</integer>
+				<key>AnimAtStart</key>
+				<false/>
+				<key>AnimLoop</key>
+				<false/>
+				<key>AnimName</key>
+				<string></string>
+				<key>AnimRepetitions</key>
+				<integer>0</integer>
+				<key>AnimSpeed</key>
+				<real>0.0</real>
+				<key>Color</key>
+				<string>{{1, 1}, {1, 0}}</string>
+				<key>Image</key>
+				<string>rider_bear.png</string>
+				<key>IsDrawable</key>
+				<true/>
+				<key>IsInParallax</key>
+				<false/>
+				<key>Locked</key>
+				<false/>
+				<key>Opacity</key>
+				<real>1</real>
+				<key>PathFlipX</key>
+				<false/>
+				<key>PathFlipY</key>
+				<false/>
+				<key>PathIsCyclic</key>
+				<false/>
+				<key>PathName</key>
+				<string></string>
+				<key>PathOrientation</key>
+				<integer>0</integer>
+				<key>PathOtherEnd</key>
+				<false/>
+				<key>PathSpeed</key>
+				<real>0.20000000298023224</real>
+				<key>PathStartPoint</key>
+				<integer>0</integer>
+				<key>Position</key>
+				<string>{330.66692174707043, 171.55389983745147}</string>
+				<key>SHName</key>
+				<string>rider_arm_upper_bear</string>
+				<key>SHScene</key>
+				<string>file://localhost/Volumes/Macintosh%20HD%202/Carl/android/workspace/MX%20Mayhem%20Lite/assets/rider_bear.pshs</string>
+				<key>Scale</key>
+				<string>{1, 1}</string>
+				<key>Size</key>
+				<string>{12.5, 18}</string>
+				<key>Tag</key>
+				<integer>0</integer>
+				<key>TagName</key>
+				<string>DEFAULT</string>
+				<key>UV</key>
+				<string>{{101, 55}, {12.5, 18}}</string>
+				<key>UniqueName</key>
+				<string>rider_arm_upper_bear_1</string>
+				<key>ZOrder</key>
+				<integer>0</integer>
+			</dict>
+			<key>PhysicProperties</key>
+			<dict>
+				<key>AngularDamping</key>
+				<real>0.0</real>
+				<key>AngularVelocity</key>
+				<real>0.0</real>
+				<key>CanSleep</key>
+				<true/>
+				<key>Category</key>
+				<integer>1</integer>
+				<key>Density</key>
+				<real>0.20000000298023224</real>
+				<key>FixedRot</key>
+				<false/>
+				<key>Friction</key>
+				<real>0.20000000298023224</real>
+				<key>GravityScale</key>
+				<real>1</real>
+				<key>Group</key>
+				<integer>-1</integer>
+				<key>HandledBySH</key>
+				<true/>
+				<key>IsBullet</key>
+				<false/>
+				<key>IsCircle</key>
+				<false/>
+				<key>IsSensor</key>
+				<false/>
+				<key>LinearDamping</key>
+				<real>0.0</real>
+				<key>LinearVelocity</key>
+				<string>{0, 0}</string>
+				<key>Mask</key>
+				<integer>65535</integer>
+				<key>Restitution</key>
+				<real>0.20000000298023224</real>
+				<key>ShapeBorder</key>
+				<string>{0, 0}</string>
+				<key>ShapeFixtures</key>
+				<array>
+					<array>
+						<string>{-0.63990021, -8.3549347}</string>
+						<string>{3.6570663, -8.3549347}</string>
+						<string>{5.6981201, -5.9916}</string>
+						<string>{5.5906982, -1.6946335}</string>
+						<string>{4.731308, 2.6023293}</string>
+						<string>{-5.9036789, 2.9245987}</string>
+						<string>{-5.4739838, -1.2649384}</string>
+						<string>{-3.7552032, -5.7767487}</string>
+					</array>
+					<array>
+						<string>{-5.9036789, 2.9245987}</string>
+						<string>{4.731308, 2.6023293}</string>
+						<string>{2.4754028, 6.7918701}</string>
+						<string>{0.97145844, 8.4032288}</string>
+						<string>{-3.8626251, 7.5438385}</string>
+						<string>{-3.970047, 7.4364166}</string>
+					</array>
+				</array>
+				<key>ShapePositionOffset</key>
+				<string>{0, 0}</string>
+				<key>Type</key>
+				<integer>2</integer>
+			</dict>
+		</dict>
+		<dict>
+			<key>GeneralProperties</key>
+			<dict>
+				<key>Angle</key>
+				<integer>0</integer>
+				<key>AnimAtStart</key>
+				<false/>
+				<key>AnimLoop</key>
+				<false/>
+				<key>AnimName</key>
+				<string></string>
+				<key>AnimRepetitions</key>
+				<integer>0</integer>
+				<key>AnimSpeed</key>
+				<real>0.0</real>
+				<key>Color</key>
+				<string>{{1, 1}, {1, 0}}</string>
+				<key>Image</key>
+				<string>rider_bear.png</string>
+				<key>IsDrawable</key>
+				<true/>
+				<key>IsInParallax</key>
+				<false/>
+				<key>Locked</key>
+				<false/>
+				<key>Opacity</key>
+				<real>1</real>
+				<key>PathFlipX</key>
+				<false/>
+				<key>PathFlipY</key>
+				<false/>
+				<key>PathIsCyclic</key>
+				<false/>
+				<key>PathName</key>
+				<string></string>
+				<key>PathOrientation</key>
+				<integer>0</integer>
+				<key>PathOtherEnd</key>
+				<false/>
+				<key>PathSpeed</key>
+				<real>0.20000000298023224</real>
+				<key>PathStartPoint</key>
+				<integer>0</integer>
+				<key>Position</key>
+				<string>{74.720881936293722, 135.7710190990739}</string>
+				<key>SHName</key>
+				<string>bike_chain</string>
+				<key>SHScene</key>
+				<string>file://localhost/Volumes/Macintosh%20HD%202/Carl/android/workspace/MX%20Mayhem%20Lite/assets/rider_bear.pshs</string>
+				<key>Scale</key>
+				<string>{1, 1}</string>
+				<key>Size</key>
+				<string>{28.5, 15.5}</string>
+				<key>Tag</key>
+				<integer>0</integer>
+				<key>TagName</key>
+				<string>DEFAULT</string>
+				<key>UV</key>
+				<string>{{100, 77}, {28.5, 15.5}}</string>
+				<key>UniqueName</key>
+				<string>bike_chain</string>
+				<key>ZOrder</key>
+				<integer>0</integer>
+			</dict>
+			<key>PhysicProperties</key>
+			<dict>
+				<key>AngularDamping</key>
+				<real>0.0</real>
+				<key>AngularVelocity</key>
+				<real>0.0</real>
+				<key>CanSleep</key>
+				<true/>
+				<key>Category</key>
+				<integer>1</integer>
+				<key>Density</key>
+				<real>0.20000000298023224</real>
+				<key>FixedRot</key>
+				<false/>
+				<key>Friction</key>
+				<real>0.20000000298023224</real>
+				<key>GravityScale</key>
+				<real>1</real>
+				<key>Group</key>
+				<integer>0</integer>
+				<key>HandledBySH</key>
+				<true/>
+				<key>IsBullet</key>
+				<false/>
+				<key>IsCircle</key>
+				<false/>
+				<key>IsSensor</key>
+				<false/>
+				<key>LinearDamping</key>
+				<real>0.0</real>
+				<key>LinearVelocity</key>
+				<string>{0, 0}</string>
+				<key>Mask</key>
+				<integer>65535</integer>
+				<key>Restitution</key>
+				<real>0.20000000298023224</real>
+				<key>ShapeBorder</key>
+				<string>{0, 0}</string>
+				<key>ShapeFixtures</key>
+				<array/>
+				<key>ShapePositionOffset</key>
+				<string>{0, 0}</string>
+				<key>Type</key>
+				<integer>2</integer>
+			</dict>
+		</dict>
+		<dict>
+			<key>GeneralProperties</key>
+			<dict>
+				<key>Angle</key>
+				<integer>0</integer>
+				<key>AnimAtStart</key>
+				<false/>
+				<key>AnimLoop</key>
+				<false/>
+				<key>AnimName</key>
+				<string></string>
+				<key>AnimRepetitions</key>
+				<integer>0</integer>
+				<key>AnimSpeed</key>
+				<real>0.0</real>
+				<key>Color</key>
+				<string>{{1, 1}, {1, 0}}</string>
+				<key>Image</key>
+				<string>rider_bear.png</string>
+				<key>IsDrawable</key>
+				<true/>
+				<key>IsInParallax</key>
+				<false/>
+				<key>Locked</key>
+				<false/>
+				<key>Opacity</key>
+				<real>1</real>
+				<key>PathFlipX</key>
+				<false/>
+				<key>PathFlipY</key>
+				<false/>
+				<key>PathIsCyclic</key>
+				<false/>
+				<key>PathName</key>
+				<string></string>
+				<key>PathOrientation</key>
+				<integer>0</integer>
+				<key>PathOtherEnd</key>
+				<false/>
+				<key>PathSpeed</key>
+				<real>0.20000000298023224</real>
+				<key>PathStartPoint</key>
+				<integer>0</integer>
+				<key>Position</key>
+				<string>{382.52306266437688, 222.4206342364453}</string>
+				<key>SHName</key>
+				<string>bike_tire_front_bear</string>
+				<key>SHScene</key>
+				<string>file://localhost/Volumes/Macintosh%20HD%202/Carl/android/workspace/MX%20Mayhem%20Lite/assets/rider_bear.pshs</string>
+				<key>Scale</key>
+				<string>{1, 1}</string>
+				<key>Size</key>
+				<string>{37, 37}</string>
+				<key>Tag</key>
+				<integer>0</integer>
+				<key>TagName</key>
+				<string>DEFAULT</string>
+				<key>UV</key>
+				<string>{{0, 55}, {37, 37}}</string>
+				<key>UniqueName</key>
+				<string>bike_tire_front_bear</string>
+				<key>ZOrder</key>
+				<integer>0</integer>
+			</dict>
+			<key>PhysicProperties</key>
+			<dict>
+				<key>AngularDamping</key>
+				<real>0.0</real>
+				<key>AngularVelocity</key>
+				<real>0.0</real>
+				<key>CanSleep</key>
+				<true/>
+				<key>Category</key>
+				<integer>1</integer>
+				<key>Density</key>
+				<real>0.20000000298023224</real>
+				<key>FixedRot</key>
+				<false/>
+				<key>Friction</key>
+				<real>0.20000000298023224</real>
+				<key>GravityScale</key>
+				<real>1</real>
+				<key>Group</key>
+				<integer>0</integer>
+				<key>HandledBySH</key>
+				<true/>
+				<key>IsBullet</key>
+				<false/>
+				<key>IsCircle</key>
+				<true/>
+				<key>IsSensor</key>
+				<false/>
+				<key>LinearDamping</key>
+				<real>0.0</real>
+				<key>LinearVelocity</key>
+				<string>{0, 0}</string>
+				<key>Mask</key>
+				<integer>65535</integer>
+				<key>Restitution</key>
+				<real>0.20000000298023224</real>
+				<key>ShapeBorder</key>
+				<string>{0, 0}</string>
+				<key>ShapeFixtures</key>
+				<array/>
+				<key>ShapePositionOffset</key>
+				<string>{0, 0}</string>
+				<key>Type</key>
+				<integer>2</integer>
+			</dict>
+		</dict>
+		<dict>
+			<key>GeneralProperties</key>
+			<dict>
+				<key>Angle</key>
+				<integer>0</integer>
+				<key>AnimAtStart</key>
+				<false/>
+				<key>AnimLoop</key>
+				<false/>
+				<key>AnimName</key>
+				<string></string>
+				<key>AnimRepetitions</key>
+				<integer>0</integer>
+				<key>AnimSpeed</key>
+				<real>0.0</real>
+				<key>Color</key>
+				<string>{{1, 1}, {1, 0}}</string>
+				<key>Image</key>
+				<string>rider_bear.png</string>
+				<key>IsDrawable</key>
+				<true/>
+				<key>IsInParallax</key>
+				<false/>
+				<key>Locked</key>
+				<false/>
+				<key>Opacity</key>
+				<real>1</real>
+				<key>PathFlipX</key>
+				<false/>
+				<key>PathFlipY</key>
+				<false/>
+				<key>PathIsCyclic</key>
+				<false/>
+				<key>PathName</key>
+				<string></string>
+				<key>PathOrientation</key>
+				<integer>0</integer>
+				<key>PathOtherEnd</key>
+				<false/>
+				<key>PathSpeed</key>
+				<real>0.20000000298023224</real>
+				<key>PathStartPoint</key>
+				<integer>0</integer>
+				<key>Position</key>
+				<string>{342.32365676394539, 200.4110641042009}</string>
+				<key>SHName</key>
+				<string>bike_body_bear</string>
+				<key>SHScene</key>
+				<string>file://localhost/Volumes/Macintosh%20HD%202/Carl/android/workspace/MX%20Mayhem%20Lite/assets/rider_bear.pshs</string>
+				<key>Scale</key>
+				<string>{1, 1}</string>
+				<key>Size</key>
+				<string>{105.5, 52}</string>
+				<key>Tag</key>
+				<integer>0</integer>
+				<key>TagName</key>
+				<string>DEFAULT</string>
+				<key>UV</key>
+				<string>{{0, 0}, {105.5, 52}}</string>
+				<key>UniqueName</key>
+				<string>bike_body_bear</string>
+				<key>ZOrder</key>
+				<integer>0</integer>
+			</dict>
+			<key>PhysicProperties</key>
+			<dict>
+				<key>AngularDamping</key>
+				<real>0.0</real>
+				<key>AngularVelocity</key>
+				<real>0.0</real>
+				<key>CanSleep</key>
+				<true/>
+				<key>Category</key>
+				<integer>1</integer>
+				<key>Density</key>
+				<real>0.20000000298023224</real>
+				<key>FixedRot</key>
+				<false/>
+				<key>Friction</key>
+				<real>0.20000000298023224</real>
+				<key>GravityScale</key>
+				<real>1</real>
+				<key>Group</key>
+				<integer>0</integer>
+				<key>HandledBySH</key>
+				<true/>
+				<key>IsBullet</key>
+				<false/>
+				<key>IsCircle</key>
+				<false/>
+				<key>IsSensor</key>
+				<false/>
+				<key>LinearDamping</key>
+				<real>0.0</real>
+				<key>LinearVelocity</key>
+				<string>{0, 0}</string>
+				<key>Mask</key>
+				<integer>65535</integer>
+				<key>Restitution</key>
+				<real>0.20000000298023224</real>
+				<key>ShapeBorder</key>
+				<string>{0, 0}</string>
+				<key>ShapeFixtures</key>
+				<array>
+					<array>
+						<string>{41.822632, 5.3607082}</string>
+						<string>{51.884766, 1.7970352}</string>
+						<string>{48.949974, 5.3607082}</string>
+						<string>{39.307098, 8.9243813}</string>
+					</array>
+					<array>
+						<string>{-50.623253, 4.9414539}</string>
+						<string>{-50.413628, 4.7318249}</string>
+						<string>{-44.753674, 4.7318249}</string>
+						<string>{-31.414734, 9.1110249}</string>
+						<string>{-51.461765, 7.8762436}</string>
+					</array>
+					<array>
+						<string>{-12.261356, -19.375378}</string>
+						<string>{-5.7628937, -24.406448}</string>
+						<string>{8.0725441, -24.825706}</string>
+						<string>{23.794632, 0.9585228}</string>
+						<string>{6.3955269, 11.439917}</string>
+						<string>{-11.842102, -12.876915}</string>
+					</array>
+					<array>
+						<string>{-44.12479, 0.53926849}</string>
+						<string>{-29.660469, -6.3784523}</string>
+						<string>{-17.502052, -9.9421234}</string>
+						<string>{6.3955269, 11.439917}</string>
+						<string>{-31.414734, 9.1110239}</string>
+						<string>{-44.753674, 4.7318249}</string>
+					</array>
+					<array>
+						<string>{-15.825031, -13.505798}</string>
+						<string>{-14.567265, -11.619148}</string>
+						<string>{-17.502052, -9.9421234}</string>
+						<string>{-18.969448, -12.876915}</string>
+						<string>{-18.969448, -17.488728}</string>
+					</array>
+					<array>
+						<string>{-16.03466, -17.279099}</string>
+						<string>{-15.825031, -13.505798}</string>
+						<string>{-18.969448, -17.488728}</string>
+					</array>
+					<array>
+						<string>{-11.842102, -12.876915}</string>
+						<string>{6.3955269, 11.439917}</string>
+						<string>{-17.502052, -9.9421234}</string>
+						<string>{-14.567265, -11.619148}</string>
+					</array>
+					<array>
+						<string>{8.7014236, 15.422846}</string>
+						<string>{23.794632, 0.9585228}</string>
+						<string>{27.737686, -0.23991013}</string>
+						<string>{29.244957, 3.264431}</string>
+						<string>{29.035332, 8.2954979}</string>
+						<string>{22.32724, 20.663544}</string>
+						<string>{12.474731, 20.453915}</string>
+						<string>{9.3303108, 18.148006}</string>
+					</array>
+					<array>
+						<string>{12.474731, 20.453915}</string>
+						<string>{22.32724, 20.663544}</string>
+						<string>{16.038406, 25.065727}</string>
+						<string>{10.797707, 22.969448}</string>
+					</array>
+					<array>
+						<string>{33.647141, 5.3607082}</string>
+						<string>{41.822632, 5.3607082}</string>
+						<string>{39.307098, 8.9243813}</string>
+						<string>{29.035332, 8.2954979}</string>
+					</array>
+					<array>
+						<string>{12.684357, -21.681282}</string>
+						<string>{16.66729, -10.780636}</string>
+						<string>{8.0725441, -24.825706}</string>
+					</array>
+					<array>
+						<string>{6.3955269, 11.439917}</string>
+						<string>{23.794632, 0.9585228}</string>
+						<string>{8.7014236, 15.422846}</string>
+					</array>
+					<array>
+						<string>{28.156723, -0.23991013}</string>
+						<string>{29.244957, 3.264431}</string>
+						<string>{27.737686, -0.23991013}</string>
+					</array>
+					<array>
+						<string>{29.244957, 3.264431}</string>
+						<string>{33.647141, 5.3607082}</string>
+						<string>{29.035332, 8.2954979}</string>
+					</array>
+				</array>
+				<key>ShapePositionOffset</key>
+				<string>{0, 0}</string>
+				<key>Type</key>
+				<integer>2</integer>
+			</dict>
+		</dict>
+		<dict>
+			<key>GeneralProperties</key>
+			<dict>
+				<key>Angle</key>
+				<integer>0</integer>
+				<key>AnimAtStart</key>
+				<false/>
+				<key>AnimLoop</key>
+				<false/>
+				<key>AnimName</key>
+				<string></string>
+				<key>AnimRepetitions</key>
+				<integer>0</integer>
+				<key>AnimSpeed</key>
+				<real>0.0</real>
+				<key>Color</key>
+				<string>{{1, 1}, {1, 0}}</string>
+				<key>Image</key>
+				<string>rider_bear.png</string>
+				<key>IsDrawable</key>
+				<true/>
+				<key>IsInParallax</key>
+				<false/>
+				<key>Locked</key>
+				<false/>
+				<key>Opacity</key>
+				<real>1</real>
+				<key>PathFlipX</key>
+				<false/>
+				<key>PathFlipY</key>
+				<false/>
+				<key>PathIsCyclic</key>
+				<false/>
+				<key>PathName</key>
+				<string></string>
+				<key>PathOrientation</key>
+				<integer>0</integer>
+				<key>PathOtherEnd</key>
+				<false/>
+				<key>PathSpeed</key>
+				<real>0.20000000298023224</real>
+				<key>PathStartPoint</key>
+				<integer>0</integer>
+				<key>Position</key>
+				<string>{303.56666656147161, 225.11357462059485}</string>
+				<key>SHName</key>
+				<string>bike_tire_rear_bear</string>
+				<key>SHScene</key>
+				<string>file://localhost/Volumes/Macintosh%20HD%202/Carl/android/workspace/MX%20Mayhem%20Lite/assets/rider_bear.pshs</string>
+				<key>Scale</key>
+				<string>{1, 1}</string>
+				<key>Size</key>
+				<string>{37, 37}</string>
+				<key>Tag</key>
+				<integer>0</integer>
+				<key>TagName</key>
+				<string>DEFAULT</string>
+				<key>UV</key>
+				<string>{{0, 94}, {37, 37}}</string>
+				<key>UniqueName</key>
+				<string>bike_tire_rear_bear</string>
+				<key>ZOrder</key>
+				<integer>0</integer>
+			</dict>
+			<key>PhysicProperties</key>
+			<dict>
+				<key>AngularDamping</key>
+				<real>0.0</real>
+				<key>AngularVelocity</key>
+				<real>0.0</real>
+				<key>CanSleep</key>
+				<true/>
+				<key>Category</key>
+				<integer>1</integer>
+				<key>Density</key>
+				<real>0.20000000298023224</real>
+				<key>FixedRot</key>
+				<false/>
+				<key>Friction</key>
+				<real>0.20000000298023224</real>
+				<key>GravityScale</key>
+				<real>1</real>
+				<key>Group</key>
+				<integer>0</integer>
+				<key>HandledBySH</key>
+				<true/>
+				<key>IsBullet</key>
+				<false/>
+				<key>IsCircle</key>
+				<true/>
+				<key>IsSensor</key>
+				<false/>
+				<key>LinearDamping</key>
+				<real>0.0</real>
+				<key>LinearVelocity</key>
+				<string>{0, 0}</string>
+				<key>Mask</key>
+				<integer>65535</integer>
+				<key>Restitution</key>
+				<real>0.20000000298023224</real>
+				<key>ShapeBorder</key>
+				<string>{0, 0}</string>
+				<key>ShapeFixtures</key>
+				<array/>
+				<key>ShapePositionOffset</key>
+				<string>{0, 0}</string>
+				<key>Type</key>
+				<integer>2</integer>
+			</dict>
+		</dict>
+		<dict>
+			<key>GeneralProperties</key>
+			<dict>
+				<key>Angle</key>
+				<integer>0</integer>
+				<key>AnimAtStart</key>
+				<false/>
+				<key>AnimLoop</key>
+				<false/>
+				<key>AnimName</key>
+				<string></string>
+				<key>AnimRepetitions</key>
+				<integer>0</integer>
+				<key>AnimSpeed</key>
+				<real>0.0</real>
+				<key>Color</key>
+				<string>{{1, 1}, {1, 0}}</string>
+				<key>Image</key>
+				<string>rider_bear.png</string>
+				<key>IsDrawable</key>
+				<true/>
+				<key>IsInParallax</key>
+				<false/>
+				<key>Locked</key>
+				<false/>
+				<key>Opacity</key>
+				<real>1</real>
+				<key>PathFlipX</key>
+				<false/>
+				<key>PathFlipY</key>
+				<false/>
+				<key>PathIsCyclic</key>
+				<false/>
+				<key>PathName</key>
+				<string></string>
+				<key>PathOrientation</key>
+				<integer>0</integer>
+				<key>PathOtherEnd</key>
+				<false/>
+				<key>PathSpeed</key>
+				<real>0.20000000298023224</real>
+				<key>PathStartPoint</key>
+				<integer>0</integer>
+				<key>Position</key>
+				<string>{206.50553300712696, 85.287811932878981}</string>
+				<key>SHName</key>
+				<string>bike_brakeline</string>
+				<key>SHScene</key>
+				<string>file://localhost/Volumes/Macintosh%20HD%202/Carl/android/workspace/MX%20Mayhem%20Lite/assets/rider_bear.pshs</string>
+				<key>Scale</key>
+				<string>{1, 1}</string>
+				<key>Size</key>
+				<string>{9.5, 30.5}</string>
+				<key>Tag</key>
+				<integer>0</integer>
+				<key>TagName</key>
+				<string>DEFAULT</string>
+				<key>UV</key>
+				<string>{{117, 100}, {9.5, 30.5}}</string>
+				<key>UniqueName</key>
+				<string>bike_brakeline</string>
+				<key>ZOrder</key>
+				<integer>0</integer>
+			</dict>
+			<key>PhysicProperties</key>
+			<dict>
+				<key>AngularDamping</key>
+				<real>0.0</real>
+				<key>AngularVelocity</key>
+				<real>0.0</real>
+				<key>CanSleep</key>
+				<true/>
+				<key>Category</key>
+				<integer>1</integer>
+				<key>Density</key>
+				<real>0.20000000298023224</real>
+				<key>FixedRot</key>
+				<false/>
+				<key>Friction</key>
+				<real>0.20000000298023224</real>
+				<key>GravityScale</key>
+				<real>1</real>
+				<key>Group</key>
+				<integer>-1</integer>
+				<key>HandledBySH</key>
+				<true/>
+				<key>IsBullet</key>
+				<false/>
+				<key>IsCircle</key>
+				<false/>
+				<key>IsSensor</key>
+				<false/>
+				<key>LinearDamping</key>
+				<real>0.0</real>
+				<key>LinearVelocity</key>
+				<string>{0, 0}</string>
+				<key>Mask</key>
+				<integer>65535</integer>
+				<key>Restitution</key>
+				<real>0.20000000298023224</real>
+				<key>ShapeBorder</key>
+				<string>{0, 0}</string>
+				<key>ShapeFixtures</key>
+				<array/>
+				<key>ShapePositionOffset</key>
+				<string>{0, 0}</string>
+				<key>Type</key>
+				<integer>2</integer>
+			</dict>
+		</dict>
+		<dict>
+			<key>GeneralProperties</key>
+			<dict>
+				<key>Angle</key>
+				<integer>0</integer>
+				<key>AnimAtStart</key>
+				<false/>
+				<key>AnimLoop</key>
+				<false/>
+				<key>AnimName</key>
+				<string></string>
+				<key>AnimRepetitions</key>
+				<integer>0</integer>
+				<key>AnimSpeed</key>
+				<real>0.0</real>
+				<key>Color</key>
+				<string>{{1, 1}, {1, 0}}</string>
+				<key>Image</key>
+				<string>rider_bear.png</string>
+				<key>IsDrawable</key>
+				<true/>
+				<key>IsInParallax</key>
+				<false/>
+				<key>Locked</key>
+				<false/>
+				<key>Opacity</key>
+				<real>1</real>
+				<key>PathFlipX</key>
+				<false/>
+				<key>PathFlipY</key>
+				<false/>
+				<key>PathIsCyclic</key>
+				<false/>
+				<key>PathName</key>
+				<string></string>
+				<key>PathOrientation</key>
+				<integer>0</integer>
+				<key>PathOtherEnd</key>
+				<false/>
+				<key>PathSpeed</key>
+				<real>0.20000000298023224</real>
+				<key>PathStartPoint</key>
+				<integer>0</integer>
+				<key>Position</key>
+				<string>{318.15129478011715, 223.43469834120799}</string>
+				<key>SHName</key>
+				<string>bike_shock_rear_bear</string>
+				<key>SHScene</key>
+				<string>file://localhost/Volumes/Macintosh%20HD%202/Carl/android/workspace/MX%20Mayhem%20Lite/assets/rider_bear.pshs</string>
+				<key>Scale</key>
+				<string>{1, 1}</string>
+				<key>Size</key>
+				<string>{31.5, 20}</string>
+				<key>Tag</key>
+				<integer>0</integer>
+				<key>TagName</key>
+				<string>DEFAULT</string>
+				<key>UV</key>
+				<string>{{67, 55}, {31.5, 20}}</string>
+				<key>UniqueName</key>
+				<string>bike_shock_rear_bear</string>
+				<key>ZOrder</key>
+				<integer>0</integer>
+			</dict>
+			<key>PhysicProperties</key>
+			<dict>
+				<key>AngularDamping</key>
+				<real>0.0</real>
+				<key>AngularVelocity</key>
+				<real>0.0</real>
+				<key>CanSleep</key>
+				<true/>
+				<key>Category</key>
+				<integer>1</integer>
+				<key>Density</key>
+				<real>0.20000000298023224</real>
+				<key>FixedRot</key>
+				<false/>
+				<key>Friction</key>
+				<real>0.20000000298023224</real>
+				<key>GravityScale</key>
+				<real>1</real>
+				<key>Group</key>
+				<integer>0</integer>
+				<key>HandledBySH</key>
+				<true/>
+				<key>IsBullet</key>
+				<false/>
+				<key>IsCircle</key>
+				<false/>
+				<key>IsSensor</key>
+				<false/>
+				<key>LinearDamping</key>
+				<real>0.0</real>
+				<key>LinearVelocity</key>
+				<string>{0, 0}</string>
+				<key>Mask</key>
+				<integer>65535</integer>
+				<key>Restitution</key>
+				<real>0.20000000298023224</real>
+				<key>ShapeBorder</key>
+				<string>{0, 0}</string>
+				<key>ShapeFixtures</key>
+				<array>
+					<array>
+						<string>{-14.419014, -4.3382187}</string>
+						<string>{-12.148041, -4.6746597}</string>
+						<string>{-11.054611, 0.54016113}</string>
+						<string>{-15.091896, -1.310257}</string>
+					</array>
+					<array>
+						<string>{9.6364517, -2.4036865}</string>
+						<string>{15.103607, 0.11961365}</string>
+						<string>{14.935387, 2.5588036}</string>
+						<string>{12.327972, 5.8390961}</string>
+						<string>{8.3748016, 7.3530731}</string>
+						<string>{6.5243835, 5.7549858}</string>
+						<string>{6.356163, -0.13271332}</string>
+						<string>{6.6926041, -2.4878006}</string>
+					</array>
+					<array>
+						<string>{8.3748016, 7.3530731}</string>
+						<string>{12.327972, 5.8390961}</string>
+						<string>{11.991531, 9.6240463}</string>
+						<string>{8.5430222, 9.6240463}</string>
+					</array>
+					<array>
+						<string>{-12.148041, -4.6746597}</string>
+						<string>{-10.465843, -5.0111008}</string>
+						<string>{-4.8304749, -2.9083481}</string>
+						<string>{-4.6622543, 2.6429138}</string>
+						<string>{-5.0828018, 3.9886742}</string>
+						<string>{-7.1014404, 3.9886742}</string>
+						<string>{-9.6247406, 3.3998985}</string>
+						<string>{-11.054611, 0.54016113}</string>
+					</array>
+					<array>
+						<string>{-10.213516, -8.8801575}</string>
+						<string>{-8.3630905, -8.6278305}</string>
+						<string>{-5.7556839, -6.1886368}</string>
+						<string>{-4.8304749, -2.9083481}</string>
+						<string>{-10.465843, -5.0111008}</string>
+					</array>
+					<array>
+						<string>{-11.054611, 0.54016113}</string>
+						<string>{-9.6247406, 3.3998985}</string>
+						<string>{-11.222832, 2.9793549}</string>
+					</array>
+					<array>
+						<string>{6.5243835, 5.7549858}</string>
+						<string>{8.3748016, 7.3530731}</string>
+						<string>{6.944931, 7.1007462}</string>
+					</array>
+					<array>
+						<string>{6.356163, -0.13271332}</string>
+						<string>{6.5243835, 5.7549858}</string>
+						<string>{-4.6622543, 2.6429138}</string>
+						<string>{-4.8304749, -2.9083481}</string>
+					</array>
+				</array>
+				<key>ShapePositionOffset</key>
+				<string>{0, 0}</string>
+				<key>Type</key>
+				<integer>2</integer>
+			</dict>
+		</dict>
+		<dict>
+			<key>GeneralProperties</key>
+			<dict>
+				<key>Angle</key>
+				<integer>0</integer>
+				<key>AnimAtStart</key>
+				<false/>
+				<key>AnimLoop</key>
+				<false/>
+				<key>AnimName</key>
+				<string></string>
+				<key>AnimRepetitions</key>
+				<integer>0</integer>
+				<key>AnimSpeed</key>
+				<real>0.0</real>
+				<key>Color</key>
+				<string>{{1, 1}, {1, 0}}</string>
+				<key>Image</key>
+				<string>rider_bear.png</string>
+				<key>IsDrawable</key>
+				<true/>
+				<key>IsInParallax</key>
+				<false/>
+				<key>Locked</key>
+				<false/>
+				<key>Opacity</key>
+				<real>1</real>
+				<key>PathFlipX</key>
+				<false/>
+				<key>PathFlipY</key>
+				<false/>
+				<key>PathIsCyclic</key>
+				<false/>
+				<key>PathName</key>
+				<string></string>
+				<key>PathOrientation</key>
+				<integer>0</integer>
+				<key>PathOtherEnd</key>
+				<false/>
+				<key>PathSpeed</key>
+				<real>0.20000000298023224</real>
+				<key>PathStartPoint</key>
+				<integer>0</integer>
+				<key>Position</key>
+				<string>{379.50361347679484, 213.81850713284541}</string>
+				<key>SHName</key>
+				<string>bike_shock_front_bear</string>
+				<key>SHScene</key>
+				<string>file://localhost/Volumes/Macintosh%20HD%202/Carl/android/workspace/MX%20Mayhem%20Lite/assets/rider_bear.pshs</string>
+				<key>Scale</key>
+				<string>{1, 1}</string>
+				<key>Size</key>
+				<string>{13, 25}</string>
+				<key>Tag</key>
+				<integer>0</integer>
+				<key>TagName</key>
+				<string>DEFAULT</string>
+				<key>UV</key>
+				<string>{{101, 100}, {13, 25}}</string>
+				<key>UniqueName</key>
+				<string>bike_shock_front_bear</string>
+				<key>ZOrder</key>
+				<integer>0</integer>
+			</dict>
+			<key>PhysicProperties</key>
+			<dict>
+				<key>AngularDamping</key>
+				<real>0.0</real>
+				<key>AngularVelocity</key>
+				<real>0.0</real>
+				<key>CanSleep</key>
+				<true/>
+				<key>Category</key>
+				<integer>1</integer>
+				<key>Density</key>
+				<real>0.20000000298023224</real>
+				<key>FixedRot</key>
+				<false/>
+				<key>Friction</key>
+				<real>0.20000000298023224</real>
+				<key>GravityScale</key>
+				<real>1</real>
+				<key>Group</key>
+				<integer>0</integer>
+				<key>HandledBySH</key>
+				<true/>
+				<key>IsBullet</key>
+				<false/>
+				<key>IsCircle</key>
+				<false/>
+				<key>IsSensor</key>
+				<false/>
+				<key>LinearDamping</key>
+				<real>0.0</real>
+				<key>LinearVelocity</key>
+				<string>{0, 0}</string>
+				<key>Mask</key>
+				<integer>65535</integer>
+				<key>Restitution</key>
+				<real>0.20000000298023224</real>
+				<key>ShapeBorder</key>
+				<string>{0, 0}</string>
+				<key>ShapeFixtures</key>
+				<array>
+					<array>
+						<string>{-6.0163422, 0.93848419}</string>
+						<string>{-2.9981461, -4.5841827}</string>
+						<string>{3.5519943, -6.3180389}</string>
+						<string>{-5.6310425, 11.98381}</string>
+						<string>{-5.8236923, 11.98381}</string>
+					</array>
+					<array>
+						<string>{3.5519943, -6.3180389}</string>
+						<string>{0.53379059, -9.7215424}</string>
+						<string>{1.8823471, -10.106842}</string>
+						<string>{6.0564575, -9.4646759}</string>
+						<string>{5.7353668, -6.4464722}</string>
+					</array>
+					<array>
+						<string>{0.53379059, -9.7215424}</string>
+						<string>{3.5519943, -6.3180389}</string>
+						<string>{-2.9981461, -4.5841827}</string>
+						<string>{-4.3467026, -5.4832153}</string>
+						<string>{-5.4383926, -8.8225021}</string>
+					</array>
+					<array>
+						<string>{-3.4476624, -11.904922}</string>
+						<string>{-0.94319916, -11.648056}</string>
+						<string>{0.53379059, -9.7215424}</string>
+						<string>{-5.4383926, -8.8225021}</string>
+					</array>
+				</array>
+				<key>ShapePositionOffset</key>
+				<string>{0, 0}</string>
+				<key>Type</key>
+				<integer>2</integer>
+			</dict>
+		</dict>
+		<dict>
+			<key>GeneralProperties</key>
+			<dict>
+				<key>Angle</key>
+				<integer>0</integer>
+				<key>AnimAtStart</key>
+				<false/>
+				<key>AnimLoop</key>
+				<false/>
+				<key>AnimName</key>
+				<string></string>
+				<key>AnimRepetitions</key>
+				<integer>0</integer>
+				<key>AnimSpeed</key>
+				<real>0.0</real>
+				<key>Color</key>
+				<string>{{1, 1}, {1, 0}}</string>
+				<key>Image</key>
+				<string>rider_bear.png</string>
+				<key>IsDrawable</key>
+				<true/>
+				<key>IsInParallax</key>
+				<false/>
+				<key>Locked</key>
+				<false/>
+				<key>Opacity</key>
+				<real>1</real>
+				<key>PathFlipX</key>
+				<false/>
+				<key>PathFlipY</key>
+				<false/>
+				<key>PathIsCyclic</key>
+				<false/>
+				<key>PathName</key>
+				<string></string>
+				<key>PathOrientation</key>
+				<integer>0</integer>
+				<key>PathOtherEnd</key>
+				<false/>
+				<key>PathSpeed</key>
+				<real>0.20000000298023224</real>
+				<key>PathStartPoint</key>
+				<integer>0</integer>
+				<key>Position</key>
+				<string>{327.62989720438111, 188.25475483925868}</string>
+				<key>SHName</key>
+				<string>rider_leg_upper_bear</string>
+				<key>SHScene</key>
+				<string>file://localhost/Volumes/Macintosh%20HD%202/Carl/android/workspace/MX%20Mayhem%20Lite/assets/rider_bear.pshs</string>
+				<key>Scale</key>
+				<string>{1, 1}</string>
+				<key>Size</key>
+				<string>{30.5, 20.5}</string>
+				<key>Tag</key>
+				<integer>0</integer>
+				<key>TagName</key>
+				<string>DEFAULT</string>
+				<key>UV</key>
+				<string>{{67, 77}, {30.5, 20.5}}</string>
+				<key>UniqueName</key>
+				<string>rider_leg_upper_bear</string>
+				<key>ZOrder</key>
+				<integer>2</integer>
+			</dict>
+			<key>PhysicProperties</key>
+			<dict>
+				<key>AngularDamping</key>
+				<real>0.0</real>
+				<key>AngularVelocity</key>
+				<real>0.0</real>
+				<key>CanSleep</key>
+				<true/>
+				<key>Category</key>
+				<integer>1</integer>
+				<key>Density</key>
+				<real>0.20000000298023224</real>
+				<key>FixedRot</key>
+				<false/>
+				<key>Friction</key>
+				<real>0.20000000298023224</real>
+				<key>GravityScale</key>
+				<real>1</real>
+				<key>Group</key>
+				<integer>-1</integer>
+				<key>HandledBySH</key>
+				<true/>
+				<key>IsBullet</key>
+				<false/>
+				<key>IsCircle</key>
+				<false/>
+				<key>IsSensor</key>
+				<false/>
+				<key>LinearDamping</key>
+				<real>0.0</real>
+				<key>LinearVelocity</key>
+				<string>{0, 0}</string>
+				<key>Mask</key>
+				<integer>65535</integer>
+				<key>Restitution</key>
+				<real>0.20000000298023224</real>
+				<key>ShapeBorder</key>
+				<string>{0, 0}</string>
+				<key>ShapeFixtures</key>
+				<array>
+					<array>
+						<string>{13.842209, -5.839035}</string>
+						<string>{14.497658, -1.1572418}</string>
+						<string>{11.126762, 2.4945602}</string>
+						<string>{6.351326, 5.1163712}</string>
+						<string>{1.482254, 7.0827255}</string>
+						<string>{0.639534, -7.0563049}</string>
+						<string>{6.4449615, -9.4908447}</string>
+						<string>{10.939491, -9.3972015}</string>
+					</array>
+					<array>
+						<string>{-14.716766, -1.4381485}</string>
+						<string>{-10.971329, -5.3708572}</string>
+						<string>{-6.1022568, -7.1499405}</string>
+						<string>{-4.3231735, 8.9554443}</string>
+						<string>{-10.784058, 8.8618088}</string>
+						<string>{-13.405861, 7.6445389}</string>
+						<string>{-14.716766, 5.1163712}</string>
+					</array>
+					<array>
+						<string>{-6.1022568, -7.1499405}</string>
+						<string>{0.639534, -7.0563049}</string>
+						<string>{1.482254, 7.0827255}</string>
+						<string>{-4.3231735, 8.9554443}</string>
+					</array>
+				</array>
+				<key>ShapePositionOffset</key>
+				<string>{0, 0}</string>
+				<key>Type</key>
+				<integer>2</integer>
+			</dict>
+		</dict>
+		<dict>
+			<key>GeneralProperties</key>
+			<dict>
+				<key>Angle</key>
+				<integer>0</integer>
+				<key>AnimAtStart</key>
+				<false/>
+				<key>AnimLoop</key>
+				<false/>
+				<key>AnimName</key>
+				<string></string>
+				<key>AnimRepetitions</key>
+				<integer>0</integer>
+				<key>AnimSpeed</key>
+				<real>0.0</real>
+				<key>Color</key>
+				<string>{{1, 1}, {1, 0}}</string>
+				<key>Image</key>
+				<string>rider_bear.png</string>
+				<key>IsDrawable</key>
+				<true/>
+				<key>IsInParallax</key>
+				<false/>
+				<key>Locked</key>
+				<false/>
+				<key>Opacity</key>
+				<real>1</real>
+				<key>PathFlipX</key>
+				<false/>
+				<key>PathFlipY</key>
+				<false/>
+				<key>PathIsCyclic</key>
+				<false/>
+				<key>PathName</key>
+				<string></string>
+				<key>PathOrientation</key>
+				<integer>0</integer>
+				<key>PathOtherEnd</key>
+				<false/>
+				<key>PathSpeed</key>
+				<real>0.20000000298023224</real>
+				<key>PathStartPoint</key>
+				<integer>0</integer>
+				<key>Position</key>
+				<string>{334.63205735694089, 207.20029851447569}</string>
+				<key>SHName</key>
+				<string>rider_leg_lower_bear</string>
+				<key>SHScene</key>
+				<string>file://localhost/Volumes/Macintosh%20HD%202/Carl/android/workspace/MX%20Mayhem%20Lite/assets/rider_bear.pshs</string>
+				<key>Scale</key>
+				<string>{1, 1}</string>
+				<key>Size</key>
+				<string>{19, 37.5}</string>
+				<key>Tag</key>
+				<integer>0</integer>
+				<key>TagName</key>
+				<string>DEFAULT</string>
+				<key>UV</key>
+				<string>{{108, 0}, {19, 37.5}}</string>
+				<key>UniqueName</key>
+				<string>rider_leg_lower_bear</string>
+				<key>ZOrder</key>
+				<integer>2</integer>
+			</dict>
+			<key>PhysicProperties</key>
+			<dict>
+				<key>AngularDamping</key>
+				<real>0.0</real>
+				<key>AngularVelocity</key>
+				<real>0.0</real>
+				<key>CanSleep</key>
+				<true/>
+				<key>Category</key>
+				<integer>1</integer>
+				<key>Density</key>
+				<real>0.20000000298023224</real>
+				<key>FixedRot</key>
+				<false/>
+				<key>Friction</key>
+				<real>0.20000000298023224</real>
+				<key>GravityScale</key>
+				<real>1</real>
+				<key>Group</key>
+				<integer>-1</integer>
+				<key>HandledBySH</key>
+				<true/>
+				<key>IsBullet</key>
+				<false/>
+				<key>IsCircle</key>
+				<false/>
+				<key>IsSensor</key>
+				<false/>
+				<key>LinearDamping</key>
+				<real>0.0</real>
+				<key>LinearVelocity</key>
+				<string>{0, 0}</string>
+				<key>Mask</key>
+				<integer>65535</integer>
+				<key>Restitution</key>
+				<real>0.20000000298023224</real>
+				<key>ShapeBorder</key>
+				<string>{0, 0}</string>
+				<key>ShapeFixtures</key>
+				<array>
+					<array>
+						<string>{8.804451, 9.7668209}</string>
+						<string>{9.2892456, 15.220688}</string>
+						<string>{6.7441025, 17.523432}</string>
+						<string>{2.6234055, 18.129417}</string>
+						<string>{2.381012, 18.129417}</string>
+						<string>{-2.2244797, 12.433156}</string>
+						<string>{-4.1636276, 6.1309099}</string>
+						<string>{7.9560699, 6.8580923}</string>
+					</array>
+					<array>
+						<string>{-4.5272217, 1.8890133}</string>
+						<string>{2.865799, -5.3828087}</string>
+						<string>{7.9560699, 6.8580923}</string>
+						<string>{-4.1636276, 6.1309099}</string>
+					</array>
+					<array>
+						<string>{2.6234055, -17.987305}</string>
+						<string>{7.2288895, -16.532936}</string>
+						<string>{6.1381226, -13.260616}</string>
+						<string>{2.865799, -9.8670998}</string>
+						<string>{1.0478439, -16.169346}</string>
+					</array>
+					<array>
+						<string>{1.0478439, -16.169346}</string>
+						<string>{2.865799, -9.8670998}</string>
+						<string>{2.865799, -5.3828087}</string>
+						<string>{-4.5272217, 1.8890133}</string>
+						<string>{-8.2843323, -9.0187206}</string>
+						<string>{-8.1631317, -12.897026}</string>
+					</array>
+				</array>
+				<key>ShapePositionOffset</key>
+				<string>{0, 0}</string>
+				<key>Type</key>
+				<integer>2</integer>
+			</dict>
+		</dict>
+		<dict>
+			<key>GeneralProperties</key>
+			<dict>
+				<key>Angle</key>
+				<integer>0</integer>
+				<key>AnimAtStart</key>
+				<false/>
+				<key>AnimLoop</key>
+				<false/>
+				<key>AnimName</key>
+				<string></string>
+				<key>AnimRepetitions</key>
+				<integer>0</integer>
+				<key>AnimSpeed</key>
+				<real>0.0</real>
+				<key>Color</key>
+				<string>{{1, 1}, {1, 0}}</string>
+				<key>Image</key>
+				<string>rider_bear.png</string>
+				<key>IsDrawable</key>
+				<true/>
+				<key>IsInParallax</key>
+				<false/>
+				<key>Locked</key>
+				<false/>
+				<key>Opacity</key>
+				<real>1</real>
+				<key>PathFlipX</key>
+				<false/>
+				<key>PathFlipY</key>
+				<false/>
+				<key>PathIsCyclic</key>
+				<false/>
+				<key>PathName</key>
+				<string></string>
+				<key>PathOrientation</key>
+				<integer>0</integer>
+				<key>PathOtherEnd</key>
+				<false/>
+				<key>PathSpeed</key>
+				<real>0.20000000298023224</real>
+				<key>PathStartPoint</key>
+				<integer>0</integer>
+				<key>Position</key>
+				<string>{323.52622847567716, 174.45445337544905}</string>
+				<key>SHName</key>
+				<string>rider_torso_bear</string>
+				<key>SHScene</key>
+				<string>file://localhost/Volumes/Macintosh%20HD%202/Carl/android/workspace/MX%20Mayhem%20Lite/assets/rider_bear.pshs</string>
+				<key>Scale</key>
+				<string>{1, 1}</string>
+				<key>Size</key>
+				<string>{25, 32}</string>
+				<key>Tag</key>
+				<integer>0</integer>
+				<key>TagName</key>
+				<string>DEFAULT</string>
+				<key>UV</key>
+				<string>{{40, 55}, {25, 32}}</string>
+				<key>UniqueName</key>
+				<string>rider_torso_bear</string>
+				<key>ZOrder</key>
+				<integer>2</integer>
+			</dict>
+			<key>PhysicProperties</key>
+			<dict>
+				<key>AngularDamping</key>
+				<real>0.0</real>
+				<key>AngularVelocity</key>
+				<real>0.0</real>
+				<key>CanSleep</key>
+				<true/>
+				<key>Category</key>
+				<integer>1</integer>
+				<key>Density</key>
+				<real>0.20000000298023224</real>
+				<key>FixedRot</key>
+				<false/>
+				<key>Friction</key>
+				<real>0.20000000298023224</real>
+				<key>GravityScale</key>
+				<real>1</real>
+				<key>Group</key>
+				<integer>-1</integer>
+				<key>HandledBySH</key>
+				<true/>
+				<key>IsBullet</key>
+				<false/>
+				<key>IsCircle</key>
+				<false/>
+				<key>IsSensor</key>
+				<false/>
+				<key>LinearDamping</key>
+				<real>0.0</real>
+				<key>LinearVelocity</key>
+				<string>{0, 0}</string>
+				<key>Mask</key>
+				<integer>65535</integer>
+				<key>Restitution</key>
+				<real>0.20000000298023224</real>
+				<key>ShapeBorder</key>
+				<string>{0, 0}</string>
+				<key>ShapeFixtures</key>
+				<array>
+					<array>
+						<string>{10.844074, -1.4388962}</string>
+						<string>{11.971039, 7.0566635}</string>
+						<string>{1.9150658, 15.378857}</string>
+						<string>{-2.8528557, 10.957691}</string>
+						<string>{-7.0139465, 5.9297028}</string>
+						<string>{-9.7880096, 0.38158417}</string>
+						<string>{-11.435104, -4.8197861}</string>
+						<string>{8.6768417, -7.5071564}</string>
+					</array>
+					<array>
+						<string>{1.9150658, 15.378857}</string>
+						<string>{11.971039, 7.0566635}</string>
+						<string>{9.8037987, 15.465542}</string>
+						<string>{2.0017548, 15.465542}</string>
+					</array>
+					<array>
+						<string>{-9.5279388, -13.488724}</string>
+						<string>{-5.1934662, -15.309204}</string>
+						<string>{2.0017548, -15.309204}</string>
+						<string>{5.2959518, -13.228661}</string>
+						<string>{8.6768417, -7.5071564}</string>
+						<string>{-11.435104, -4.8197861}</string>
+						<string>{-11.088348, -10.367905}</string>
+					</array>
+				</array>
+				<key>ShapePositionOffset</key>
+				<string>{0, 0}</string>
+				<key>Type</key>
+				<integer>2</integer>
+			</dict>
+		</dict>
+		<dict>
+			<key>GeneralProperties</key>
+			<dict>
+				<key>Angle</key>
+				<integer>0</integer>
+				<key>AnimAtStart</key>
+				<false/>
+				<key>AnimLoop</key>
+				<false/>
+				<key>AnimName</key>
+				<string></string>
+				<key>AnimRepetitions</key>
+				<integer>0</integer>
+				<key>AnimSpeed</key>
+				<real>0.0</real>
+				<key>Color</key>
+				<string>{{1, 1}, {1, 0}}</string>
+				<key>Image</key>
+				<string>rider_bear.png</string>
+				<key>IsDrawable</key>
+				<true/>
+				<key>IsInParallax</key>
+				<false/>
+				<key>Locked</key>
+				<false/>
+				<key>Opacity</key>
+				<real>1</real>
+				<key>PathFlipX</key>
+				<false/>
+				<key>PathFlipY</key>
+				<false/>
+				<key>PathIsCyclic</key>
+				<false/>
+				<key>PathName</key>
+				<string></string>
+				<key>PathOrientation</key>
+				<integer>0</integer>
+				<key>PathOtherEnd</key>
+				<false/>
+				<key>PathSpeed</key>
+				<real>0.20000000298023224</real>
+				<key>PathStartPoint</key>
+				<integer>0</integer>
+				<key>Position</key>
+				<string>{335.14338176261106, 147.97658995937334}</string>
+				<key>SHName</key>
+				<string>rider_head_bear</string>
+				<key>SHScene</key>
+				<string>file://localhost/Volumes/Macintosh%20HD%202/Carl/android/workspace/MX%20Mayhem%20Lite/assets/rider_bear.pshs</string>
+				<key>Scale</key>
+				<string>{1, 1}</string>
+				<key>Size</key>
+				<string>{24, 27}</string>
+				<key>Tag</key>
+				<integer>0</integer>
+				<key>TagName</key>
+				<string>DEFAULT</string>
+				<key>UV</key>
+				<string>{{40, 89}, {24, 27}}</string>
+				<key>UniqueName</key>
+				<string>rider_head_bear</string>
+				<key>ZOrder</key>
+				<integer>2</integer>
+			</dict>
+			<key>PhysicProperties</key>
+			<dict>
+				<key>AngularDamping</key>
+				<real>0.0</real>
+				<key>AngularVelocity</key>
+				<real>0.0</real>
+				<key>CanSleep</key>
+				<true/>
+				<key>Category</key>
+				<integer>1</integer>
+				<key>Density</key>
+				<real>0.20000000298023224</real>
+				<key>FixedRot</key>
+				<false/>
+				<key>Friction</key>
+				<real>0.20000000298023224</real>
+				<key>GravityScale</key>
+				<real>1</real>
+				<key>Group</key>
+				<integer>-1</integer>
+				<key>HandledBySH</key>
+				<true/>
+				<key>IsBullet</key>
+				<false/>
+				<key>IsCircle</key>
+				<false/>
+				<key>IsSensor</key>
+				<false/>
+				<key>LinearDamping</key>
+				<real>0.0</real>
+				<key>LinearVelocity</key>
+				<string>{0, 0}</string>
+				<key>Mask</key>
+				<integer>65535</integer>
+				<key>Restitution</key>
+				<real>0.20000000298023224</real>
+				<key>ShapeBorder</key>
+				<string>{0, 0}</string>
+				<key>ShapeFixtures</key>
+				<array>
+					<array>
+						<string>{11.264622, 3.1881027}</string>
+						<string>{11.612274, 5.0654373}</string>
+						<string>{5.6326256, 6.6646423}</string>
+						<string>{5.9107513, -1.4009247}</string>
+						<string>{9.6654167, -0.91421509}</string>
+					</array>
+					<array>
+						<string>{-11.193825, -2.3743591}</string>
+						<string>{-9.6641464, -6.198555}</string>
+						<string>{-1.3899841, -10.787582}</string>
+						<string>{5.9107513, -1.4009247}</string>
+						<string>{0.69593811, 10.002121}</string>
+						<string>{-3.6149673, 10.906021}</string>
+						<string>{-11.332886, 9.7935257}</string>
+						<string>{-11.471947, 6.3169861}</string>
+					</array>
+					<array>
+						<string>{-1.3899841, -10.787582}</string>
+						<string>{3.3381119, -10.370399}</string>
+						<string>{6.3974648, -8.4235382}</string>
+						<string>{6.3974648, -5.7118378}</string>
+						<string>{5.9107513, -1.4009247}</string>
+					</array>
+					<array>
+						<string>{-11.332886, 9.7935257}</string>
+						<string>{-3.6149673, 10.906021}</string>
+						<string>{-7.1610374, 12.783356}</string>
+						<string>{-10.011803, 12.088043}</string>
+					</array>
+					<array>
+						<string>{-9.5250854, -11.204773}</string>
+						<string>{-6.813385, -12.873505}</string>
+						<string>{-3.9626236, -12.873505}</string>
+						<string>{-1.5985756, -10.857117}</string>
+						<string>{-9.6641464, -6.198555}</string>
+					</array>
+					<array>
+						<string>{0.69593811, 10.002121}</string>
+						<string>{5.9107513, -1.4009247}</string>
+						<string>{5.6326256, 6.6646423}</string>
+					</array>
+				</array>
+				<key>ShapePositionOffset</key>
+				<string>{0, 0}</string>
+				<key>Type</key>
+				<integer>2</integer>
+			</dict>
+		</dict>
+		<dict>
+			<key>GeneralProperties</key>
+			<dict>
+				<key>Angle</key>
+				<integer>0</integer>
+				<key>AnimAtStart</key>
+				<false/>
+				<key>AnimLoop</key>
+				<false/>
+				<key>AnimName</key>
+				<string></string>
+				<key>AnimRepetitions</key>
+				<integer>0</integer>
+				<key>AnimSpeed</key>
+				<real>0.0</real>
+				<key>Color</key>
+				<string>{{1, 1}, {1, 0}}</string>
+				<key>Image</key>
+				<string>rider_bear.png</string>
+				<key>IsDrawable</key>
+				<true/>
+				<key>IsInParallax</key>
+				<false/>
+				<key>Locked</key>
+				<false/>
+				<key>Opacity</key>
+				<real>1</real>
+				<key>PathFlipX</key>
+				<false/>
+				<key>PathFlipY</key>
+				<false/>
+				<key>PathIsCyclic</key>
+				<false/>
+				<key>PathName</key>
+				<string></string>
+				<key>PathOrientation</key>
+				<integer>0</integer>
+				<key>PathOtherEnd</key>
+				<false/>
+				<key>PathSpeed</key>
+				<real>0.20000000298023224</real>
+				<key>PathStartPoint</key>
+				<integer>0</integer>
+				<key>Position</key>
+				<string>{345.52600244913685, 176.13863304050494}</string>
+				<key>SHName</key>
+				<string>rider_arm_lower_bear</string>
+				<key>SHScene</key>
+				<string>file://localhost/Volumes/Macintosh%20HD%202/Carl/android/workspace/MX%20Mayhem%20Lite/assets/rider_bear.pshs</string>
+				<key>Scale</key>
+				<string>{1, 1}</string>
+				<key>Size</key>
+				<string>{31.5, 10.5}</string>
+				<key>Tag</key>
+				<integer>0</integer>
+				<key>TagName</key>
+				<string>DEFAULT</string>
+				<key>UV</key>
+				<string>{{67, 100}, {31.5, 10.5}}</string>
+				<key>UniqueName</key>
+				<string>rider_arm_lower_bear</string>
+				<key>ZOrder</key>
+				<integer>2</integer>
+			</dict>
+			<key>PhysicProperties</key>
+			<dict>
+				<key>AngularDamping</key>
+				<real>0.0</real>
+				<key>AngularVelocity</key>
+				<real>0.0</real>
+				<key>CanSleep</key>
+				<true/>
+				<key>Category</key>
+				<integer>1</integer>
+				<key>Density</key>
+				<real>0.20000000298023224</real>
+				<key>FixedRot</key>
+				<false/>
+				<key>Friction</key>
+				<real>0.20000000298023224</real>
+				<key>GravityScale</key>
+				<real>1</real>
+				<key>Group</key>
+				<integer>-1</integer>
+				<key>HandledBySH</key>
+				<true/>
+				<key>IsBullet</key>
+				<false/>
+				<key>IsCircle</key>
+				<false/>
+				<key>IsSensor</key>
+				<false/>
+				<key>LinearDamping</key>
+				<real>0.0</real>
+				<key>LinearVelocity</key>
+				<string>{0, 0}</string>
+				<key>Mask</key>
+				<integer>65535</integer>
+				<key>Restitution</key>
+				<real>0.20000000298023224</real>
+				<key>ShapeBorder</key>
+				<string>{0, 0}</string>
+				<key>ShapeFixtures</key>
+				<array>
+					<array>
+						<string>{-14.790047, -1.9352493}</string>
+						<string>{-14.936958, -3.5512695}</string>
+						<string>{-13.027122, -4.7265472}</string>
+						<string>{-9.0605469, -4.0654526}</string>
+						<string>{-6.1223373, 4.6022568}</string>
+						<string>{-10.382736, 4.3818893}</string>
+						<string>{-12.659851, 2.8393326}</string>
+						<string>{-13.761673, 0.48876953}</string>
+					</array>
+					<array>
+						<string>{14.445099, -1.2006989}</string>
+						<string>{14.885834, 1.5905914}</string>
+						<string>{14.004372, -0.68651581}</string>
+					</array>
+					<array>
+						<string>{14.004372, -0.68651581}</string>
+						<string>{14.885834, 1.5905914}</string>
+						<string>{12.682175, 3.3535156}</string>
+						<string>{12.167992, 0.63568115}</string>
+					</array>
+					<array>
+						<string>{10.772346, 0.41531372}</string>
+						<string>{12.682175, 3.3535156}</string>
+						<string>{8.6421432, 3.3535156}</string>
+						<string>{6.1446686, 2.7658768}</string>
+						<string>{0.85590363, -2.8167114}</string>
+						<string>{8.1279602, -1.7148895}</string>
+					</array>
+					<array>
+						<string>{-9.0605469, -4.0654526}</string>
+						<string>{-4.8736038, -3.6247177}</string>
+						<string>{0.85590363, -2.8167114}</string>
+						<string>{6.1446686, 2.7658768}</string>
+						<string>{-6.1223373, 4.6022568}</string>
+					</array>
+					<array>
+						<string>{-9.0605469, -4.0654526}</string>
+						<string>{-6.1223373, 4.6022568}</string>
+						<string>{-13.027122, -4.7265472}</string>
+					</array>
+					<array>
+						<string>{-6.1223373, 4.6022568}</string>
+						<string>{10.772346, 0.41531372}</string>
+						<string>{8.6421432, 3.3535156}</string>
+					</array>
+					<array>
+						<string>{12.167992, 0.63568115}</string>
+						<string>{12.682175, 3.3535156}</string>
+						<string>{10.772346, 0.41531372}</string>
+					</array>
+				</array>
+				<key>ShapePositionOffset</key>
+				<string>{0, 0}</string>
+				<key>Type</key>
+				<integer>2</integer>
+			</dict>
+		</dict>
+		<dict>
+			<key>GeneralProperties</key>
+			<dict>
+				<key>Angle</key>
+				<integer>0</integer>
+				<key>AnimAtStart</key>
+				<false/>
+				<key>AnimLoop</key>
+				<false/>
+				<key>AnimName</key>
+				<string></string>
+				<key>AnimRepetitions</key>
+				<integer>0</integer>
+				<key>AnimSpeed</key>
+				<real>0.0</real>
+				<key>Color</key>
+				<string>{{1, 1}, {1, 0}}</string>
+				<key>Image</key>
+				<string>rider_bear.png</string>
+				<key>IsDrawable</key>
+				<true/>
+				<key>IsInParallax</key>
+				<false/>
+				<key>Locked</key>
+				<false/>
+				<key>Opacity</key>
+				<real>1</real>
+				<key>PathFlipX</key>
+				<false/>
+				<key>PathFlipY</key>
+				<false/>
+				<key>PathIsCyclic</key>
+				<false/>
+				<key>PathName</key>
+				<string></string>
+				<key>PathOrientation</key>
+				<integer>0</integer>
+				<key>PathOtherEnd</key>
+				<false/>
+				<key>PathSpeed</key>
+				<real>0.20000000298023224</real>
+				<key>PathStartPoint</key>
+				<integer>0</integer>
+				<key>Position</key>
+				<string>{330.66428325806248, 171.74853732975055}</string>
+				<key>SHName</key>
+				<string>rider_arm_upper_bear</string>
+				<key>SHScene</key>
+				<string>file://localhost/Volumes/Macintosh%20HD%202/Carl/android/workspace/MX%20Mayhem%20Lite/assets/rider_bear.pshs</string>
+				<key>Scale</key>
+				<string>{1, 1}</string>
+				<key>Size</key>
+				<string>{12.5, 18}</string>
+				<key>Tag</key>
+				<integer>0</integer>
+				<key>TagName</key>
+				<string>DEFAULT</string>
+				<key>UV</key>
+				<string>{{101, 55}, {12.5, 18}}</string>
+				<key>UniqueName</key>
+				<string>rider_arm_upper_bear</string>
+				<key>ZOrder</key>
+				<integer>2</integer>
+			</dict>
+			<key>PhysicProperties</key>
+			<dict>
+				<key>AngularDamping</key>
+				<real>0.0</real>
+				<key>AngularVelocity</key>
+				<real>0.0</real>
+				<key>CanSleep</key>
+				<true/>
+				<key>Category</key>
+				<integer>1</integer>
+				<key>Density</key>
+				<real>0.20000000298023224</real>
+				<key>FixedRot</key>
+				<false/>
+				<key>Friction</key>
+				<real>0.20000000298023224</real>
+				<key>GravityScale</key>
+				<real>1</real>
+				<key>Group</key>
+				<integer>-1</integer>
+				<key>HandledBySH</key>
+				<true/>
+				<key>IsBullet</key>
+				<false/>
+				<key>IsCircle</key>
+				<false/>
+				<key>IsSensor</key>
+				<false/>
+				<key>LinearDamping</key>
+				<real>0.0</real>
+				<key>LinearVelocity</key>
+				<string>{0, 0}</string>
+				<key>Mask</key>
+				<integer>65535</integer>
+				<key>Restitution</key>
+				<real>0.20000000298023224</real>
+				<key>ShapeBorder</key>
+				<string>{0, 0}</string>
+				<key>ShapeFixtures</key>
+				<array>
+					<array>
+						<string>{-0.63990021, -8.3549347}</string>
+						<string>{3.6570663, -8.3549347}</string>
+						<string>{5.6981201, -5.9916}</string>
+						<string>{5.5906982, -1.6946335}</string>
+						<string>{4.731308, 2.6023293}</string>
+						<string>{-5.9036789, 2.9245987}</string>
+						<string>{-5.4739838, -1.2649384}</string>
+						<string>{-3.7552032, -5.7767487}</string>
+					</array>
+					<array>
+						<string>{-5.9036789, 2.9245987}</string>
+						<string>{4.731308, 2.6023293}</string>
+						<string>{2.4754028, 6.7918701}</string>
+						<string>{0.97145844, 8.4032288}</string>
+						<string>{-3.8626251, 7.5438385}</string>
+						<string>{-3.970047, 7.4364166}</string>
+					</array>
+				</array>
+				<key>ShapePositionOffset</key>
+				<string>{0, 0}</string>
+				<key>Type</key>
+				<integer>2</integer>
+			</dict>
+		</dict>
+		<dict>
+			<key>GeneralProperties</key>
+			<dict>
+				<key>Angle</key>
+				<integer>0</integer>
+				<key>AnimAtStart</key>
+				<false/>
+				<key>AnimLoop</key>
+				<false/>
+				<key>AnimName</key>
+				<string></string>
+				<key>AnimRepetitions</key>
+				<integer>0</integer>
+				<key>AnimSpeed</key>
+				<real>0.0</real>
+				<key>Color</key>
+				<string>{{1, 1}, {1, 0}}</string>
+				<key>Image</key>
+				<string>rider_bear.png</string>
+				<key>IsDrawable</key>
+				<true/>
+				<key>IsInParallax</key>
+				<false/>
+				<key>Locked</key>
+				<false/>
+				<key>Opacity</key>
+				<real>1</real>
+				<key>PathFlipX</key>
+				<false/>
+				<key>PathFlipY</key>
+				<false/>
+				<key>PathIsCyclic</key>
+				<false/>
+				<key>PathName</key>
+				<string></string>
+				<key>PathOrientation</key>
+				<integer>0</integer>
+				<key>PathOtherEnd</key>
+				<false/>
+				<key>PathSpeed</key>
+				<real>0.20000000298023224</real>
+				<key>PathStartPoint</key>
+				<integer>0</integer>
+				<key>Position</key>
+				<string>{334.79032014619031, 206.74261305879577}</string>
+				<key>SHName</key>
+				<string>rider_leg_lower_bear</string>
+				<key>SHScene</key>
+				<string>file://localhost/Volumes/Macintosh%20HD%202/Carl/android/workspace/MX%20Mayhem%20Lite/assets/rider_bear.pshs</string>
+				<key>Scale</key>
+				<string>{1, 1}</string>
+				<key>Size</key>
+				<string>{19, 37.5}</string>
+				<key>Tag</key>
+				<integer>0</integer>
+				<key>TagName</key>
+				<string>DEFAULT</string>
+				<key>UV</key>
+				<string>{{108, 0}, {19, 37.5}}</string>
+				<key>UniqueName</key>
+				<string>rider_leg_lower_bear_1</string>
+				<key>ZOrder</key>
+				<integer>2</integer>
+			</dict>
+			<key>PhysicProperties</key>
+			<dict>
+				<key>AngularDamping</key>
+				<real>0.0</real>
+				<key>AngularVelocity</key>
+				<real>0.0</real>
+				<key>CanSleep</key>
+				<true/>
+				<key>Category</key>
+				<integer>1</integer>
+				<key>Density</key>
+				<real>0.20000000298023224</real>
+				<key>FixedRot</key>
+				<false/>
+				<key>Friction</key>
+				<real>0.20000000298023224</real>
+				<key>GravityScale</key>
+				<real>1</real>
+				<key>Group</key>
+				<integer>-1</integer>
+				<key>HandledBySH</key>
+				<true/>
+				<key>IsBullet</key>
+				<false/>
+				<key>IsCircle</key>
+				<false/>
+				<key>IsSensor</key>
+				<false/>
+				<key>LinearDamping</key>
+				<real>0.0</real>
+				<key>LinearVelocity</key>
+				<string>{0, 0}</string>
+				<key>Mask</key>
+				<integer>65535</integer>
+				<key>Restitution</key>
+				<real>0.20000000298023224</real>
+				<key>ShapeBorder</key>
+				<string>{0, 0}</string>
+				<key>ShapeFixtures</key>
+				<array>
+					<array>
+						<string>{8.804451, 9.7668209}</string>
+						<string>{9.2892456, 15.220688}</string>
+						<string>{6.7441025, 17.523432}</string>
+						<string>{2.6234055, 18.129417}</string>
+						<string>{2.381012, 18.129417}</string>
+						<string>{-2.2244797, 12.433156}</string>
+						<string>{-4.1636276, 6.1309099}</string>
+						<string>{7.9560699, 6.8580923}</string>
+					</array>
+					<array>
+						<string>{-4.5272217, 1.8890133}</string>
+						<string>{2.865799, -5.3828087}</string>
+						<string>{7.9560699, 6.8580923}</string>
+						<string>{-4.1636276, 6.1309099}</string>
+					</array>
+					<array>
+						<string>{2.6234055, -17.987305}</string>
+						<string>{7.2288895, -16.532936}</string>
+						<string>{6.1381226, -13.260616}</string>
+						<string>{2.865799, -9.8670998}</string>
+						<string>{1.0478439, -16.169346}</string>
+					</array>
+					<array>
+						<string>{1.0478439, -16.169346}</string>
+						<string>{2.865799, -9.8670998}</string>
+						<string>{2.865799, -5.3828087}</string>
+						<string>{-4.5272217, 1.8890133}</string>
+						<string>{-8.2843323, -9.0187206}</string>
+						<string>{-8.1631317, -12.897026}</string>
+					</array>
+				</array>
+				<key>ShapePositionOffset</key>
+				<string>{0, 0}</string>
+				<key>Type</key>
+				<integer>2</integer>
+			</dict>
+		</dict>
+		<dict>
+			<key>GeneralProperties</key>
+			<dict>
+				<key>Angle</key>
+				<integer>0</integer>
+				<key>AnimAtStart</key>
+				<false/>
+				<key>AnimLoop</key>
+				<false/>
+				<key>AnimName</key>
+				<string></string>
+				<key>AnimRepetitions</key>
+				<integer>0</integer>
+				<key>AnimSpeed</key>
+				<real>0.0</real>
+				<key>Color</key>
+				<string>{{1, 1}, {1, 0}}</string>
+				<key>Image</key>
+				<string>rider_bear.png</string>
+				<key>IsDrawable</key>
+				<true/>
+				<key>IsInParallax</key>
+				<false/>
+				<key>Locked</key>
+				<false/>
+				<key>Opacity</key>
+				<real>1</real>
+				<key>PathFlipX</key>
+				<false/>
+				<key>PathFlipY</key>
+				<false/>
+				<key>PathIsCyclic</key>
+				<false/>
+				<key>PathName</key>
+				<string></string>
+				<key>PathOrientation</key>
+				<integer>0</integer>
+				<key>PathOtherEnd</key>
+				<false/>
+				<key>PathSpeed</key>
+				<real>0.20000000298023224</real>
+				<key>PathStartPoint</key>
+				<integer>0</integer>
+				<key>Position</key>
+				<string>{327.78815999363053, 187.79706938357879}</string>
+				<key>SHName</key>
+				<string>rider_leg_upper_bear</string>
+				<key>SHScene</key>
+				<string>file://localhost/Volumes/Macintosh%20HD%202/Carl/android/workspace/MX%20Mayhem%20Lite/assets/rider_bear.pshs</string>
+				<key>Scale</key>
+				<string>{1, 1}</string>
+				<key>Size</key>
+				<string>{30.5, 20.5}</string>
+				<key>Tag</key>
+				<integer>0</integer>
+				<key>TagName</key>
+				<string>DEFAULT</string>
+				<key>UV</key>
+				<string>{{67, 77}, {30.5, 20.5}}</string>
+				<key>UniqueName</key>
+				<string>rider_leg_upper_bear_1</string>
+				<key>ZOrder</key>
+				<integer>2</integer>
+			</dict>
+			<key>PhysicProperties</key>
+			<dict>
+				<key>AngularDamping</key>
+				<real>0.0</real>
+				<key>AngularVelocity</key>
+				<real>0.0</real>
+				<key>CanSleep</key>
+				<true/>
+				<key>Category</key>
+				<integer>1</integer>
+				<key>Density</key>
+				<real>0.20000000298023224</real>
+				<key>FixedRot</key>
+				<false/>
+				<key>Friction</key>
+				<real>0.20000000298023224</real>
+				<key>GravityScale</key>
+				<real>1</real>
+				<key>Group</key>
+				<integer>-1</integer>
+				<key>HandledBySH</key>
+				<true/>
+				<key>IsBullet</key>
+				<false/>
+				<key>IsCircle</key>
+				<false/>
+				<key>IsSensor</key>
+				<false/>
+				<key>LinearDamping</key>
+				<real>0.0</real>
+				<key>LinearVelocity</key>
+				<string>{0, 0}</string>
+				<key>Mask</key>
+				<integer>65535</integer>
+				<key>Restitution</key>
+				<real>0.20000000298023224</real>
+				<key>ShapeBorder</key>
+				<string>{0, 0}</string>
+				<key>ShapeFixtures</key>
+				<array>
+					<array>
+						<string>{13.842209, -5.839035}</string>
+						<string>{14.497658, -1.1572418}</string>
+						<string>{11.126762, 2.4945602}</string>
+						<string>{6.351326, 5.1163712}</string>
+						<string>{1.482254, 7.0827255}</string>
+						<string>{0.639534, -7.0563049}</string>
+						<string>{6.4449615, -9.4908447}</string>
+						<string>{10.939491, -9.3972015}</string>
+					</array>
+					<array>
+						<string>{-14.716766, -1.4381485}</string>
+						<string>{-10.971329, -5.3708572}</string>
+						<string>{-6.1022568, -7.1499405}</string>
+						<string>{-4.3231735, 8.9554443}</string>
+						<string>{-10.784058, 8.8618088}</string>
+						<string>{-13.405861, 7.6445389}</string>
+						<string>{-14.716766, 5.1163712}</string>
+					</array>
+					<array>
+						<string>{-6.1022568, -7.1499405}</string>
+						<string>{0.639534, -7.0563049}</string>
+						<string>{1.482254, 7.0827255}</string>
+						<string>{-4.3231735, 8.9554443}</string>
+					</array>
+				</array>
+				<key>ShapePositionOffset</key>
+				<string>{0, 0}</string>
+				<key>Type</key>
+				<integer>2</integer>
+			</dict>
+		</dict>
+	</array>
+	<key>ScenePreference</key>
+	<dict>
+		<key>BackgroundColor</key>
+		<string>{{1, 1}, {1, 2.155131169106627e-314}}</string>
+		<key>GameWorld</key>
+		<string>{{0, 0}, {480, 320}}</string>
+		<key>LevelsPath</key>
+		<string>file://localhost/Volumes/Macintosh%20HD%202/Carl/android/workspace/MX%20Mayhem%20Lite/assets/</string>
+		<key>PanValue</key>
+		<string>{296.47658389402176, 140.55139124055609}</string>
+		<key>ProjectName</key>
+		<string>rider_bear</string>
+		<key>SHScenesPath</key>
+		<string>file://localhost/Volumes/Macintosh%20HD%202/Carl/android/workspace/MX%20Mayhem%20Lite/assets/</string>
+		<key>SafeFrame</key>
+		<string>{480, 320}</string>
+		<key>ScreenSize</key>
+		<integer>1</integer>
+		<key>Tags</key>
+		<array>
+			<string>DEFAULT</string>
+		</array>
+		<key>ZoomValue</key>
+		<real>0.45984575152397156</real>
+	</dict>
+	<key>WBInfo</key>
+	<dict>
+		<key>CanSleep</key>
+		<true/>
+		<key>Category</key>
+		<integer>1</integer>
+		<key>Density</key>
+		<real>0.20000000298023224</real>
+		<key>Friction</key>
+		<real>0.20000000298023224</real>
+		<key>Group</key>
+		<integer>0</integer>
+		<key>IsSensor</key>
+		<false/>
+		<key>Mask</key>
+		<integer>65535</integer>
+		<key>Restitution</key>
+		<real>0.20000000298023224</real>
+		<key>TagBottom</key>
+		<integer>0</integer>
+		<key>TagBottomName</key>
+		<string>DEFAULT</string>
+		<key>TagLeft</key>
+		<integer>0</integer>
+		<key>TagLeftName</key>
+		<string>DEFAULT</string>
+		<key>TagRight</key>
+		<integer>0</integer>
+		<key>TagRightName</key>
+		<string>DEFAULT</string>
+		<key>TagTop</key>
+		<integer>0</integer>
+		<key>TagTopName</key>
+		<string>DEFAULT</string>
+		<key>WBRect</key>
+		<string>{{0, 0}, {480, 320}}</string>
+	</dict>
+</dict>
+</plist>
